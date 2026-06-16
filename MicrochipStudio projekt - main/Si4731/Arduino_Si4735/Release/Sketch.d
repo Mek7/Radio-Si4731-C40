@@ -11,8 +11,8 @@ Sketch.d Sketch.o: .././Sketch.cpp \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\2.0.401\include/avr/iom328.h \
- C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\2.0.401\include/avr/iom328p.h \
+ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.4.522\include/avr/iom328.h \
+ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.4.522\include/avr/iom328p.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\portpins.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
@@ -40,7 +40,11 @@ Sketch.d Sketch.o: .././Sketch.cpp \
  ..\\..\ArduinoCore\include\libraries\Wire/Wire.h \
  ..\\..\ArduinoCore\include\core/Stream.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
- .././defines.hpp .././vfd.hpp
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sleep.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\power.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\atomic.h \
+ .././defines.hpp .././vfdprotocol.hpp .././irmp.hpp .././irmpconfig.hpp \
+ .././irmpsystem.hpp .././irmpprotocols.hpp
 
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
@@ -66,9 +70,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\2.0.401\include/avr/iom328.h:
+C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.4.522\include/avr/iom328.h:
 
-C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\2.0.401\include/avr/iom328p.h:
+C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.4.522\include/avr/iom328p.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\portpins.h:
 
@@ -124,6 +128,20 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sleep.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\power.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\atomic.h:
+
 .././defines.hpp:
 
-.././vfd.hpp:
+.././vfdprotocol.hpp:
+
+.././irmp.hpp:
+
+.././irmpconfig.hpp:
+
+.././irmpsystem.hpp:
+
+.././irmpprotocols.hpp:

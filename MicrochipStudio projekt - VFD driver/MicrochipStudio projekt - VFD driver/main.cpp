@@ -1,5 +1,3 @@
-// this file MUST be saved in ANSI encoding, not UTF-8 - because of the diacritic chars which should take up only one byte - á
-
 #include <avr/io.h>
 #include <avr/eeprom.h>
 #include <avr/interrupt.h>
@@ -16,8 +14,8 @@
 #include "vfdprotocol.hpp"
 #include "I2CSlave.hpp"
 
-static volatile unsigned int activeGrid = 0; // 0-17
-static volatile VfdState displayMemory[18];
+static unsigned int activeGrid = 0; // 0-17
+static VfdState displayMemory[18];
 static volatile uint8_t i2cdata[I2CDATA_MAXLENGTH] = { UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX };
 static volatile bool showUnderlines = false;
 static volatile unsigned char modeCmdGraTextCurrentIndex = UINT8_MAX; // UINT8_MAX means we are not in CMD_SHOW_GRA_TEXT mode
@@ -264,77 +262,99 @@ static VfdState getGraDisplayChar(char chr)
 	{
 		const VfdState* vfdStatePointer;
 		
-		switch (chr)
+		switch ((unsigned char)chr)
 		{
-			case 'š':
-			case 'Š':
+			case 0x9A:  /* š */
+			case 0x8A:  /* Š */
 			vfdStatePointer = &GraCaronS;
 			break;
-			case '¾':
+
+			case 0xBE:  /* ľ */
 			vfdStatePointer = &GraCaronLowerL;
 			break;
-			case '¼':
+
+			case 0xBC:  /* Ľ */
 			vfdStatePointer = &GraCaronUpperL;
 			break;
-			case 'è':
-			case 'È':
+
+			case 0xE8:  /* č */
+			case 0xC8:  /* Č */
 			vfdStatePointer = &GraCaronC;
 			break;
-			case '':
+
+			case 0x8D:  /* Ť */
 			vfdStatePointer = &GraCaronUpperT;
 			break;
-			case '':
+
+			case 0x9D:  /* ť */
 			vfdStatePointer = &GraCaronLowerT;
 			break;
-			case 'ž':
-			case 'Ž':
+
+			case 0x9E:  /* ž */
+			case 0x8E:  /* Ž */
 			vfdStatePointer = &GraCaronZ;
 			break;
-			case 'ý':
+
+			case 0xFD:  /* ý */
 			vfdStatePointer = &GraAcuteLowerY;
 			break;
-			case 'Ý':
+
+			case 0xDD:  /* Ý */
 			vfdStatePointer = &GraAcuteUpperY;
 			break;
-			case 'á':
+
+			case 0xE1:  /* á */
 			vfdStatePointer = &GraAcuteLowerA;
 			break;
-			case 'Á':
+
+			case 0xC1:  /* Á */
 			vfdStatePointer = &GraAcuteUpperA;
 			break;
-			case 'í':
+
+			case 0xED:  /* í */
 			vfdStatePointer = &GraAcuteLowerI;
 			break;
-			case 'Í':
+
+			case 0xCD:  /* Í */
 			vfdStatePointer = &GraAcuteUpperI;
 			break;
-			case 'é':
+
+			case 0xE9:  /* é */
 			vfdStatePointer = &GraAcuteLowerE;
 			break;
-			case 'É':
+
+			case 0xC9:  /* É */
 			vfdStatePointer = &GraAcuteUpperE;
 			break;
-			case 'ó':
+
+			case 0xF3:  /* ó */
 			vfdStatePointer = &GraAcuteLowerO;
 			break;
-			case 'Ó':
+
+			case 0xD3:  /* Ó */
 			vfdStatePointer = &GraAcuteUpperO;
 			break;
-			case 'ú':
+
+			case 0xFA:  /* ú */
 			vfdStatePointer = &GraAcuteLowerU;
 			break;
-			case 'Ú':
+
+			case 0xDA:  /* Ú */
 			vfdStatePointer = &GraAcuteUpperU;
 			break;
-			case 'Ä':
+
+			case 0xC4:  /* Ä */
 			vfdStatePointer = &GraDiaeresisUpperA;
 			break;
-			case 'ä':
+
+			case 0xE4:  /* ä */
 			vfdStatePointer = &GraDiaeresisLowerA;
 			break;
-			case 'ò':
+
+			case 0xF2:  /* ň */
 			vfdStatePointer = &GraCaronLowerN;
 			break;
+
 			default:
 			vfdStatePointer = &GraSpace;
 			break;

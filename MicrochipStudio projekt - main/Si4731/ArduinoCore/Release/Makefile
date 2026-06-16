@@ -230,189 +230,189 @@ LINKER_SCRIPT_DEP+=
 src/core/abi.o: ../src/core/abi.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\abi.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\abi.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/CDC.o: ../src/core/CDC.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\CDC.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\CDC.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/HardwareSerial.o: ../src/core/HardwareSerial.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/HardwareSerial0.o: ../src/core/HardwareSerial0.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial0.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial0.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/HardwareSerial1.o: ../src/core/HardwareSerial1.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial1.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial1.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/HardwareSerial2.o: ../src/core/HardwareSerial2.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial2.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial2.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/HardwareSerial3.o: ../src/core/HardwareSerial3.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial3.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial3.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/hooks.o: ../src/core/hooks.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\hooks.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\hooks.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/IPAddress.o: ../src/core/IPAddress.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\IPAddress.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\IPAddress.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/main.o: ../src/core/main.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\main.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\main.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/new.o: ../src/core/new.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\new.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\new.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/PluggableUSB.o: ../src/core/PluggableUSB.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\PluggableUSB.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\PluggableUSB.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/Print.o: ../src/core/Print.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\Print.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\Print.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/Stream.o: ../src/core/Stream.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\Stream.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\Stream.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/Tone.o: ../src/core/Tone.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\Tone.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\Tone.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/USBCore.o: ../src/core/USBCore.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\USBCore.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\USBCore.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/WInterrupts.o: ../src/core/WInterrupts.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\WInterrupts.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\WInterrupts.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/wiring.o: ../src/core/wiring.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/wiring_analog.o: ../src/core/wiring_analog.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_analog.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_analog.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/wiring_digital.o: ../src/core/wiring_digital.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_digital.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_digital.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/wiring_pulse.o: ../src/core/wiring_pulse.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_pulse.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_pulse.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/wiring_shift.o: ../src/core/wiring_shift.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_shift.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_shift.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/WMath.o: ../src/core/WMath.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\WMath.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\WMath.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/core/WString.o: ../src/core/WString.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\WString.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\WString.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/libraries/pu2clr-si4735/SI4735.o: ../src/libraries/pu2clr-si4735/SI4735.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\libraries\pu2clr-si4735\SI4735.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\libraries\pu2clr-si4735\SI4735.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/libraries/Wire/utility/twi.o: ../src/libraries/Wire/utility/twi.c
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\libraries\Wire\utility\twi.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\libraries\Wire\utility\twi.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
 src/libraries/Wire/Wire.o: ../src/libraries/Wire/Wire.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\libraries\Wire\Wire.mk"   
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) @"D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\libraries\Wire\Wire.mk"   
 	@echo Finished building: $<
 	@echo $<:0:0: warning: Command Line Exceeds Limit $<
 
@@ -427,7 +427,7 @@ src/libraries/Wire/Wire.o: ../src/libraries/Wire/Wire.cpp
 src/core/PreprocessingAssembly/wiring_pulse.o: ../src/core/PreprocessingAssembly/wiring_pulse.S
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU Assembler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\2.0.401\gcc\dev\atmega328p" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\2.0.401\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.4.522\gcc\dev\atmega328p" -I "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.4.522\include"  -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
@@ -463,31 +463,31 @@ clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
 	rm -rf "libArduinoCore.elf" "libArduinoCore.a" "libArduinoCore.hex" "libArduinoCore.lss" "libArduinoCore.eep" "libArduinoCore.map" "libArduinoCore.srec" "libArduinoCore.usersignatures"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\abi.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\CDC.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial0.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial1.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial2.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\HardwareSerial3.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\hooks.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\IPAddress.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\main.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\new.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\PluggableUSB.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\Print.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\Stream.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\Tone.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\USBCore.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\WInterrupts.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_analog.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_digital.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_pulse.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\wiring_shift.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\WMath.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\core\WString.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\libraries\pu2clr-si4735\SI4735.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\libraries\Wire\utility\twi.mk"
-	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\MicrochipStudio projekt\Si4731\ArduinoCore\Release\src\libraries\Wire\Wire.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\abi.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\CDC.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial0.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial1.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial2.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\HardwareSerial3.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\hooks.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\IPAddress.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\main.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\new.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\PluggableUSB.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\Print.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\Stream.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\Tone.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\USBCore.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\WInterrupts.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_analog.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_digital.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_pulse.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\wiring_shift.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\WMath.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\core\WString.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\libraries\pu2clr-si4735\SI4735.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\libraries\Wire\utility\twi.mk"
+	rm -rf "D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Release\src\libraries\Wire\Wire.mk"
 	

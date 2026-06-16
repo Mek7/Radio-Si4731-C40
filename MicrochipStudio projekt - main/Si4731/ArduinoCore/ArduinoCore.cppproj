@@ -46,7 +46,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGccCpp>
-  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\gcc\dev\atmega328p"</avrgcc.common.Device>
+  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\gcc\dev\atmega328p"</avrgcc.common.Device>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
   <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -57,7 +57,7 @@
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>NDEBUG</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=20000000L</Value>
       <Value>ARDUINO=108019</Value>
       <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
@@ -150,7 +150,7 @@
       <Value>..\include\core</Value>
       <Value>..\include\variants\eightanaloginputs</Value>
       <Value>..\include\variants\standard</Value>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\include\</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -165,7 +165,7 @@
   <avrgcccpp.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>NDEBUG</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=20000000L</Value>
       <Value>ARDUINO=108019</Value>
       <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
@@ -258,7 +258,7 @@
       <Value>..\include\core</Value>
       <Value>..\include\variants\eightanaloginputs</Value>
       <Value>..\include\variants\standard</Value>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\include\</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -276,7 +276,7 @@
   <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
   <avrgcccpp.assembler.general.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\include\</Value>
     </ListValues>
   </avrgcccpp.assembler.general.IncludePaths>
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
@@ -286,7 +286,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGccCpp>
-  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\gcc\dev\atmega328p"</avrgcc.common.Device>
+  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\gcc\dev\atmega328p"</avrgcc.common.Device>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
   <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -297,7 +297,7 @@
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>DEBUG</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=20000000L</Value>
       <Value>ARDUINO=108019</Value>
       <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
@@ -311,7 +311,7 @@
       <Value>..\include\core</Value>
       <Value>..\include\variants\eightanaloginputs</Value>
       <Value>..\include\variants\standard</Value>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\include\</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -326,7 +326,7 @@
   <avrgcccpp.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>DEBUG</Value>
-      <Value>F_CPU=16000000L</Value>
+      <Value>F_CPU=20000000L</Value>
       <Value>ARDUINO=108019</Value>
       <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
@@ -340,7 +340,7 @@
       <Value>..\include\core</Value>
       <Value>..\include\variants\eightanaloginputs</Value>
       <Value>..\include\variants\standard</Value>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\include\</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -358,7 +358,7 @@
   <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
   <avrgcccpp.assembler.general.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.4.522\include\</Value>
     </ListValues>
   </avrgcccpp.assembler.general.IncludePaths>
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>

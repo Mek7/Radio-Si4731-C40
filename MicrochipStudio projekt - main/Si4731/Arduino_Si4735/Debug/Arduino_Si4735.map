@@ -1222,7 +1222,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x78f0
+.text           0x00000000     0x7908
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5/crtatmega328.o
                 0x00000000                __vector_default
@@ -1399,10 +1399,10 @@ END GROUP
                 0x00001efc       0x42 Sketch.o
  .text._ZL7numPutcch
                 0x00001f3e       0x52 Sketch.o
- .text._ZL7graPutcch
-                0x00001f90       0x68 Sketch.o
  .text._ZL8clearGrav
-                0x00001ff8       0x40 Sketch.o
+                0x00001f90       0x40 Sketch.o
+ .text._ZL7graPutcch
+                0x00001fd0       0x68 Sketch.o
  .text._ZL27forceDateTimeReadAndDisplayv
                 0x00002038       0x68 Sketch.o
  .text._ZL5speOnc
@@ -1434,353 +1434,353 @@ END GROUP
  .text._ZL2onv  0x000027e0       0xe2 Sketch.o
  .text._ZL22switchToSavedFrequencyjj
                 0x000028c2       0x4e Sketch.o
- .text.loop     0x00002910     0x26e6 Sketch.o
+ .text.loop     0x00002910     0x26fe Sketch.o
                 0x00002910                loop
  .text.initVariant
-                0x00004ff6        0x2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
-                0x00004ff6                initVariant
+                0x0000500e        0x2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
+                0x0000500e                initVariant
  .text.startup.main
-                0x00004ff8       0x1e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
-                0x00004ff8                main
+                0x00005010       0x1e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
+                0x00005010                main
  .text._ZN6Stream9timedReadEv
-                0x00005016       0x60 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
-                0x00005016                _ZN6Stream9timedReadEv
+                0x0000502e       0x60 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
+                0x0000502e                _ZN6Stream9timedReadEv
  .text._ZN6Stream9readBytesEPcj
-                0x00005076       0x4a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
-                0x00005076                _ZN6Stream9readBytesEPcj
+                0x0000508e       0x4a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
+                0x0000508e                _ZN6Stream9readBytesEPcj
  .text.__vector_16
-                0x000050c0       0x8c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x000050c0                __vector_16
- .text.millis   0x0000514c       0x18 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x0000514c                millis
- .text.micros   0x00005164       0x46 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x00005164                micros
- .text.delay    0x000051aa       0x78 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x000051aa                delay
+                0x000050d8       0x8c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x000050d8                __vector_16
+ .text.millis   0x00005164       0x18 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x00005164                millis
+ .text.micros   0x0000517c       0x46 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x0000517c                micros
+ .text.delay    0x000051c2       0x78 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x000051c2                delay
  .text.delayMicroseconds
-                0x00005222       0x24 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x00005222                delayMicroseconds
- .text.init     0x00005246       0x76 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
-                0x00005246                init
+                0x0000523a       0x24 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x0000523a                delayMicroseconds
+ .text.init     0x0000525e       0x76 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+                0x0000525e                init
  .text.turnOffPWM
-                0x000052bc       0x52 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .text.pinMode  0x0000530e       0x78 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
-                0x0000530e                pinMode
+                0x000052d4       0x52 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .text.pinMode  0x00005326       0x78 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+                0x00005326                pinMode
  .text.digitalWrite
-                0x00005386       0x5e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
-                0x00005386                digitalWrite
+                0x0000539e       0x5e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+                0x0000539e                digitalWrite
  .text.digitalRead
-                0x000053e4       0x52 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
-                0x000053e4                digitalRead
+                0x000053fc       0x52 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+                0x000053fc                digitalRead
  .text._ZN6SI4735C2Ev
-                0x00005436       0x84 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005436                _ZN6SI4735C2Ev
-                0x00005436                _ZN6SI4735C1Ev
+                0x0000544e       0x84 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000544e                _ZN6SI4735C2Ev
+                0x0000544e                _ZN6SI4735C1Ev
  .text._ZN6SI47355resetEv
-                0x000054ba       0x4a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000054ba                _ZN6SI47355resetEv
+                0x000054d2       0x4a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000054d2                _ZN6SI47355resetEv
  .text._ZN6SI473510setPowerUpEhhhhhh
-                0x00005504       0x7a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005504                _ZN6SI473510setPowerUpEhhhhhh
+                0x0000551c       0x7a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000551c                _ZN6SI473510setPowerUpEhhhhhh
  .text._ZN6SI473514disableFmDebugEv
-                0x0000557e       0x6a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000557e                _ZN6SI473514disableFmDebugEv
+                0x00005596       0x6a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005596                _ZN6SI473514disableFmDebugEv
  .text._ZN6SI473516clearRdsBuffer2AEv
-                0x000055e8       0x1c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000055e8                _ZN6SI473516clearRdsBuffer2AEv
+                0x00005600       0x1c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005600                _ZN6SI473516clearRdsBuffer2AEv
  .text._ZN6SI473516clearRdsBuffer2BEv
-                0x00005604       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005604                _ZN6SI473516clearRdsBuffer2BEv
+                0x0000561c       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000561c                _ZN6SI473516clearRdsBuffer2BEv
  .text._ZN6SI473516clearRdsBuffer0AEv
-                0x00005624       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005624                _ZN6SI473516clearRdsBuffer0AEv
+                0x0000563c       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000563c                _ZN6SI473516clearRdsBuffer0AEv
  .text._ZN6SI47357RdsInitEv
-                0x00005644       0x38 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005644                _ZN6SI47357RdsInitEv
+                0x0000565c       0x38 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000565c                _ZN6SI47357RdsInitEv
  .text._ZN6SI473513getNext2BlockEPc
-                0x0000567c       0x92 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000567c                _ZN6SI473513getNext2BlockEPc
+                0x00005694       0x92 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005694                _ZN6SI473513getNext2BlockEPc
  .text._ZN6SI473513getNext4BlockEPc
-                0x0000570e       0xa6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000570e                _ZN6SI473513getNext4BlockEPc
+                0x00005726       0xa6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005726                _ZN6SI473513getNext4BlockEPc
  .text._ZN6SI473512getRdsText0AEv
-                0x000057b4       0x5c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000057b4                _ZN6SI473512getRdsText0AEv
+                0x000057cc       0x5c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000057cc                _ZN6SI473512getRdsText0AEv
  .text._ZN6SI473512getRdsText2AEv
-                0x00005810       0x54 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005810                _ZN6SI473512getRdsText2AEv
+                0x00005828       0x54 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005828                _ZN6SI473512getRdsText2AEv
  .text._ZN6SI473512mjdConverterEmPmS0_S0_
-                0x00005864      0x1c0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005864                _ZN6SI473512mjdConverterEmPmS0_S0_
+                0x0000587c      0x1c0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000587c                _ZN6SI473512mjdConverterEmPmS0_S0_
  .text._ZN6SI473514getRdsDateTimeEPjS0_S0_S0_S0_
-                0x00005a24      0x1fe D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005a24                _ZN6SI473514getRdsDateTimeEPjS0_S0_S0_S0_
+                0x00005a3c      0x1fe D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005a3c                _ZN6SI473514getRdsDateTimeEPjS0_S0_S0_S0_
  .text._ZN6SI473510waitToSendEv
-                0x00005c22       0x34 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005c22                _ZN6SI473510waitToSendEv
+                0x00005c3a       0x34 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005c3a                _ZN6SI473510waitToSendEv
  .text._ZN6SI47359powerDownEv
-                0x00005c56       0x56 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005c56                _ZN6SI47359powerDownEv
+                0x00005c6e       0x56 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005c6e                _ZN6SI47359powerDownEv
  .text._ZN6SI473511getFirmwareEv
-                0x00005cac       0x9e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005cac                _ZN6SI473511getFirmwareEv
+                0x00005cc4       0x9e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005cc4                _ZN6SI473511getFirmwareEv
  .text._ZN6SI473512setFrequencyEj
-                0x00005d4a      0x11e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005d4a                _ZN6SI473512setFrequencyEj
+                0x00005d62      0x11e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005d62                _ZN6SI473512setFrequencyEj
  .text._ZN6SI473532setTuneFrequencyAntennaCapacitorEj
-                0x00005e68       0x4e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005e68                _ZN6SI473532setTuneFrequencyAntennaCapacitorEj
+                0x00005e80       0x4e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005e80                _ZN6SI473532setTuneFrequencyAntennaCapacitorEj
  .text._ZN6SI473511frequencyUpEv
-                0x00005eb6       0x3e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005eb6                _ZN6SI473511frequencyUpEv
+                0x00005ece       0x3e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005ece                _ZN6SI473511frequencyUpEv
  .text._ZN6SI473513frequencyDownEv
-                0x00005ef4       0x3e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005ef4                _ZN6SI473513frequencyDownEv
+                0x00005f0c       0x3e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005f0c                _ZN6SI473513frequencyDownEv
  .text._ZN6SI473531getCurrentReceivedSignalQualityEh
-                0x00005f32       0xc2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005f32                _ZN6SI473531getCurrentReceivedSignalQualityEh
+                0x00005f4a       0xc2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00005f4a                _ZN6SI473531getCurrentReceivedSignalQualityEh
  .text._ZN6SI473531getCurrentReceivedSignalQualityEv
-                0x00005ff4        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005ff4                _ZN6SI473531getCurrentReceivedSignalQualityEv
+                0x0000600c        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000600c                _ZN6SI473531getCurrentReceivedSignalQualityEv
  .text._ZN6SI473512sendPropertyEjj
-                0x00005ffa       0x86 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00005ffa                _ZN6SI473512sendPropertyEjj
+                0x00006012       0x86 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006012                _ZN6SI473512sendPropertyEjj
  .text._ZN6SI473511setRefClockEj
-                0x00006080       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00006080                _ZN6SI473511setRefClockEj
+                0x00006098       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006098                _ZN6SI473511setRefClockEj
  .text._ZN6SI473520setRefClockPrescalerEjh
-                0x000060a8       0x36 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000060a8                _ZN6SI473520setRefClockPrescalerEjh
+                0x000060c0       0x36 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000060c0                _ZN6SI473520setRefClockPrescalerEjh
  .text._ZN6SI473515setAvcAmMaxGainEh
-                0x000060de       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000060de                _ZN6SI473515setAvcAmMaxGainEh
+                0x000060f6       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000060f6                _ZN6SI473515setAvcAmMaxGainEh
  .text._ZN6SI473515setSeekAmLimitsEjj
-                0x00006106       0x2a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00006106                _ZN6SI473515setSeekAmLimitsEjj
+                0x0000611e       0x2a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000611e                _ZN6SI473515setSeekAmLimitsEjj
  .text._ZN6SI473515setSeekFmLimitsEjj
-                0x00006130       0x2a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00006130                _ZN6SI473515setSeekFmLimitsEjj
+                0x00006148       0x2a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006148                _ZN6SI473515setSeekFmLimitsEjj
  .text._ZN6SI473516setSeekAmSpacingEj
-                0x0000615a        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000615a                _ZN6SI473516setSeekAmSpacingEj
+                0x00006172        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006172                _ZN6SI473516setSeekAmSpacingEj
  .text._ZN6SI473516setSeekFmSpacingEj
-                0x00006164        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00006164                _ZN6SI473516setSeekFmSpacingEj
+                0x0000617c        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000617c                _ZN6SI473516setSeekFmSpacingEj
  .text._ZN6SI473525setFmBlendStereoThresholdEh
-                0x0000616e        0xc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000616e                _ZN6SI473525setFmBlendStereoThresholdEh
+                0x00006186        0xc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006186                _ZN6SI473525setFmBlendStereoThresholdEh
  .text._ZN6SI47359setVolumeEh
-                0x0000617a       0x24 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000617a                _ZN6SI47359setVolumeEh
+                0x00006192       0x24 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006192                _ZN6SI47359setVolumeEh
  .text._ZN6SI473512radioPowerUpEv
-                0x0000619e       0xbc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000619e                _ZN6SI473512radioPowerUpEv
+                0x000061b6       0xbc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000061b6                _ZN6SI473512radioPowerUpEv
  .text._ZN6SI47355setupEhhhhhh
-                0x0000625a       0xa2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000625a                _ZN6SI47355setupEhhhhhh
+                0x00006272       0xa2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006272                _ZN6SI47355setupEhhhhhh
  .text._ZN6SI47355setupEhh
-                0x000062fc       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000062fc                _ZN6SI47355setupEhh
+                0x00006314       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006314                _ZN6SI47355setupEhh
  .text._ZN6SI47355setAMEv
-                0x00006324       0x9e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x00006324                _ZN6SI47355setAMEv
+                0x0000633c       0x9e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x0000633c                _ZN6SI47355setAMEv
  .text._ZN6SI47355setAMEjjjj
-                0x000063c2       0x58 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000063c2                _ZN6SI47355setAMEjjjj
+                0x000063da       0x58 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000063da                _ZN6SI47355setAMEjjjj
  .text._ZN6SI47355setFMEv
-                0x0000641a       0x86 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x0000641a                _ZN6SI47355setFMEv
+                0x00006432       0x86 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006432                _ZN6SI47355setFMEv
  .text._ZN6SI47355setFMEjjjj
-                0x000064a0       0x58 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000064a0                _ZN6SI47355setFMEjjjj
+                0x000064b8       0x58 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000064b8                _ZN6SI47355setFMEjjjj
  .text._ZN6SI473512setRdsConfigEhhhhh
-                0x000064f8       0xb4 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000064f8                _ZN6SI473512setRdsConfigEhhhhh
+                0x00006510       0xb4 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x00006510                _ZN6SI473512setRdsConfigEhhhhh
  .text._ZN6SI473512getRdsStatusEhhh
-                0x000065ac      0x116 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
-                0x000065ac                _ZN6SI473512getRdsStatusEhhh
+                0x000065c4      0x116 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+                0x000065c4                _ZN6SI473512getRdsStatusEhhh
  .text._ZN5Print17availableForWriteEv
-                0x000066c2        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000066c2                _ZN5Print17availableForWriteEv
+                0x000066da        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000066da                _ZN5Print17availableForWriteEv
  .text._ZN7TwoWire9availableEv
-                0x000066c8       0x10 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000066c8                _ZN7TwoWire9availableEv
+                0x000066e0       0x10 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000066e0                _ZN7TwoWire9availableEv
  .text._ZN7TwoWire4readEv
-                0x000066d8       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000066d8                _ZN7TwoWire4readEv
+                0x000066f0       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000066f0                _ZN7TwoWire4readEv
  .text._ZN7TwoWire4peekEv
-                0x00006700       0x1e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006700                _ZN7TwoWire4peekEv
+                0x00006718       0x1e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00006718                _ZN7TwoWire4peekEv
  .text._ZN7TwoWire5flushEv
-                0x0000671e        0x2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000671e                _ZN7TwoWire5flushEv
+                0x00006736        0x2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00006736                _ZN7TwoWire5flushEv
  .text._ZN7TwoWire16onReceiveServiceEPhi
-                0x00006720       0x54 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006720                _ZN7TwoWire16onReceiveServiceEPhi
+                0x00006738       0x54 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x00006738                _ZN7TwoWire16onReceiveServiceEPhi
  .text._ZN7TwoWire16onRequestServiceEv
-                0x00006774       0x18 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006774                _ZN7TwoWire16onRequestServiceEv
+                0x0000678c       0x18 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x0000678c                _ZN7TwoWire16onRequestServiceEv
  .text._ZN7TwoWire5writeEPKhj
-                0x0000678c       0x5a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000678c                _ZN7TwoWire5writeEPKhj
+                0x000067a4       0x5a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000067a4                _ZN7TwoWire5writeEPKhj
  .text._ZN7TwoWire5writeEh
-                0x000067e6       0x5e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000067e6                _ZN7TwoWire5writeEh
+                0x000067fe       0x5e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000067fe                _ZN7TwoWire5writeEh
  .text._ZN7TwoWireC2Ev
-                0x00006844       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006844                _ZN7TwoWireC1Ev
-                0x00006844                _ZN7TwoWireC2Ev
+                0x0000685c       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x0000685c                _ZN7TwoWireC1Ev
+                0x0000685c                _ZN7TwoWireC2Ev
  .text._ZN7TwoWire5beginEv
-                0x00006864       0x24 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006864                _ZN7TwoWire5beginEv
+                0x0000687c       0x24 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x0000687c                _ZN7TwoWire5beginEv
  .text._ZN7TwoWire8setClockEm
-                0x00006888        0x8 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006888                _ZN7TwoWire8setClockEm
+                0x000068a0        0x8 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000068a0                _ZN7TwoWire8setClockEm
  .text._ZN7TwoWire17beginTransmissionEh
-                0x00006890       0x14 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006890                _ZN7TwoWire17beginTransmissionEh
+                0x000068a8       0x14 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000068a8                _ZN7TwoWire17beginTransmissionEh
  .text._ZN7TwoWire17beginTransmissionEi
-                0x000068a4        0x4 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000068a4                _ZN7TwoWire17beginTransmissionEi
+                0x000068bc        0x4 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000068bc                _ZN7TwoWire17beginTransmissionEi
  .text._ZN7TwoWire15endTransmissionEh
-                0x000068a8       0x26 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000068a8                _ZN7TwoWire15endTransmissionEh
+                0x000068c0       0x26 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000068c0                _ZN7TwoWire15endTransmissionEh
  .text._ZN7TwoWire11requestFromEhhmhh
-                0x000068ce       0xa8 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000068ce                _ZN7TwoWire11requestFromEhhmhh
+                0x000068e6       0xa8 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000068e6                _ZN7TwoWire11requestFromEhhmhh
  .text._ZN7TwoWire11requestFromEhhh
-                0x00006976       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006976                _ZN7TwoWire11requestFromEhhh
+                0x0000698e       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x0000698e                _ZN7TwoWire11requestFromEhhh
  .text._ZN7TwoWire11requestFromEii
-                0x00006996        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x00006996                _ZN7TwoWire11requestFromEii
+                0x000069ae        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000069ae                _ZN7TwoWire11requestFromEii
  .text._ZN7TwoWire11requestFromEiii
-                0x0000699c        0x4 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x0000699c                _ZN7TwoWire11requestFromEiii
+                0x000069b4        0x4 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000069b4                _ZN7TwoWire11requestFromEiii
  .text._ZN7TwoWire15endTransmissionEv
-                0x000069a0        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
-                0x000069a0                _ZN7TwoWire15endTransmissionEv
+                0x000069b8        0x6 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+                0x000069b8                _ZN7TwoWire15endTransmissionEv
  .text.startup._GLOBAL__sub_I__ZN7TwoWire8rxBufferE
-                0x000069a6        0x8 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
- .text.__empty  0x000069ae        0x2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
-                0x000069ae                yield
+                0x000069be        0x8 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+ .text.__empty  0x000069c6        0x2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+                0x000069c6                yield
  .text.twi_init
-                0x000069b0       0x3c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x000069b0                twi_init
+                0x000069c8       0x3c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x000069c8                twi_init
  .text.twi_disable
-                0x000069ec       0x1a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x000069ec                twi_disable
+                0x00006a04       0x1a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006a04                twi_disable
  .text.twi_setFrequency
-                0x00006a06       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006a06                twi_setFrequency
+                0x00006a1e       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006a1e                twi_setFrequency
  .text.twi_transmit
-                0x00006a2e       0x50 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006a2e                twi_transmit
+                0x00006a46       0x50 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006a46                twi_transmit
  .text.twi_attachSlaveRxEvent
-                0x00006a7e        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006a7e                twi_attachSlaveRxEvent
+                0x00006a96        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006a96                twi_attachSlaveRxEvent
  .text.twi_attachSlaveTxEvent
-                0x00006a88        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006a88                twi_attachSlaveTxEvent
+                0x00006aa0        0xa D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006aa0                twi_attachSlaveTxEvent
  .text.twi_releaseBus
-                0x00006a92        0xc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006a92                twi_releaseBus
+                0x00006aaa        0xc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006aaa                twi_releaseBus
  .text.twi_handleTimeout
-                0x00006a9e       0x2c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006a9e                twi_handleTimeout
+                0x00006ab6       0x2c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006ab6                twi_handleTimeout
  .text.twi_readFrom
-                0x00006aca      0x1d2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006aca                twi_readFrom
+                0x00006ae2      0x1d2 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006ae2                twi_readFrom
  .text.twi_writeTo
-                0x00006c9c      0x1e0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006c9c                twi_writeTo
+                0x00006cb4      0x1e0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006cb4                twi_writeTo
  .text.twi_stop
-                0x00006e7c       0x70 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006e7c                twi_stop
+                0x00006e94       0x70 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006e94                twi_stop
  .text.__vector_24
-                0x00006eec      0x25a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
-                0x00006eec                __vector_24
+                0x00006f04      0x25a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+                0x00006f04                __vector_24
  .text.libgcc.mul
-                0x00007146       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_mulsi3.o)
-                0x00007146                __mulsi3
+                0x0000715e       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_mulsi3.o)
+                0x0000715e                __mulsi3
  .text.libgcc.div
-                0x00007166       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
-                0x00007166                __udivmodqi4
+                0x0000717e       0x18 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x0000717e                __udivmodqi4
  .text.libgcc.div
-                0x0000717e       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
-                0x0000717e                __udivmodhi4
+                0x00007196       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x00007196                __udivmodhi4
  .text.libgcc.div
-                0x000071a6       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
-                0x000071a6                _div
-                0x000071a6                __divmodhi4
+                0x000071be       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
+                0x000071be                _div
+                0x000071be                __divmodhi4
  .text.libgcc.div
-                0x000071ce       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x000071ce                __udivmodsi4
+                0x000071e6       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x000071e6                __udivmodsi4
  .text.libgcc.mul
-                0x00007212       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00007212                __muluhisi3
- .text.libgcc   0x00007228        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x00007228                __tablejump2__
+                0x0000722a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x0000722a                __muluhisi3
+ .text.libgcc   0x00007240        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00007240                __tablejump2__
  .text.libgcc.mul
-                0x00007234       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00007234                __umulhisi3
+                0x0000724c       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x0000724c                __umulhisi3
  .text.avr-libc
-                0x00007252       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
-                0x00007252                memcpy_P
+                0x0000726a       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
+                0x0000726a                memcpy_P
  .text.avr-libc
-                0x00007264       0x1a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcmp.o)
-                0x00007264                memcmp
+                0x0000727c       0x1a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcmp.o)
+                0x0000727c                memcmp
  .text.avr-libc
-                0x0000727e       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
-                0x0000727e                __itoa_ncheck
+                0x00007296       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
+                0x00007296                __itoa_ncheck
  .text.avr-libc
-                0x00007294       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
-                0x00007294                __utoa_ncheck
-                0x00007296                __utoa_common
+                0x000072ac       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
+                0x000072ac                __utoa_ncheck
+                0x000072ae                __utoa_common
  .text.avr-libc
-                0x000072c8      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x000072c8                vfprintf
+                0x000072e0      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x000072e0                vfprintf
  .text.avr-libc
-                0x0000768a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x0000768a                strnlen_P
+                0x000076a2       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x000076a2                strnlen_P
  .text.avr-libc
-                0x000076a0       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x000076a0                strnlen
+                0x000076b8       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x000076b8                strnlen
  .text.avr-libc
-                0x000076b6       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x000076b6                strrev
+                0x000076ce       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x000076ce                strrev
  .text.avr-libc
-                0x000076d6       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x000076d6                fputc
+                0x000076ee       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x000076ee                fputc
  .text.avr-libc
-                0x0000774e       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x0000774e                __ultoa_invert
+                0x00007766       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00007766                __ultoa_invert
  .text.avr-libc
-                0x0000780a       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eerd_block.o)
-                0x0000780a                eeprom_read_block
-                0x0000780e                eeprom_read_blraw
+                0x00007822       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eerd_block.o)
+                0x00007822                eeprom_read_block
+                0x00007826                eeprom_read_blraw
  .text.avr-libc
-                0x0000782a       0x24 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eeupd_byte.o)
-                0x0000782a                eeprom_update_byte
-                0x0000782c                eeprom_update_r18
+                0x00007842       0x24 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eeupd_byte.o)
+                0x00007842                eeprom_update_byte
+                0x00007844                eeprom_update_r18
  .text.avr-libc
-                0x0000784e       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_block.o)
-                0x0000784e                eeprom_write_block
+                0x00007866       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_block.o)
+                0x00007866                eeprom_write_block
  .text.avr-libc
-                0x00007862       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_byte.o)
-                0x00007862                eeprom_write_byte
-                0x00007864                eeprom_write_r18
+                0x0000787a       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_byte.o)
+                0x0000787a                eeprom_write_byte
+                0x0000787c                eeprom_write_r18
  .text.libgcc.prologue
-                0x0000787e       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x0000787e                __prologue_saves__
+                0x00007896       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x00007896                __prologue_saves__
  .text.libgcc.prologue
-                0x000078b6       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x000078b6                __epilogue_restores__
-                0x000078ec                . = ALIGN (0x2)
+                0x000078ce       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x000078ce                __epilogue_restores__
+                0x00007904                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000078ec        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000078ec                _exit
-                0x000078ec                exit
+ .fini9         0x00007904        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00007904                _exit
+                0x00007904                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1799,11 +1799,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000078ec        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00007904        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000078f0                _etext = .
+                0x00007908                _etext = .
 
-.data           0x00800100      0x318 load address 0x000078f0
+.data           0x00800100      0x318 load address 0x00007908
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -2419,8 +2419,8 @@ END GROUP
                 0x0080079e        0x1 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
  *(COMMON)
                 0x0080079f                PROVIDE (__bss_end, .)
-                0x000078f0                __data_load_start = LOADADDR (.data)
-                0x00007c08                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00007908                __data_load_start = LOADADDR (.data)
+                0x00007c20                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080079f        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -2537,23 +2537,23 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x1b8ac
+.debug_info     0x00000000    0x1b8d5
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5/crtatmega328.o
  .debug_info    0x000005f4      0x6de irmp.o
- .debug_info    0x00000cd2     0xbb9b Sketch.o
- .debug_info    0x0000c86d      0x237 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
- .debug_info    0x0000caa4     0x2157 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
- .debug_info    0x0000ebfb      0x2cb D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
- .debug_info    0x0000eec6      0x5fe D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_info    0x0000f4c4     0x8f2b D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
- .debug_info    0x000183ef     0x2910 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
- .debug_info    0x0001acff       0x3e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
- .debug_info    0x0001ad3d      0x8dc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
- .debug_info    0x0001b619       0xa5 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eerd_block.o)
- .debug_info    0x0001b6be       0xa5 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eeupd_byte.o)
- .debug_info    0x0001b763       0xa5 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_block.o)
- .debug_info    0x0001b808       0xa4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_byte.o)
+ .debug_info    0x00000cd2     0xbbc4 Sketch.o
+ .debug_info    0x0000c896      0x237 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
+ .debug_info    0x0000cacd     0x2157 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
+ .debug_info    0x0000ec24      0x2cb D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+ .debug_info    0x0000eeef      0x5fe D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_info    0x0000f4ed     0x8f2b D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+ .debug_info    0x00018418     0x2910 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+ .debug_info    0x0001ad28       0x3e D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_info    0x0001ad66      0x8dc D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+ .debug_info    0x0001b642       0xa5 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eerd_block.o)
+ .debug_info    0x0001b6e7       0xa5 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eeupd_byte.o)
+ .debug_info    0x0001b78c       0xa5 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_block.o)
+ .debug_info    0x0001b831       0xa4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_byte.o)
 
 .debug_abbrev   0x00000000     0x25cb
  *(.debug_abbrev)
@@ -2573,23 +2573,23 @@ END GROUP
  .debug_abbrev  0x000025a3       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_block.o)
  .debug_abbrev  0x000025b7       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_byte.o)
 
-.debug_line     0x00000000     0x7c1e
+.debug_line     0x00000000     0x7c45
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5/crtatmega328.o
  .debug_line    0x00000134      0xce5 irmp.o
- .debug_line    0x00000e19     0x2b50 Sketch.o
- .debug_line    0x00003969      0x17a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
- .debug_line    0x00003ae3      0x60c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
- .debug_line    0x000040ef      0x2af D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
- .debug_line    0x0000439e      0x267 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_line    0x00004605     0x2652 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
- .debug_line    0x00006c57      0x637 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
- .debug_line    0x0000728e       0x41 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
- .debug_line    0x000072cf      0x6d0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
- .debug_line    0x0000799f       0xab C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eerd_block.o)
- .debug_line    0x00007a4a       0xb6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eeupd_byte.o)
- .debug_line    0x00007b00       0x80 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_block.o)
- .debug_line    0x00007b80       0x9e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_byte.o)
+ .debug_line    0x00000e19     0x2b77 Sketch.o
+ .debug_line    0x00003990      0x17a D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
+ .debug_line    0x00003b0a      0x60c D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
+ .debug_line    0x00004116      0x2af D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+ .debug_line    0x000043c5      0x267 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_line    0x0000462c     0x2652 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+ .debug_line    0x00006c7e      0x637 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+ .debug_line    0x000072b5       0x41 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_line    0x000072f6      0x6d0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+ .debug_line    0x000079c6       0xab C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eerd_block.o)
+ .debug_line    0x00007a71       0xb6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eeupd_byte.o)
+ .debug_line    0x00007b27       0x80 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_block.o)
+ .debug_line    0x00007ba7       0x9e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5\libatmega328.a(eewr_byte.o)
 
 .debug_frame    0x00000000     0x1f78
  *(.debug_frame)
@@ -2657,18 +2657,18 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0xa08
+.debug_ranges   0x00000000      0xa10
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x60 irmp.o
- .debug_ranges  0x00000060      0x290 Sketch.o
- .debug_ranges  0x000002f0       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
- .debug_ranges  0x00000310       0xd0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
- .debug_ranges  0x000003e0       0x38 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
- .debug_ranges  0x00000418       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_ranges  0x00000440      0x430 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
- .debug_ranges  0x00000870      0x100 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
- .debug_ranges  0x00000970       0x10 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
- .debug_ranges  0x00000980       0x88 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
+ .debug_ranges  0x00000060      0x298 Sketch.o
+ .debug_ranges  0x000002f8       0x20 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(main.o)
+ .debug_ranges  0x00000318       0xd0 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Stream.o)
+ .debug_ranges  0x000003e8       0x38 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+ .debug_ranges  0x00000420       0x28 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_ranges  0x00000448      0x430 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(SI4735.o)
+ .debug_ranges  0x00000878      0x100 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(Wire.o)
+ .debug_ranges  0x00000978       0x10 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_ranges  0x00000988       0x88 D:\Elektro\_Projekty\Radio Si4731-C40\_github\MicrochipStudio projekt - main\Si4731\ArduinoCore\Debug\libArduinoCore.a(twi.o)
 
 .debug_macro
  *(.debug_macro)

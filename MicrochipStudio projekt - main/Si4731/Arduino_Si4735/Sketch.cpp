@@ -732,11 +732,12 @@ static void forceDateTimeReadAndDisplay()
 	
 	if (getMode() == MODE_STANDBY)
 	{
-		clearGra();
-		graPutc('.', 6);
-		graPutc('.', 9);
-		graPutc('2', 10);
-		graPutc('0', 11);
+		//clearGra();
+		graPuts("    .  .  20  ");
+		//graPutc('.', 6);
+		//graPutc('.', 9);
+		//graPutc('2', 10);
+		//graPutc('0', 11);
 	}
 }
 

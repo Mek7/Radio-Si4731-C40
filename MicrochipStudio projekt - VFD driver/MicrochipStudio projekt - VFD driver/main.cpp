@@ -871,7 +871,7 @@ int main(void)
 	
 	sei(); // enable global interrupts
 	
-	graPuts("-Rádio by Mek-");
+	graPuts("-R\xE1""dio by Mek-");
 
     while (1) 
     {	

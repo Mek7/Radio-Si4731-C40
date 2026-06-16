@@ -999,7 +999,7 @@ END GROUP
  *(.fini0)
                 0x00001386                _etext = .
 
-.data           0x00800100      0x46a load address 0x00001386
+.data           0x00800100      0x468 load address 0x00001386
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5/crtatmega328.o
@@ -1041,67 +1041,66 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800119       0x1f main.o
-                                 0x26 (size before relaxing)
+                0x00800119       0x1e main.o
+                                 0x25 (size before relaxing)
  .rodata.CSWTCH.138
-                0x00800138       0x12 main.o
+                0x00800137       0x12 main.o
  .rodata.CSWTCH.137
-                0x0080014a       0x12 main.o
+                0x00800149       0x12 main.o
  .rodata.CSWTCH.136
-                0x0080015c       0x12 main.o
+                0x0080015b       0x12 main.o
  .rodata.CSWTCH.134
-                0x0080016e       0x14 main.o
+                0x0080016d       0x14 main.o
  .rodata.CSWTCH.133
-                0x00800182       0x14 main.o
+                0x00800181       0x14 main.o
  .rodata.CSWTCH.131
-                0x00800196       0x52 main.o
+                0x00800195       0x52 main.o
  .rodata.CSWTCH.117
-                0x008001e8       0xe8 main.o
+                0x008001e7       0xe8 main.o
  .rodata.GraAsciiTable
-                0x008002d0      0x299 vfd.o
-                0x008002d0                GraAsciiTable
+                0x008002cf      0x299 vfd.o
+                0x008002cf                GraAsciiTable
  *(.gnu.linkonce.r*)
-                0x0080056a                . = ALIGN (0x2)
- *fill*         0x00800569        0x1 
-                0x0080056a                _edata = .
-                0x0080056a                PROVIDE (__data_end, .)
+                0x00800568                . = ALIGN (0x2)
+                0x00800568                _edata = .
+                0x00800568                PROVIDE (__data_end, .)
 
-.bss            0x0080056a       0x87
-                0x0080056a                PROVIDE (__bss_start, .)
+.bss            0x00800568       0x87
+                0x00800568                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x0080056a        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5/crtatmega328.o
- .bss           0x0080056a        0x0 I2CSlave.o
- .bss           0x0080056a        0x0 main.o
- .bss           0x0080056a        0x0 vfd.o
- .bss           0x0080056a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
- .bss           0x0080056a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
- .bss           0x0080056a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
- .bss           0x0080056a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
- .bss           0x0080056a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
- .bss           0x0080056a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
+ .bss           0x00800568        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.4.522/gcc/dev/atmega328/avr5/crtatmega328.o
+ .bss           0x00800568        0x0 I2CSlave.o
+ .bss           0x00800568        0x0 main.o
+ .bss           0x00800568        0x0 vfd.o
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
  *(.bss*)
  .bss._ZL7I2C_req
-                0x0080056a        0x2 I2CSlave.o
+                0x00800568        0x2 I2CSlave.o
  .bss._ZL8I2C_recv
-                0x0080056c        0x2 I2CSlave.o
+                0x0080056a        0x2 I2CSlave.o
  .bss._ZL14displayCounter
-                0x0080056e        0x2 main.o
+                0x0080056c        0x2 main.o
  .bss._ZL14showUnderlines
-                0x00800570        0x1 main.o
+                0x0080056e        0x1 main.o
  .bss._ZL13displayMemory
-                0x00800571       0x7e main.o
+                0x0080056f       0x7e main.o
  .bss._ZL10activeGrid
-                0x008005ef        0x2 main.o
+                0x008005ed        0x2 main.o
  *(COMMON)
-                0x008005f1                PROVIDE (__bss_end, .)
+                0x008005ef                PROVIDE (__bss_end, .)
                 0x00001386                __data_load_start = LOADADDR (.data)
-                0x000017f0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000017ee                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008005f1        0x0
+.noinit         0x008005ef        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008005f1                _end = .
+                0x008005ef                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0

@@ -15,7 +15,7 @@
 #include "I2CSlave.hpp"
 
 static unsigned int activeGrid = 0; // 0-17
-static VfdState displayMemory[18];
+static VfdState displayMemory[18] = {'\0'};
 static volatile uint8_t i2cdata[I2CDATA_MAXLENGTH] = { UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX };
 static volatile bool showUnderlines = false;
 static volatile unsigned char modeCmdGraTextCurrentIndex = UINT8_MAX; // UINT8_MAX means we are not in CMD_SHOW_GRA_TEXT mode
@@ -32,6 +32,23 @@ static volatile unsigned char displayOn = 1; // 0 or 1 or 2 (means "turn off dis
 
 static void graPuts(char const* text);
 static void numPuts(char const* text);
+
+// Called from the I2C ISR on a STOP/repeated-START. Abort any partially
+// received command so a new transaction always begins by expecting a
+// command byte. Without this, a transaction that ends mid-payload leaves a
+// modeCmd* collector "armed", and the NEXT command byte is swallowed as
+// payload - which silently drops whole commands (notably CMD_SHOW_GRA_TEXT).
+static void I2C_resetReceiveState()
+{
+	modeCmdGraTextCurrentIndex = UINT8_MAX;
+	modeCmdNumTextCurrentIndex = UINT8_MAX;
+	modeCmdGraCharCurrentIndex = UINT8_MAX;
+	modeCmdNumCharCurrentIndex = UINT8_MAX;
+	modeCmdShowSpeCurrentIndex = UINT8_MAX;
+	modeCmdHideSpeCurrentIndex = UINT8_MAX;
+	modeCmdToggleSpeCurrentIndex = UINT8_MAX;
+	modeCmdShowVolumeCurrentIndex = UINT8_MAX;
+}
 
 static void clearI2Cdata()
 {
@@ -855,10 +872,10 @@ int main(void)
 	DDRC = 0b00001111;
 	
 	// initialize I2C slave
-	I2C_setCallbacks(I2C_received, I2C_requested);
+	I2C_setCallbacks(I2C_received, I2C_requested, I2C_resetReceiveState);
 	I2C_init(I2C_ADDR);
 	I2C_setStatus(STATUS_READY);
-	
+		
 	PORTC |= _BV(PC3); // MR/, 0 clears whole register
 	
 	// clear all
@@ -872,7 +889,7 @@ int main(void)
 	sei(); // enable global interrupts
 	
 	graPuts("-R\xE1""dio by Mek-");
-
+	
     while (1) 
     {	
 		if (modeCmdFinished != UINT8_MAX)
@@ -889,9 +906,15 @@ int main(void)
 			switch (finished)
 			{
 				case CMD_SHOW_GRA_TEXT:
+				// TEMP DIAG: prove this case runs at all
+				displayMemory[10] = getGraDisplayChar('Y');
 				graPuts((const char *)i2cdata);
 				clearI2Cdata();
 				break;
+				/*				case CMD_SHOW_GRA_TEXT:
+				graPuts((const char *)i2cdata);
+				clearI2Cdata();
+				break;*/
 				case CMD_SHOW_NUM_TEXT:
 				numPuts((const char *)i2cdata);
 				clearI2Cdata();
@@ -913,16 +936,10 @@ int main(void)
 					}
 				}
 				break;
-								case CMD_SHOW_GRA_CHAR:
-								// TEMP DIAG: force a visible marker so we know this command ran
-								displayMemory[17] = getGraDisplayChar('X');
-								graPutc(i2cdata[0], i2cdata[1]);
-								clearI2Cdata();
-								break;
-				/*case CMD_SHOW_GRA_CHAR:
+				case CMD_SHOW_GRA_CHAR:
 				graPutc(i2cdata[0], i2cdata[1]);
 				clearI2Cdata();
-				break;*/
+				break;
 				case CMD_SHOW_NUM_CHAR:
 				numPutc(i2cdata[0], i2cdata[1]);
 				clearI2Cdata();

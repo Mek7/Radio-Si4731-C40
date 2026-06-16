@@ -733,7 +733,6 @@ static void forceDateTimeReadAndDisplay()
 	if (getMode() == MODE_STANDBY)
 	{
 		clearGra();
-		graPutc('Z', 0);
 		graPutc('.', 6);
 		graPutc('.', 9);
 		graPutc('2', 10);

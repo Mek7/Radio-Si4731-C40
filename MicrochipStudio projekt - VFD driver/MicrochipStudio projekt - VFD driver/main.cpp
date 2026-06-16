@@ -913,10 +913,16 @@ int main(void)
 					}
 				}
 				break;
-				case CMD_SHOW_GRA_CHAR:
+								case CMD_SHOW_GRA_CHAR:
+								// TEMP DIAG: force a visible marker so we know this command ran
+								displayMemory[17] = getGraDisplayChar('X');
+								graPutc(i2cdata[0], i2cdata[1]);
+								clearI2Cdata();
+								break;
+				/*case CMD_SHOW_GRA_CHAR:
 				graPutc(i2cdata[0], i2cdata[1]);
 				clearI2Cdata();
-				break;
+				break;*/
 				case CMD_SHOW_NUM_CHAR:
 				numPutc(i2cdata[0], i2cdata[1]);
 				clearI2Cdata();

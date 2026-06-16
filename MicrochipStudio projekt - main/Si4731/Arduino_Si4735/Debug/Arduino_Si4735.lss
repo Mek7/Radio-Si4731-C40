@@ -6639,11 +6639,11 @@ static void on()
 	speOn(SPE_VOLDB);
     2820:	88 e2       	ldi	r24, 0x28	; 40
     2822:	0e 94 9d 0f 	call	0x1f3a	; 0x1f3a <_ZL5speOnc>
-	speOn(SPE_L);
-    2826:	8a e1       	ldi	r24, 0x1A	; 26
-    2828:	0e 94 9d 0f 	call	0x1f3a	; 0x1f3a <_ZL5speOnc>
 	speOn(SPE_R);
-    282c:	8c e1       	ldi	r24, 0x1C	; 28
+    2826:	8c e1       	ldi	r24, 0x1C	; 28
+    2828:	0e 94 9d 0f 	call	0x1f3a	; 0x1f3a <_ZL5speOnc>
+	speOn(SPE_L);
+    282c:	8a e1       	ldi	r24, 0x1A	; 26
     282e:	0e 94 9d 0f 	call	0x1f3a	; 0x1f3a <_ZL5speOnc>
 	
 	// show underlines

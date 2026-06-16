@@ -1,0 +1,1245 @@
+Archive member included to satisfy reference by file (symbol)
+
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                              main.o (__udivmodhi4)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                              C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o (exit)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                              main.o (__tablejump2__)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                              main.o (__do_copy_data)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                              I2CSlave.o (__do_clear_bss)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
+                              main.o (memcpy_P)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00008000         xr
+data             0x00800100         0x00000800         rw !x
+eeprom           0x00810000         0x00000400         rw !x
+fuse             0x00820000         0x00000003         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+user_signatures  0x00850000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+LOAD I2CSlave.o
+LOAD main.o
+LOAD vfd.o
+START GROUP
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
+END GROUP
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
+START GROUP
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a
+LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5\libatmega328.a
+END GROUP
+                0x00000000                __TEXT_REGION_ORIGIN__ = DEFINED (__TEXT_REGION_ORIGIN__)?__TEXT_REGION_ORIGIN__:0x0
+                [0x00800100]                __DATA_REGION_ORIGIN__ = DEFINED (__DATA_REGION_ORIGIN__)?__DATA_REGION_ORIGIN__:0x800060
+                [0x00008000]                __TEXT_REGION_LENGTH__ = DEFINED (__TEXT_REGION_LENGTH__)?__TEXT_REGION_LENGTH__:0x20000
+                [0x00000800]                __DATA_REGION_LENGTH__ = DEFINED (__DATA_REGION_LENGTH__)?__DATA_REGION_LENGTH__:0xffa0
+                [0x00000400]                __EEPROM_REGION_LENGTH__ = DEFINED (__EEPROM_REGION_LENGTH__)?__EEPROM_REGION_LENGTH__:0x10000
+                [0x00000003]                __FUSE_REGION_LENGTH__ = DEFINED (__FUSE_REGION_LENGTH__)?__FUSE_REGION_LENGTH__:0x400
+                0x00000400                __LOCK_REGION_LENGTH__ = DEFINED (__LOCK_REGION_LENGTH__)?__LOCK_REGION_LENGTH__:0x400
+                0x00000400                __SIGNATURE_REGION_LENGTH__ = DEFINED (__SIGNATURE_REGION_LENGTH__)?__SIGNATURE_REGION_LENGTH__:0x400
+                0x00000400                __USER_SIGNATURE_REGION_LENGTH__ = DEFINED (__USER_SIGNATURE_REGION_LENGTH__)?__USER_SIGNATURE_REGION_LENGTH__:0x400
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x12a4
+ *(.vectors)
+ .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+                0x00000000                __vector_default
+                0x00000000                __vectors
+ *(.vectors)
+ *(.progmem.gcc*)
+ .progmem.gcc_sw_table._ZL7numPutccc
+                0x00000068       0x3c main.o
+ .progmem.gcc_sw_table.main
+                0x000000a4       0x1a main.o
+                0x000000be                . = ALIGN (0x2)
+                0x000000be                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x000000be        0x0 linker stubs
+ *(.trampolines*)
+                0x000000be                __trampolines_end = .
+ *libprintf_flt.a:*(.progmem.data)
+ *libc.a:*(.progmem.data)
+ *(.progmem*)
+ .progmem.data.Vol5c
+                0x000000be        0x7 vfd.o
+                0x000000be                Vol5c
+ .progmem.data.Vol0c
+                0x000000c5        0x7 vfd.o
+                0x000000c5                Vol0c
+ .progmem.data.Vol9b
+                0x000000cc        0x7 vfd.o
+                0x000000cc                Vol9b
+ .progmem.data.Vol8b
+                0x000000d3        0x7 vfd.o
+                0x000000d3                Vol8b
+ .progmem.data.Vol7b
+                0x000000da        0x7 vfd.o
+                0x000000da                Vol7b
+ .progmem.data.Vol6b
+                0x000000e1        0x7 vfd.o
+                0x000000e1                Vol6b
+ .progmem.data.Vol5b
+                0x000000e8        0x7 vfd.o
+                0x000000e8                Vol5b
+ .progmem.data.Vol4b
+                0x000000ef        0x7 vfd.o
+                0x000000ef                Vol4b
+ .progmem.data.Vol3b
+                0x000000f6        0x7 vfd.o
+                0x000000f6                Vol3b
+ .progmem.data.Vol2b
+                0x000000fd        0x7 vfd.o
+                0x000000fd                Vol2b
+ .progmem.data.Vol1b
+                0x00000104        0x7 vfd.o
+                0x00000104                Vol1b
+ .progmem.data.Vol0b
+                0x0000010b        0x7 vfd.o
+                0x0000010b                Vol0b
+ .progmem.data.Vol9a
+                0x00000112        0x7 vfd.o
+                0x00000112                Vol9a
+ .progmem.data.Vol8a
+                0x00000119        0x7 vfd.o
+                0x00000119                Vol8a
+ .progmem.data.Vol7a
+                0x00000120        0x7 vfd.o
+                0x00000120                Vol7a
+ .progmem.data.Vol6a
+                0x00000127        0x7 vfd.o
+                0x00000127                Vol6a
+ .progmem.data.Vol5a
+                0x0000012e        0x7 vfd.o
+                0x0000012e                Vol5a
+ .progmem.data.Vol4a
+                0x00000135        0x7 vfd.o
+                0x00000135                Vol4a
+ .progmem.data.Vol3a
+                0x0000013c        0x7 vfd.o
+                0x0000013c                Vol3a
+ .progmem.data.Vol2a
+                0x00000143        0x7 vfd.o
+                0x00000143                Vol2a
+ .progmem.data.Vol1a
+                0x0000014a        0x7 vfd.o
+                0x0000014a                Vol1a
+ .progmem.data.Vol0a
+                0x00000151        0x7 vfd.o
+                0x00000151                Vol0a
+ .progmem.data.SpeVolDb
+                0x00000158        0x7 vfd.o
+                0x00000158                SpeVolDb
+ .progmem.data.SpeSleep
+                0x0000015f        0x7 vfd.o
+                0x0000015f                SpeSleep
+ .progmem.data.SpeZone3
+                0x00000166        0x7 vfd.o
+                0x00000166                SpeZone3
+ .progmem.data.SpeZone2
+                0x0000016d        0x7 vfd.o
+                0x0000016d                SpeZone2
+ .progmem.data.SpeMute
+                0x00000174        0x7 vfd.o
+                0x00000174                SpeMute
+ .progmem.data.SpeRectangle2
+                0x0000017b        0x7 vfd.o
+                0x0000017b                SpeRectangle2
+ .progmem.data.SpeArrowRight
+                0x00000182        0x7 vfd.o
+                0x00000182                SpeArrowRight
+ .progmem.data.SpeSBR
+                0x00000189        0x7 vfd.o
+                0x00000189                SpeSBR
+ .progmem.data.SpeSB
+                0x00000190        0x7 vfd.o
+                0x00000190                SpeSB
+ .progmem.data.SpeSBL
+                0x00000197        0x7 vfd.o
+                0x00000197                SpeSBL
+ .progmem.data.SpeSR
+                0x0000019e        0x7 vfd.o
+                0x0000019e                SpeSR
+ .progmem.data.SpeSL
+                0x000001a5        0x7 vfd.o
+                0x000001a5                SpeSL
+ .progmem.data.SpeR
+                0x000001ac        0x7 vfd.o
+                0x000001ac                SpeR
+ .progmem.data.SpeC
+                0x000001b3        0x7 vfd.o
+                0x000001b3                SpeC
+ .progmem.data.SpeL
+                0x000001ba        0x7 vfd.o
+                0x000001ba                SpeL
+ .progmem.data.SpePR
+                0x000001c1        0x7 vfd.o
+                0x000001c1                SpePR
+ .progmem.data.SpeSW
+                0x000001c8        0x7 vfd.o
+                0x000001c8                SpeSW
+ .progmem.data.SpePL
+                0x000001cf        0x7 vfd.o
+                0x000001cf                SpePL
+ .progmem.data.SpeAdaptiveDrc
+                0x000001d6        0x7 vfd.o
+                0x000001d6                SpeAdaptiveDrc
+ .progmem.data.SpeEnhancer
+                0x000001dd        0x7 vfd.o
+                0x000001dd                SpeEnhancer
+ .progmem.data.SpeTuned
+                0x000001e4        0x7 vfd.o
+                0x000001e4                SpeTuned
+ .progmem.data.SpeStereo
+                0x000001eb        0x7 vfd.o
+                0x000001eb                SpeStereo
+ .progmem.data.SpeThreeSquared
+                0x000001f2        0x7 vfd.o
+                0x000001f2                SpeThreeSquared
+ .progmem.data.SpeCinemaDsp
+                0x000001f9        0x7 vfd.o
+                0x000001f9                SpeCinemaDsp
+ .progmem.data.SpeTag
+                0x00000200        0x7 vfd.o
+                0x00000200                SpeTag
+ .progmem.data.SpeHd
+                0x00000207        0x7 vfd.o
+                0x00000207                SpeHd
+ .progmem.data.SpeParty
+                0x0000020e        0x7 vfd.o
+                0x0000020e                SpeParty
+ .progmem.data.SpeSpa
+                0x00000215        0x7 vfd.o
+                0x00000215                SpeSpa
+ .progmem.data.SpeRectangle1
+                0x0000021c        0x7 vfd.o
+                0x0000021c                SpeRectangle1
+ .progmem.data.SpeSpb
+                0x00000223        0x7 vfd.o
+                0x00000223                SpeSpb
+ .progmem.data.SpeIpodCharge
+                0x0000022a        0x7 vfd.o
+                0x0000022a                SpeIpodCharge
+ .progmem.data.SpeNumColonLower
+                0x00000231        0x7 vfd.o
+                0x00000231                SpeNumColonLower
+ .progmem.data.SpeNumColonUpper
+                0x00000238        0x7 vfd.o
+                0x00000238                SpeNumColonUpper
+ .progmem.data.SpeArrowDown
+                0x0000023f        0x7 vfd.o
+                0x0000023f                SpeArrowDown
+ .progmem.data.SpeArrowUp
+                0x00000246        0x7 vfd.o
+                0x00000246                SpeArrowUp
+ .progmem.data.SpeArrowLeft
+                0x0000024d        0x7 vfd.o
+                0x0000024d                SpeArrowLeft
+ .progmem.data.SpeTwoSquared
+                0x00000254        0x7 vfd.o
+                0x00000254                SpeTwoSquared
+ .progmem.data.SpeOneSquared
+                0x0000025b        0x7 vfd.o
+                0x0000025b                SpeOneSquared
+ .progmem.data.SpeHdmi
+                0x00000262        0x7 vfd.o
+                0x00000262                SpeHdmi
+ .progmem.data.SpeOut
+                0x00000269        0x7 vfd.o
+                0x00000269                SpeOut
+ .progmem.data.SpeSirius
+                0x00000270        0x7 vfd.o
+                0x00000270                SpeSirius
+ .progmem.data.GraCaronLowerN
+                0x00000277        0x7 vfd.o
+                0x00000277                GraCaronLowerN
+ .progmem.data.GraDiaeresisLowerA
+                0x0000027e        0x7 vfd.o
+                0x0000027e                GraDiaeresisLowerA
+ .progmem.data.GraDiaeresisUpperA
+                0x00000285        0x7 vfd.o
+                0x00000285                GraDiaeresisUpperA
+ .progmem.data.GraAcuteUpperU
+                0x0000028c        0x7 vfd.o
+                0x0000028c                GraAcuteUpperU
+ .progmem.data.GraAcuteLowerU
+                0x00000293        0x7 vfd.o
+                0x00000293                GraAcuteLowerU
+ .progmem.data.GraAcuteUpperO
+                0x0000029a        0x7 vfd.o
+                0x0000029a                GraAcuteUpperO
+ .progmem.data.GraAcuteLowerO
+                0x000002a1        0x7 vfd.o
+                0x000002a1                GraAcuteLowerO
+ .progmem.data.GraAcuteUpperE
+                0x000002a8        0x7 vfd.o
+                0x000002a8                GraAcuteUpperE
+ .progmem.data.GraAcuteLowerE
+                0x000002af        0x7 vfd.o
+                0x000002af                GraAcuteLowerE
+ .progmem.data.GraAcuteUpperI
+                0x000002b6        0x7 vfd.o
+                0x000002b6                GraAcuteUpperI
+ .progmem.data.GraAcuteLowerI
+                0x000002bd        0x7 vfd.o
+                0x000002bd                GraAcuteLowerI
+ .progmem.data.GraAcuteUpperA
+                0x000002c4        0x7 vfd.o
+                0x000002c4                GraAcuteUpperA
+ .progmem.data.GraAcuteLowerA
+                0x000002cb        0x7 vfd.o
+                0x000002cb                GraAcuteLowerA
+ .progmem.data.GraAcuteUpperY
+                0x000002d2        0x7 vfd.o
+                0x000002d2                GraAcuteUpperY
+ .progmem.data.GraAcuteLowerY
+                0x000002d9        0x7 vfd.o
+                0x000002d9                GraAcuteLowerY
+ .progmem.data.GraCaronZ
+                0x000002e0        0x7 vfd.o
+                0x000002e0                GraCaronZ
+ .progmem.data.GraCaronLowerT
+                0x000002e7        0x7 vfd.o
+                0x000002e7                GraCaronLowerT
+ .progmem.data.GraCaronUpperT
+                0x000002ee        0x7 vfd.o
+                0x000002ee                GraCaronUpperT
+ .progmem.data.GraCaronC
+                0x000002f5        0x7 vfd.o
+                0x000002f5                GraCaronC
+ .progmem.data.GraCaronUpperL
+                0x000002fc        0x7 vfd.o
+                0x000002fc                GraCaronUpperL
+ .progmem.data.GraCaronLowerL
+                0x00000303        0x7 vfd.o
+                0x00000303                GraCaronLowerL
+ .progmem.data.GraCaronS
+                0x0000030a        0x7 vfd.o
+                0x0000030a                GraCaronS
+ .progmem.data.GraTilde
+                0x00000311        0x7 vfd.o
+                0x00000311                GraTilde
+ .progmem.data.GraCurlyBracketRight
+                0x00000318        0x7 vfd.o
+                0x00000318                GraCurlyBracketRight
+ .progmem.data.GraPipe
+                0x0000031f        0x7 vfd.o
+                0x0000031f                GraPipe
+ .progmem.data.GraCurlyBracketLeft
+                0x00000326        0x7 vfd.o
+                0x00000326                GraCurlyBracketLeft
+ .progmem.data.GraLowerZ
+                0x0000032d        0x7 vfd.o
+                0x0000032d                GraLowerZ
+ .progmem.data.GraLowerY
+                0x00000334        0x7 vfd.o
+                0x00000334                GraLowerY
+ .progmem.data.GraLowerX
+                0x0000033b        0x7 vfd.o
+                0x0000033b                GraLowerX
+ .progmem.data.GraLowerW
+                0x00000342        0x7 vfd.o
+                0x00000342                GraLowerW
+ .progmem.data.GraLowerV
+                0x00000349        0x7 vfd.o
+                0x00000349                GraLowerV
+ .progmem.data.GraLowerU
+                0x00000350        0x7 vfd.o
+                0x00000350                GraLowerU
+ .progmem.data.GraLowerT
+                0x00000357        0x7 vfd.o
+                0x00000357                GraLowerT
+ .progmem.data.GraLowerS
+                0x0000035e        0x7 vfd.o
+                0x0000035e                GraLowerS
+ .progmem.data.GraLowerR
+                0x00000365        0x7 vfd.o
+                0x00000365                GraLowerR
+ .progmem.data.GraLowerQ
+                0x0000036c        0x7 vfd.o
+                0x0000036c                GraLowerQ
+ .progmem.data.GraLowerP
+                0x00000373        0x7 vfd.o
+                0x00000373                GraLowerP
+ .progmem.data.GraLowerO
+                0x0000037a        0x7 vfd.o
+                0x0000037a                GraLowerO
+ .progmem.data.GraLowerN
+                0x00000381        0x7 vfd.o
+                0x00000381                GraLowerN
+ .progmem.data.GraLowerM
+                0x00000388        0x7 vfd.o
+                0x00000388                GraLowerM
+ .progmem.data.GraLowerL
+                0x0000038f        0x7 vfd.o
+                0x0000038f                GraLowerL
+ .progmem.data.GraLowerK
+                0x00000396        0x7 vfd.o
+                0x00000396                GraLowerK
+ .progmem.data.GraLowerJ
+                0x0000039d        0x7 vfd.o
+                0x0000039d                GraLowerJ
+ .progmem.data.GraLowerI
+                0x000003a4        0x7 vfd.o
+                0x000003a4                GraLowerI
+ .progmem.data.GraLowerH
+                0x000003ab        0x7 vfd.o
+                0x000003ab                GraLowerH
+ .progmem.data.GraLowerG
+                0x000003b2        0x7 vfd.o
+                0x000003b2                GraLowerG
+ .progmem.data.GraLowerF
+                0x000003b9        0x7 vfd.o
+                0x000003b9                GraLowerF
+ .progmem.data.GraLowerE
+                0x000003c0        0x7 vfd.o
+                0x000003c0                GraLowerE
+ .progmem.data.GraLowerD
+                0x000003c7        0x7 vfd.o
+                0x000003c7                GraLowerD
+ .progmem.data.GraLowerC
+                0x000003ce        0x7 vfd.o
+                0x000003ce                GraLowerC
+ .progmem.data.GraLowerB
+                0x000003d5        0x7 vfd.o
+                0x000003d5                GraLowerB
+ .progmem.data.GraLowerA
+                0x000003dc        0x7 vfd.o
+                0x000003dc                GraLowerA
+ .progmem.data.GraApostropheRight
+                0x000003e3        0x7 vfd.o
+                0x000003e3                GraApostropheRight
+ .progmem.data.GraUnderscore
+                0x000003ea        0x7 vfd.o
+                0x000003ea                GraUnderscore
+ .progmem.data.GraCaret
+                0x000003f1        0x7 vfd.o
+                0x000003f1                GraCaret
+ .progmem.data.GraSquareBracketRight
+                0x000003f8        0x7 vfd.o
+                0x000003f8                GraSquareBracketRight
+ .progmem.data.GraBackSlash
+                0x000003ff        0x7 vfd.o
+                0x000003ff                GraBackSlash
+ .progmem.data.GraSquareBracketLeft
+                0x00000406        0x7 vfd.o
+                0x00000406                GraSquareBracketLeft
+ .progmem.data.GraUpperZ
+                0x0000040d        0x7 vfd.o
+                0x0000040d                GraUpperZ
+ .progmem.data.GraUpperY
+                0x00000414        0x7 vfd.o
+                0x00000414                GraUpperY
+ .progmem.data.GraUpperX
+                0x0000041b        0x7 vfd.o
+                0x0000041b                GraUpperX
+ .progmem.data.GraUpperW
+                0x00000422        0x7 vfd.o
+                0x00000422                GraUpperW
+ .progmem.data.GraUpperV
+                0x00000429        0x7 vfd.o
+                0x00000429                GraUpperV
+ .progmem.data.GraUpperU
+                0x00000430        0x7 vfd.o
+                0x00000430                GraUpperU
+ .progmem.data.GraUpperT
+                0x00000437        0x7 vfd.o
+                0x00000437                GraUpperT
+ .progmem.data.GraUpperS
+                0x0000043e        0x7 vfd.o
+                0x0000043e                GraUpperS
+ .progmem.data.GraUpperR
+                0x00000445        0x7 vfd.o
+                0x00000445                GraUpperR
+ .progmem.data.GraUpperQ
+                0x0000044c        0x7 vfd.o
+                0x0000044c                GraUpperQ
+ .progmem.data.GraUpperP
+                0x00000453        0x7 vfd.o
+                0x00000453                GraUpperP
+ .progmem.data.GraUpperO
+                0x0000045a        0x7 vfd.o
+                0x0000045a                GraUpperO
+ .progmem.data.GraUpperN
+                0x00000461        0x7 vfd.o
+                0x00000461                GraUpperN
+ .progmem.data.GraUpperM
+                0x00000468        0x7 vfd.o
+                0x00000468                GraUpperM
+ .progmem.data.GraUpperL
+                0x0000046f        0x7 vfd.o
+                0x0000046f                GraUpperL
+ .progmem.data.GraUpperK
+                0x00000476        0x7 vfd.o
+                0x00000476                GraUpperK
+ .progmem.data.GraUpperJ
+                0x0000047d        0x7 vfd.o
+                0x0000047d                GraUpperJ
+ .progmem.data.GraUpperI
+                0x00000484        0x7 vfd.o
+                0x00000484                GraUpperI
+ .progmem.data.GraUpperH
+                0x0000048b        0x7 vfd.o
+                0x0000048b                GraUpperH
+ .progmem.data.GraUpperG
+                0x00000492        0x7 vfd.o
+                0x00000492                GraUpperG
+ .progmem.data.GraUpperF
+                0x00000499        0x7 vfd.o
+                0x00000499                GraUpperF
+ .progmem.data.GraUpperE
+                0x000004a0        0x7 vfd.o
+                0x000004a0                GraUpperE
+ .progmem.data.GraUpperD
+                0x000004a7        0x7 vfd.o
+                0x000004a7                GraUpperD
+ .progmem.data.GraUpperC
+                0x000004ae        0x7 vfd.o
+                0x000004ae                GraUpperC
+ .progmem.data.GraUpperB
+                0x000004b5        0x7 vfd.o
+                0x000004b5                GraUpperB
+ .progmem.data.GraUpperA
+                0x000004bc        0x7 vfd.o
+                0x000004bc                GraUpperA
+ .progmem.data.GraAt
+                0x000004c3        0x7 vfd.o
+                0x000004c3                GraAt
+ .progmem.data.GraQuestionMark
+                0x000004ca        0x7 vfd.o
+                0x000004ca                GraQuestionMark
+ .progmem.data.GraAngleBracketRight
+                0x000004d1        0x7 vfd.o
+                0x000004d1                GraAngleBracketRight
+ .progmem.data.GraEquals
+                0x000004d8        0x7 vfd.o
+                0x000004d8                GraEquals
+ .progmem.data.GraAngleBracketLeft
+                0x000004df        0x7 vfd.o
+                0x000004df                GraAngleBracketLeft
+ .progmem.data.GraSemicolon
+                0x000004e6        0x7 vfd.o
+                0x000004e6                GraSemicolon
+ .progmem.data.GraColon
+                0x000004ed        0x7 vfd.o
+                0x000004ed                GraColon
+ .progmem.data.Gra9
+                0x000004f4        0x7 vfd.o
+                0x000004f4                Gra9
+ .progmem.data.Gra8
+                0x000004fb        0x7 vfd.o
+                0x000004fb                Gra8
+ .progmem.data.Gra7
+                0x00000502        0x7 vfd.o
+                0x00000502                Gra7
+ .progmem.data.Gra6
+                0x00000509        0x7 vfd.o
+                0x00000509                Gra6
+ .progmem.data.Gra5
+                0x00000510        0x7 vfd.o
+                0x00000510                Gra5
+ .progmem.data.Gra4
+                0x00000517        0x7 vfd.o
+                0x00000517                Gra4
+ .progmem.data.Gra3
+                0x0000051e        0x7 vfd.o
+                0x0000051e                Gra3
+ .progmem.data.Gra2
+                0x00000525        0x7 vfd.o
+                0x00000525                Gra2
+ .progmem.data.Gra1
+                0x0000052c        0x7 vfd.o
+                0x0000052c                Gra1
+ .progmem.data.Gra0
+                0x00000533        0x7 vfd.o
+                0x00000533                Gra0
+ .progmem.data.GraForwardSlash
+                0x0000053a        0x7 vfd.o
+                0x0000053a                GraForwardSlash
+ .progmem.data.GraDot
+                0x00000541        0x7 vfd.o
+                0x00000541                GraDot
+ .progmem.data.GraMinus
+                0x00000548        0x7 vfd.o
+                0x00000548                GraMinus
+ .progmem.data.GraComma
+                0x0000054f        0x7 vfd.o
+                0x0000054f                GraComma
+ .progmem.data.GraPlus
+                0x00000556        0x7 vfd.o
+                0x00000556                GraPlus
+ .progmem.data.GraAsterisk
+                0x0000055d        0x7 vfd.o
+                0x0000055d                GraAsterisk
+ .progmem.data.GraParenthesisRight
+                0x00000564        0x7 vfd.o
+                0x00000564                GraParenthesisRight
+ .progmem.data.GraParenthesisLeft
+                0x0000056b        0x7 vfd.o
+                0x0000056b                GraParenthesisLeft
+ .progmem.data.GraApostropheLeft
+                0x00000572        0x7 vfd.o
+                0x00000572                GraApostropheLeft
+ .progmem.data.GraAmpersand
+                0x00000579        0x7 vfd.o
+                0x00000579                GraAmpersand
+ .progmem.data.GraPercent
+                0x00000580        0x7 vfd.o
+                0x00000580                GraPercent
+ .progmem.data.GraDollar
+                0x00000587        0x7 vfd.o
+                0x00000587                GraDollar
+ .progmem.data.GraHash
+                0x0000058e        0x7 vfd.o
+                0x0000058e                GraHash
+ .progmem.data.GraQuote
+                0x00000595        0x7 vfd.o
+                0x00000595                GraQuote
+ .progmem.data.GraExclamationMark
+                0x0000059c        0x7 vfd.o
+                0x0000059c                GraExclamationMark
+ .progmem.data.GraSpace
+                0x000005a3        0x7 vfd.o
+                0x000005a3                GraSpace
+ .progmem.data.NumSpaceb
+                0x000005aa        0x7 vfd.o
+                0x000005aa                NumSpaceb
+ .progmem.data.NumSpacea
+                0x000005b1        0x7 vfd.o
+                0x000005b1                NumSpacea
+ .progmem.data.NumMb
+                0x000005b8        0x7 vfd.o
+                0x000005b8                NumMb
+ .progmem.data.NumFb
+                0x000005bf        0x7 vfd.o
+                0x000005bf                NumFb
+ .progmem.data.NumAb
+                0x000005c6        0x7 vfd.o
+                0x000005c6                NumAb
+ .progmem.data.Num9b
+                0x000005cd        0x7 vfd.o
+                0x000005cd                Num9b
+ .progmem.data.Num8b
+                0x000005d4        0x7 vfd.o
+                0x000005d4                Num8b
+ .progmem.data.Num7b
+                0x000005db        0x7 vfd.o
+                0x000005db                Num7b
+ .progmem.data.Num6b
+                0x000005e2        0x7 vfd.o
+                0x000005e2                Num6b
+ .progmem.data.Num5b
+                0x000005e9        0x7 vfd.o
+                0x000005e9                Num5b
+ .progmem.data.Num4b
+                0x000005f0        0x7 vfd.o
+                0x000005f0                Num4b
+ .progmem.data.Num3b
+                0x000005f7        0x7 vfd.o
+                0x000005f7                Num3b
+ .progmem.data.Num2b
+                0x000005fe        0x7 vfd.o
+                0x000005fe                Num2b
+ .progmem.data.Num1b
+                0x00000605        0x7 vfd.o
+                0x00000605                Num1b
+ .progmem.data.Num0b
+                0x0000060c        0x7 vfd.o
+                0x0000060c                Num0b
+ .progmem.data.NumMa
+                0x00000613        0x7 vfd.o
+                0x00000613                NumMa
+ .progmem.data.NumFa
+                0x0000061a        0x7 vfd.o
+                0x0000061a                NumFa
+ .progmem.data.NumAa
+                0x00000621        0x7 vfd.o
+                0x00000621                NumAa
+ .progmem.data.Num9a
+                0x00000628        0x7 vfd.o
+                0x00000628                Num9a
+ .progmem.data.Num8a
+                0x0000062f        0x7 vfd.o
+                0x0000062f                Num8a
+ .progmem.data.Num7a
+                0x00000636        0x7 vfd.o
+                0x00000636                Num7a
+ .progmem.data.Num6a
+                0x0000063d        0x7 vfd.o
+                0x0000063d                Num6a
+ .progmem.data.Num5a
+                0x00000644        0x7 vfd.o
+                0x00000644                Num5a
+ .progmem.data.Num4a
+                0x0000064b        0x7 vfd.o
+                0x0000064b                Num4a
+ .progmem.data.Num3a
+                0x00000652        0x7 vfd.o
+                0x00000652                Num3a
+ .progmem.data.Num2a
+                0x00000659        0x7 vfd.o
+                0x00000659                Num2a
+ .progmem.data.Num1a
+                0x00000660        0x7 vfd.o
+                0x00000660                Num1a
+ .progmem.data.Num0a
+                0x00000667        0x7 vfd.o
+                0x00000667                Num0a
+                0x0000066e                . = ALIGN (0x2)
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x0000066e                __ctors_start = .
+ *(.ctors)
+                0x0000066e                __ctors_end = .
+                0x0000066e                __dtors_start = .
+ *(.dtors)
+                0x0000066e                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x0000066e        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+                0x0000066e                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x0000066e        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x0000067a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x0000067a                __do_copy_data
+ .init4         0x00000690       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000690                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x000006a0        0x8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ *(.init9)
+ *(.text)
+ .text          0x000006a8        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+                0x000006a8                __vector_22
+                0x000006a8                __vector_1
+                0x000006a8                __vector_12
+                0x000006a8                __bad_interrupt
+                0x000006a8                __vector_6
+                0x000006a8                __vector_3
+                0x000006a8                __vector_23
+                0x000006a8                __vector_25
+                0x000006a8                __vector_11
+                0x000006a8                __vector_13
+                0x000006a8                __vector_17
+                0x000006a8                __vector_19
+                0x000006a8                __vector_7
+                0x000006a8                __vector_5
+                0x000006a8                __vector_4
+                0x000006a8                __vector_9
+                0x000006a8                __vector_2
+                0x000006a8                __vector_21
+                0x000006a8                __vector_15
+                0x000006a8                __vector_8
+                0x000006a8                __vector_14
+                0x000006a8                __vector_10
+                0x000006a8                __vector_16
+                0x000006a8                __vector_18
+                0x000006a8                __vector_20
+ .text          0x000006ac        0x0 I2CSlave.o
+ .text          0x000006ac        0x0 main.o
+ .text          0x000006ac        0x0 vfd.o
+ .text          0x000006ac        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text          0x000006ac        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text          0x000006ac        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text          0x000006ac        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text          0x000006ac        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text          0x000006ac        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
+                0x000006ac                . = ALIGN (0x2)
+ *(.text.*)
+ .text._Z16I2C_setCallbacksPFvhEPFvvE
+                0x000006ac       0x12 I2CSlave.o
+                0x000006ac                _Z16I2C_setCallbacksPFvhEPFvvE
+ .text._Z8I2C_inith
+                0x000006be       0x10 I2CSlave.o
+                0x000006be                _Z8I2C_inith
+ .text._Z8I2C_stopv
+                0x000006ce        0xe I2CSlave.o
+                0x000006ce                _Z8I2C_stopv
+ .text.__vector_24
+                0x000006dc       0x84 I2CSlave.o
+                0x000006dc                __vector_24
+ .text._ZL12clearI2Cdatav
+                0x00000760       0x18 main.o
+ .text._ZL13I2C_requestedv
+                0x00000778        0xa main.o
+ .text._ZL7numPutccc
+                0x00000782      0x1f8 main.o
+ .text._ZL7numPutsPKc
+                0x0000097a       0x24 main.o
+ .text._ZL17getSpeDisplayCharc
+                0x0000099e       0x6e main.o
+ .text._ZL8shiftOuth
+                0x00000a0c       0x28 main.o
+ .text._ZL12I2C_receivedh
+                0x00000a34      0x182 main.o
+ .text._ZL17getGraDisplayCharc
+                0x00000bb6       0xd0 main.o
+ .text._ZL7graPutsPKc
+                0x00000c86       0x58 main.o
+ .text.startup.main
+                0x00000cde      0x57c main.o
+                0x00000cde                main
+ .text.libgcc.mul
+                0x0000125a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.div
+                0x0000125a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000125a                __udivmodhi4
+ .text.libgcc   0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.prologue
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.builtins
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fmul
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fixed
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .text.libgcc.mul
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc.div
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc.prologue
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc.builtins
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc.fmul
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc.fixed
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc.mul
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.div
+                0x00001282        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc   0x00001282        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00001282                __tablejump2__
+ .text.libgcc.prologue
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.builtins
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.fmul
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.fixed
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.mul
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x0000128e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.avr-libc
+                0x0000128e       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
+                0x0000128e                memcpy_P
+                0x000012a0                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x000012a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000012a0                _exit
+                0x000012a0                exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x000012a0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x000012a4                _etext = .
+
+.data           0x00800100      0x468 load address 0x000012a4
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ .data          0x00800100        0x0 I2CSlave.o
+ .data          0x00800100        0x0 main.o
+ .data          0x00800100        0x0 vfd.o
+ .data          0x00800100        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .data          0x00800100        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .data          0x00800100        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .data          0x00800100        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .data          0x00800100        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .data          0x00800100        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
+ *(.data*)
+ .data._ZL9displayOn
+                0x00800100        0x1 main.o
+ .data._ZL15modeCmdFinished
+                0x00800101        0x1 main.o
+ .data._ZL29modeCmdShowVolumeCurrentIndex
+                0x00800102        0x1 main.o
+ .data._ZL28modeCmdToggleSpeCurrentIndex
+                0x00800103        0x1 main.o
+ .data._ZL26modeCmdHideSpeCurrentIndex
+                0x00800104        0x1 main.o
+ .data._ZL26modeCmdShowSpeCurrentIndex
+                0x00800105        0x1 main.o
+ .data._ZL26modeCmdNumCharCurrentIndex
+                0x00800106        0x1 main.o
+ .data._ZL26modeCmdGraCharCurrentIndex
+                0x00800107        0x1 main.o
+ .data._ZL26modeCmdNumTextCurrentIndex
+                0x00800108        0x1 main.o
+ .data._ZL26modeCmdGraTextCurrentIndex
+                0x00800109        0x1 main.o
+ .data._ZL7i2cdata
+                0x0080010a        0xe main.o
+ *(.gnu.linkonce.d*)
+ *(.rodata)
+ *(.rodata*)
+ .rodata.str1.1
+                0x00800118       0x1e main.o
+                                 0x25 (size before relaxing)
+ .rodata.CSWTCH.98
+                0x00800136       0x12 main.o
+ .rodata.CSWTCH.97
+                0x00800148       0x12 main.o
+ .rodata.CSWTCH.96
+                0x0080015a       0x12 main.o
+ .rodata.CSWTCH.92
+                0x0080016c       0x14 main.o
+ .rodata.CSWTCH.91
+                0x00800180       0x14 main.o
+ .rodata.CSWTCH.89
+                0x00800194       0x52 main.o
+ .rodata.CSWTCH.75
+                0x008001e6       0xe8 main.o
+ .rodata.GraAsciiTable
+                0x008002ce      0x299 vfd.o
+                0x008002ce                GraAsciiTable
+ *(.gnu.linkonce.r*)
+                0x00800568                . = ALIGN (0x2)
+ *fill*         0x00800567        0x1 
+                0x00800568                _edata = .
+                0x00800568                PROVIDE (__data_end, .)
+
+.bss            0x00800568       0x87
+                0x00800568                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00800568        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ .bss           0x00800568        0x0 I2CSlave.o
+ .bss           0x00800568        0x0 main.o
+ .bss           0x00800568        0x0 vfd.o
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00800568        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy_P.o)
+ *(.bss*)
+ .bss._ZL7I2C_req
+                0x00800568        0x2 I2CSlave.o
+ .bss._ZL8I2C_recv
+                0x0080056a        0x2 I2CSlave.o
+ .bss._ZL14displayCounter
+                0x0080056c        0x2 main.o
+ .bss._ZL14showUnderlines
+                0x0080056e        0x1 main.o
+ .bss._ZL13displayMemory
+                0x0080056f       0x7e main.o
+ .bss._ZL10activeGrid
+                0x008005ed        0x2 main.o
+ *(COMMON)
+                0x008005ef                PROVIDE (__bss_end, .)
+                0x000012a4                __data_load_start = LOADADDR (.data)
+                0x0000170c                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008005ef        0x0
+                [!provide]                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                [!provide]                PROVIDE (__noinit_end, .)
+                0x008005ef                _end = .
+                [!provide]                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.user_signatures
+ *(.user_signatures*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x30
+ *(.comment)
+ .comment       0x00000000       0x30 I2CSlave.o
+                                 0x31 (size before relaxing)
+ .comment       0x00000030       0x31 main.o
+ .comment       0x00000030       0x31 vfd.o
+
+.note.gnu.avr.deviceinfo
+                0x00000000       0x3c
+ .note.gnu.avr.deviceinfo
+                0x00000000       0x3c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0xb8
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x38 I2CSlave.o
+ .debug_aranges
+                0x00000038       0x68 main.o
+ .debug_aranges
+                0x000000a0       0x18 vfd.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000     0x297d
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ .debug_info    0x000005f4      0x144 I2CSlave.o
+ .debug_info    0x00000738     0x11f5 main.o
+ .debug_info    0x0000192d     0x1050 vfd.o
+
+.debug_abbrev   0x00000000      0xa60
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ .debug_abbrev  0x000005a2       0xdb I2CSlave.o
+ .debug_abbrev  0x0000067d      0x364 main.o
+ .debug_abbrev  0x000009e1       0x7f vfd.o
+
+.debug_line     0x00000000      0xb83
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ .debug_line    0x00000134      0x137 I2CSlave.o
+ .debug_line    0x0000026b      0x8e3 main.o
+ .debug_line    0x00000b4e       0x35 vfd.o
+
+.debug_frame    0x00000000      0x1e8
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x9c I2CSlave.o
+ .debug_frame   0x0000009c      0x14c main.o
+
+.debug_str      0x00000000     0x1035
+ *(.debug_str)
+ .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/2.1.506/gcc/dev/atmega328/avr5/crtatmega328.o
+ .debug_str     0x00000208      0x247 I2CSlave.o
+                                0x280 (size before relaxing)
+ .debug_str     0x0000044f      0x7e8 main.o
+                                0xa30 (size before relaxing)
+ .debug_str     0x00000c37      0x3fe vfd.o
+                                0xa38 (size before relaxing)
+
+.debug_loc      0x00000000      0xd2a
+ *(.debug_loc)
+ .debug_loc     0x00000000       0xf8 I2CSlave.o
+ .debug_loc     0x000000f8      0xc32 main.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges   0x00000000       0xe0
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x28 I2CSlave.o
+ .debug_ranges  0x00000028       0xb8 main.o
+
+.debug_macro
+ *(.debug_macro)
+OUTPUT(MicrochipStudio projekt - VFD driver.elf elf32-avr)
+LOAD linker stubs

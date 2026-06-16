@@ -1,0 +1,3062 @@
+
+MicrochipStudio projekt - VFD driver.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000468  00800100  000012a4  00001338  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000012a4  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000087  00800568  00800568  000017a0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000017a0  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000017d0  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000b8  00000000  00000000  0000180c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000297d  00000000  00000000  000018c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000a60  00000000  00000000  00004241  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000b83  00000000  00000000  00004ca1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000001e8  00000000  00000000  00005824  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00001035  00000000  00000000  00005a0c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000d2a  00000000  00000000  00006a41  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000e0  00000000  00000000  0000776b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+       0:	0c 94 37 03 	jmp	0x66e	; 0x66e <__ctors_end>
+       4:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+       8:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+       c:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      10:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      14:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      18:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      1c:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      20:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      24:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      28:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      2c:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      30:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      34:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      38:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      3c:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      40:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      44:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      48:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      4c:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      50:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      54:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      58:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      5c:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      60:	0c 94 6e 03 	jmp	0x6dc	; 0x6dc <__vector_24>
+      64:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__bad_interrupt>
+      68:	f7 03       	fmuls	r23, r23
+      6a:	fd 03       	fmulsu	r23, r21
+      6c:	03 04       	cpc	r0, r3
+      6e:	09 04       	cpc	r0, r9
+      70:	0e 04       	cpc	r0, r14
+      72:	13 04       	cpc	r1, r3
+      74:	18 04       	cpc	r1, r8
+      76:	1d 04       	cpc	r1, r13
+      78:	22 04       	cpc	r2, r2
+      7a:	27 04       	cpc	r2, r7
+      7c:	3b 04       	cpc	r3, r11
+      7e:	3b 04       	cpc	r3, r11
+      80:	3b 04       	cpc	r3, r11
+      82:	3b 04       	cpc	r3, r11
+      84:	3b 04       	cpc	r3, r11
+      86:	3b 04       	cpc	r3, r11
+      88:	3b 04       	cpc	r3, r11
+      8a:	2c 04       	cpc	r2, r12
+      8c:	3b 04       	cpc	r3, r11
+      8e:	3b 04       	cpc	r3, r11
+      90:	3b 04       	cpc	r3, r11
+      92:	3b 04       	cpc	r3, r11
+      94:	31 04       	cpc	r3, r1
+      96:	3b 04       	cpc	r3, r11
+      98:	3b 04       	cpc	r3, r11
+      9a:	3b 04       	cpc	r3, r11
+      9c:	3b 04       	cpc	r3, r11
+      9e:	3b 04       	cpc	r3, r11
+      a0:	3b 04       	cpc	r3, r11
+      a2:	36 04       	cpc	r3, r6
+      a4:	dd 06       	cpc	r13, r29
+      a6:	f6 06       	cpc	r15, r22
+      a8:	fd 06       	cpc	r15, r29
+      aa:	4d 07       	cpc	r20, r29
+      ac:	a5 07       	cpc	r26, r21
+      ae:	ba 06       	cpc	r11, r26
+      b0:	bf 06       	cpc	r11, r31
+      b2:	c4 06       	cpc	r12, r20
+      b4:	73 08       	sbc	r7, r3
+      b6:	73 08       	sbc	r7, r3
+      b8:	b0 06       	cpc	r11, r16
+      ba:	b5 06       	cpc	r11, r21
+      bc:	f1 07       	cpc	r31, r17
+
+000000be <Vol5c>:
+      be:	00 00 80 00 00 04 10                                .......
+
+000000c5 <Vol0c>:
+      c5:	00 00 80 00 00 00 90                                .......
+
+000000cc <Vol9b>:
+      cc:	00 00 80 00 05 52 08                                .....R.
+
+000000d3 <Vol8b>:
+      d3:	00 00 80 00 05 52 48                                .....RH
+
+000000da <Vol7b>:
+      da:	00 00 80 00 05 02 00                                .......
+
+000000e1 <Vol6b>:
+      e1:	00 00 80 00 04 52 48                                .....RH
+
+000000e8 <Vol5b>:
+      e8:	00 00 80 00 04 52 08                                .....R.
+
+000000ef <Vol4b>:
+      ef:	00 00 80 00 01 52 00                                .....R.
+
+000000f6 <Vol3b>:
+      f6:	00 00 80 00 05 12 08                                .......
+
+000000fd <Vol2b>:
+      fd:	00 00 80 00 05 10 48                                ......H
+
+00000104 <Vol1b>:
+     104:	00 00 80 00 01 02 00                                .......
+
+0000010b <Vol0b>:
+     10b:	00 00 80 00 05 42 48                                .....BH
+
+00000112 <Vol9a>:
+     112:	00 00 80 00 02 a9 04                                .......
+
+00000119 <Vol8a>:
+     119:	00 00 80 00 02 a9 24                                ......$
+
+00000120 <Vol7a>:
+     120:	00 00 80 00 02 81 00                                .......
+
+00000127 <Vol6a>:
+     127:	00 00 80 00 02 29 24                                .....)$
+
+0000012e <Vol5a>:
+     12e:	00 00 80 00 02 29 04                                .....).
+
+00000135 <Vol4a>:
+     135:	00 00 80 00 00 a9 00                                .......
+
+0000013c <Vol3a>:
+     13c:	00 00 80 00 02 89 04                                .......
+
+00000143 <Vol2a>:
+     143:	00 00 80 00 02 88 24                                ......$
+
+0000014a <Vol1a>:
+     14a:	00 00 80 00 00 81 00                                .......
+
+00000151 <Vol0a>:
+     151:	00 00 80 00 02 a1 24                                ......$
+
+00000158 <SpeVolDb>:
+     158:	00 00 80 00 00 00 01                                .......
+
+0000015f <SpeSleep>:
+     15f:	00 00 88 00 00 00 00                                .......
+
+00000166 <SpeZone3>:
+     166:	00 00 84 00 00 00 00                                .......
+
+0000016d <SpeZone2>:
+     16d:	00 00 82 00 00 00 00                                .......
+
+00000174 <SpeMute>:
+     174:	00 00 81 00 00 00 00                                .......
+
+0000017b <SpeRectangle2>:
+     17b:	00 00 80 80 00 00 00                                .......
+
+00000182 <SpeArrowRight>:
+     182:	00 00 80 40 00 00 00                                ...@...
+
+00000189 <SpeSBR>:
+     189:	00 00 80 20 00 00 00                                ... ...
+
+00000190 <SpeSB>:
+     190:	00 00 80 10 00 00 00                                .......
+
+00000197 <SpeSBL>:
+     197:	00 00 80 08 00 00 00                                .......
+
+0000019e <SpeSR>:
+     19e:	00 00 80 04 00 00 00                                .......
+
+000001a5 <SpeSL>:
+     1a5:	00 00 80 02 00 00 00                                .......
+
+000001ac <SpeR>:
+     1ac:	00 00 80 01 00 00 00                                .......
+
+000001b3 <SpeC>:
+     1b3:	00 00 80 00 80 00 00                                .......
+
+000001ba <SpeL>:
+     1ba:	00 00 80 00 40 00 00                                ....@..
+
+000001c1 <SpePR>:
+     1c1:	00 00 80 00 20 00 00                                .... ..
+
+000001c8 <SpeSW>:
+     1c8:	00 00 80 00 10 00 00                                .......
+
+000001cf <SpePL>:
+     1cf:	00 00 80 00 08 00 00                                .......
+
+000001d6 <SpeAdaptiveDrc>:
+     1d6:	00 00 48 00 00 00 00                                ..H....
+
+000001dd <SpeEnhancer>:
+     1dd:	00 00 44 00 00 00 00                                ..D....
+
+000001e4 <SpeTuned>:
+     1e4:	00 00 42 00 00 00 00                                ..B....
+
+000001eb <SpeStereo>:
+     1eb:	00 00 41 00 00 00 00                                ..A....
+
+000001f2 <SpeThreeSquared>:
+     1f2:	00 00 40 80 00 00 00                                ..@....
+
+000001f9 <SpeCinemaDsp>:
+     1f9:	00 00 40 40 00 00 00                                ..@@...
+
+00000200 <SpeTag>:
+     200:	00 00 40 20 00 00 00                                ..@ ...
+
+00000207 <SpeHd>:
+     207:	00 00 40 10 00 00 00                                ..@....
+
+0000020e <SpeParty>:
+     20e:	00 00 24 00 00 00 00                                ..$....
+
+00000215 <SpeSpa>:
+     215:	00 00 22 00 00 00 00                                .."....
+
+0000021c <SpeRectangle1>:
+     21c:	00 00 21 00 00 00 00                                ..!....
+
+00000223 <SpeSpb>:
+     223:	00 00 20 80 00 00 00                                .. ....
+
+0000022a <SpeIpodCharge>:
+     22a:	00 00 20 40 00 00 00                                .. @...
+
+00000231 <SpeNumColonLower>:
+     231:	00 00 20 20 00 00 00                                ..  ...
+
+00000238 <SpeNumColonUpper>:
+     238:	00 00 20 10 00 00 00                                .. ....
+
+0000023f <SpeArrowDown>:
+     23f:	00 00 18 00 00 00 00                                .......
+
+00000246 <SpeArrowUp>:
+     246:	00 00 14 00 00 00 00                                .......
+
+0000024d <SpeArrowLeft>:
+     24d:	00 00 12 00 00 00 00                                .......
+
+00000254 <SpeTwoSquared>:
+     254:	00 00 11 00 00 00 00                                .......
+
+0000025b <SpeOneSquared>:
+     25b:	00 00 10 80 00 00 00                                .......
+
+00000262 <SpeHdmi>:
+     262:	00 00 10 40 00 00 00                                ...@...
+
+00000269 <SpeOut>:
+     269:	00 00 10 20 00 00 00                                ... ...
+
+00000270 <SpeSirius>:
+     270:	00 00 10 10 00 00 00                                .......
+
+00000277 <GraCaronLowerN>:
+     277:	00 00 04 63 36 80 8a                                ...c6..
+
+0000027e <GraDiaeresisLowerA>:
+     27e:	00 00 07 a3 e8 38 0a                                .....8.
+
+00000285 <GraDiaeresisUpperA>:
+     285:	00 00 04 7f 15 10 0a                                .......
+
+0000028c <GraAcuteUpperU>:
+     28c:	00 00 05 b3 18 c4 88                                .......
+
+00000293 <GraAcuteLowerU>:
+     293:	00 00 05 b3 18 80 88                                .......
+
+0000029a <GraAcuteUpperO>:
+     29a:	00 00 03 a3 18 b8 88                                .......
+
+000002a1 <GraAcuteLowerO>:
+     2a1:	00 00 03 a3 17 00 88                                .......
+
+000002a8 <GraAcuteUpperE>:
+     2a8:	00 00 07 c2 f0 fc 88                                .......
+
+000002af <GraAcuteLowerE>:
+     2af:	00 00 07 83 f8 b8 88                                .......
+
+000002b6 <GraAcuteUpperI>:
+     2b6:	00 00 03 88 42 38 88                                ....B8.
+
+000002bd <GraAcuteLowerI>:
+     2bd:	00 00 03 88 43 00 88                                ....C..
+
+000002c4 <GraAcuteUpperA>:
+     2c4:	00 00 04 63 f8 a8 88                                ...c...
+
+000002cb <GraAcuteLowerA>:
+     2cb:	00 00 07 a3 e8 38 88                                .....8.
+
+000002d2 <GraAcuteUpperY>:
+     2d2:	00 00 01 08 45 46 a8                                ....EF.
+
+000002d9 <GraAcuteLowerY>:
+     2d9:	00 00 03 a1 e8 c4 88                                .......
+
+000002e0 <GraCaronZ>:
+     2e0:	00 00 07 c4 44 7c 8a                                ....D|.
+
+000002e7 <GraCaronLowerT>:
+     2e7:	00 00 02 28 42 3a 88                                ...(B:.
+
+000002ee <GraCaronUpperT>:
+     2ee:	00 00 01 08 42 7c 8a                                ....B|.
+
+000002f5 <GraCaronC>:
+     2f5:	00 00 07 82 10 f8 8a                                .......
+
+000002fc <GraCaronUpperL>:
+     2fc:	00 00 07 c2 10 85 35                                ......5
+
+00000303 <GraCaronLowerL>:
+     303:	00 00 03 88 42 12 96                                ....B..
+
+0000030a <GraCaronS>:
+     30a:	00 00 03 e0 e0 b8 8a                                .......
+
+00000311 <GraTilde>:
+     311:	00 00 00 00 00 22 a2                                .....".
+
+00000318 <GraCurlyBracketRight>:
+     318:	00 00 00 c8 41 10 83                                ....A..
+
+0000031f <GraPipe>:
+     31f:	00 00 01 08 42 10 84                                ....B..
+
+00000326 <GraCurlyBracketLeft>:
+     326:	00 00 06 08 41 10 98                                ....A..
+
+0000032d <GraLowerZ>:
+     32d:	00 00 07 c4 44 7c 00                                ....D|.
+
+00000334 <GraLowerY>:
+     334:	00 00 03 a1 e8 c4 00                                .......
+
+0000033b <GraLowerX>:
+     33b:	00 00 04 54 45 44 00                                ...TED.
+
+00000342 <GraLowerW>:
+     342:	00 00 02 ab 58 c4 00                                ....X..
+
+00000349 <GraLowerV>:
+     349:	00 00 01 15 18 c4 00                                .......
+
+00000350 <GraLowerU>:
+     350:	00 00 05 b3 18 c4 00                                .......
+
+00000357 <GraLowerT>:
+     357:	00 00 02 28 42 38 84                                ...(B8.
+
+0000035e <GraLowerS>:
+     35e:	00 00 03 e0 e0 b8 00                                .......
+
+00000365 <GraLowerR>:
+     365:	00 00 00 84 23 68 00                                ....#h.
+
+0000036c <GraLowerQ>:
+     36c:	00 00 04 21 e8 f8 00                                ...!...
+
+00000373 <GraLowerP>:
+     373:	00 00 00 42 f8 bc 00                                ...B...
+
+0000037a <GraLowerO>:
+     37a:	00 00 03 a3 18 b8 00                                .......
+
+00000381 <GraLowerN>:
+     381:	00 00 04 63 19 b4 00                                ...c...
+
+00000388 <GraLowerM>:
+     388:	00 00 05 6b 5a ac 00                                ...kZ..
+
+0000038f <GraLowerL>:
+     38f:	00 00 03 88 42 10 86                                ....B..
+
+00000396 <GraLowerK>:
+     396:	00 00 04 94 65 48 42                                ....eHB
+
+0000039d <GraLowerJ>:
+     39d:	00 00 01 92 84 30 08                                .....0.
+
+000003a4 <GraLowerI>:
+     3a4:	00 00 03 88 42 18 04                                ....B..
+
+000003ab <GraLowerH>:
+     3ab:	00 00 04 63 19 b4 21                                ...c..!
+
+000003b2 <GraLowerG>:
+     3b2:	00 00 03 a1 e8 f8 00                                .......
+
+000003b9 <GraLowerF>:
+     3b9:	00 00 01 08 47 12 88                                ....G..
+
+000003c0 <GraLowerE>:
+     3c0:	00 00 03 83 f8 b8 00                                .......
+
+000003c7 <GraLowerD>:
+     3c7:	00 00 07 a3 18 fa 10                                .......
+
+000003ce <GraLowerC>:
+     3ce:	00 00 07 82 10 f8 00                                .......
+
+000003d5 <GraLowerB>:
+     3d5:	00 00 03 e3 18 bc 21                                ......!
+
+000003dc <GraLowerA>:
+     3dc:	00 00 07 a3 e8 38 00                                .....8.
+
+000003e3 <GraApostropheRight>:
+     3e3:	00 00 00 00 00 20 8c                                ..... .
+
+000003ea <GraUnderscore>:
+     3ea:	00 00 07 c0 00 00 00                                .......
+
+000003f1 <GraCaret>:
+     3f1:	00 00 00 00 00 45 44                                .....ED
+
+000003f8 <GraSquareBracketRight>:
+     3f8:	00 00 03 90 84 21 0e                                .....!.
+
+000003ff <GraBackSlash>:
+     3ff:	00 00 00 20 82 08 20                                ... .. 
+
+00000406 <GraSquareBracketLeft>:
+     406:	00 00 03 84 21 08 4e                                ....!.N
+
+0000040d <GraUpperZ>:
+     40d:	00 00 07 c2 22 22 1f                                ...."".
+
+00000414 <GraUpperY>:
+     414:	00 00 01 08 42 2a 31                                ....B*1
+
+0000041b <GraUpperX>:
+     41b:	00 00 04 62 a2 2a 31                                ...b.*1
+
+00000422 <GraUpperW>:
+     422:	00 00 02 ab 5a c6 31                                ....Z.1
+
+00000429 <GraUpperV>:
+     429:	00 00 01 15 18 c6 31                                ......1
+
+00000430 <GraUpperU>:
+     430:	00 00 03 a3 18 c6 31                                ......1
+
+00000437 <GraUpperT>:
+     437:	00 00 01 08 42 10 9f                                ....B..
+
+0000043e <GraUpperS>:
+     43e:	00 00 03 a3 07 06 2e                                .......
+
+00000445 <GraUpperR>:
+     445:	00 00 04 52 57 c6 2f                                ...RW./
+
+0000044c <GraUpperQ>:
+     44c:	00 00 05 93 58 c6 2e                                ....X..
+
+00000453 <GraUpperP>:
+     453:	00 00 00 42 17 c6 2f                                ...B../
+
+0000045a <GraUpperO>:
+     45a:	00 00 03 a3 18 c6 2e                                .......
+
+00000461 <GraUpperN>:
+     461:	00 00 04 63 9a ce 31                                ...c..1
+
+00000468 <GraUpperM>:
+     468:	00 00 04 63 1a d7 71                                ...c..q
+
+0000046f <GraUpperL>:
+     46f:	00 00 07 c2 10 84 21                                ......!
+
+00000476 <GraUpperK>:
+     476:	00 00 04 52 51 95 31                                ...RQ.1
+
+0000047d <GraUpperJ>:
+     47d:	00 00 01 92 84 21 1c                                .....!.
+
+00000484 <GraUpperI>:
+     484:	00 00 03 88 42 10 8e                                ....B..
+
+0000048b <GraUpperH>:
+     48b:	00 00 04 63 1f c6 31                                ...c..1
+
+00000492 <GraUpperG>:
+     492:	00 00 07 a3 1e 86 2e                                .......
+
+00000499 <GraUpperF>:
+     499:	00 00 00 42 17 84 3f                                ...B..?
+
+000004a0 <GraUpperE>:
+     4a0:	00 00 07 c2 17 84 3f                                ......?
+
+000004a7 <GraUpperD>:
+     4a7:	00 00 01 d3 18 c5 27                                ......'
+
+000004ae <GraUpperC>:
+     4ae:	00 00 03 a2 10 86 2e                                .......
+
+000004b5 <GraUpperB>:
+     4b5:	00 00 03 e3 17 c6 2f                                ....../
+
+000004bc <GraUpperA>:
+     4bc:	00 00 04 63 f8 c5 44                                ...c..D
+
+000004c3 <GraAt>:
+     4c3:	00 00 03 83 da f6 2e                                .......
+
+000004ca <GraQuestionMark>:
+     4ca:	00 00 01 00 44 42 2e                                ....DB.
+
+000004d1 <GraAngleBracketRight>:
+     4d1:	00 00 00 88 88 20 82                                ..... .
+
+000004d8 <GraEquals>:
+     4d8:	00 00 00 01 f0 7c 00                                .....|.
+
+000004df <GraAngleBracketLeft>:
+     4df:	00 00 02 08 20 88 88                                .... ..
+
+000004e6 <GraSemicolon>:
+     4e6:	00 00 00 88 60 18 c0                                ....`..
+
+000004ed <GraColon>:
+     4ed:	00 00 00 0c 60 18 c0                                ....`..
+
+000004f4 <Gra9>:
+     4f4:	00 00 01 91 0f 46 2e                                .....F.
+
+000004fb <Gra8>:
+     4fb:	00 00 03 a3 17 46 2e                                .....F.
+
+00000502 <Gra7>:
+     502:	00 00 01 08 44 22 1f                                ....D".
+
+00000509 <Gra6>:
+     509:	00 00 03 a3 17 84 4c                                ......L
+
+00000510 <Gra5>:
+     510:	00 00 03 a3 08 3c 3f                                .....<?
+
+00000517 <Gra4>:
+     517:	00 00 02 11 f4 a9 88                                .......
+
+0000051e <Gra3>:
+     51e:	00 00 03 a3 04 11 1f                                .......
+
+00000525 <Gra2>:
+     525:	00 00 07 c4 44 42 2e                                ....DB.
+
+0000052c <Gra1>:
+     52c:	00 00 03 88 42 10 c4                                ....B..
+
+00000533 <Gra0>:
+     533:	00 00 03 a3 3a e6 2e                                ....:..
+
+0000053a <GraForwardSlash>:
+     53a:	00 00 00 02 22 22 00                                ...."".
+
+00000541 <GraDot>:
+     541:	00 00 01 8c 00 00 00                                .......
+
+00000548 <GraMinus>:
+     548:	00 00 00 00 0f 80 00                                .......
+
+0000054f <GraComma>:
+     54f:	00 00 00 88 60 00 00                                ....`..
+
+00000556 <GraPlus>:
+     556:	00 00 00 08 4f 90 80                                ....O..
+
+0000055d <GraAsterisk>:
+     55d:	00 00 01 2a e2 3a a4                                ...*.:.
+
+00000564 <GraParenthesisRight>:
+     564:	00 00 00 88 84 20 82                                ..... .
+
+0000056b <GraParenthesisLeft>:
+     56b:	00 00 02 08 21 08 88                                ....!..
+
+00000572 <GraApostropheLeft>:
+     572:	00 00 00 00 00 08 86                                .......
+
+00000579 <GraAmpersand>:
+     579:	00 00 05 93 59 14 a2                                ....Y..
+
+00000580 <GraPercent>:
+     580:	00 00 06 32 22 22 63                                ...2""c
+
+00000587 <GraDollar>:
+     587:	00 00 01 1f 4f 17 c4                                ....O..
+
+0000058e <GraHash>:
+     58e:	00 00 02 95 f5 7d 4a                                .....}J
+
+00000595 <GraQuote>:
+     595:	00 00 00 00 00 29 4a                                .....)J
+
+0000059c <GraExclamationMark>:
+     59c:	00 00 01 00 02 10 84                                .......
+
+000005a3 <GraSpace>:
+     5a3:	00 00 00 00 00 00 00                                .......
+
+000005aa <NumSpaceb>:
+     5aa:	00 00 00 00 00 00 00                                .......
+
+000005b1 <NumSpacea>:
+     5b1:	00 00 00 00 00 00 00                                .......
+
+000005b8 <NumMb>:
+     5b8:	00 00 00 00 ce 80 00                                .......
+
+000005bf <NumFb>:
+     5bf:	00 00 00 00 b8 40 00                                .....@.
+
+000005c6 <NumAb>:
+     5c6:	00 00 00 00 fc 40 00                                .....@.
+
+000005cd <Num9b>:
+     5cd:	00 00 00 08 7c 40 00                                ....|@.
+
+000005d4 <Num8b>:
+     5d4:	00 00 00 08 fc 40 00                                .....@.
+
+000005db <Num7b>:
+     5db:	00 00 00 02 02 40 00                                .....@.
+
+000005e2 <Num6b>:
+     5e2:	00 00 00 08 f8 40 00                                .....@.
+
+000005e9 <Num5b>:
+     5e9:	00 00 00 08 78 40 00                                ....x@.
+
+000005f0 <Num4b>:
+     5f0:	00 00 00 00 7c 00 00                                ....|..
+
+000005f7 <Num3b>:
+     5f7:	00 00 00 08 54 40 00                                ....T@.
+
+000005fe <Num2b>:
+     5fe:	00 00 00 08 b4 40 00                                .....@.
+
+00000605 <Num1b>:
+     605:	00 00 00 00 46 00 00                                ....F..
+
+0000060c <Num0b>:
+     60c:	00 00 00 08 cc 40 00                                .....@.
+
+00000613 <NumMa>:
+     613:	00 00 00 00 00 03 3a                                ......:
+
+0000061a <NumFa>:
+     61a:	00 00 00 00 00 02 e1                                .......
+
+00000621 <NumAa>:
+     621:	00 00 00 00 00 03 f1                                .......
+
+00000628 <Num9a>:
+     628:	00 00 00 00 00 21 f1                                .....!.
+
+0000062f <Num8a>:
+     62f:	00 00 00 00 00 23 f1                                .....#.
+
+00000636 <Num7a>:
+     636:	00 00 00 00 00 08 09                                .......
+
+0000063d <Num6a>:
+     63d:	00 00 00 00 00 23 e1                                .....#.
+
+00000644 <Num5a>:
+     644:	00 00 00 00 00 21 e1                                .....!.
+
+0000064b <Num4a>:
+     64b:	00 00 00 00 00 01 f0                                .......
+
+00000652 <Num3a>:
+     652:	00 00 00 00 00 21 51                                .....!Q
+
+00000659 <Num2a>:
+     659:	00 00 00 00 00 22 d1                                .....".
+
+00000660 <Num1a>:
+     660:	00 00 00 00 00 01 18                                .......
+
+00000667 <Num0a>:
+     667:	00 00 00 00 00 23 31                                .....#1
+
+0000066e <__ctors_end>:
+     66e:	11 24       	eor	r1, r1
+     670:	1f be       	out	0x3f, r1	; 63
+     672:	cf ef       	ldi	r28, 0xFF	; 255
+     674:	d8 e0       	ldi	r29, 0x08	; 8
+     676:	de bf       	out	0x3e, r29	; 62
+     678:	cd bf       	out	0x3d, r28	; 61
+
+0000067a <__do_copy_data>:
+     67a:	15 e0       	ldi	r17, 0x05	; 5
+     67c:	a0 e0       	ldi	r26, 0x00	; 0
+     67e:	b1 e0       	ldi	r27, 0x01	; 1
+     680:	e4 ea       	ldi	r30, 0xA4	; 164
+     682:	f2 e1       	ldi	r31, 0x12	; 18
+     684:	02 c0       	rjmp	.+4      	; 0x68a <__do_copy_data+0x10>
+     686:	05 90       	lpm	r0, Z+
+     688:	0d 92       	st	X+, r0
+     68a:	a8 36       	cpi	r26, 0x68	; 104
+     68c:	b1 07       	cpc	r27, r17
+     68e:	d9 f7       	brne	.-10     	; 0x686 <__do_copy_data+0xc>
+
+00000690 <__do_clear_bss>:
+     690:	25 e0       	ldi	r18, 0x05	; 5
+     692:	a8 e6       	ldi	r26, 0x68	; 104
+     694:	b5 e0       	ldi	r27, 0x05	; 5
+     696:	01 c0       	rjmp	.+2      	; 0x69a <.do_clear_bss_start>
+
+00000698 <.do_clear_bss_loop>:
+     698:	1d 92       	st	X+, r1
+
+0000069a <.do_clear_bss_start>:
+     69a:	af 3e       	cpi	r26, 0xEF	; 239
+     69c:	b2 07       	cpc	r27, r18
+     69e:	e1 f7       	brne	.-8      	; 0x698 <.do_clear_bss_loop>
+     6a0:	0e 94 6f 06 	call	0xcde	; 0xcde <main>
+     6a4:	0c 94 50 09 	jmp	0x12a0	; 0x12a0 <_exit>
+
+000006a8 <__bad_interrupt>:
+     6a8:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000006ac <_Z16I2C_setCallbacksPFvhEPFvvE>:
+static void (*I2C_recv)(uint8_t);
+static void (*I2C_req)();
+
+void I2C_setCallbacks(void (*recv)(uint8_t), void (*req)())
+{
+  I2C_recv = recv;
+     6ac:	90 93 6b 05 	sts	0x056B, r25	; 0x80056b <_ZL8I2C_recv+0x1>
+     6b0:	80 93 6a 05 	sts	0x056A, r24	; 0x80056a <_ZL8I2C_recv>
+  I2C_req = req;
+     6b4:	70 93 69 05 	sts	0x0569, r23	; 0x800569 <__data_end+0x1>
+     6b8:	60 93 68 05 	sts	0x0568, r22	; 0x800568 <__data_end>
+     6bc:	08 95       	ret
+
+000006be <_Z8I2C_inith>:
+}
+
+void I2C_init(uint8_t address)
+{
+  cli();
+     6be:	f8 94       	cli
+  // load address into TWI address register
+  TWAR = address;
+     6c0:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <__TEXT_REGION_LENGTH__+0x7f80ba>
+  // set the TWCR to enable address matching and enable TWI, clear TWINT, enable TWI interrupt
+  TWCR = (1<<TWIE) | (1<<TWEA) | (1<<TWINT) | (1<<TWEN);
+     6c4:	85 ec       	ldi	r24, 0xC5	; 197
+     6c6:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  sei();
+     6ca:	78 94       	sei
+     6cc:	08 95       	ret
+
+000006ce <_Z8I2C_stopv>:
+}
+
+void I2C_stop(void)
+{
+  // clear acknowledge and enable bits
+  cli();
+     6ce:	f8 94       	cli
+  TWCR = 0;
+     6d0:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  TWAR = 0;
+     6d4:	10 92 ba 00 	sts	0x00BA, r1	; 0x8000ba <__TEXT_REGION_LENGTH__+0x7f80ba>
+  sei();
+     6d8:	78 94       	sei
+     6da:	08 95       	ret
+
+000006dc <__vector_24>:
+}
+
+ISR(TWI_vect)
+{
+     6dc:	1f 92       	push	r1
+     6de:	0f 92       	push	r0
+     6e0:	0f b6       	in	r0, 0x3f	; 63
+     6e2:	0f 92       	push	r0
+     6e4:	11 24       	eor	r1, r1
+     6e6:	2f 93       	push	r18
+     6e8:	3f 93       	push	r19
+     6ea:	4f 93       	push	r20
+     6ec:	5f 93       	push	r21
+     6ee:	6f 93       	push	r22
+     6f0:	7f 93       	push	r23
+     6f2:	8f 93       	push	r24
+     6f4:	9f 93       	push	r25
+     6f6:	af 93       	push	r26
+     6f8:	bf 93       	push	r27
+     6fa:	ef 93       	push	r30
+     6fc:	ff 93       	push	r31
+  switch(TW_STATUS)
+     6fe:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+     702:	88 7f       	andi	r24, 0xF8	; 248
+     704:	80 38       	cpi	r24, 0x80	; 128
+     706:	59 f0       	breq	.+22     	; 0x71e <__vector_24+0x42>
+     708:	28 f4       	brcc	.+10     	; 0x714 <__vector_24+0x38>
+     70a:	81 11       	cpse	r24, r1
+     70c:	15 c0       	rjmp	.+42     	; 0x738 <__vector_24+0x5c>
+      I2C_req();
+      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
+      break;
+    case TW_BUS_ERROR:
+      // some sort of erroneous state, prepare TWI to be readdressed
+      TWCR = 0;
+     70e:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+     712:	12 c0       	rjmp	.+36     	; 0x738 <__vector_24+0x5c>
+  sei();
+}
+
+ISR(TWI_vect)
+{
+  switch(TW_STATUS)
+     714:	88 3a       	cpi	r24, 0xA8	; 168
+     716:	59 f0       	breq	.+22     	; 0x72e <__vector_24+0x52>
+     718:	88 3b       	cpi	r24, 0xB8	; 184
+     71a:	49 f0       	breq	.+18     	; 0x72e <__vector_24+0x52>
+     71c:	0d c0       	rjmp	.+26     	; 0x738 <__vector_24+0x5c>
+  {
+    case TW_SR_DATA_ACK:
+      // received data from master, call the receive callback
+      I2C_recv(TWDR); 
+     71e:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+     722:	e0 91 6a 05 	lds	r30, 0x056A	; 0x80056a <_ZL8I2C_recv>
+     726:	f0 91 6b 05 	lds	r31, 0x056B	; 0x80056b <_ZL8I2C_recv+0x1>
+     72a:	09 95       	icall
+     72c:	05 c0       	rjmp	.+10     	; 0x738 <__vector_24+0x5c>
+      I2C_req();
+      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
+      break;
+    case TW_ST_DATA_ACK:
+      // master is requesting data, call the request callback
+      I2C_req();
+     72e:	e0 91 68 05 	lds	r30, 0x0568	; 0x800568 <__data_end>
+     732:	f0 91 69 05 	lds	r31, 0x0569	; 0x800569 <__data_end+0x1>
+     736:	09 95       	icall
+      // some sort of erroneous state, prepare TWI to be readdressed
+      TWCR = 0;
+      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN); 
+      break;
+    default:
+      TWCR = (1<<TWIE) | (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
+     738:	85 ec       	ldi	r24, 0xC5	; 197
+     73a:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+      break;
+  }
+} 
+     73e:	ff 91       	pop	r31
+     740:	ef 91       	pop	r30
+     742:	bf 91       	pop	r27
+     744:	af 91       	pop	r26
+     746:	9f 91       	pop	r25
+     748:	8f 91       	pop	r24
+     74a:	7f 91       	pop	r23
+     74c:	6f 91       	pop	r22
+     74e:	5f 91       	pop	r21
+     750:	4f 91       	pop	r20
+     752:	3f 91       	pop	r19
+     754:	2f 91       	pop	r18
+     756:	0f 90       	pop	r0
+     758:	0f be       	out	0x3f, r0	; 63
+     75a:	0f 90       	pop	r0
+     75c:	1f 90       	pop	r1
+     75e:	18 95       	reti
+
+00000760 <_ZL12clearI2Cdatav>:
+static void graPuts(char const* text);
+static void numPuts(char const* text);
+
+static void clearI2Cdata()
+{
+	for (int i = 0; i <= I2CDATA_MAXLENGTH - 1; i++)
+     760:	80 e0       	ldi	r24, 0x00	; 0
+     762:	90 e0       	ldi	r25, 0x00	; 0
+	{
+		i2cdata[i] = UINT8_MAX;
+     764:	2f ef       	ldi	r18, 0xFF	; 255
+     766:	fc 01       	movw	r30, r24
+     768:	e6 5f       	subi	r30, 0xF6	; 246
+     76a:	fe 4f       	sbci	r31, 0xFE	; 254
+     76c:	20 83       	st	Z, r18
+static void graPuts(char const* text);
+static void numPuts(char const* text);
+
+static void clearI2Cdata()
+{
+	for (int i = 0; i <= I2CDATA_MAXLENGTH - 1; i++)
+     76e:	01 96       	adiw	r24, 0x01	; 1
+     770:	8e 30       	cpi	r24, 0x0E	; 14
+     772:	91 05       	cpc	r25, r1
+     774:	c1 f7       	brne	.-16     	; 0x766 <_ZL12clearI2Cdatav+0x6>
+	{
+		i2cdata[i] = UINT8_MAX;
+	}
+}
+     776:	08 95       	ret
+
+00000778 <_ZL13I2C_requestedv>:
+	}
+}
+
+static void I2C_requested()
+{
+	I2C_transmitByte(i2cdata[0]);
+     778:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL7i2cdata>
+void I2C_stop(void);
+void I2C_setCallbacks(void (*recv)(uint8_t), void (*req)());
+
+inline void __attribute__((always_inline)) I2C_transmitByte(uint8_t data)
+{
+  TWDR = data;
+     77c:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+     780:	08 95       	ret
+
+00000782 <_ZL7numPutccc>:
+	
+	return result;
+}
+
+static void numPutc(char chr, char index)
+{
+     782:	bf 92       	push	r11
+     784:	cf 92       	push	r12
+     786:	df 92       	push	r13
+     788:	ef 92       	push	r14
+     78a:	ff 92       	push	r15
+     78c:	0f 93       	push	r16
+     78e:	1f 93       	push	r17
+     790:	cf 93       	push	r28
+     792:	df 93       	push	r29
+     794:	cd b7       	in	r28, 0x3d	; 61
+     796:	de b7       	in	r29, 0x3e	; 62
+     798:	65 97       	sbiw	r28, 0x15	; 21
+     79a:	0f b6       	in	r0, 0x3f	; 63
+     79c:	f8 94       	cli
+     79e:	de bf       	out	0x3e, r29	; 62
+     7a0:	0f be       	out	0x3f, r0	; 63
+     7a2:	cd bf       	out	0x3d, r28	; 61
+     7a4:	16 2f       	mov	r17, r22
+     7a6:	11 70       	andi	r17, 0x01	; 1
+	const bool isEven = index % 2 == 0;
+	const int displayMemoryIndex = index / 2;
+     7a8:	66 95       	lsr	r22
+     7aa:	e6 2e       	mov	r14, r22
+     7ac:	f1 2c       	mov	r15, r1
+	VfdState oldVfdState = displayMemory[displayMemoryIndex];
+     7ae:	97 e0       	ldi	r25, 0x07	; 7
+     7b0:	9e 9d       	mul	r25, r14
+     7b2:	90 01       	movw	r18, r0
+     7b4:	9f 9d       	mul	r25, r15
+     7b6:	30 0d       	add	r19, r0
+     7b8:	11 24       	eor	r1, r1
+     7ba:	21 59       	subi	r18, 0x91	; 145
+     7bc:	3a 4f       	sbci	r19, 0xFA	; 250
+     7be:	f9 01       	movw	r30, r18
+     7c0:	de 01       	movw	r26, r28
+     7c2:	1f 96       	adiw	r26, 0x0f	; 15
+     7c4:	01 90       	ld	r0, Z+
+     7c6:	0d 92       	st	X+, r0
+     7c8:	9a 95       	dec	r25
+     7ca:	e1 f7       	brne	.-8      	; 0x7c4 <_ZL7numPutccc+0x42>
+     7cc:	f9 01       	movw	r30, r18
+     7ce:	d3 80       	ldd	r13, Z+3	; 0x03
+     7d0:	c4 80       	ldd	r12, Z+4	; 0x04
+     7d2:	b5 80       	ldd	r11, Z+5	; 0x05
+     7d4:	06 81       	ldd	r16, Z+6	; 0x06
+static VfdState getNumDisplayChar(char chr, const bool isEven)
+{
+	// convert supplied character to numeric display character
+	const VfdState* vfdStatePointer;
+	
+	switch (chr)
+     7d6:	48 2f       	mov	r20, r24
+     7d8:	50 e0       	ldi	r21, 0x00	; 0
+     7da:	fa 01       	movw	r30, r20
+     7dc:	f0 97       	sbiw	r30, 0x30	; 48
+     7de:	ee 31       	cpi	r30, 0x1E	; 30
+     7e0:	f1 05       	cpc	r31, r1
+     7e2:	08 f0       	brcs	.+2      	; 0x7e6 <_ZL7numPutccc+0x64>
+     7e4:	48 c0       	rjmp	.+144    	; 0x876 <__DATA_REGION_LENGTH__+0x76>
+     7e6:	ec 5c       	subi	r30, 0xCC	; 204
+     7e8:	ff 4f       	sbci	r31, 0xFF	; 255
+     7ea:	0c 94 41 09 	jmp	0x1282	; 0x1282 <__tablejump2__>
+	{
+		case '0':
+		vfdStatePointer = isEven ? &Num0a : &Num0b;
+     7ee:	11 23       	and	r17, r17
+     7f0:	09 f4       	brne	.+2      	; 0x7f4 <_ZL7numPutccc+0x72>
+     7f2:	46 c0       	rjmp	.+140    	; 0x880 <__DATA_REGION_LENGTH__+0x80>
+     7f4:	6c e0       	ldi	r22, 0x0C	; 12
+     7f6:	76 e0       	ldi	r23, 0x06	; 6
+     7f8:	6c c0       	rjmp	.+216    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '1':
+		vfdStatePointer = isEven ? &Num1a : &Num1b;
+     7fa:	11 23       	and	r17, r17
+     7fc:	09 f4       	brne	.+2      	; 0x800 <__DATA_REGION_LENGTH__>
+     7fe:	43 c0       	rjmp	.+134    	; 0x886 <__DATA_REGION_LENGTH__+0x86>
+     800:	65 e0       	ldi	r22, 0x05	; 5
+     802:	76 e0       	ldi	r23, 0x06	; 6
+     804:	66 c0       	rjmp	.+204    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '2':
+		vfdStatePointer = isEven ? &Num2a : &Num2b;
+     806:	11 23       	and	r17, r17
+     808:	09 f4       	brne	.+2      	; 0x80c <__DATA_REGION_LENGTH__+0xc>
+     80a:	40 c0       	rjmp	.+128    	; 0x88c <__DATA_REGION_LENGTH__+0x8c>
+     80c:	6e ef       	ldi	r22, 0xFE	; 254
+     80e:	75 e0       	ldi	r23, 0x05	; 5
+     810:	60 c0       	rjmp	.+192    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '3':
+		vfdStatePointer = isEven ? &Num3a : &Num3b;
+     812:	11 23       	and	r17, r17
+     814:	f1 f1       	breq	.+124    	; 0x892 <__DATA_REGION_LENGTH__+0x92>
+     816:	67 ef       	ldi	r22, 0xF7	; 247
+     818:	75 e0       	ldi	r23, 0x05	; 5
+     81a:	5b c0       	rjmp	.+182    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '4':
+		vfdStatePointer = isEven ? &Num4a : &Num4b;
+     81c:	11 23       	and	r17, r17
+     81e:	e1 f1       	breq	.+120    	; 0x898 <__DATA_REGION_LENGTH__+0x98>
+     820:	60 ef       	ldi	r22, 0xF0	; 240
+     822:	75 e0       	ldi	r23, 0x05	; 5
+     824:	56 c0       	rjmp	.+172    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '5':
+		vfdStatePointer = isEven ? &Num5a : &Num5b;
+     826:	11 23       	and	r17, r17
+     828:	d1 f1       	breq	.+116    	; 0x89e <__DATA_REGION_LENGTH__+0x9e>
+     82a:	69 ee       	ldi	r22, 0xE9	; 233
+     82c:	75 e0       	ldi	r23, 0x05	; 5
+     82e:	51 c0       	rjmp	.+162    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '6':
+		vfdStatePointer = isEven ? &Num6a : &Num6b;
+     830:	11 23       	and	r17, r17
+     832:	c1 f1       	breq	.+112    	; 0x8a4 <__DATA_REGION_LENGTH__+0xa4>
+     834:	62 ee       	ldi	r22, 0xE2	; 226
+     836:	75 e0       	ldi	r23, 0x05	; 5
+     838:	4c c0       	rjmp	.+152    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '7':
+		vfdStatePointer = isEven ? &Num7a : &Num7b;
+     83a:	11 23       	and	r17, r17
+     83c:	b1 f1       	breq	.+108    	; 0x8aa <__DATA_REGION_LENGTH__+0xaa>
+     83e:	6b ed       	ldi	r22, 0xDB	; 219
+     840:	75 e0       	ldi	r23, 0x05	; 5
+     842:	47 c0       	rjmp	.+142    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '8':
+		vfdStatePointer = isEven ? &Num8a : &Num8b;
+     844:	11 23       	and	r17, r17
+     846:	a1 f1       	breq	.+104    	; 0x8b0 <__DATA_REGION_LENGTH__+0xb0>
+     848:	64 ed       	ldi	r22, 0xD4	; 212
+     84a:	75 e0       	ldi	r23, 0x05	; 5
+     84c:	42 c0       	rjmp	.+132    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '9':
+		vfdStatePointer = isEven ? &Num9a : &Num9b;
+     84e:	11 23       	and	r17, r17
+     850:	91 f1       	breq	.+100    	; 0x8b6 <__DATA_REGION_LENGTH__+0xb6>
+     852:	6d ec       	ldi	r22, 0xCD	; 205
+     854:	75 e0       	ldi	r23, 0x05	; 5
+     856:	3d c0       	rjmp	.+122    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case 'A':
+		vfdStatePointer = isEven ? &NumAa : &NumAb;
+     858:	11 23       	and	r17, r17
+     85a:	81 f1       	breq	.+96     	; 0x8bc <__DATA_REGION_LENGTH__+0xbc>
+     85c:	66 ec       	ldi	r22, 0xC6	; 198
+     85e:	75 e0       	ldi	r23, 0x05	; 5
+     860:	38 c0       	rjmp	.+112    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case 'F':
+		vfdStatePointer = isEven ? &NumFa : &NumFb;
+     862:	11 23       	and	r17, r17
+     864:	71 f1       	breq	.+92     	; 0x8c2 <__DATA_REGION_LENGTH__+0xc2>
+     866:	6f eb       	ldi	r22, 0xBF	; 191
+     868:	75 e0       	ldi	r23, 0x05	; 5
+     86a:	33 c0       	rjmp	.+102    	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case 'M':
+		vfdStatePointer = isEven ? &NumMa : &NumMb;
+     86c:	11 23       	and	r17, r17
+     86e:	61 f1       	breq	.+88     	; 0x8c8 <__DATA_REGION_LENGTH__+0xc8>
+     870:	68 eb       	ldi	r22, 0xB8	; 184
+     872:	75 e0       	ldi	r23, 0x05	; 5
+     874:	2e c0       	rjmp	.+92     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		default:
+		vfdStatePointer = isEven ? &NumSpacea : &NumSpaceb;
+     876:	11 23       	and	r17, r17
+     878:	51 f1       	breq	.+84     	; 0x8ce <__DATA_REGION_LENGTH__+0xce>
+     87a:	6a ea       	ldi	r22, 0xAA	; 170
+     87c:	75 e0       	ldi	r23, 0x05	; 5
+     87e:	29 c0       	rjmp	.+82     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+	const VfdState* vfdStatePointer;
+	
+	switch (chr)
+	{
+		case '0':
+		vfdStatePointer = isEven ? &Num0a : &Num0b;
+     880:	67 e6       	ldi	r22, 0x67	; 103
+     882:	76 e0       	ldi	r23, 0x06	; 6
+     884:	26 c0       	rjmp	.+76     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '1':
+		vfdStatePointer = isEven ? &Num1a : &Num1b;
+     886:	60 e6       	ldi	r22, 0x60	; 96
+     888:	76 e0       	ldi	r23, 0x06	; 6
+     88a:	23 c0       	rjmp	.+70     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '2':
+		vfdStatePointer = isEven ? &Num2a : &Num2b;
+     88c:	69 e5       	ldi	r22, 0x59	; 89
+     88e:	76 e0       	ldi	r23, 0x06	; 6
+     890:	20 c0       	rjmp	.+64     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '3':
+		vfdStatePointer = isEven ? &Num3a : &Num3b;
+     892:	62 e5       	ldi	r22, 0x52	; 82
+     894:	76 e0       	ldi	r23, 0x06	; 6
+     896:	1d c0       	rjmp	.+58     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '4':
+		vfdStatePointer = isEven ? &Num4a : &Num4b;
+     898:	6b e4       	ldi	r22, 0x4B	; 75
+     89a:	76 e0       	ldi	r23, 0x06	; 6
+     89c:	1a c0       	rjmp	.+52     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '5':
+		vfdStatePointer = isEven ? &Num5a : &Num5b;
+     89e:	64 e4       	ldi	r22, 0x44	; 68
+     8a0:	76 e0       	ldi	r23, 0x06	; 6
+     8a2:	17 c0       	rjmp	.+46     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '6':
+		vfdStatePointer = isEven ? &Num6a : &Num6b;
+     8a4:	6d e3       	ldi	r22, 0x3D	; 61
+     8a6:	76 e0       	ldi	r23, 0x06	; 6
+     8a8:	14 c0       	rjmp	.+40     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '7':
+		vfdStatePointer = isEven ? &Num7a : &Num7b;
+     8aa:	66 e3       	ldi	r22, 0x36	; 54
+     8ac:	76 e0       	ldi	r23, 0x06	; 6
+     8ae:	11 c0       	rjmp	.+34     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '8':
+		vfdStatePointer = isEven ? &Num8a : &Num8b;
+     8b0:	6f e2       	ldi	r22, 0x2F	; 47
+     8b2:	76 e0       	ldi	r23, 0x06	; 6
+     8b4:	0e c0       	rjmp	.+28     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case '9':
+		vfdStatePointer = isEven ? &Num9a : &Num9b;
+     8b6:	68 e2       	ldi	r22, 0x28	; 40
+     8b8:	76 e0       	ldi	r23, 0x06	; 6
+     8ba:	0b c0       	rjmp	.+22     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case 'A':
+		vfdStatePointer = isEven ? &NumAa : &NumAb;
+     8bc:	61 e2       	ldi	r22, 0x21	; 33
+     8be:	76 e0       	ldi	r23, 0x06	; 6
+     8c0:	08 c0       	rjmp	.+16     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case 'F':
+		vfdStatePointer = isEven ? &NumFa : &NumFb;
+     8c2:	6a e1       	ldi	r22, 0x1A	; 26
+     8c4:	76 e0       	ldi	r23, 0x06	; 6
+     8c6:	05 c0       	rjmp	.+10     	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		case 'M':
+		vfdStatePointer = isEven ? &NumMa : &NumMb;
+     8c8:	63 e1       	ldi	r22, 0x13	; 19
+     8ca:	76 e0       	ldi	r23, 0x06	; 6
+     8cc:	02 c0       	rjmp	.+4      	; 0x8d2 <__DATA_REGION_LENGTH__+0xd2>
+		break;
+		default:
+		vfdStatePointer = isEven ? &NumSpacea : &NumSpaceb;
+     8ce:	61 eb       	ldi	r22, 0xB1	; 177
+     8d0:	75 e0       	ldi	r23, 0x05	; 5
+		break;
+	}
+	
+	VfdState result;
+	memcpy_P(&result, vfdStatePointer, sizeof(VfdState));
+     8d2:	47 e0       	ldi	r20, 0x07	; 7
+     8d4:	50 e0       	ldi	r21, 0x00	; 0
+     8d6:	ce 01       	movw	r24, r28
+     8d8:	08 96       	adiw	r24, 0x08	; 8
+     8da:	0e 94 47 09 	call	0x128e	; 0x128e <memcpy_P>
+	
+	return result;
+     8de:	87 e0       	ldi	r24, 0x07	; 7
+     8e0:	fe 01       	movw	r30, r28
+     8e2:	38 96       	adiw	r30, 0x08	; 8
+     8e4:	de 01       	movw	r26, r28
+     8e6:	11 96       	adiw	r26, 0x01	; 1
+     8e8:	01 90       	ld	r0, Z+
+     8ea:	0d 92       	st	X+, r0
+     8ec:	8a 95       	dec	r24
+     8ee:	e1 f7       	brne	.-8      	; 0x8e8 <__DATA_REGION_LENGTH__+0xe8>
+     8f0:	9c 81       	ldd	r25, Y+4	; 0x04
+     8f2:	3d 81       	ldd	r19, Y+5	; 0x05
+     8f4:	8e 81       	ldd	r24, Y+6	; 0x06
+     8f6:	4f 81       	ldd	r20, Y+7	; 0x07
+{
+	const bool isEven = index % 2 == 0;
+	const int displayMemoryIndex = index / 2;
+	VfdState oldVfdState = displayMemory[displayMemoryIndex];
+	VfdState newVfdState = getNumDisplayChar(chr, isEven);
+	VfdState merged = oldVfdState;
+     8f8:	da 8a       	std	Y+18, r13	; 0x12
+     8fa:	cb 8a       	std	Y+19, r12	; 0x13
+     8fc:	bc 8a       	std	Y+20, r11	; 0x14
+     8fe:	0d 8b       	std	Y+21, r16	; 0x15
+     900:	27 e0       	ldi	r18, 0x07	; 7
+     902:	fe 01       	movw	r30, r28
+     904:	3f 96       	adiw	r30, 0x0f	; 15
+     906:	de 01       	movw	r26, r28
+     908:	18 96       	adiw	r26, 0x08	; 8
+     90a:	01 90       	ld	r0, Z+
+     90c:	0d 92       	st	X+, r0
+     90e:	2a 95       	dec	r18
+     910:	e1 f7       	brne	.-8      	; 0x90a <__stack+0xb>
+	
+	if (isEven)
+     912:	11 11       	cpse	r17, r1
+     914:	06 c0       	rjmp	.+12     	; 0x922 <__stack+0x23>
+	{
+		// take segments A-N only, leave others as they were
+		merged.chip1 = newVfdState.chip1;
+		merged.chip2 = (merged.chip2 & ~0b00111111) | (newVfdState.chip2 & 0b00111111);
+     916:	9b 2d       	mov	r25, r11
+     918:	90 7c       	andi	r25, 0xC0	; 192
+     91a:	8f 73       	andi	r24, 0x3F	; 63
+     91c:	89 2b       	or	r24, r25
+	VfdState merged = oldVfdState;
+	
+	if (isEven)
+	{
+		// take segments A-N only, leave others as they were
+		merged.chip1 = newVfdState.chip1;
+     91e:	04 2f       	mov	r16, r20
+     920:	0a c0       	rjmp	.+20     	; 0x936 <__stack+0x37>
+		merged.chip2 = (merged.chip2 & ~0b00111111) | (newVfdState.chip2 & 0b00111111);
+	}
+	else
+	{
+		// take segments O-AB only, leave others as they were
+		merged.chip2 = (merged.chip2 & ~0b11000000) | (newVfdState.chip2 & 0b11000000);
+     922:	2b 2d       	mov	r18, r11
+     924:	2f 73       	andi	r18, 0x3F	; 63
+     926:	80 7c       	andi	r24, 0xC0	; 192
+     928:	82 2b       	or	r24, r18
+		merged.chip3 = newVfdState.chip3;
+		merged.chip4 = (merged.chip4 & ~0b00001111) | (newVfdState.chip4 & 0b00001111);
+     92a:	2d 2d       	mov	r18, r13
+     92c:	20 7f       	andi	r18, 0xF0	; 240
+     92e:	9f 70       	andi	r25, 0x0F	; 15
+     930:	d2 2e       	mov	r13, r18
+     932:	d9 2a       	or	r13, r25
+	}
+	else
+	{
+		// take segments O-AB only, leave others as they were
+		merged.chip2 = (merged.chip2 & ~0b11000000) | (newVfdState.chip2 & 0b11000000);
+		merged.chip3 = newVfdState.chip3;
+     934:	c3 2e       	mov	r12, r19
+		merged.chip4 = (merged.chip4 & ~0b00001111) | (newVfdState.chip4 & 0b00001111);
+	}
+	
+	displayMemory[displayMemoryIndex] = merged;
+     936:	db 86       	std	Y+11, r13	; 0x0b
+     938:	cc 86       	std	Y+12, r12	; 0x0c
+     93a:	8d 87       	std	Y+13, r24	; 0x0d
+     93c:	0e 87       	std	Y+14, r16	; 0x0e
+     93e:	87 e0       	ldi	r24, 0x07	; 7
+     940:	8e 9d       	mul	r24, r14
+     942:	d0 01       	movw	r26, r0
+     944:	8f 9d       	mul	r24, r15
+     946:	b0 0d       	add	r27, r0
+     948:	11 24       	eor	r1, r1
+     94a:	a1 59       	subi	r26, 0x91	; 145
+     94c:	ba 4f       	sbci	r27, 0xFA	; 250
+     94e:	fe 01       	movw	r30, r28
+     950:	38 96       	adiw	r30, 0x08	; 8
+     952:	01 90       	ld	r0, Z+
+     954:	0d 92       	st	X+, r0
+     956:	8a 95       	dec	r24
+     958:	e1 f7       	brne	.-8      	; 0x952 <__stack+0x53>
+}
+     95a:	65 96       	adiw	r28, 0x15	; 21
+     95c:	0f b6       	in	r0, 0x3f	; 63
+     95e:	f8 94       	cli
+     960:	de bf       	out	0x3e, r29	; 62
+     962:	0f be       	out	0x3f, r0	; 63
+     964:	cd bf       	out	0x3d, r28	; 61
+     966:	df 91       	pop	r29
+     968:	cf 91       	pop	r28
+     96a:	1f 91       	pop	r17
+     96c:	0f 91       	pop	r16
+     96e:	ff 90       	pop	r15
+     970:	ef 90       	pop	r14
+     972:	df 90       	pop	r13
+     974:	cf 90       	pop	r12
+     976:	bf 90       	pop	r11
+     978:	08 95       	ret
+
+0000097a <_ZL7numPutsPKc>:
+
+static void numPuts(char const* text)
+{
+     97a:	0f 93       	push	r16
+     97c:	1f 93       	push	r17
+     97e:	cf 93       	push	r28
+     980:	8c 01       	movw	r16, r24
+     982:	c0 e0       	ldi	r28, 0x00	; 0
+	for (int i = 0; i <= 5; i++)
+	{
+		numPutc(text[i], i);
+     984:	6c 2f       	mov	r22, r28
+     986:	f8 01       	movw	r30, r16
+     988:	81 91       	ld	r24, Z+
+     98a:	8f 01       	movw	r16, r30
+     98c:	0e 94 c1 03 	call	0x782	; 0x782 <_ZL7numPutccc>
+     990:	cf 5f       	subi	r28, 0xFF	; 255
+	displayMemory[displayMemoryIndex] = merged;
+}
+
+static void numPuts(char const* text)
+{
+	for (int i = 0; i <= 5; i++)
+     992:	c6 30       	cpi	r28, 0x06	; 6
+     994:	b9 f7       	brne	.-18     	; 0x984 <_ZL7numPutsPKc+0xa>
+	{
+		numPutc(text[i], i);
+	}
+}
+     996:	cf 91       	pop	r28
+     998:	1f 91       	pop	r17
+     99a:	0f 91       	pop	r16
+     99c:	08 95       	ret
+
+0000099e <_ZL17getSpeDisplayCharc>:
+
+static VfdState getSpeDisplayChar(char spe)
+{
+     99e:	cf 93       	push	r28
+     9a0:	df 93       	push	r29
+     9a2:	cd b7       	in	r28, 0x3d	; 61
+     9a4:	de b7       	in	r29, 0x3e	; 62
+     9a6:	2e 97       	sbiw	r28, 0x0e	; 14
+     9a8:	0f b6       	in	r0, 0x3f	; 63
+     9aa:	f8 94       	cli
+     9ac:	de bf       	out	0x3e, r29	; 62
+     9ae:	0f be       	out	0x3f, r0	; 63
+     9b0:	cd bf       	out	0x3d, r28	; 61
+     9b2:	89 32       	cpi	r24, 0x29	; 41
+     9b4:	48 f4       	brcc	.+18     	; 0x9c8 <_ZL17getSpeDisplayCharc+0x2a>
+     9b6:	e8 2f       	mov	r30, r24
+     9b8:	f0 e0       	ldi	r31, 0x00	; 0
+     9ba:	ee 0f       	add	r30, r30
+     9bc:	ff 1f       	adc	r31, r31
+     9be:	ec 56       	subi	r30, 0x6C	; 108
+     9c0:	fe 4f       	sbci	r31, 0xFE	; 254
+     9c2:	60 81       	ld	r22, Z
+     9c4:	71 81       	ldd	r23, Z+1	; 0x01
+     9c6:	02 c0       	rjmp	.+4      	; 0x9cc <_ZL17getSpeDisplayCharc+0x2e>
+     9c8:	6c e1       	ldi	r22, 0x1C	; 28
+     9ca:	72 e0       	ldi	r23, 0x02	; 2
+		vfdStatePointer = &SpeRectangle1;
+		break;
+	}
+	
+	VfdState result;
+	memcpy_P(&result, vfdStatePointer, sizeof(VfdState));
+     9cc:	47 e0       	ldi	r20, 0x07	; 7
+     9ce:	50 e0       	ldi	r21, 0x00	; 0
+     9d0:	ce 01       	movw	r24, r28
+     9d2:	08 96       	adiw	r24, 0x08	; 8
+     9d4:	0e 94 47 09 	call	0x128e	; 0x128e <memcpy_P>
+	
+	return result;
+     9d8:	87 e0       	ldi	r24, 0x07	; 7
+     9da:	fe 01       	movw	r30, r28
+     9dc:	38 96       	adiw	r30, 0x08	; 8
+     9de:	de 01       	movw	r26, r28
+     9e0:	11 96       	adiw	r26, 0x01	; 1
+     9e2:	01 90       	ld	r0, Z+
+     9e4:	0d 92       	st	X+, r0
+     9e6:	8a 95       	dec	r24
+     9e8:	e1 f7       	brne	.-8      	; 0x9e2 <_ZL17getSpeDisplayCharc+0x44>
+     9ea:	29 81       	ldd	r18, Y+1	; 0x01
+     9ec:	3a 81       	ldd	r19, Y+2	; 0x02
+     9ee:	4b 81       	ldd	r20, Y+3	; 0x03
+     9f0:	5c 81       	ldd	r21, Y+4	; 0x04
+     9f2:	6d 81       	ldd	r22, Y+5	; 0x05
+     9f4:	7e 81       	ldd	r23, Y+6	; 0x06
+}
+     9f6:	8f 81       	ldd	r24, Y+7	; 0x07
+     9f8:	90 e0       	ldi	r25, 0x00	; 0
+     9fa:	2e 96       	adiw	r28, 0x0e	; 14
+     9fc:	0f b6       	in	r0, 0x3f	; 63
+     9fe:	f8 94       	cli
+     a00:	de bf       	out	0x3e, r29	; 62
+     a02:	0f be       	out	0x3f, r0	; 63
+     a04:	cd bf       	out	0x3d, r28	; 61
+     a06:	df 91       	pop	r29
+     a08:	cf 91       	pop	r28
+     a0a:	08 95       	ret
+
+00000a0c <_ZL8shiftOuth>:
+{
+	numPuts("      ");
+}
+
+static void shiftOut(uint8_t val)
+{
+     a0c:	98 e0       	ldi	r25, 0x08	; 8
+	uint8_t i;
+
+	for (i = 0; i < 8; i++) 
+	{
+		if ((val & 128) != 0)
+     a0e:	87 ff       	sbrs	r24, 7
+     a10:	02 c0       	rjmp	.+4      	; 0xa16 <_ZL8shiftOuth+0xa>
+		{
+			PORTC |= _BV(PC0);
+     a12:	40 9a       	sbi	0x08, 0	; 8
+     a14:	01 c0       	rjmp	.+2      	; 0xa18 <_ZL8shiftOuth+0xc>
+		}
+		else
+		{
+			PORTC &= ~_BV(PC0);
+     a16:	40 98       	cbi	0x08, 0	; 8
+		}
+		
+		val <<= 1;
+     a18:	88 0f       	add	r24, r24
+		PORTC |= _BV(PC1); // 100 ns between these two (without delay)
+     a1a:	41 9a       	sbi	0x08, 1	; 8
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+     a1c:	21 e2       	ldi	r18, 0x21	; 33
+     a1e:	2a 95       	dec	r18
+     a20:	f1 f7       	brne	.-4      	; 0xa1e <_ZL8shiftOuth+0x12>
+     a22:	00 00       	nop
+		_delay_us(5);
+		PORTC &= ~_BV(PC1);
+     a24:	41 98       	cbi	0x08, 1	; 8
+     a26:	21 e2       	ldi	r18, 0x21	; 33
+     a28:	2a 95       	dec	r18
+     a2a:	f1 f7       	brne	.-4      	; 0xa28 <_ZL8shiftOuth+0x1c>
+     a2c:	00 00       	nop
+     a2e:	91 50       	subi	r25, 0x01	; 1
+
+static void shiftOut(uint8_t val)
+{
+	uint8_t i;
+
+	for (i = 0; i < 8; i++) 
+     a30:	71 f7       	brne	.-36     	; 0xa0e <_ZL8shiftOuth+0x2>
+		PORTC |= _BV(PC1); // 100 ns between these two (without delay)
+		_delay_us(5);
+		PORTC &= ~_BV(PC1);
+		_delay_us(5);
+	}
+}
+     a32:	08 95       	ret
+
+00000a34 <_ZL12I2C_receivedh>:
+
+// called in interrupt of I2C receive, keep as fast as possible
+static void I2C_received(uint8_t data)
+{
+	if (modeCmdGraTextCurrentIndex != UINT8_MAX)
+     a34:	20 91 09 01 	lds	r18, 0x0109	; 0x800109 <_ZL26modeCmdGraTextCurrentIndex>
+     a38:	2f 3f       	cpi	r18, 0xFF	; 255
+     a3a:	81 f0       	breq	.+32     	; 0xa5c <_ZL12I2C_receivedh+0x28>
+	{
+		// accepting data for gra display
+		// exactly 14 characters are accepted
+		i2cdata[modeCmdGraTextCurrentIndex] = data;
+     a3c:	e2 2f       	mov	r30, r18
+     a3e:	f0 e0       	ldi	r31, 0x00	; 0
+     a40:	e6 5f       	subi	r30, 0xF6	; 246
+     a42:	fe 4f       	sbci	r31, 0xFE	; 254
+     a44:	80 83       	st	Z, r24
+		
+		if (modeCmdGraTextCurrentIndex != 13)
+     a46:	2d 30       	cpi	r18, 0x0D	; 13
+     a48:	21 f0       	breq	.+8      	; 0xa52 <_ZL12I2C_receivedh+0x1e>
+		{
+			modeCmdGraTextCurrentIndex++;
+     a4a:	2f 5f       	subi	r18, 0xFF	; 255
+     a4c:	20 93 09 01 	sts	0x0109, r18	; 0x800109 <_ZL26modeCmdGraTextCurrentIndex>
+     a50:	08 95       	ret
+		}
+		else
+		{
+			modeCmdGraTextCurrentIndex = UINT8_MAX;
+     a52:	8f ef       	ldi	r24, 0xFF	; 255
+     a54:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <_ZL26modeCmdGraTextCurrentIndex>
+			modeCmdFinished = CMD_SHOW_GRA_TEXT;
+     a58:	8a e0       	ldi	r24, 0x0A	; 10
+     a5a:	12 c0       	rjmp	.+36     	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+		}
+	}
+	else if (modeCmdNumTextCurrentIndex != UINT8_MAX)
+     a5c:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <_ZL26modeCmdNumTextCurrentIndex>
+     a60:	9f 3f       	cpi	r25, 0xFF	; 255
+     a62:	89 f0       	breq	.+34     	; 0xa86 <_ZL12I2C_receivedh+0x52>
+	{
+		// accepting data for num display
+		// exactly 6 characters are accepted
+		i2cdata[modeCmdNumTextCurrentIndex] = data;
+     a64:	e9 2f       	mov	r30, r25
+     a66:	f0 e0       	ldi	r31, 0x00	; 0
+     a68:	e6 5f       	subi	r30, 0xF6	; 246
+     a6a:	fe 4f       	sbci	r31, 0xFE	; 254
+     a6c:	80 83       	st	Z, r24
+		
+		if (modeCmdNumTextCurrentIndex != 5)
+     a6e:	95 30       	cpi	r25, 0x05	; 5
+     a70:	21 f0       	breq	.+8      	; 0xa7a <_ZL12I2C_receivedh+0x46>
+		{
+			modeCmdNumTextCurrentIndex++;
+     a72:	9f 5f       	subi	r25, 0xFF	; 255
+     a74:	90 93 08 01 	sts	0x0108, r25	; 0x800108 <_ZL26modeCmdNumTextCurrentIndex>
+     a78:	08 95       	ret
+		}
+		else
+		{
+			modeCmdNumTextCurrentIndex = UINT8_MAX;
+     a7a:	20 93 08 01 	sts	0x0108, r18	; 0x800108 <_ZL26modeCmdNumTextCurrentIndex>
+			modeCmdFinished = CMD_SHOW_NUM_TEXT;
+     a7e:	8b e0       	ldi	r24, 0x0B	; 11
+     a80:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <_ZL15modeCmdFinished>
+     a84:	08 95       	ret
+		}
+	}
+	else if (modeCmdGraCharCurrentIndex != UINT8_MAX)
+     a86:	20 91 07 01 	lds	r18, 0x0107	; 0x800107 <_ZL26modeCmdGraCharCurrentIndex>
+     a8a:	2f 3f       	cpi	r18, 0xFF	; 255
+     a8c:	81 f0       	breq	.+32     	; 0xaae <_ZL12I2C_receivedh+0x7a>
+	{
+		// data contains the code of gra char to display
+		// or the index to display the char on
+		i2cdata[modeCmdGraCharCurrentIndex] = data;
+     a8e:	e2 2f       	mov	r30, r18
+     a90:	f0 e0       	ldi	r31, 0x00	; 0
+     a92:	e6 5f       	subi	r30, 0xF6	; 246
+     a94:	fe 4f       	sbci	r31, 0xFE	; 254
+     a96:	80 83       	st	Z, r24
+	
+		if (modeCmdGraCharCurrentIndex != 1)
+     a98:	21 30       	cpi	r18, 0x01	; 1
+     a9a:	21 f0       	breq	.+8      	; 0xaa4 <_ZL12I2C_receivedh+0x70>
+		{
+			modeCmdGraCharCurrentIndex++;
+     a9c:	2f 5f       	subi	r18, 0xFF	; 255
+     a9e:	20 93 07 01 	sts	0x0107, r18	; 0x800107 <_ZL26modeCmdGraCharCurrentIndex>
+     aa2:	08 95       	ret
+		}
+		else
+		{
+			modeCmdGraCharCurrentIndex = UINT8_MAX;
+     aa4:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <_ZL26modeCmdGraCharCurrentIndex>
+			modeCmdFinished = CMD_SHOW_GRA_CHAR;
+     aa8:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_ZL15modeCmdFinished>
+     aac:	08 95       	ret
+		}
+	}
+	else if (modeCmdNumCharCurrentIndex != UINT8_MAX)
+     aae:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <_ZL26modeCmdNumCharCurrentIndex>
+     ab2:	9f 3f       	cpi	r25, 0xFF	; 255
+     ab4:	81 f0       	breq	.+32     	; 0xad6 <_ZL12I2C_receivedh+0xa2>
+	{
+		// data contains the code of num char to display
+		// or the index to display the char on
+		i2cdata[modeCmdNumCharCurrentIndex] = data;
+     ab6:	e9 2f       	mov	r30, r25
+     ab8:	f0 e0       	ldi	r31, 0x00	; 0
+     aba:	e6 5f       	subi	r30, 0xF6	; 246
+     abc:	fe 4f       	sbci	r31, 0xFE	; 254
+     abe:	80 83       	st	Z, r24
+		
+		if (modeCmdNumCharCurrentIndex != 1)
+     ac0:	91 30       	cpi	r25, 0x01	; 1
+     ac2:	21 f0       	breq	.+8      	; 0xacc <_ZL12I2C_receivedh+0x98>
+		{
+			modeCmdNumCharCurrentIndex++;
+     ac4:	9f 5f       	subi	r25, 0xFF	; 255
+     ac6:	90 93 06 01 	sts	0x0106, r25	; 0x800106 <_ZL26modeCmdNumCharCurrentIndex>
+     aca:	08 95       	ret
+		}
+		else
+		{
+			modeCmdNumCharCurrentIndex = UINT8_MAX;
+     acc:	20 93 06 01 	sts	0x0106, r18	; 0x800106 <_ZL26modeCmdNumCharCurrentIndex>
+			modeCmdFinished = CMD_SHOW_NUM_CHAR;
+     ad0:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_ZL15modeCmdFinished>
+     ad4:	08 95       	ret
+		}
+	}
+	else if (modeCmdShowSpeCurrentIndex != UINT8_MAX)
+     ad6:	30 91 05 01 	lds	r19, 0x0105	; 0x800105 <_ZL26modeCmdShowSpeCurrentIndex>
+     ada:	3f 3f       	cpi	r19, 0xFF	; 255
+     adc:	31 f0       	breq	.+12     	; 0xaea <_ZL12I2C_receivedh+0xb6>
+	{
+		// data contains the code of special char to display
+		i2cdata[0] = data;
+     ade:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <_ZL7i2cdata>
+		modeCmdShowSpeCurrentIndex = UINT8_MAX;
+     ae2:	90 93 05 01 	sts	0x0105, r25	; 0x800105 <_ZL26modeCmdShowSpeCurrentIndex>
+		modeCmdFinished = CMD_SHOW_SPE;
+     ae6:	82 e0       	ldi	r24, 0x02	; 2
+     ae8:	cb cf       	rjmp	.-106    	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+	}
+	else if (modeCmdHideSpeCurrentIndex != UINT8_MAX)
+     aea:	20 91 04 01 	lds	r18, 0x0104	; 0x800104 <_ZL26modeCmdHideSpeCurrentIndex>
+     aee:	2f 3f       	cpi	r18, 0xFF	; 255
+     af0:	31 f0       	breq	.+12     	; 0xafe <_ZL12I2C_receivedh+0xca>
+	{
+		// data contains the code of special char to hide
+		i2cdata[0] = data;
+     af2:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <_ZL7i2cdata>
+		modeCmdHideSpeCurrentIndex = UINT8_MAX;
+     af6:	30 93 04 01 	sts	0x0104, r19	; 0x800104 <_ZL26modeCmdHideSpeCurrentIndex>
+		modeCmdFinished = CMD_HIDE_SPE;
+     afa:	83 e0       	ldi	r24, 0x03	; 3
+     afc:	c1 cf       	rjmp	.-126    	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+	}
+	else if (modeCmdToggleSpeCurrentIndex != UINT8_MAX)
+     afe:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <_ZL28modeCmdToggleSpeCurrentIndex>
+     b02:	9f 3f       	cpi	r25, 0xFF	; 255
+     b04:	31 f0       	breq	.+12     	; 0xb12 <_ZL12I2C_receivedh+0xde>
+	{
+		// data contains the code of special char to toggle
+		i2cdata[0] = data;
+     b06:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <_ZL7i2cdata>
+		modeCmdToggleSpeCurrentIndex = UINT8_MAX;
+     b0a:	20 93 03 01 	sts	0x0103, r18	; 0x800103 <_ZL28modeCmdToggleSpeCurrentIndex>
+		modeCmdFinished = CMD_TOGGLE_SPE;
+     b0e:	84 e0       	ldi	r24, 0x04	; 4
+     b10:	b7 cf       	rjmp	.-146    	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+	}
+	else if (modeCmdShowVolumeCurrentIndex != UINT8_MAX)
+     b12:	20 91 02 01 	lds	r18, 0x0102	; 0x800102 <_ZL29modeCmdShowVolumeCurrentIndex>
+     b16:	2f 3f       	cpi	r18, 0xFF	; 255
+     b18:	31 f0       	breq	.+12     	; 0xb26 <_ZL12I2C_receivedh+0xf2>
+	{
+		// data contains the value of volume 0-63
+		i2cdata[0] = data;
+     b1a:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <_ZL7i2cdata>
+		modeCmdShowVolumeCurrentIndex = UINT8_MAX;
+     b1e:	90 93 02 01 	sts	0x0102, r25	; 0x800102 <_ZL29modeCmdShowVolumeCurrentIndex>
+		modeCmdFinished = CMD_SHOW_VOLUME;
+     b22:	8c e0       	ldi	r24, 0x0C	; 12
+     b24:	ad cf       	rjmp	.-166    	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+	}
+	else
+	{
+		if (data == CMD_CLEAR_GRA)
+     b26:	85 30       	cpi	r24, 0x05	; 5
+     b28:	09 f4       	brne	.+2      	; 0xb2c <_ZL12I2C_receivedh+0xf8>
+     b2a:	aa cf       	rjmp	.-172    	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+		{
+			modeCmdFinished = CMD_CLEAR_GRA;
+		}
+		else if (data == CMD_CLEAR_NUM)
+     b2c:	86 30       	cpi	r24, 0x06	; 6
+     b2e:	09 f4       	brne	.+2      	; 0xb32 <_ZL12I2C_receivedh+0xfe>
+     b30:	a7 cf       	rjmp	.-178    	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+		{
+			modeCmdFinished = CMD_CLEAR_NUM;
+		}
+		else if (data == CMD_CLEAR_ALL)
+     b32:	87 30       	cpi	r24, 0x07	; 7
+     b34:	09 f4       	brne	.+2      	; 0xb38 <_ZL12I2C_receivedh+0x104>
+     b36:	a4 cf       	rjmp	.-184    	; 0xa80 <_ZL12I2C_receivedh+0x4c>
+		{
+			modeCmdFinished = CMD_CLEAR_ALL;
+		}
+		else if (data == CMD_SHOW_UNDERLINES)
+     b38:	88 30       	cpi	r24, 0x08	; 8
+     b3a:	21 f4       	brne	.+8      	; 0xb44 <_ZL12I2C_receivedh+0x110>
+		{
+			showUnderlines = true;
+     b3c:	81 e0       	ldi	r24, 0x01	; 1
+     b3e:	80 93 6e 05 	sts	0x056E, r24	; 0x80056e <_ZL14showUnderlines>
+     b42:	08 95       	ret
+		}
+		else if (data == CMD_HIDE_UNDERLINES)
+     b44:	89 30       	cpi	r24, 0x09	; 9
+     b46:	19 f4       	brne	.+6      	; 0xb4e <_ZL12I2C_receivedh+0x11a>
+		{
+			showUnderlines = false;
+     b48:	10 92 6e 05 	sts	0x056E, r1	; 0x80056e <_ZL14showUnderlines>
+     b4c:	08 95       	ret
+		}
+		else if (data == CMD_SHOW_GRA_TEXT)
+     b4e:	8a 30       	cpi	r24, 0x0A	; 10
+     b50:	19 f4       	brne	.+6      	; 0xb58 <_ZL12I2C_receivedh+0x124>
+		{
+			modeCmdGraTextCurrentIndex = 0;
+     b52:	10 92 09 01 	sts	0x0109, r1	; 0x800109 <_ZL26modeCmdGraTextCurrentIndex>
+     b56:	08 95       	ret
+		}
+		else if (data == CMD_SHOW_NUM_TEXT)
+     b58:	8b 30       	cpi	r24, 0x0B	; 11
+     b5a:	19 f4       	brne	.+6      	; 0xb62 <_ZL12I2C_receivedh+0x12e>
+		{
+			modeCmdNumTextCurrentIndex = 0;
+     b5c:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <_ZL26modeCmdNumTextCurrentIndex>
+     b60:	08 95       	ret
+		}
+		else if (data == CMD_SHOW_GRA_CHAR)
+     b62:	81 11       	cpse	r24, r1
+     b64:	03 c0       	rjmp	.+6      	; 0xb6c <_ZL12I2C_receivedh+0x138>
+		{
+			modeCmdGraCharCurrentIndex = 0;
+     b66:	10 92 07 01 	sts	0x0107, r1	; 0x800107 <_ZL26modeCmdGraCharCurrentIndex>
+     b6a:	08 95       	ret
+		}
+		else if (data == CMD_SHOW_NUM_CHAR)
+     b6c:	81 30       	cpi	r24, 0x01	; 1
+     b6e:	19 f4       	brne	.+6      	; 0xb76 <_ZL12I2C_receivedh+0x142>
+		{
+			modeCmdNumCharCurrentIndex = 0;
+     b70:	10 92 06 01 	sts	0x0106, r1	; 0x800106 <_ZL26modeCmdNumCharCurrentIndex>
+     b74:	08 95       	ret
+		}
+		else if (data == CMD_SHOW_SPE)
+     b76:	82 30       	cpi	r24, 0x02	; 2
+     b78:	19 f4       	brne	.+6      	; 0xb80 <_ZL12I2C_receivedh+0x14c>
+		{
+			modeCmdShowSpeCurrentIndex = 0;
+     b7a:	10 92 05 01 	sts	0x0105, r1	; 0x800105 <_ZL26modeCmdShowSpeCurrentIndex>
+     b7e:	08 95       	ret
+		}
+		else if (data == CMD_HIDE_SPE)
+     b80:	83 30       	cpi	r24, 0x03	; 3
+     b82:	19 f4       	brne	.+6      	; 0xb8a <_ZL12I2C_receivedh+0x156>
+		{
+			modeCmdHideSpeCurrentIndex = 0;
+     b84:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <_ZL26modeCmdHideSpeCurrentIndex>
+     b88:	08 95       	ret
+		}
+		else if (data == CMD_TOGGLE_SPE)
+     b8a:	84 30       	cpi	r24, 0x04	; 4
+     b8c:	19 f4       	brne	.+6      	; 0xb94 <_ZL12I2C_receivedh+0x160>
+		{
+			modeCmdToggleSpeCurrentIndex = 0;
+     b8e:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <_ZL28modeCmdToggleSpeCurrentIndex>
+     b92:	08 95       	ret
+		}
+		else if (data == CMD_SHOW_VOLUME)
+     b94:	8c 30       	cpi	r24, 0x0C	; 12
+     b96:	19 f4       	brne	.+6      	; 0xb9e <_ZL12I2C_receivedh+0x16a>
+		{
+			modeCmdShowVolumeCurrentIndex = 0;
+     b98:	10 92 02 01 	sts	0x0102, r1	; 0x800102 <_ZL29modeCmdShowVolumeCurrentIndex>
+     b9c:	08 95       	ret
+		}
+		else if (data == CMD_TOGGLE_DISPLAY)
+     b9e:	8d 30       	cpi	r24, 0x0D	; 13
+     ba0:	49 f4       	brne	.+18     	; 0xbb4 <_ZL12I2C_receivedh+0x180>
+		{
+			displayOn = displayOn == 1 ? 2 : 1;
+     ba2:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+     ba6:	81 30       	cpi	r24, 0x01	; 1
+     ba8:	11 f0       	breq	.+4      	; 0xbae <_ZL12I2C_receivedh+0x17a>
+     baa:	81 e0       	ldi	r24, 0x01	; 1
+     bac:	01 c0       	rjmp	.+2      	; 0xbb0 <_ZL12I2C_receivedh+0x17c>
+     bae:	82 e0       	ldi	r24, 0x02	; 2
+     bb0:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+     bb4:	08 95       	ret
+
+00000bb6 <_ZL17getGraDisplayCharc>:
+{
+	I2C_transmitByte(i2cdata[0]);
+}
+
+static VfdState getGraDisplayChar(char chr)
+{
+     bb6:	cf 93       	push	r28
+     bb8:	df 93       	push	r29
+     bba:	cd b7       	in	r28, 0x3d	; 61
+     bbc:	de b7       	in	r29, 0x3e	; 62
+     bbe:	6c 97       	sbiw	r28, 0x1c	; 28
+     bc0:	0f b6       	in	r0, 0x3f	; 63
+     bc2:	f8 94       	cli
+     bc4:	de bf       	out	0x3e, r29	; 62
+     bc6:	0f be       	out	0x3f, r0	; 63
+     bc8:	cd bf       	out	0x3d, r28	; 61
+	// convert supplied character to graphic display character
+	VfdState result;
+	
+	if (chr >= 32 && chr <= 126)
+     bca:	90 ee       	ldi	r25, 0xE0	; 224
+     bcc:	98 0f       	add	r25, r24
+     bce:	9f 35       	cpi	r25, 0x5F	; 95
+     bd0:	60 f5       	brcc	.+88     	; 0xc2a <_ZL17getGraDisplayCharc+0x74>
+	{
+		result = GraAsciiTable[chr - 32];
+     bd2:	90 e0       	ldi	r25, 0x00	; 0
+     bd4:	80 97       	sbiw	r24, 0x20	; 32
+     bd6:	27 e0       	ldi	r18, 0x07	; 7
+     bd8:	28 9f       	mul	r18, r24
+     bda:	f0 01       	movw	r30, r0
+     bdc:	29 9f       	mul	r18, r25
+     bde:	f0 0d       	add	r31, r0
+     be0:	11 24       	eor	r1, r1
+     be2:	e2 53       	subi	r30, 0x32	; 50
+     be4:	fd 4f       	sbci	r31, 0xFD	; 253
+     be6:	de 01       	movw	r26, r28
+     be8:	18 96       	adiw	r26, 0x08	; 8
+     bea:	82 2f       	mov	r24, r18
+     bec:	01 90       	ld	r0, Z+
+     bee:	0d 92       	st	X+, r0
+     bf0:	8a 95       	dec	r24
+     bf2:	e1 f7       	brne	.-8      	; 0xbec <_ZL17getGraDisplayCharc+0x36>
+		}
+		
+		memcpy_P(&result, vfdStatePointer, sizeof(VfdState));
+	}
+	
+	return result;
+     bf4:	fe 01       	movw	r30, r28
+     bf6:	38 96       	adiw	r30, 0x08	; 8
+     bf8:	de 01       	movw	r26, r28
+     bfa:	11 96       	adiw	r26, 0x01	; 1
+     bfc:	82 2f       	mov	r24, r18
+     bfe:	01 90       	ld	r0, Z+
+     c00:	0d 92       	st	X+, r0
+     c02:	8a 95       	dec	r24
+     c04:	e1 f7       	brne	.-8      	; 0xbfe <_ZL17getGraDisplayCharc+0x48>
+     c06:	fe 01       	movw	r30, r28
+     c08:	31 96       	adiw	r30, 0x01	; 1
+     c0a:	de 01       	movw	r26, r28
+     c0c:	18 96       	adiw	r26, 0x08	; 8
+     c0e:	82 2f       	mov	r24, r18
+     c10:	01 90       	ld	r0, Z+
+     c12:	0d 92       	st	X+, r0
+     c14:	8a 95       	dec	r24
+     c16:	e1 f7       	brne	.-8      	; 0xc10 <_ZL17getGraDisplayCharc+0x5a>
+     c18:	fe 01       	movw	r30, r28
+     c1a:	38 96       	adiw	r30, 0x08	; 8
+     c1c:	de 01       	movw	r26, r28
+     c1e:	56 96       	adiw	r26, 0x16	; 22
+     c20:	01 90       	ld	r0, Z+
+     c22:	0d 92       	st	X+, r0
+     c24:	2a 95       	dec	r18
+     c26:	e1 f7       	brne	.-8      	; 0xc20 <_ZL17getGraDisplayCharc+0x6a>
+     c28:	14 c0       	rjmp	.+40     	; 0xc52 <_ZL17getGraDisplayCharc+0x9c>
+     c2a:	8a 58       	subi	r24, 0x8A	; 138
+     c2c:	84 37       	cpi	r24, 0x74	; 116
+     c2e:	48 f4       	brcc	.+18     	; 0xc42 <_ZL17getGraDisplayCharc+0x8c>
+     c30:	e8 2f       	mov	r30, r24
+     c32:	f0 e0       	ldi	r31, 0x00	; 0
+     c34:	ee 0f       	add	r30, r30
+     c36:	ff 1f       	adc	r31, r31
+     c38:	ea 51       	subi	r30, 0x1A	; 26
+     c3a:	fe 4f       	sbci	r31, 0xFE	; 254
+     c3c:	60 81       	ld	r22, Z
+     c3e:	71 81       	ldd	r23, Z+1	; 0x01
+     c40:	02 c0       	rjmp	.+4      	; 0xc46 <_ZL17getGraDisplayCharc+0x90>
+static VfdState getGraDisplayChar(char chr)
+{
+	// convert supplied character to graphic display character
+	VfdState result;
+	
+	if (chr >= 32 && chr <= 126)
+     c42:	63 ea       	ldi	r22, 0xA3	; 163
+     c44:	75 e0       	ldi	r23, 0x05	; 5
+			default:
+			vfdStatePointer = &GraSpace;
+			break;
+		}
+		
+		memcpy_P(&result, vfdStatePointer, sizeof(VfdState));
+     c46:	47 e0       	ldi	r20, 0x07	; 7
+     c48:	50 e0       	ldi	r21, 0x00	; 0
+     c4a:	ce 01       	movw	r24, r28
+     c4c:	46 96       	adiw	r24, 0x16	; 22
+     c4e:	0e 94 47 09 	call	0x128e	; 0x128e <memcpy_P>
+	}
+	
+	return result;
+     c52:	87 e0       	ldi	r24, 0x07	; 7
+     c54:	fe 01       	movw	r30, r28
+     c56:	76 96       	adiw	r30, 0x16	; 22
+     c58:	de 01       	movw	r26, r28
+     c5a:	1f 96       	adiw	r26, 0x0f	; 15
+     c5c:	01 90       	ld	r0, Z+
+     c5e:	0d 92       	st	X+, r0
+     c60:	8a 95       	dec	r24
+     c62:	e1 f7       	brne	.-8      	; 0xc5c <_ZL17getGraDisplayCharc+0xa6>
+     c64:	2f 85       	ldd	r18, Y+15	; 0x0f
+     c66:	38 89       	ldd	r19, Y+16	; 0x10
+     c68:	49 89       	ldd	r20, Y+17	; 0x11
+     c6a:	5a 89       	ldd	r21, Y+18	; 0x12
+     c6c:	6b 89       	ldd	r22, Y+19	; 0x13
+     c6e:	7c 89       	ldd	r23, Y+20	; 0x14
+}
+     c70:	8d 89       	ldd	r24, Y+21	; 0x15
+     c72:	90 e0       	ldi	r25, 0x00	; 0
+     c74:	6c 96       	adiw	r28, 0x1c	; 28
+     c76:	0f b6       	in	r0, 0x3f	; 63
+     c78:	f8 94       	cli
+     c7a:	de bf       	out	0x3e, r29	; 62
+     c7c:	0f be       	out	0x3f, r0	; 63
+     c7e:	cd bf       	out	0x3d, r28	; 61
+     c80:	df 91       	pop	r29
+     c82:	cf 91       	pop	r28
+     c84:	08 95       	ret
+
+00000c86 <_ZL7graPutsPKc>:
+
+static void graPuts(char const* text)
+{
+     c86:	df 92       	push	r13
+     c88:	ef 92       	push	r14
+     c8a:	ff 92       	push	r15
+     c8c:	0f 93       	push	r16
+     c8e:	1f 93       	push	r17
+     c90:	cf 93       	push	r28
+     c92:	df 93       	push	r29
+     c94:	7c 01       	movw	r14, r24
+     c96:	04 e0       	ldi	r16, 0x04	; 4
+     c98:	10 e0       	ldi	r17, 0x00	; 0
+	for (unsigned char i = 0; i <= 13; i++)
+	{
+		displayMemory[4 + i] = getGraDisplayChar(text[i]);
+     c9a:	87 e0       	ldi	r24, 0x07	; 7
+     c9c:	d8 2e       	mov	r13, r24
+     c9e:	d0 9e       	mul	r13, r16
+     ca0:	e0 01       	movw	r28, r0
+     ca2:	d1 9e       	mul	r13, r17
+     ca4:	d0 0d       	add	r29, r0
+     ca6:	11 24       	eor	r1, r1
+     ca8:	c1 59       	subi	r28, 0x91	; 145
+     caa:	da 4f       	sbci	r29, 0xFA	; 250
+     cac:	f7 01       	movw	r30, r14
+     cae:	81 91       	ld	r24, Z+
+     cb0:	7f 01       	movw	r14, r30
+     cb2:	0e 94 db 05 	call	0xbb6	; 0xbb6 <_ZL17getGraDisplayCharc>
+     cb6:	28 83       	st	Y, r18
+     cb8:	39 83       	std	Y+1, r19	; 0x01
+     cba:	4a 83       	std	Y+2, r20	; 0x02
+     cbc:	5b 83       	std	Y+3, r21	; 0x03
+     cbe:	6c 83       	std	Y+4, r22	; 0x04
+     cc0:	7d 83       	std	Y+5, r23	; 0x05
+     cc2:	8e 83       	std	Y+6, r24	; 0x06
+     cc4:	0f 5f       	subi	r16, 0xFF	; 255
+     cc6:	1f 4f       	sbci	r17, 0xFF	; 255
+	return result;
+}
+
+static void graPuts(char const* text)
+{
+	for (unsigned char i = 0; i <= 13; i++)
+     cc8:	02 31       	cpi	r16, 0x12	; 18
+     cca:	11 05       	cpc	r17, r1
+     ccc:	41 f7       	brne	.-48     	; 0xc9e <_ZL7graPutsPKc+0x18>
+	{
+		displayMemory[4 + i] = getGraDisplayChar(text[i]);
+	}
+}
+     cce:	df 91       	pop	r29
+     cd0:	cf 91       	pop	r28
+     cd2:	1f 91       	pop	r17
+     cd4:	0f 91       	pop	r16
+     cd6:	ff 90       	pop	r15
+     cd8:	ef 90       	pop	r14
+     cda:	df 90       	pop	r13
+     cdc:	08 95       	ret
+
+00000cde <main>:
+		}
+	}
+}
+
+int main(void)
+{
+     cde:	cf 93       	push	r28
+     ce0:	df 93       	push	r29
+     ce2:	cd b7       	in	r28, 0x3d	; 61
+     ce4:	de b7       	in	r29, 0x3e	; 62
+     ce6:	aa 97       	sbiw	r28, 0x2a	; 42
+     ce8:	0f b6       	in	r0, 0x3f	; 63
+     cea:	f8 94       	cli
+     cec:	de bf       	out	0x3e, r29	; 62
+     cee:	0f be       	out	0x3f, r0	; 63
+     cf0:	cd bf       	out	0x3d, r28	; 61
+	// set pins as output:
+	// PC0 - shift reg. DATA
+	// PC1 - shift reg. CLK
+	// PC2 - shift reg. LATCH
+	// PC3 - shift reg. MR/
+	DDRC = 0b00001111;
+     cf2:	8f e0       	ldi	r24, 0x0F	; 15
+     cf4:	87 b9       	out	0x07, r24	; 7
+	
+	// initialize I2C slave
+	I2C_setCallbacks(I2C_received, I2C_requested);
+     cf6:	6c eb       	ldi	r22, 0xBC	; 188
+     cf8:	73 e0       	ldi	r23, 0x03	; 3
+     cfa:	8a e1       	ldi	r24, 0x1A	; 26
+     cfc:	95 e0       	ldi	r25, 0x05	; 5
+     cfe:	0e 94 56 03 	call	0x6ac	; 0x6ac <_Z16I2C_setCallbacksPFvhEPFvvE>
+	I2C_init(I2C_ADDR);
+     d02:	84 ef       	ldi	r24, 0xF4	; 244
+     d04:	0e 94 5f 03 	call	0x6be	; 0x6be <_Z8I2C_inith>
+	
+	PORTC |= _BV(PC3); // MR/, 0 clears whole register
+     d08:	43 9a       	sbi	0x08, 3	; 8
+	
+	// clear all
+	PORTC &= ~_BV(PC2); // LATCH, 1 active
+     d0a:	42 98       	cbi	0x08, 2	; 8
+     d0c:	17 e0       	ldi	r17, 0x07	; 7
+	for (char i = 1; i <= 7; i++)
+	{
+		shiftOut(~0b00000000);
+     d0e:	8f ef       	ldi	r24, 0xFF	; 255
+     d10:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+     d14:	11 50       	subi	r17, 0x01	; 1
+	
+	PORTC |= _BV(PC3); // MR/, 0 clears whole register
+	
+	// clear all
+	PORTC &= ~_BV(PC2); // LATCH, 1 active
+	for (char i = 1; i <= 7; i++)
+     d16:	d9 f7       	brne	.-10     	; 0xd0e <main+0x30>
+	{
+		shiftOut(~0b00000000);
+	}
+	PORTC |= _BV(PC2); // LATCH, 1 active
+     d18:	42 9a       	sbi	0x08, 2	; 8
+	
+	sei(); // enable global interrupts
+     d1a:	78 94       	sei
+	
+	graPuts("-Rádio by Mek-");
+     d1c:	88 e1       	ldi	r24, 0x18	; 24
+     d1e:	91 e0       	ldi	r25, 0x01	; 1
+     d20:	0e 94 43 06 	call	0xc86	; 0xc86 <_ZL7graPutsPKc>
+				volDisplay(i2cdata[0]);
+				clearI2Cdata();
+				break;
+			}
+			
+			modeCmdFinished = UINT8_MAX;
+     d24:	44 24       	eor	r4, r4
+     d26:	4a 94       	dec	r4
+		displayMemory[3].chip2 = 0b00000000;
+		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b00000111) | (0b00000000 & 0b00000111);
+	}
+	else
+	{
+		const unsigned int segmentA = volDb / 100;
+     d28:	54 e6       	ldi	r21, 0x64	; 100
+     d2a:	65 2e       	mov	r6, r21
+     d2c:	71 2c       	mov	r7, r1
+		const unsigned int segmentB = (volDb % 100) / 10;
+     d2e:	6a e0       	ldi	r22, 0x0A	; 10
+     d30:	c6 2e       	mov	r12, r22
+     d32:	d1 2c       	mov	r13, r1
+	}
+}
+
+static void graPutc(char chr, char index)
+{
+	displayMemory[4 + index] = getGraDisplayChar(chr);
+     d34:	77 e0       	ldi	r23, 0x07	; 7
+     d36:	57 2e       	mov	r5, r23
+     d38:	ed ee       	ldi	r30, 0xED	; 237
+     d3a:	ae 2e       	mov	r10, r30
+     d3c:	e5 e0       	ldi	r30, 0x05	; 5
+     d3e:	be 2e       	mov	r11, r30
+	
+	graPuts("-Rádio by Mek-");
+
+    while (1) 
+    {	
+		if (modeCmdFinished != UINT8_MAX)
+     d40:	e0 91 01 01 	lds	r30, 0x0101	; 0x800101 <_ZL15modeCmdFinished>
+     d44:	ef 3f       	cpi	r30, 0xFF	; 255
+     d46:	09 f4       	brne	.+2      	; 0xd4a <main+0x6c>
+     d48:	d0 c1       	rjmp	.+928    	; 0x10ea <main+0x40c>
+		{
+			switch (modeCmdFinished)
+     d4a:	8e 2f       	mov	r24, r30
+     d4c:	90 e0       	ldi	r25, 0x00	; 0
+     d4e:	8d 30       	cpi	r24, 0x0D	; 13
+     d50:	91 05       	cpc	r25, r1
+     d52:	08 f0       	brcs	.+2      	; 0xd56 <main+0x78>
+     d54:	c8 c1       	rjmp	.+912    	; 0x10e6 <main+0x408>
+     d56:	fc 01       	movw	r30, r24
+     d58:	ee 5a       	subi	r30, 0xAE	; 174
+     d5a:	ff 4f       	sbci	r31, 0xFF	; 255
+     d5c:	0c 94 41 09 	jmp	0x1282	; 0x1282 <__tablejump2__>
+			{
+				case CMD_SHOW_GRA_TEXT:
+				graPuts((const char *)i2cdata);
+     d60:	8a e0       	ldi	r24, 0x0A	; 10
+     d62:	91 e0       	ldi	r25, 0x01	; 1
+     d64:	0e 94 43 06 	call	0xc86	; 0xc86 <_ZL7graPutsPKc>
+     d68:	95 c0       	rjmp	.+298    	; 0xe94 <main+0x1b6>
+				clearI2Cdata();
+				break;
+				case CMD_SHOW_NUM_TEXT:
+				numPuts((const char *)i2cdata);
+     d6a:	8a e0       	ldi	r24, 0x0A	; 10
+     d6c:	91 e0       	ldi	r25, 0x01	; 1
+     d6e:	0e 94 bd 04 	call	0x97a	; 0x97a <_ZL7numPutsPKc>
+     d72:	90 c0       	rjmp	.+288    	; 0xe94 <main+0x1b6>
+	}
+}
+
+static void clearGraDisplay()
+{
+	graPuts("              ");
+     d74:	87 e2       	ldi	r24, 0x27	; 39
+     d76:	91 e0       	ldi	r25, 0x01	; 1
+     d78:	0e 94 43 06 	call	0xc86	; 0xc86 <_ZL7graPutsPKc>
+     d7c:	b4 c1       	rjmp	.+872    	; 0x10e6 <main+0x408>
+}
+
+static void clearNumDisplay()
+{
+	numPuts("      ");
+     d7e:	8f e2       	ldi	r24, 0x2F	; 47
+     d80:	91 e0       	ldi	r25, 0x01	; 1
+     d82:	0e 94 bd 04 	call	0x97a	; 0x97a <_ZL7numPutsPKc>
+     d86:	af c1       	rjmp	.+862    	; 0x10e6 <main+0x408>
+				case CMD_CLEAR_NUM:
+				clearNumDisplay();
+				break;
+				case CMD_CLEAR_ALL:
+				VfdState graChar;
+				graChar = getGraDisplayChar(' '); // happens to be all zeroes, turns off everything including Spe segments
+     d88:	80 e2       	ldi	r24, 0x20	; 32
+     d8a:	0e 94 db 05 	call	0xbb6	; 0xbb6 <_ZL17getGraDisplayCharc>
+     d8e:	29 83       	std	Y+1, r18	; 0x01
+     d90:	3a 83       	std	Y+2, r19	; 0x02
+     d92:	4b 83       	std	Y+3, r20	; 0x03
+     d94:	5c 83       	std	Y+4, r21	; 0x04
+     d96:	6d 83       	std	Y+5, r22	; 0x05
+     d98:	7e 83       	std	Y+6, r23	; 0x06
+     d9a:	8f 83       	std	Y+7, r24	; 0x07
+     d9c:	8f e6       	ldi	r24, 0x6F	; 111
+     d9e:	95 e0       	ldi	r25, 0x05	; 5
+				
+				for (unsigned char i = 0; i <= 17; i++)
+				{
+					displayMemory[i] = graChar;
+     da0:	27 e0       	ldi	r18, 0x07	; 7
+     da2:	fe 01       	movw	r30, r28
+     da4:	31 96       	adiw	r30, 0x01	; 1
+     da6:	dc 01       	movw	r26, r24
+     da8:	01 90       	ld	r0, Z+
+     daa:	0d 92       	st	X+, r0
+     dac:	2a 95       	dec	r18
+     dae:	e1 f7       	brne	.-8      	; 0xda8 <main+0xca>
+     db0:	07 96       	adiw	r24, 0x07	; 7
+				break;
+				case CMD_CLEAR_ALL:
+				VfdState graChar;
+				graChar = getGraDisplayChar(' '); // happens to be all zeroes, turns off everything including Spe segments
+				
+				for (unsigned char i = 0; i <= 17; i++)
+     db2:	a8 16       	cp	r10, r24
+     db4:	b9 06       	cpc	r11, r25
+     db6:	a1 f7       	brne	.-24     	; 0xda0 <main+0xc2>
+     db8:	96 c1       	rjmp	.+812    	; 0x10e6 <main+0x408>
+					displayMemory[i] = graChar;
+				}
+				
+				break;
+				case CMD_SHOW_GRA_CHAR:
+				graPutc(i2cdata[0], i2cdata[1]);
+     dba:	20 91 0b 01 	lds	r18, 0x010B	; 0x80010b <_ZL7i2cdata+0x1>
+     dbe:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL7i2cdata>
+	}
+}
+
+static void graPutc(char chr, char index)
+{
+	displayMemory[4 + index] = getGraDisplayChar(chr);
+     dc2:	30 e0       	ldi	r19, 0x00	; 0
+     dc4:	2c 5f       	subi	r18, 0xFC	; 252
+     dc6:	3f 4f       	sbci	r19, 0xFF	; 255
+     dc8:	52 9e       	mul	r5, r18
+     dca:	80 01       	movw	r16, r0
+     dcc:	53 9e       	mul	r5, r19
+     dce:	10 0d       	add	r17, r0
+     dd0:	11 24       	eor	r1, r1
+     dd2:	01 59       	subi	r16, 0x91	; 145
+     dd4:	1a 4f       	sbci	r17, 0xFA	; 250
+     dd6:	0e 94 db 05 	call	0xbb6	; 0xbb6 <_ZL17getGraDisplayCharc>
+     dda:	f8 01       	movw	r30, r16
+     ddc:	20 83       	st	Z, r18
+     dde:	31 83       	std	Z+1, r19	; 0x01
+     de0:	42 83       	std	Z+2, r20	; 0x02
+     de2:	53 83       	std	Z+3, r21	; 0x03
+     de4:	64 83       	std	Z+4, r22	; 0x04
+     de6:	75 83       	std	Z+5, r23	; 0x05
+     de8:	86 83       	std	Z+6, r24	; 0x06
+     dea:	54 c0       	rjmp	.+168    	; 0xe94 <main+0x1b6>
+				case CMD_SHOW_GRA_CHAR:
+				graPutc(i2cdata[0], i2cdata[1]);
+				clearI2Cdata();
+				break;
+				case CMD_SHOW_NUM_CHAR:
+				numPutc(i2cdata[0], i2cdata[1]);
+     dec:	60 91 0b 01 	lds	r22, 0x010B	; 0x80010b <_ZL7i2cdata+0x1>
+     df0:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL7i2cdata>
+     df4:	0e 94 c1 03 	call	0x782	; 0x782 <_ZL7numPutccc>
+     df8:	4d c0       	rjmp	.+154    	; 0xe94 <main+0x1b6>
+				clearI2Cdata();
+				break;
+				case CMD_SHOW_SPE:
+				speOn((const VfdState)getSpeDisplayChar(i2cdata[0]));
+     dfa:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL7i2cdata>
+     dfe:	0e 94 cf 04 	call	0x99e	; 0x99e <_ZL17getSpeDisplayCharc>
+     e02:	2c a3       	std	Y+36, r18	; 0x24
+     e04:	3d a3       	std	Y+37, r19	; 0x25
+     e06:	4e a3       	std	Y+38, r20	; 0x26
+     e08:	5f a3       	std	Y+39, r21	; 0x27
+     e0a:	68 a7       	std	Y+40, r22	; 0x28
+     e0c:	79 a7       	std	Y+41, r23	; 0x29
+     e0e:	8a a7       	std	Y+42, r24	; 0x2a
+static void speOn(const VfdState newVfdState)
+{
+	// take AC-AJ from grids 0-2
+	// take A and T-AJ from grid 3
+	// leave the rest as they were
+	if (newVfdState.chip5 & 0b00010000)
+     e10:	44 ff       	sbrs	r20, 4
+     e12:	0b c0       	rjmp	.+22     	; 0xe2a <main+0x14c>
+	{
+		// grid 0
+		displayMemory[0].chip4 |= (displayMemory[0].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+     e14:	80 91 72 05 	lds	r24, 0x0572	; 0x800572 <_ZL13displayMemory+0x3>
+     e18:	50 7f       	andi	r21, 0xF0	; 240
+     e1a:	58 2b       	or	r21, r24
+     e1c:	50 93 72 05 	sts	0x0572, r21	; 0x800572 <_ZL13displayMemory+0x3>
+		displayMemory[0].chip5 |= (displayMemory[0].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     e20:	80 91 71 05 	lds	r24, 0x0571	; 0x800571 <_ZL13displayMemory+0x2>
+     e24:	4f 70       	andi	r20, 0x0F	; 15
+     e26:	48 2b       	or	r20, r24
+     e28:	51 c0       	rjmp	.+162    	; 0xecc <main+0x1ee>
+	}
+	else if (newVfdState.chip5 & 0b00100000)
+     e2a:	45 ff       	sbrs	r20, 5
+     e2c:	0b c0       	rjmp	.+22     	; 0xe44 <main+0x166>
+	{
+		// grid 1
+		displayMemory[1].chip4 |= (displayMemory[1].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+     e2e:	80 91 79 05 	lds	r24, 0x0579	; 0x800579 <_ZL13displayMemory+0xa>
+     e32:	50 7f       	andi	r21, 0xF0	; 240
+     e34:	58 2b       	or	r21, r24
+     e36:	50 93 79 05 	sts	0x0579, r21	; 0x800579 <_ZL13displayMemory+0xa>
+		displayMemory[1].chip5 |= (displayMemory[1].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     e3a:	80 91 78 05 	lds	r24, 0x0578	; 0x800578 <_ZL13displayMemory+0x9>
+     e3e:	4f 70       	andi	r20, 0x0F	; 15
+     e40:	48 2b       	or	r20, r24
+     e42:	55 c0       	rjmp	.+170    	; 0xeee <main+0x210>
+	}
+	else if (newVfdState.chip5 & 0b01000000)
+     e44:	46 ff       	sbrs	r20, 6
+     e46:	0b c0       	rjmp	.+22     	; 0xe5e <main+0x180>
+	{
+		// grid 2
+		displayMemory[2].chip4 |= (displayMemory[2].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+     e48:	80 91 80 05 	lds	r24, 0x0580	; 0x800580 <_ZL13displayMemory+0x11>
+     e4c:	50 7f       	andi	r21, 0xF0	; 240
+     e4e:	58 2b       	or	r21, r24
+     e50:	50 93 80 05 	sts	0x0580, r21	; 0x800580 <_ZL13displayMemory+0x11>
+		displayMemory[2].chip5 |= (displayMemory[2].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     e54:	80 91 7f 05 	lds	r24, 0x057F	; 0x80057f <_ZL13displayMemory+0x10>
+     e58:	4f 70       	andi	r20, 0x0F	; 15
+     e5a:	48 2b       	or	r20, r24
+     e5c:	a7 c0       	rjmp	.+334    	; 0xfac <main+0x2ce>
+	}
+	else if (newVfdState.chip5 & 0b10000000)
+     e5e:	47 ff       	sbrs	r20, 7
+     e60:	19 c0       	rjmp	.+50     	; 0xe94 <main+0x1b6>
+	{
+		// grid 3
+		displayMemory[3].chip1 |= (displayMemory[3].chip1 & ~0b00000001) | (newVfdState.chip1 & 0b00000001);
+     e62:	90 91 8a 05 	lds	r25, 0x058A	; 0x80058a <_ZL13displayMemory+0x1b>
+     e66:	f9 2f       	mov	r31, r25
+     e68:	80 fb       	bst	r24, 0
+     e6a:	f0 f9       	bld	r31, 0
+     e6c:	9f 2b       	or	r25, r31
+     e6e:	90 93 8a 05 	sts	0x058A, r25	; 0x80058a <_ZL13displayMemory+0x1b>
+		displayMemory[3].chip3 |= (displayMemory[3].chip3 & ~0b11111000) | (newVfdState.chip3 & 0b11111000);
+     e72:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x19>
+     e76:	68 7f       	andi	r22, 0xF8	; 248
+     e78:	68 2b       	or	r22, r24
+     e7a:	60 93 88 05 	sts	0x0588, r22	; 0x800588 <_ZL13displayMemory+0x19>
+		displayMemory[3].chip4 |= newVfdState.chip4;
+     e7e:	80 91 87 05 	lds	r24, 0x0587	; 0x800587 <_ZL13displayMemory+0x18>
+     e82:	58 2b       	or	r21, r24
+     e84:	50 93 87 05 	sts	0x0587, r21	; 0x800587 <_ZL13displayMemory+0x18>
+		displayMemory[3].chip5 |= (displayMemory[3].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     e88:	80 91 86 05 	lds	r24, 0x0586	; 0x800586 <_ZL13displayMemory+0x17>
+     e8c:	4f 70       	andi	r20, 0x0F	; 15
+     e8e:	48 2b       	or	r20, r24
+     e90:	40 93 86 05 	sts	0x0586, r20	; 0x800586 <_ZL13displayMemory+0x17>
+				numPutc(i2cdata[0], i2cdata[1]);
+				clearI2Cdata();
+				break;
+				case CMD_SHOW_SPE:
+				speOn((const VfdState)getSpeDisplayChar(i2cdata[0]));
+				clearI2Cdata();
+     e94:	0e 94 b0 03 	call	0x760	; 0x760 <_ZL12clearI2Cdatav>
+				break;
+     e98:	26 c1       	rjmp	.+588    	; 0x10e6 <main+0x408>
+				case CMD_HIDE_SPE:
+				speOff((const VfdState)getSpeDisplayChar(i2cdata[0]));
+     e9a:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL7i2cdata>
+     e9e:	0e 94 cf 04 	call	0x99e	; 0x99e <_ZL17getSpeDisplayCharc>
+     ea2:	2d 8f       	std	Y+29, r18	; 0x1d
+     ea4:	3e 8f       	std	Y+30, r19	; 0x1e
+     ea6:	4f 8f       	std	Y+31, r20	; 0x1f
+     ea8:	58 a3       	std	Y+32, r21	; 0x20
+     eaa:	69 a3       	std	Y+33, r22	; 0x21
+     eac:	7a a3       	std	Y+34, r23	; 0x22
+     eae:	8b a3       	std	Y+35, r24	; 0x23
+static void speOff(const VfdState newVfdState)
+{
+	// take AC-AJ from grids 0-2
+	// take A and T-AJ from grid 3
+	// leave the rest as they were
+	if (newVfdState.chip5 & 0b00010000)
+     eb0:	44 ff       	sbrs	r20, 4
+     eb2:	0f c0       	rjmp	.+30     	; 0xed2 <main+0x1f4>
+	{
+		// grid 0
+		displayMemory[0].chip4 &= ~(newVfdState.chip4 & 0b11110000);
+     eb4:	50 7f       	andi	r21, 0xF0	; 240
+     eb6:	50 95       	com	r21
+     eb8:	80 91 72 05 	lds	r24, 0x0572	; 0x800572 <_ZL13displayMemory+0x3>
+     ebc:	58 23       	and	r21, r24
+     ebe:	50 93 72 05 	sts	0x0572, r21	; 0x800572 <_ZL13displayMemory+0x3>
+		displayMemory[0].chip5 &= ~(newVfdState.chip5 & 0b00001111);
+     ec2:	4f 70       	andi	r20, 0x0F	; 15
+     ec4:	40 95       	com	r20
+     ec6:	80 91 71 05 	lds	r24, 0x0571	; 0x800571 <_ZL13displayMemory+0x2>
+     eca:	48 23       	and	r20, r24
+     ecc:	40 93 71 05 	sts	0x0571, r20	; 0x800571 <_ZL13displayMemory+0x2>
+     ed0:	e1 cf       	rjmp	.-62     	; 0xe94 <main+0x1b6>
+	}
+	else if (newVfdState.chip5 & 0b00100000)
+     ed2:	45 ff       	sbrs	r20, 5
+     ed4:	0f c0       	rjmp	.+30     	; 0xef4 <main+0x216>
+	{
+		// grid 1
+		displayMemory[1].chip4 &= ~(newVfdState.chip4 & 0b11110000);
+     ed6:	50 7f       	andi	r21, 0xF0	; 240
+     ed8:	50 95       	com	r21
+     eda:	80 91 79 05 	lds	r24, 0x0579	; 0x800579 <_ZL13displayMemory+0xa>
+     ede:	58 23       	and	r21, r24
+     ee0:	50 93 79 05 	sts	0x0579, r21	; 0x800579 <_ZL13displayMemory+0xa>
+		displayMemory[1].chip5 &= ~(newVfdState.chip5 & 0b00001111);
+     ee4:	4f 70       	andi	r20, 0x0F	; 15
+     ee6:	40 95       	com	r20
+     ee8:	80 91 78 05 	lds	r24, 0x0578	; 0x800578 <_ZL13displayMemory+0x9>
+     eec:	48 23       	and	r20, r24
+     eee:	40 93 78 05 	sts	0x0578, r20	; 0x800578 <_ZL13displayMemory+0x9>
+     ef2:	d0 cf       	rjmp	.-96     	; 0xe94 <main+0x1b6>
+	}
+	else if (newVfdState.chip5 & 0b01000000)
+     ef4:	46 ff       	sbrs	r20, 6
+     ef6:	0d c0       	rjmp	.+26     	; 0xf12 <main+0x234>
+	{
+		// grid 2
+		displayMemory[2].chip4 &= ~(newVfdState.chip4 & 0b11110000);
+     ef8:	50 7f       	andi	r21, 0xF0	; 240
+     efa:	50 95       	com	r21
+     efc:	80 91 80 05 	lds	r24, 0x0580	; 0x800580 <_ZL13displayMemory+0x11>
+     f00:	58 23       	and	r21, r24
+     f02:	50 93 80 05 	sts	0x0580, r21	; 0x800580 <_ZL13displayMemory+0x11>
+		displayMemory[2].chip5 &= ~(newVfdState.chip5 & 0b00001111);
+     f06:	4f 70       	andi	r20, 0x0F	; 15
+     f08:	40 95       	com	r20
+     f0a:	80 91 7f 05 	lds	r24, 0x057F	; 0x80057f <_ZL13displayMemory+0x10>
+     f0e:	48 23       	and	r20, r24
+     f10:	4d c0       	rjmp	.+154    	; 0xfac <main+0x2ce>
+	}
+	else if (newVfdState.chip5 & 0b10000000)
+     f12:	47 ff       	sbrs	r20, 7
+     f14:	bf cf       	rjmp	.-130    	; 0xe94 <main+0x1b6>
+	{
+		// grid 3
+		displayMemory[3].chip1 &= ~(newVfdState.chip1 & 0b00000001);
+     f16:	81 70       	andi	r24, 0x01	; 1
+     f18:	80 95       	com	r24
+     f1a:	90 91 8a 05 	lds	r25, 0x058A	; 0x80058a <_ZL13displayMemory+0x1b>
+     f1e:	89 23       	and	r24, r25
+     f20:	80 93 8a 05 	sts	0x058A, r24	; 0x80058a <_ZL13displayMemory+0x1b>
+		displayMemory[3].chip3 &= ~(newVfdState.chip3 & 0b11111000);
+     f24:	68 7f       	andi	r22, 0xF8	; 248
+     f26:	60 95       	com	r22
+     f28:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x19>
+     f2c:	68 23       	and	r22, r24
+     f2e:	60 93 88 05 	sts	0x0588, r22	; 0x800588 <_ZL13displayMemory+0x19>
+		displayMemory[3].chip4 &= ~newVfdState.chip4;
+     f32:	50 95       	com	r21
+     f34:	80 91 87 05 	lds	r24, 0x0587	; 0x800587 <_ZL13displayMemory+0x18>
+     f38:	58 23       	and	r21, r24
+     f3a:	50 93 87 05 	sts	0x0587, r21	; 0x800587 <_ZL13displayMemory+0x18>
+		displayMemory[3].chip5 &= ~(newVfdState.chip5 & 0b00001111);
+     f3e:	4f 70       	andi	r20, 0x0F	; 15
+     f40:	40 95       	com	r20
+     f42:	80 91 86 05 	lds	r24, 0x0586	; 0x800586 <_ZL13displayMemory+0x17>
+     f46:	48 23       	and	r20, r24
+     f48:	a3 cf       	rjmp	.-186    	; 0xe90 <main+0x1b2>
+				case CMD_HIDE_SPE:
+				speOff((const VfdState)getSpeDisplayChar(i2cdata[0]));
+				clearI2Cdata();
+				break;
+				case CMD_TOGGLE_SPE:
+				speToggle((const VfdState)getSpeDisplayChar(i2cdata[0]));
+     f4a:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL7i2cdata>
+     f4e:	0e 94 cf 04 	call	0x99e	; 0x99e <_ZL17getSpeDisplayCharc>
+     f52:	2e 8b       	std	Y+22, r18	; 0x16
+     f54:	3f 8b       	std	Y+23, r19	; 0x17
+     f56:	48 8f       	std	Y+24, r20	; 0x18
+     f58:	59 8f       	std	Y+25, r21	; 0x19
+     f5a:	6a 8f       	std	Y+26, r22	; 0x1a
+     f5c:	7b 8f       	std	Y+27, r23	; 0x1b
+     f5e:	8c 8f       	std	Y+28, r24	; 0x1c
+static void speToggle(const VfdState newVfdState)
+{
+	// take AC-AJ from grids 0-2
+	// take A and T-AJ from grid 3
+	// leave the rest as they were
+	if (newVfdState.chip5 & 0b00010000)
+     f60:	44 ff       	sbrs	r20, 4
+     f62:	0b c0       	rjmp	.+22     	; 0xf7a <main+0x29c>
+	{
+		// grid 0
+		displayMemory[0].chip4 ^= newVfdState.chip4 & 0b11110000;
+     f64:	50 7f       	andi	r21, 0xF0	; 240
+     f66:	80 91 72 05 	lds	r24, 0x0572	; 0x800572 <_ZL13displayMemory+0x3>
+     f6a:	58 27       	eor	r21, r24
+     f6c:	50 93 72 05 	sts	0x0572, r21	; 0x800572 <_ZL13displayMemory+0x3>
+		displayMemory[0].chip5 ^= newVfdState.chip5 & 0b00001111;
+     f70:	4f 70       	andi	r20, 0x0F	; 15
+     f72:	80 91 71 05 	lds	r24, 0x0571	; 0x800571 <_ZL13displayMemory+0x2>
+     f76:	48 27       	eor	r20, r24
+     f78:	a9 cf       	rjmp	.-174    	; 0xecc <main+0x1ee>
+	}
+	else if (newVfdState.chip5 & 0b00100000)
+     f7a:	45 ff       	sbrs	r20, 5
+     f7c:	0b c0       	rjmp	.+22     	; 0xf94 <main+0x2b6>
+	{
+		// grid 1
+		displayMemory[1].chip4 ^= newVfdState.chip4 & 0b11110000;
+     f7e:	50 7f       	andi	r21, 0xF0	; 240
+     f80:	80 91 79 05 	lds	r24, 0x0579	; 0x800579 <_ZL13displayMemory+0xa>
+     f84:	58 27       	eor	r21, r24
+     f86:	50 93 79 05 	sts	0x0579, r21	; 0x800579 <_ZL13displayMemory+0xa>
+		displayMemory[1].chip5 ^= newVfdState.chip5 & 0b00001111;
+     f8a:	4f 70       	andi	r20, 0x0F	; 15
+     f8c:	80 91 78 05 	lds	r24, 0x0578	; 0x800578 <_ZL13displayMemory+0x9>
+     f90:	48 27       	eor	r20, r24
+     f92:	ad cf       	rjmp	.-166    	; 0xeee <main+0x210>
+	}
+	else if (newVfdState.chip5 & 0b01000000)
+     f94:	46 ff       	sbrs	r20, 6
+     f96:	0d c0       	rjmp	.+26     	; 0xfb2 <main+0x2d4>
+	{
+		// grid 2
+		displayMemory[2].chip4 ^= newVfdState.chip4 & 0b11110000;
+     f98:	50 7f       	andi	r21, 0xF0	; 240
+     f9a:	80 91 80 05 	lds	r24, 0x0580	; 0x800580 <_ZL13displayMemory+0x11>
+     f9e:	58 27       	eor	r21, r24
+     fa0:	50 93 80 05 	sts	0x0580, r21	; 0x800580 <_ZL13displayMemory+0x11>
+		displayMemory[2].chip5 ^= newVfdState.chip5 & 0b00001111;
+     fa4:	4f 70       	andi	r20, 0x0F	; 15
+     fa6:	80 91 7f 05 	lds	r24, 0x057F	; 0x80057f <_ZL13displayMemory+0x10>
+     faa:	48 27       	eor	r20, r24
+     fac:	40 93 7f 05 	sts	0x057F, r20	; 0x80057f <_ZL13displayMemory+0x10>
+     fb0:	71 cf       	rjmp	.-286    	; 0xe94 <main+0x1b6>
+	}
+	else if (newVfdState.chip5 & 0b10000000)
+     fb2:	47 ff       	sbrs	r20, 7
+     fb4:	6f cf       	rjmp	.-290    	; 0xe94 <main+0x1b6>
+	{
+		// grid 3
+		displayMemory[3].chip1 ^= newVfdState.chip1 & 0b00000001;
+     fb6:	81 70       	andi	r24, 0x01	; 1
+     fb8:	90 91 8a 05 	lds	r25, 0x058A	; 0x80058a <_ZL13displayMemory+0x1b>
+     fbc:	89 27       	eor	r24, r25
+     fbe:	80 93 8a 05 	sts	0x058A, r24	; 0x80058a <_ZL13displayMemory+0x1b>
+		displayMemory[3].chip3 ^= newVfdState.chip3 & 0b11111000;
+     fc2:	68 7f       	andi	r22, 0xF8	; 248
+     fc4:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x19>
+     fc8:	68 27       	eor	r22, r24
+     fca:	60 93 88 05 	sts	0x0588, r22	; 0x800588 <_ZL13displayMemory+0x19>
+		displayMemory[3].chip4 ^= newVfdState.chip4;
+     fce:	80 91 87 05 	lds	r24, 0x0587	; 0x800587 <_ZL13displayMemory+0x18>
+     fd2:	58 27       	eor	r21, r24
+     fd4:	50 93 87 05 	sts	0x0587, r21	; 0x800587 <_ZL13displayMemory+0x18>
+		displayMemory[3].chip5 ^= newVfdState.chip5 & 0b00001111;
+     fd8:	4f 70       	andi	r20, 0x0F	; 15
+     fda:	80 91 86 05 	lds	r24, 0x0586	; 0x800586 <_ZL13displayMemory+0x17>
+     fde:	48 27       	eor	r20, r24
+     fe0:	57 cf       	rjmp	.-338    	; 0xe90 <main+0x1b2>
+				case CMD_TOGGLE_SPE:
+				speToggle((const VfdState)getSpeDisplayChar(i2cdata[0]));
+				clearI2Cdata();
+				break;
+				case CMD_SHOW_VOLUME:
+				volDisplay(i2cdata[0]);
+     fe2:	00 91 0a 01 	lds	r16, 0x010A	; 0x80010a <_ZL7i2cdata>
+	}
+}
+
+static void volDisplay(const char volume)
+{
+	unsigned int volDb = 945 - volume * 15; // -94.5 dB is maximum silence, 0 is maximum loudness
+     fe6:	21 ef       	ldi	r18, 0xF1	; 241
+     fe8:	20 03       	mulsu	r18, r16
+     fea:	80 01       	movw	r16, r0
+     fec:	11 24       	eor	r1, r1
+     fee:	0f 54       	subi	r16, 0x4F	; 79
+     ff0:	1c 4f       	sbci	r17, 0xFC	; 252
+
+	if (volDb == UINT16_MAX)
+     ff2:	0f 3f       	cpi	r16, 0xFF	; 255
+     ff4:	8f ef       	ldi	r24, 0xFF	; 255
+     ff6:	18 07       	cpc	r17, r24
+     ff8:	69 f4       	brne	.+26     	; 0x1014 <main+0x336>
+	{
+		// do not display anything
+		// set grid 3, segments C-S to 0, leave others as they were
+		// also do not display minus sign (segment A)
+		displayMemory[3].chip1 = (displayMemory[3].chip1 & ~0b11111110) | (0b00000000 & 0b11111110);
+     ffa:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x1b>
+     ffe:	81 70       	andi	r24, 0x01	; 1
+    1000:	80 93 8a 05 	sts	0x058A, r24	; 0x80058a <_ZL13displayMemory+0x1b>
+		displayMemory[3].chip2 = 0b00000000;
+    1004:	10 92 89 05 	sts	0x0589, r1	; 0x800589 <_ZL13displayMemory+0x1a>
+		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b00000111) | (0b00000000 & 0b00000111);
+    1008:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x19>
+    100c:	88 7f       	andi	r24, 0xF8	; 248
+    100e:	80 93 88 05 	sts	0x0588, r24	; 0x800588 <_ZL13displayMemory+0x19>
+    1012:	40 cf       	rjmp	.-384    	; 0xe94 <main+0x1b6>
+	}
+	else
+	{
+		const unsigned int segmentA = volDb / 100;
+    1014:	c8 01       	movw	r24, r16
+    1016:	b3 01       	movw	r22, r6
+    1018:	0e 94 2d 09 	call	0x125a	; 0x125a <__udivmodhi4>
+    101c:	9b 01       	movw	r18, r22
+		const unsigned int segmentB = (volDb % 100) / 10;
+    101e:	b6 01       	movw	r22, r12
+    1020:	0e 94 2d 09 	call	0x125a	; 0x125a <__udivmodhi4>
+    1024:	fb 01       	movw	r30, r22
+		const unsigned int segmentC = volDb % 10;
+    1026:	c8 01       	movw	r24, r16
+    1028:	b6 01       	movw	r22, r12
+    102a:	0e 94 2d 09 	call	0x125a	; 0x125a <__udivmodhi4>
+    102e:	2a 30       	cpi	r18, 0x0A	; 10
+    1030:	31 05       	cpc	r19, r1
+    1032:	40 f4       	brcc	.+16     	; 0x1044 <main+0x366>
+    1034:	22 0f       	add	r18, r18
+    1036:	33 1f       	adc	r19, r19
+    1038:	d9 01       	movw	r26, r18
+    103a:	a0 58       	subi	r26, 0x80	; 128
+    103c:	be 4f       	sbci	r27, 0xFE	; 254
+    103e:	6d 91       	ld	r22, X+
+    1040:	7c 91       	ld	r23, X
+    1042:	02 c0       	rjmp	.+4      	; 0x1048 <main+0x36a>
+    1044:	60 e0       	ldi	r22, 0x00	; 0
+    1046:	70 e0       	ldi	r23, 0x00	; 0
+    1048:	ee 0f       	add	r30, r30
+    104a:	ff 1f       	adc	r31, r31
+    104c:	e4 59       	subi	r30, 0x94	; 148
+    104e:	fe 4f       	sbci	r31, 0xFE	; 254
+    1050:	80 80       	ld	r8, Z
+    1052:	91 80       	ldd	r9, Z+1	; 0x01
+			case 9:
+			segmentBPointer = &Vol9b;
+			break;
+		}
+		
+		switch (segmentC)
+    1054:	00 97       	sbiw	r24, 0x00	; 0
+    1056:	39 f0       	breq	.+14     	; 0x1066 <main+0x388>
+    1058:	05 97       	sbiw	r24, 0x05	; 5
+    105a:	51 f4       	brne	.+20     	; 0x1070 <main+0x392>
+		{
+			case 0:
+			segmentCPointer = &Vol0c;
+			break;
+			case 5:
+			segmentCPointer = &Vol5c;
+    105c:	8e eb       	ldi	r24, 0xBE	; 190
+    105e:	e8 2e       	mov	r14, r24
+    1060:	80 e0       	ldi	r24, 0x00	; 0
+    1062:	f8 2e       	mov	r15, r24
+    1064:	07 c0       	rjmp	.+14     	; 0x1074 <main+0x396>
+		}
+		
+		switch (segmentC)
+		{
+			case 0:
+			segmentCPointer = &Vol0c;
+    1066:	95 ec       	ldi	r25, 0xC5	; 197
+    1068:	e9 2e       	mov	r14, r25
+    106a:	90 e0       	ldi	r25, 0x00	; 0
+    106c:	f9 2e       	mov	r15, r25
+    106e:	02 c0       	rjmp	.+4      	; 0x1074 <main+0x396>
+		const unsigned int segmentA = volDb / 100;
+		const unsigned int segmentB = (volDb % 100) / 10;
+		const unsigned int segmentC = volDb % 10;
+		const VfdState* segmentAPointer = 0;
+		const VfdState* segmentBPointer = 0;
+		const VfdState* segmentCPointer = 0;
+    1070:	e1 2c       	mov	r14, r1
+    1072:	f1 2c       	mov	r15, r1
+			segmentCPointer = &Vol5c;
+			break;
+		}
+		
+		VfdState segmentAVfdState;
+		memcpy_P(&segmentAVfdState, segmentAPointer, sizeof(VfdState));
+    1074:	47 e0       	ldi	r20, 0x07	; 7
+    1076:	50 e0       	ldi	r21, 0x00	; 0
+    1078:	ce 01       	movw	r24, r28
+    107a:	0f 96       	adiw	r24, 0x0f	; 15
+    107c:	0e 94 47 09 	call	0x128e	; 0x128e <memcpy_P>
+		VfdState segmentBVfdState;
+		memcpy_P(&segmentBVfdState, segmentBPointer, sizeof(VfdState));
+    1080:	47 e0       	ldi	r20, 0x07	; 7
+    1082:	50 e0       	ldi	r21, 0x00	; 0
+    1084:	b4 01       	movw	r22, r8
+    1086:	ce 01       	movw	r24, r28
+    1088:	08 96       	adiw	r24, 0x08	; 8
+    108a:	0e 94 47 09 	call	0x128e	; 0x128e <memcpy_P>
+		VfdState segmentCVfdState;
+		memcpy_P(&segmentCVfdState, segmentCPointer, sizeof(VfdState));
+    108e:	47 e0       	ldi	r20, 0x07	; 7
+    1090:	50 e0       	ldi	r21, 0x00	; 0
+    1092:	b7 01       	movw	r22, r14
+    1094:	ce 01       	movw	r24, r28
+    1096:	01 96       	adiw	r24, 0x01	; 1
+    1098:	0e 94 47 09 	call	0x128e	; 0x128e <memcpy_P>
+		
+		// combine all segments into C-S for grid 3
+		// leave others as they were
+		
+		displayMemory[3].chip1 = (displayMemory[3].chip1 & ~0b11111100) | ((segmentAVfdState.chip1 | segmentBVfdState.chip1 | segmentCVfdState.chip1) & 0b11111100);
+    109c:	9d 89       	ldd	r25, Y+21	; 0x15
+    109e:	8e 85       	ldd	r24, Y+14	; 0x0e
+    10a0:	89 2b       	or	r24, r25
+    10a2:	9f 81       	ldd	r25, Y+7	; 0x07
+    10a4:	89 2b       	or	r24, r25
+    10a6:	8c 7f       	andi	r24, 0xFC	; 252
+    10a8:	90 91 8a 05 	lds	r25, 0x058A	; 0x80058a <_ZL13displayMemory+0x1b>
+    10ac:	93 70       	andi	r25, 0x03	; 3
+    10ae:	89 2b       	or	r24, r25
+		displayMemory[3].chip2 = segmentAVfdState.chip2 | segmentBVfdState.chip2 | segmentCVfdState.chip2;
+    10b0:	2c 89       	ldd	r18, Y+20	; 0x14
+    10b2:	9d 85       	ldd	r25, Y+13	; 0x0d
+    10b4:	92 2b       	or	r25, r18
+    10b6:	2e 81       	ldd	r18, Y+6	; 0x06
+    10b8:	92 2b       	or	r25, r18
+    10ba:	90 93 89 05 	sts	0x0589, r25	; 0x800589 <_ZL13displayMemory+0x1a>
+		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b00000111) | ((segmentAVfdState.chip3 | segmentBVfdState.chip3 | segmentCVfdState.chip3) & 0b00000111);
+    10be:	2b 89       	ldd	r18, Y+19	; 0x13
+    10c0:	9c 85       	ldd	r25, Y+12	; 0x0c
+    10c2:	92 2b       	or	r25, r18
+    10c4:	2d 81       	ldd	r18, Y+5	; 0x05
+    10c6:	92 2b       	or	r25, r18
+    10c8:	97 70       	andi	r25, 0x07	; 7
+    10ca:	20 91 88 05 	lds	r18, 0x0588	; 0x800588 <_ZL13displayMemory+0x19>
+    10ce:	28 7f       	andi	r18, 0xF8	; 248
+    10d0:	92 2b       	or	r25, r18
+    10d2:	90 93 88 05 	sts	0x0588, r25	; 0x800588 <_ZL13displayMemory+0x19>
+		
+		if (volDb == 0)
+    10d6:	01 2b       	or	r16, r17
+    10d8:	11 f4       	brne	.+4      	; 0x10de <main+0x400>
+		{
+			// do not display minus sign
+			displayMemory[3].chip1 &= ~0b00000010;
+    10da:	8d 7f       	andi	r24, 0xFD	; 253
+    10dc:	01 c0       	rjmp	.+2      	; 0x10e0 <main+0x402>
+		}
+		else
+		{
+			// display minus sign
+			displayMemory[3].chip1 |= 0b00000010;
+    10de:	82 60       	ori	r24, 0x02	; 2
+    10e0:	80 93 8a 05 	sts	0x058A, r24	; 0x80058a <_ZL13displayMemory+0x1b>
+    10e4:	d7 ce       	rjmp	.-594    	; 0xe94 <main+0x1b6>
+				volDisplay(i2cdata[0]);
+				clearI2Cdata();
+				break;
+			}
+			
+			modeCmdFinished = UINT8_MAX;
+    10e6:	40 92 01 01 	sts	0x0101, r4	; 0x800101 <_ZL15modeCmdFinished>
+		}
+		
+		if (displayOn == 1)
+    10ea:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+    10ee:	81 30       	cpi	r24, 0x01	; 1
+    10f0:	09 f0       	breq	.+2      	; 0x10f4 <main+0x416>
+    10f2:	a3 c0       	rjmp	.+326    	; 0x123a <main+0x55c>
+		{
+			if (displayCounter >= 250)
+    10f4:	80 91 6c 05 	lds	r24, 0x056C	; 0x80056c <_ZL14displayCounter>
+    10f8:	90 91 6d 05 	lds	r25, 0x056D	; 0x80056d <_ZL14displayCounter+0x1>
+    10fc:	8a 3f       	cpi	r24, 0xFA	; 250
+    10fe:	91 05       	cpc	r25, r1
+    1100:	08 f4       	brcc	.+2      	; 0x1104 <main+0x426>
+    1102:	95 c0       	rjmp	.+298    	; 0x122e <main+0x550>
+			{
+				displayCounter = 0;
+    1104:	10 92 6d 05 	sts	0x056D, r1	; 0x80056d <_ZL14displayCounter+0x1>
+    1108:	10 92 6c 05 	sts	0x056C, r1	; 0x80056c <_ZL14displayCounter>
+		
+				if (activeGrid == 17)
+    110c:	80 91 ed 05 	lds	r24, 0x05ED	; 0x8005ed <_ZL10activeGrid>
+    1110:	90 91 ee 05 	lds	r25, 0x05EE	; 0x8005ee <_ZL10activeGrid+0x1>
+    1114:	81 31       	cpi	r24, 0x11	; 17
+    1116:	91 05       	cpc	r25, r1
+    1118:	29 f4       	brne	.+10     	; 0x1124 <main+0x446>
+				{
+					activeGrid = 0;
+    111a:	10 92 ee 05 	sts	0x05EE, r1	; 0x8005ee <_ZL10activeGrid+0x1>
+    111e:	10 92 ed 05 	sts	0x05ED, r1	; 0x8005ed <_ZL10activeGrid>
+    1122:	05 c0       	rjmp	.+10     	; 0x112e <main+0x450>
+				}
+				else
+				{
+					activeGrid++;
+    1124:	01 96       	adiw	r24, 0x01	; 1
+    1126:	90 93 ee 05 	sts	0x05EE, r25	; 0x8005ee <_ZL10activeGrid+0x1>
+    112a:	80 93 ed 05 	sts	0x05ED, r24	; 0x8005ed <_ZL10activeGrid>
+
+				unsigned char chip7 = 0b00000000;
+				unsigned char chip6 = 0b00000000;
+				unsigned char chip5 = 0b00000000;
+
+				switch (activeGrid)
+    112e:	80 91 ed 05 	lds	r24, 0x05ED	; 0x8005ed <_ZL10activeGrid>
+    1132:	90 91 ee 05 	lds	r25, 0x05EE	; 0x8005ee <_ZL10activeGrid+0x1>
+    1136:	82 31       	cpi	r24, 0x12	; 18
+    1138:	91 05       	cpc	r25, r1
+    113a:	80 f4       	brcc	.+32     	; 0x115c <main+0x47e>
+    113c:	fc 01       	movw	r30, r24
+    113e:	e6 5a       	subi	r30, 0xA6	; 166
+    1140:	fe 4f       	sbci	r31, 0xFE	; 254
+    1142:	10 81       	ld	r17, Z
+    1144:	fc 01       	movw	r30, r24
+    1146:	e8 5b       	subi	r30, 0xB8	; 184
+    1148:	fe 4f       	sbci	r31, 0xFE	; 254
+    114a:	00 81       	ld	r16, Z
+    114c:	fc 01       	movw	r30, r24
+    114e:	ea 5c       	subi	r30, 0xCA	; 202
+    1150:	fe 4f       	sbci	r31, 0xFE	; 254
+    1152:	f0 80       	ld	r15, Z
+					chip6 = 0b00000001;
+					break;
+				}
+		
+				// add underlines
+				if (activeGrid >= 4)
+    1154:	84 30       	cpi	r24, 0x04	; 4
+    1156:	91 05       	cpc	r25, r1
+    1158:	a0 f0       	brcs	.+40     	; 0x1182 <main+0x4a4>
+    115a:	03 c0       	rjmp	.+6      	; 0x1162 <main+0x484>
+
+				unsigned char chip7 = 0b00000000;
+				unsigned char chip6 = 0b00000000;
+				unsigned char chip5 = 0b00000000;
+
+				switch (activeGrid)
+    115c:	f1 2c       	mov	r15, r1
+    115e:	00 e0       	ldi	r16, 0x00	; 0
+    1160:	10 e0       	ldi	r17, 0x00	; 0
+				}
+		
+				// add underlines
+				if (activeGrid >= 4)
+				{
+					if (showUnderlines)
+    1162:	20 91 6e 05 	lds	r18, 0x056E	; 0x80056e <_ZL14showUnderlines>
+					{
+						displayMemory[activeGrid].chip5 |= 0b00001000;
+    1166:	58 9e       	mul	r5, r24
+    1168:	f0 01       	movw	r30, r0
+    116a:	59 9e       	mul	r5, r25
+    116c:	f0 0d       	add	r31, r0
+    116e:	11 24       	eor	r1, r1
+    1170:	e1 59       	subi	r30, 0x91	; 145
+    1172:	fa 4f       	sbci	r31, 0xFA	; 250
+    1174:	82 81       	ldd	r24, Z+2	; 0x02
+				}
+		
+				// add underlines
+				if (activeGrid >= 4)
+				{
+					if (showUnderlines)
+    1176:	22 23       	and	r18, r18
+    1178:	11 f0       	breq	.+4      	; 0x117e <main+0x4a0>
+					{
+						displayMemory[activeGrid].chip5 |= 0b00001000;
+    117a:	88 60       	ori	r24, 0x08	; 8
+    117c:	01 c0       	rjmp	.+2      	; 0x1180 <main+0x4a2>
+					}
+					else
+					{
+						displayMemory[activeGrid].chip5 &= ~0b00001000;
+    117e:	87 7f       	andi	r24, 0xF7	; 247
+    1180:	82 83       	std	Z+2, r24	; 0x02
+					}
+				}
+		
+				PORTC &= ~_BV(PC2); // LATCH, 1 active
+    1182:	42 98       	cbi	0x08, 2	; 8
+				shiftOut(~displayMemory[activeGrid].chip1);
+    1184:	80 91 ed 05 	lds	r24, 0x05ED	; 0x8005ed <_ZL10activeGrid>
+    1188:	90 91 ee 05 	lds	r25, 0x05EE	; 0x8005ee <_ZL10activeGrid+0x1>
+    118c:	58 9e       	mul	r5, r24
+    118e:	f0 01       	movw	r30, r0
+    1190:	59 9e       	mul	r5, r25
+    1192:	f0 0d       	add	r31, r0
+    1194:	11 24       	eor	r1, r1
+    1196:	e1 59       	subi	r30, 0x91	; 145
+    1198:	fa 4f       	sbci	r31, 0xFA	; 250
+    119a:	86 81       	ldd	r24, Z+6	; 0x06
+    119c:	80 95       	com	r24
+    119e:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+				shiftOut(~displayMemory[activeGrid].chip2);
+    11a2:	80 91 ed 05 	lds	r24, 0x05ED	; 0x8005ed <_ZL10activeGrid>
+    11a6:	90 91 ee 05 	lds	r25, 0x05EE	; 0x8005ee <_ZL10activeGrid+0x1>
+    11aa:	58 9e       	mul	r5, r24
+    11ac:	f0 01       	movw	r30, r0
+    11ae:	59 9e       	mul	r5, r25
+    11b0:	f0 0d       	add	r31, r0
+    11b2:	11 24       	eor	r1, r1
+    11b4:	e1 59       	subi	r30, 0x91	; 145
+    11b6:	fa 4f       	sbci	r31, 0xFA	; 250
+    11b8:	85 81       	ldd	r24, Z+5	; 0x05
+    11ba:	80 95       	com	r24
+    11bc:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+				shiftOut(~displayMemory[activeGrid].chip3);
+    11c0:	80 91 ed 05 	lds	r24, 0x05ED	; 0x8005ed <_ZL10activeGrid>
+    11c4:	90 91 ee 05 	lds	r25, 0x05EE	; 0x8005ee <_ZL10activeGrid+0x1>
+    11c8:	58 9e       	mul	r5, r24
+    11ca:	f0 01       	movw	r30, r0
+    11cc:	59 9e       	mul	r5, r25
+    11ce:	f0 0d       	add	r31, r0
+    11d0:	11 24       	eor	r1, r1
+    11d2:	e1 59       	subi	r30, 0x91	; 145
+    11d4:	fa 4f       	sbci	r31, 0xFA	; 250
+    11d6:	84 81       	ldd	r24, Z+4	; 0x04
+    11d8:	80 95       	com	r24
+    11da:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+				shiftOut(~displayMemory[activeGrid].chip4);
+    11de:	80 91 ed 05 	lds	r24, 0x05ED	; 0x8005ed <_ZL10activeGrid>
+    11e2:	90 91 ee 05 	lds	r25, 0x05EE	; 0x8005ee <_ZL10activeGrid+0x1>
+    11e6:	58 9e       	mul	r5, r24
+    11e8:	f0 01       	movw	r30, r0
+    11ea:	59 9e       	mul	r5, r25
+    11ec:	f0 0d       	add	r31, r0
+    11ee:	11 24       	eor	r1, r1
+    11f0:	e1 59       	subi	r30, 0x91	; 145
+    11f2:	fa 4f       	sbci	r31, 0xFA	; 250
+    11f4:	83 81       	ldd	r24, Z+3	; 0x03
+    11f6:	80 95       	com	r24
+    11f8:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+				shiftOut(~(chip5 | displayMemory[activeGrid].chip5)); // only lowest 4 bits belong to grids, so the rest is always set to 0000 (1111 inverted)
+    11fc:	80 91 ed 05 	lds	r24, 0x05ED	; 0x8005ed <_ZL10activeGrid>
+    1200:	90 91 ee 05 	lds	r25, 0x05EE	; 0x8005ee <_ZL10activeGrid+0x1>
+    1204:	58 9e       	mul	r5, r24
+    1206:	f0 01       	movw	r30, r0
+    1208:	59 9e       	mul	r5, r25
+    120a:	f0 0d       	add	r31, r0
+    120c:	11 24       	eor	r1, r1
+    120e:	e1 59       	subi	r30, 0x91	; 145
+    1210:	fa 4f       	sbci	r31, 0xFA	; 250
+    1212:	82 81       	ldd	r24, Z+2	; 0x02
+    1214:	8f 29       	or	r24, r15
+    1216:	80 95       	com	r24
+    1218:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+				shiftOut(~chip6);
+    121c:	80 2f       	mov	r24, r16
+    121e:	80 95       	com	r24
+    1220:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+				shiftOut(~chip7);
+    1224:	81 2f       	mov	r24, r17
+    1226:	80 95       	com	r24
+    1228:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+    122c:	14 c0       	rjmp	.+40     	; 0x1256 <main+0x578>
+				PORTC |= _BV(PC2); // LATCH, 1 active
+			}
+			else
+			{
+				displayCounter++;
+    122e:	01 96       	adiw	r24, 0x01	; 1
+    1230:	90 93 6d 05 	sts	0x056D, r25	; 0x80056d <_ZL14displayCounter+0x1>
+    1234:	80 93 6c 05 	sts	0x056C, r24	; 0x80056c <_ZL14displayCounter>
+    1238:	83 cd       	rjmp	.-1274   	; 0xd40 <main+0x62>
+			}
+		}
+		else
+		{
+			if (displayOn == 2)
+    123a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+    123e:	82 30       	cpi	r24, 0x02	; 2
+    1240:	09 f0       	breq	.+2      	; 0x1244 <main+0x566>
+    1242:	7e cd       	rjmp	.-1284   	; 0xd40 <main+0x62>
+			{
+				displayOn = 0;
+    1244:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+				
+				PORTC &= ~_BV(PC2); // LATCH, 1 active
+    1248:	42 98       	cbi	0x08, 2	; 8
+    124a:	17 e0       	ldi	r17, 0x07	; 7
+				
+				for (unsigned char k = 1; k <= 7; k++)
+				{
+					shiftOut(UINT8_MAX);
+    124c:	8f ef       	ldi	r24, 0xFF	; 255
+    124e:	0e 94 06 05 	call	0xa0c	; 0xa0c <_ZL8shiftOuth>
+    1252:	11 50       	subi	r17, 0x01	; 1
+			{
+				displayOn = 0;
+				
+				PORTC &= ~_BV(PC2); // LATCH, 1 active
+				
+				for (unsigned char k = 1; k <= 7; k++)
+    1254:	d9 f7       	brne	.-10     	; 0x124c <main+0x56e>
+				{
+					shiftOut(UINT8_MAX);
+				}
+				
+				PORTC |= _BV(PC2); // LATCH, 1 active
+    1256:	42 9a       	sbi	0x08, 2	; 8
+    1258:	73 cd       	rjmp	.-1306   	; 0xd40 <main+0x62>
+
+0000125a <__udivmodhi4>:
+    125a:	aa 1b       	sub	r26, r26
+    125c:	bb 1b       	sub	r27, r27
+    125e:	51 e1       	ldi	r21, 0x11	; 17
+    1260:	07 c0       	rjmp	.+14     	; 0x1270 <__udivmodhi4_ep>
+
+00001262 <__udivmodhi4_loop>:
+    1262:	aa 1f       	adc	r26, r26
+    1264:	bb 1f       	adc	r27, r27
+    1266:	a6 17       	cp	r26, r22
+    1268:	b7 07       	cpc	r27, r23
+    126a:	10 f0       	brcs	.+4      	; 0x1270 <__udivmodhi4_ep>
+    126c:	a6 1b       	sub	r26, r22
+    126e:	b7 0b       	sbc	r27, r23
+
+00001270 <__udivmodhi4_ep>:
+    1270:	88 1f       	adc	r24, r24
+    1272:	99 1f       	adc	r25, r25
+    1274:	5a 95       	dec	r21
+    1276:	a9 f7       	brne	.-22     	; 0x1262 <__udivmodhi4_loop>
+    1278:	80 95       	com	r24
+    127a:	90 95       	com	r25
+    127c:	bc 01       	movw	r22, r24
+    127e:	cd 01       	movw	r24, r26
+    1280:	08 95       	ret
+
+00001282 <__tablejump2__>:
+    1282:	ee 0f       	add	r30, r30
+    1284:	ff 1f       	adc	r31, r31
+    1286:	05 90       	lpm	r0, Z+
+    1288:	f4 91       	lpm	r31, Z
+    128a:	e0 2d       	mov	r30, r0
+    128c:	09 94       	ijmp
+
+0000128e <memcpy_P>:
+    128e:	fb 01       	movw	r30, r22
+    1290:	dc 01       	movw	r26, r24
+    1292:	02 c0       	rjmp	.+4      	; 0x1298 <memcpy_P+0xa>
+    1294:	05 90       	lpm	r0, Z+
+    1296:	0d 92       	st	X+, r0
+    1298:	41 50       	subi	r20, 0x01	; 1
+    129a:	50 40       	sbci	r21, 0x00	; 0
+    129c:	d8 f7       	brcc	.-10     	; 0x1294 <memcpy_P+0x6>
+    129e:	08 95       	ret
+
+000012a0 <_exit>:
+    12a0:	f8 94       	cli
+
+000012a2 <__stop_program>:
+    12a2:	ff cf       	rjmp	.-2      	; 0x12a2 <__stop_program>

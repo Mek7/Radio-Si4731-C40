@@ -1,0 +1,563 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
+    <ProjectGuid>0f720331-482a-4df1-a859-406ce3825698</ProjectGuid>
+    <avrdevice>atmega328p</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>StaticLibrary</OutputType>
+    <Language>CPP</Language>
+    <OutputFileName>lib$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.a</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <Name>ArduinoCore</Name>
+    <ArduinoIdeDir>C:\Program Files (x86)\Arduino</ArduinoIdeDir>
+    <ArduinoProjectType>Core</ArduinoProjectType>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <AssemblyName>ArduinoCore</AssemblyName>
+    <RootNamespace>ArduinoCore</RootNamespace>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <ResetRule>0</ResetRule>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <EraseKey />
+    <AsfFrameworkConfig>
+      <framework-data xmlns="">
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.52.0" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\gcc\dev\atmega328p"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>NDEBUG</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>ARDUINO=108019</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>..\include\libraries\pu2clr-si4735</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_01_SERIAL_MONITOR\SI4735_03_POC_SSB</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_for_Mirko_Pavleski_radio\MIRKO_V1</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_for_Mirko_Pavleski_radio\MIRKO_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_for_Mirko_Pavleski_radio\MIRKO_V3_LCD20x4</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI473X_04_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI47XX_01_LCD_20x4_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI47XX_02_LCD_20x4_SMETER_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI47XX_03_SW_LCD_SMETER_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_01_OLED_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_02_ALL_IN_ONE_OLED</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_03_ALL_IN_ONE_NEW_INTERFACE_V10</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_03_ALL_IN_ONE_NEW_INTERFACE_V15</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_03_ALL_IN_ONE_NEW_INTERFACE_V20</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_04_TFT\SI47XX_01_TFT_ILI9225</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_04_TFT\SI47XX_02_TFT_TOUCH_SHIELD</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_04_TFT\SI47XX_03_TFT_ATMEGA328_ST7735</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\CAPACITIVE_TOUCH_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\LCD16x2_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\LCD20x4_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\OLED_ALL_IN_ONE_TWO_ENCODERS</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP8266\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_07_STM32\STM32_02_SSB_SERIAL_MONITOR</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_07_STM32\STM32_03_OLED_ALL_IN_ONE_V1</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_07_STM32\STM32_04_OLED_ALL_IN_ONE_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_08_TM1638</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_09_NOKIA_5110\ALL_IN_ONE_7_BUTTONS</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_09_NOKIA_5110\ALL_IN_ONE_ONE_ENCODER</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI4735_04_RDS_ALL_IN_ONE_OLED</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_02_RDS_TFT_TOUCH_SHIELD</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_02_RDS_TFT_TOUCH_SHIELD_35</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_02_RDS_TFT_TOUCH_SHIELD_35_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_03_RDS_TFT_ILI9225</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_03_RDS_TFT_ILI9225_NEW</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_11_NO_CRYSTAL\POC_ACTIVE_CRYSTAL</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_11_NO_CRYSTAL\POC_LCD16x2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_11_NO_CRYSTAL\SI47XX_RDS_TOUCH_SHIELD_REF_CLOCK</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_12_MORSE_CODE_READOUT</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_13_RASPBERRY_PICO\OLED_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_14_TEENSY\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_15_SEEDUINO\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_ATMEGA128\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_FOR_BLIND_HAM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V1_5</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V3</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V7</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V7_BAT_MOD</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V7_g</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V8</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\DAVID_MARTINS\SI473X_ALL_IN_ONE_OLED_RDS_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\DAVID_MARTINS\SI473X_ALL_IN_ONE_OLED_RDS_V3</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\PLAMEN\PLAMEN_SI5351_SI4732_STM32</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\PLAMEN\PU2CLR_SI5351_SI4732_STM32</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\ESP32_ALL_IN_ONE_TFT_TOUTC_PU2CLR</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\FELIX_ANGGA\SLAMETRADIO</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\GERT_BAAK</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\GERT_BAAK\SI4735_2.8_TFT_SI5351_V4.2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\GERT_BAAK\SI4735_2.8_TFT_V3.0</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\SI473X_TFT_TOUCH_THIAGO_BETA_V4</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\SI473X_TFT_TOUCH_THIAGO_ORIGINAL</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\SI473X_TOUCH_THIAGO_BETA_INGLES</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\APPLYING_SSB_PATCH_WITHOUT_LIBRARIES</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\AUTO_BANDPASS_FILTER_TFT_ILI9225</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_02_STORE_EEPROM_BEFORE_SHUTDOWN</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_03_SW_OLED_FILTER_TEST</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_09_SAVE_SSB_PATCH_EEPROM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_11_POC_SSB_COMPRESS</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_93_POC_SSB_EM_RAM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI473X_ALL_IN_ONE_OLED_RDS_ATMEGA32</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI473X_TOUCH_THIAGO_BLE_V1</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_01_ATMEGA8_LCD_16x2_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_01_TFT_ILI9225_SMALL</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_02_for_Mirko_Pavleski_auto_bpf</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_05_TFT_ST7735_BODMER</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_07_NBFM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_08_TFT_BODMER</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_08_TFT_BODMER\TFT_ST7735</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI5351_SI473X_DUAL_LCD16x2</Value>
+      <Value>..\include\libraries\Wire</Value>
+      <Value>..\include\libraries\Wire\utility</Value>
+      <Value>..\include\core</Value>
+      <Value>..\include\variants\eightanaloginputs</Value>
+      <Value>..\include\variants\standard</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcc.compiler.optimization.OtherFlags>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.InhibitAllWarnings>True</avrgcc.compiler.warnings.InhibitAllWarnings>
+  <avrgcc.compiler.miscellaneous.OtherFlags>-std=gnu99 -std=gnu11</avrgcc.compiler.miscellaneous.OtherFlags>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>NDEBUG</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>ARDUINO=108019</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>..\include\libraries\pu2clr-si4735</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_01_SERIAL_MONITOR\SI4735_03_POC_SSB</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_for_Mirko_Pavleski_radio\MIRKO_V1</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_for_Mirko_Pavleski_radio\MIRKO_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_for_Mirko_Pavleski_radio\MIRKO_V3_LCD20x4</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI473X_04_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI47XX_01_LCD_20x4_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI47XX_02_LCD_20x4_SMETER_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_02_LCD_20x4_I2C\SI47XX_03_SW_LCD_SMETER_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_01_OLED_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_02_ALL_IN_ONE_OLED</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_03_ALL_IN_ONE_NEW_INTERFACE_V10</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_03_ALL_IN_ONE_NEW_INTERFACE_V15</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_03_OLED_I2C\SI47XX_03_ALL_IN_ONE_NEW_INTERFACE_V20</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_04_TFT\SI47XX_01_TFT_ILI9225</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_04_TFT\SI47XX_02_TFT_TOUCH_SHIELD</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_04_TFT\SI47XX_03_TFT_ATMEGA328_ST7735</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\CAPACITIVE_TOUCH_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\LCD16x2_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\LCD20x4_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP32\OLED_ALL_IN_ONE_TWO_ENCODERS</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_06_ESP8266\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_07_STM32\STM32_02_SSB_SERIAL_MONITOR</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_07_STM32\STM32_03_OLED_ALL_IN_ONE_V1</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_07_STM32\STM32_04_OLED_ALL_IN_ONE_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_08_TM1638</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_09_NOKIA_5110\ALL_IN_ONE_7_BUTTONS</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_09_NOKIA_5110\ALL_IN_ONE_ONE_ENCODER</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI4735_04_RDS_ALL_IN_ONE_OLED</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_02_RDS_TFT_TOUCH_SHIELD</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_02_RDS_TFT_TOUCH_SHIELD_35</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_02_RDS_TFT_TOUCH_SHIELD_35_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_03_RDS_TFT_ILI9225</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_10_RDS\SI47XX_03_RDS_TFT_ILI9225_NEW</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_11_NO_CRYSTAL\POC_ACTIVE_CRYSTAL</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_11_NO_CRYSTAL\POC_LCD16x2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_11_NO_CRYSTAL\SI47XX_RDS_TOUCH_SHIELD_REF_CLOCK</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_12_MORSE_CODE_READOUT</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_13_RASPBERRY_PICO\OLED_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_14_TEENSY\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_15_SEEDUINO\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_ATMEGA128\OLED_ALL_IN_ONE</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_FOR_BLIND_HAM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V1_5</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V3</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V7</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V7_BAT_MOD</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V7_g</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\AliExpress\SI473X_ALL_IN_ONE_OLED_RDS_CHINESE_V8</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\DAVID_MARTINS\SI473X_ALL_IN_ONE_OLED_RDS_V2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\DAVID_MARTINS\SI473X_ALL_IN_ONE_OLED_RDS_V3</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\PLAMEN\PLAMEN_SI5351_SI4732_STM32</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\PLAMEN\PU2CLR_SI5351_SI4732_STM32</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\ESP32_ALL_IN_ONE_TFT_TOUTC_PU2CLR</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\FELIX_ANGGA\SLAMETRADIO</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\GERT_BAAK</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\GERT_BAAK\SI4735_2.8_TFT_SI5351_V4.2</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\GERT_BAAK\SI4735_2.8_TFT_V3.0</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\SI473X_TFT_TOUCH_THIAGO_BETA_V4</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\SI473X_TFT_TOUCH_THIAGO_ORIGINAL</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\SI47XX_KITS\THIAGO_LIMA\SI473X_TOUCH_THIAGO_BETA_INGLES</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\APPLYING_SSB_PATCH_WITHOUT_LIBRARIES</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\AUTO_BANDPASS_FILTER_TFT_ILI9225</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_02_STORE_EEPROM_BEFORE_SHUTDOWN</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_03_SW_OLED_FILTER_TEST</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_09_SAVE_SSB_PATCH_EEPROM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_11_POC_SSB_COMPRESS</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\TOOLS\SI47XX_93_POC_SSB_EM_RAM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI473X_ALL_IN_ONE_OLED_RDS_ATMEGA32</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI473X_TOUCH_THIAGO_BLE_V1</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_01_ATMEGA8_LCD_16x2_I2C</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_01_TFT_ILI9225_SMALL</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_02_for_Mirko_Pavleski_auto_bpf</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_05_TFT_ST7735_BODMER</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_07_NBFM</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_08_TFT_BODMER</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI47XX_08_TFT_BODMER\TFT_ST7735</Value>
+      <Value>..\include\libraries\pu2clr-si4735\examples\UNDER_CONSTRUCTION\SI5351_SI473X_DUAL_LCD16x2</Value>
+      <Value>..\include\libraries\Wire</Value>
+      <Value>..\include\libraries\Wire\utility</Value>
+      <Value>..\include\core</Value>
+      <Value>..\include\variants\eightanaloginputs</Value>
+      <Value>..\include\variants\standard</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcccpp.compiler.optimization.OtherFlags>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.InhibitAllWarnings>True</avrgcccpp.compiler.warnings.InhibitAllWarnings>
+  <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu++11</avrgcccpp.compiler.miscellaneous.OtherFlags>
+  <avrgcccpp.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcccpp.linker.libraries.Libraries>
+  <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
+  <avrgcccpp.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+    </ListValues>
+  </avrgcccpp.assembler.general.IncludePaths>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\gcc\dev\atmega328p"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>ARDUINO=108019</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>..\include\libraries\pu2clr-si4735</Value>
+      <Value>..\include\libraries\Wire</Value>
+      <Value>..\include\libraries\Wire\utility</Value>
+      <Value>..\include\core</Value>
+      <Value>..\include\variants\eightanaloginputs</Value>
+      <Value>..\include\variants\standard</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcc.compiler.optimization.OtherFlags>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.InhibitAllWarnings>True</avrgcc.compiler.warnings.InhibitAllWarnings>
+  <avrgcc.compiler.miscellaneous.OtherFlags>-std=gnu99 -std=gnu11</avrgcc.compiler.miscellaneous.OtherFlags>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>ARDUINO=108019</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>..\include\libraries\pu2clr-si4735</Value>
+      <Value>..\include\libraries\Wire</Value>
+      <Value>..\include\libraries\Wire\utility</Value>
+      <Value>..\include\core</Value>
+      <Value>..\include\variants\eightanaloginputs</Value>
+      <Value>..\include\variants\standard</Value>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcccpp.compiler.optimization.OtherFlags>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.InhibitAllWarnings>True</avrgcccpp.compiler.warnings.InhibitAllWarnings>
+  <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu++11</avrgcccpp.compiler.miscellaneous.OtherFlags>
+  <avrgcccpp.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcccpp.linker.libraries.Libraries>
+  <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
+  <avrgcccpp.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\include\</Value>
+    </ListValues>
+  </avrgcccpp.assembler.general.IncludePaths>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="include\core\Arduino.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\binary.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Client.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\HardwareSerial.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\HardwareSerial_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\IPAddress.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\new.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\PluggableUSB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Print.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Printable.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Server.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Stream.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Udp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\USBAPI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\USBCore.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\USBDesc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\WCharacter.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\wiring_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\WString.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\pu2clr-si4735\SI4735.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\Wire\utility\twi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\Wire\Wire.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\variants\eightanaloginputs\pins_arduino.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\variants\standard\pins_arduino.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\abi.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\CDC.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial0.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial1.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial2.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial3.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\hooks.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\IPAddress.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\main.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\new.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\PluggableUSB.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\PreprocessingAssembly\wiring_pulse.S">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\Print.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\Stream.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\Tone.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\USBCore.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\WInterrupts.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_analog.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_digital.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_pulse.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_shift.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\WMath.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\WString.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\pu2clr-si4735\SI4735.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\Wire\utility\twi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\Wire\Wire.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="include\" />
+    <Folder Include="include\core\" />
+    <Folder Include="include\libraries\" />
+    <Folder Include="include\libraries\pu2clr-si4735\" />
+    <Folder Include="include\libraries\Wire\" />
+    <Folder Include="include\libraries\Wire\utility\" />
+    <Folder Include="include\variants\" />
+    <Folder Include="include\variants\eightanaloginputs\" />
+    <Folder Include="include\variants\standard\" />
+    <Folder Include="src\" />
+    <Folder Include="src\core\" />
+    <Folder Include="src\core\PreprocessingAssembly\" />
+    <Folder Include="src\libraries\" />
+    <Folder Include="src\libraries\pu2clr-si4735\" />
+    <Folder Include="src\libraries\pu2clr-si4735\extras\" />
+    <Folder Include="src\libraries\pu2clr-si4735\extras\apidoc\" />
+    <Folder Include="src\libraries\pu2clr-si4735\extras\apidoc\html\" />
+    <Folder Include="src\libraries\pu2clr-si4735\extras\apidoc\html\search\" />
+    <Folder Include="src\libraries\Wire\" />
+    <Folder Include="src\libraries\Wire\utility\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\libraries\pu2clr-si4735\extras\apidoc\html\doxygen.css">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\libraries\pu2clr-si4735\extras\apidoc\html\navtree.css">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\libraries\pu2clr-si4735\extras\apidoc\html\search\search.css">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\libraries\pu2clr-si4735\extras\apidoc\html\tabs.css">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>

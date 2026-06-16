@@ -1754,16 +1754,21 @@ void loop() {
 				}
 				else
 				{
-					// radioText is not transmitted anymore, but station name may still be, let it display station name
-					if (radioTextLostCounter <= 8)
+					// radiotext no longer available, RDS sync maybe lost
+					if (radioTextLostCounter < 8)
 					{
 						radioTextLostCounter++;
 					}
 					else if (radioTextLostCounter == 8)
 					{
-						displayRadioText = false;
+						radioTextLostCounter = 0;
 						clearRdsInfo();
-						clearGra();
+						
+						if (compareGraMemory(fmString))
+						{
+							rdsSyncedFreshly = false;
+							showFM();
+						}
 					}
 				}
 
@@ -1836,7 +1841,6 @@ void loop() {
 				
 				if (compareGraMemory(fmString))
 				{
-					clearGra();
 					showFM();
 				}
 			}
@@ -1849,7 +1853,6 @@ void loop() {
 			
 			if (compareGraMemory(fmString))
 			{
-				clearGra();
 				showFM();
 			}
 		}

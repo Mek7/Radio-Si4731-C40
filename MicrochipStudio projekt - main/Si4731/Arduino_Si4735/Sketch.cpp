@@ -733,6 +733,7 @@ static void forceDateTimeReadAndDisplay()
 	if (getMode() == MODE_STANDBY)
 	{
 		clearGra();
+		graPutc('Z', 0);
 		graPutc('.', 6);
 		graPutc('.', 9);
 		graPutc('2', 10);
@@ -1128,9 +1129,19 @@ void setup() {
 	eeprom_read_block(&irmp_display, (unsigned char *)DISPLAY_ADDRESS, sizeof(irmp_display));
 
 	wdt_reset();
-	delay(1000);
-	wdt_reset();
-	setupFinished = true;
+	
+	// set Saturday 1.1.2000 to RTC
+	unsigned char bytes[] = {
+		0b00000000, // seconds
+		0b00000000, // minutes
+		0b00000000, // hours
+		0b00000110, // Saturday (6)
+		0b00000001, // day of month (1)
+		0b00000001, // month (1)
+		0b00000000 // 2000
+	};
+	
+	setRTCValues(bytes);
 }
 
 static void frequencyDisplayUpdate()
@@ -1500,7 +1511,7 @@ void loop() {
 		
 		speToggle(SPE_COLON_UPPER);
 		speToggle(SPE_COLON_LOWER);
-			
+
 		// read from RTC if indicated by interrupt from TIMER2
 		// start from register 0
 		Wire.beginTransmission(I2C7_RTC);

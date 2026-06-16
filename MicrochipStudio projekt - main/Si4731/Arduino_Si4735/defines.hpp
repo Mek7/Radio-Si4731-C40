@@ -1,6 +1,19 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
+// ---------------------------------------------------------------------------
+// Master (main ATmega) build configuration.
+// This chip runs at 20 MHz. The IRMP decoder derives all of its pulse/pause
+// tolerance windows from F_CPU via F_INTERRUPTS, so an incorrect F_CPU would
+// silently corrupt IR decoding. Fail loudly instead.
+// ---------------------------------------------------------------------------
+#ifndef F_CPU
+#  error "F_CPU must be defined by the build system (expected 20000000UL for the master)."
+#endif
+#if F_CPU != 20000000UL
+#  warning "Master F_CPU is not 20 MHz; verify F_INTERRUPTS/IRMP timing and TIMER2 period."
+#endif
+
 // define constants to map raw AVR pins to arduino pin numbers
 #define PB0A 8
 #define PB1A 9
@@ -26,13 +39,26 @@
 #define I2C_ADDR_RTC 0xD0
 #define I2C_ADDR_VFDDRIVER 0xF4
 #define I2C_ADDR_AUDIOPROC 0b10001000
-#define _BV(bit) (1 << (bit))
+
+// Pre-shifted 7-bit addresses for the Arduino Wire API (which wants 7-bit).
+// Using these avoids repeating ">> 1" at every call site, where a single
+// missed shift would silently talk to the wrong device.
+#define I2C7_RTC        (I2C_ADDR_RTC >> 1)
+#define I2C7_VFDDRIVER  (I2C_ADDR_VFDDRIVER >> 1)
+#define I2C7_AUDIOPROC  (I2C_ADDR_AUDIOPROC >> 1)
+
+#ifndef _BV
+#  define _BV(bit) (1 << (bit))
+#endif
+
 #define STATION_NAME_CHARS 8
 #define RADIOTEXT_CHARS 64
 #define GRA_DISPLAY_CHARS 14
 #define NUM_DISPLAY_CHARS 6
 
-#define TIMER2_TCCR2B _BV(CS20) | _BV(CS21) | _BV(CS22)
+// Timer2 prescaler = 1024 (CS22:CS21:CS20 = 111).
+// At F_CPU = 20 MHz this gives an overflow every 256 * 1024 / 20e6 = 13.107 ms.
+#define TIMER2_TCCR2B (_BV(CS20) | _BV(CS21) | _BV(CS22))
 
 #define IR_LEARNING_PROGRAM0 1
 #define IR_LEARNING_PROGRAM1 2

@@ -1705,48 +1705,31 @@ void loop() {
 							}
 						}
 						
-						// snapshot the ISR-shared scrolling indices once, atomically,
-						// then work with locals so the values cannot change mid-use.
-						char startIndex;
-						char endIndex;
-						ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-						{
-							startIndex = radioTextScrollingStartIndex;
-							endIndex = radioTextScrollingEndIndex;
-						}
-
-						// determine endIndex - last non-space character
+						// determine radioTextScrollingEndIndex - last non-space character
 						for (int i = RADIOTEXT_CHARS - 1; i >= 0; i--)
 						{
 							if (completeRadioText[i] != ' ')
 							{
-								endIndex = i;
+								radioTextScrollingEndIndex = i;
 								break;
 							}
 						}
-					
-						if (endIndex < GRA_DISPLAY_CHARS)
+
+						if (radioTextScrollingEndIndex < GRA_DISPLAY_CHARS)
 						{
 							// no scrolling, radiotext is short
-							startIndex = 0;
+							radioTextScrollingStartIndex = 0;
 						}
 
-						// publish possibly-updated indices back atomically
-						ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-						{
-							radioTextScrollingStartIndex = startIndex;
-							radioTextScrollingEndIndex = endIndex;
-						}
-					
 						char graString[GRA_DISPLAY_CHARS]; // not nul-terminated
 						for (unsigned char i = 0; i < GRA_DISPLAY_CHARS; i++)
 						{
-							graString[i] = completeRadioText[i + startIndex];
+							graString[i] = completeRadioText[i + radioTextScrollingStartIndex];
 						}
-					
+
 						graPuts((const char *)&graString);
-						
-						if (startIndex > 0)
+
+						if (radioTextScrollingStartIndex > 0)
 						{
 							speOn(SPE_ARROW_LEFT);
 						}
@@ -1754,10 +1737,10 @@ void loop() {
 						{
 							speOff(SPE_ARROW_LEFT);
 						}
-						
+
 						delay(1);
-						
-						if ((startIndex + GRA_DISPLAY_CHARS < endIndex + 1))
+
+						if ((radioTextScrollingStartIndex + GRA_DISPLAY_CHARS < radioTextScrollingEndIndex + 1))
 						{
 							speOn(SPE_ARROW_RIGHT);
 						}
@@ -1765,7 +1748,7 @@ void loop() {
 						{
 							speOff(SPE_ARROW_RIGHT);
 						}
-						
+
 						delay(1);
 					}
 				}
@@ -2733,71 +2716,92 @@ ISR(TIMER1_COMPA_vect)
 	irmp_ISR();
 }
 
-// TIMER2 overflow: ~13.1 ms tick at 20 MHz / 1024 prescaler.
-// Drives the once-per-second housekeeping (RTC read request, standby spe
-// blinking) and the radiotext scroll stepping. All variables touched here
-// are declared volatile; the main loop snapshots the multi-byte ones under
-// ATOMIC_BLOCK.
 ISR(TIMER2_OVF_vect)
 {
-	// ~76 overflows per second at 20 MHz (20e6 / 1024 / 256 = 76.29)
-	if (timer2OverflowCounter >= 76)
+	unsigned char mode = getMode();
+	if (mode == MODE_RADIO_FM && timer2OverflowCounter % 8 == 0) // do not read RDS too often, spare some MCU cycles
+	{
+		readRDS = true;
+	}
+
+	// set flag to read from RTC every second, doesn't have to be perfectly second-aligned, because we don't display seconds, only minutes
+	// this is like a second prescaler of TIMER2
+	if (timer2OverflowCounter < 96)
+	{
+		timer2OverflowCounter++;
+	}
+	else
 	{
 		timer2OverflowCounter = 0;
-		
-		readFromRTC = true;
-		readRDS = true;
-		
-		if (getMode() == MODE_STANDBY)
+
+		if (mode == MODE_STANDBY)
 		{
-			// advance the blinking spe segment index (wraps around)
-			if (displayedSpeForStandbyIndex >= (sizeof(speForStandby) - 1))
+			if (setupFinished)
 			{
-				displayedSpeForStandbyIndex = 0;
-			}
-			else
-			{
-				displayedSpeForStandbyIndex++;
+				readFromRTC = true;
+
+				if (displayedSpeForStandbyIndex == sizeof(speForStandby) - 1)
+				{
+					displayedSpeForStandbyIndex = 0;
+				}
+				else
+				{
+					displayedSpeForStandbyIndex++;
+				}
 			}
 		}
 		else
 		{
-			// radiotext scrolling timing, only relevant when displaying radio text
-			if (displayRadioText)
+			if (!displayRadioText)
 			{
-				if (initialScrollDelayCounter < 3)
+				// show station name for a few seconds, THEN switch to radiotext
+				if (radioTextDelayCounter == 3)
 				{
-					// keep the start of the radiotext visible for a few seconds
-					// before scrolling begins
-					initialScrollDelayCounter++;
+					radioTextDelayCounter = 0;
+					displayRadioText = true;
 				}
 				else
 				{
-					// step the scroll window one character to the right; when the
-					// end is reached, wrap back to the beginning after a short pause
+					radioTextDelayCounter++;
+				}
+			}
+			else
+			{
+				// if there is new radio text that is shorter than the previous one and we were past the length of the new one,
+				// reset position to 0 immediately
+				if (radioTextScrollingStartIndex + GRA_DISPLAY_CHARS > radioTextScrollingEndIndex + 1)
+				{
+					radioTextScrollingStartIndex = 0;
+				}
+
+				bool continueScrolling = true; // indicates if enough time has passed so that we can scroll or wait a bit
+
+				// wait a bit if showing radiotext from the start or it is at the end of scrolling
+				if (radioTextScrollingStartIndex == 0 || (radioTextScrollingStartIndex + GRA_DISPLAY_CHARS == radioTextScrollingEndIndex + 1))
+				{
+					if (initialScrollDelayCounter == 3)
+					{
+						initialScrollDelayCounter = 0;
+					}
+					else
+					{
+						initialScrollDelayCounter++;
+						continueScrolling = false;
+					}
+				}
+
+				if (continueScrolling)
+				{
 					if (radioTextScrollingStartIndex + GRA_DISPLAY_CHARS <= radioTextScrollingEndIndex)
 					{
 						radioTextScrollingStartIndex++;
 					}
 					else
 					{
-						if (radioTextDelayCounter < 2)
-						{
-							radioTextDelayCounter++;
-						}
-						else
-						{
-							radioTextScrollingStartIndex = 0;
-							initialScrollDelayCounter = 0;
-							radioTextDelayCounter = 0;
-						}
+						radioTextScrollingStartIndex = 0;
 					}
 				}
 			}
 		}
-	}
-	else
-	{
-		timer2OverflowCounter++;
 	}
 }

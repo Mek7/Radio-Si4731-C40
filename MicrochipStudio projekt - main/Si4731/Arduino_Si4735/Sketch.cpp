@@ -1874,269 +1874,797 @@ void loop() {
 	
 	if (irmp_get_data(&irmp_data))
 	{
-		wdt_reset();
+		char wasRepetition = irmp_data.flags & IRMP_FLAG_REPETITION;
 		
-		// a key was received
-		if (irLearningMode != 0)
+		if (specialMode == SPECIAL_MODE_IR_LEARNING)
 		{
-			// we are in IR learning mode, store the received code
-			switch (irLearningMode)
+			if (!wasRepetition)
 			{
-				case IR_LEARNING_PROGRAM0:
-				learnIrCode(PROGRAM0_ADDRESS, &irmp_data, &irmp_program0);
-				freqProgram0fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram0fm;
-				freqProgram0am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram0am;
-				eeprom_update_block(&freqProgram0fm, (unsigned char *)PROGRAM0_FM_FREQ_ADDRESS, sizeof(freqProgram0fm));
-				eeprom_update_block(&freqProgram0am, (unsigned char *)PROGRAM0_AM_FREQ_ADDRESS, sizeof(freqProgram0am));
-				irLearningMode = IR_LEARNING_PROGRAM1;
-				graPuts("Program 2 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM1:
-				learnIrCode(PROGRAM1_ADDRESS, &irmp_data, &irmp_program1);
-				freqProgram1fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram1fm;
-				freqProgram1am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram1am;
-				eeprom_update_block(&freqProgram1fm, (unsigned char *)PROGRAM1_FM_FREQ_ADDRESS, sizeof(freqProgram1fm));
-				eeprom_update_block(&freqProgram1am, (unsigned char *)PROGRAM1_AM_FREQ_ADDRESS, sizeof(freqProgram1am));
-				irLearningMode = IR_LEARNING_PROGRAM2;
-				graPuts("Program 3 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM2:
-				learnIrCode(PROGRAM2_ADDRESS, &irmp_data, &irmp_program2);
-				freqProgram2fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram2fm;
-				freqProgram2am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram2am;
-				eeprom_update_block(&freqProgram2fm, (unsigned char *)PROGRAM2_FM_FREQ_ADDRESS, sizeof(freqProgram2fm));
-				eeprom_update_block(&freqProgram2am, (unsigned char *)PROGRAM2_AM_FREQ_ADDRESS, sizeof(freqProgram2am));
-				irLearningMode = IR_LEARNING_PROGRAM3;
-				graPuts("Program 4 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM3:
-				learnIrCode(PROGRAM3_ADDRESS, &irmp_data, &irmp_program3);
-				freqProgram3fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram3fm;
-				freqProgram3am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram3am;
-				eeprom_update_block(&freqProgram3fm, (unsigned char *)PROGRAM3_FM_FREQ_ADDRESS, sizeof(freqProgram3fm));
-				eeprom_update_block(&freqProgram3am, (unsigned char *)PROGRAM3_AM_FREQ_ADDRESS, sizeof(freqProgram3am));
-				irLearningMode = IR_LEARNING_PROGRAM4;
-				graPuts("Program 5 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM4:
-				learnIrCode(PROGRAM4_ADDRESS, &irmp_data, &irmp_program4);
-				freqProgram4fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram4fm;
-				freqProgram4am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram4am;
-				eeprom_update_block(&freqProgram4fm, (unsigned char *)PROGRAM4_FM_FREQ_ADDRESS, sizeof(freqProgram4fm));
-				eeprom_update_block(&freqProgram4am, (unsigned char *)PROGRAM4_AM_FREQ_ADDRESS, sizeof(freqProgram4am));
-				irLearningMode = IR_LEARNING_PROGRAM5;
-				graPuts("Program 6 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM5:
-				learnIrCode(PROGRAM5_ADDRESS, &irmp_data, &irmp_program5);
-				freqProgram5fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram5fm;
-				freqProgram5am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram5am;
-				eeprom_update_block(&freqProgram5fm, (unsigned char *)PROGRAM5_FM_FREQ_ADDRESS, sizeof(freqProgram5fm));
-				eeprom_update_block(&freqProgram5am, (unsigned char *)PROGRAM5_AM_FREQ_ADDRESS, sizeof(freqProgram5am));
-				irLearningMode = IR_LEARNING_PROGRAM6;
-				graPuts("Program 7 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM6:
-				learnIrCode(PROGRAM6_ADDRESS, &irmp_data, &irmp_program6);
-				freqProgram6fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram6fm;
-				freqProgram6am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram6am;
-				eeprom_update_block(&freqProgram6fm, (unsigned char *)PROGRAM6_FM_FREQ_ADDRESS, sizeof(freqProgram6fm));
-				eeprom_update_block(&freqProgram6am, (unsigned char *)PROGRAM6_AM_FREQ_ADDRESS, sizeof(freqProgram6am));
-				irLearningMode = IR_LEARNING_PROGRAM7;
-				graPuts("Program 8 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM7:
-				learnIrCode(PROGRAM7_ADDRESS, &irmp_data, &irmp_program7);
-				freqProgram7fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram7fm;
-				freqProgram7am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram7am;
-				eeprom_update_block(&freqProgram7fm, (unsigned char *)PROGRAM7_FM_FREQ_ADDRESS, sizeof(freqProgram7fm));
-				eeprom_update_block(&freqProgram7am, (unsigned char *)PROGRAM7_AM_FREQ_ADDRESS, sizeof(freqProgram7am));
-				irLearningMode = IR_LEARNING_PROGRAM8;
-				graPuts("Program 9 = ? ");
-				break;
-				case IR_LEARNING_PROGRAM8:
-				learnIrCode(PROGRAM8_ADDRESS, &irmp_data, &irmp_program8);
-				freqProgram8fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram8fm;
-				freqProgram8am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram8am;
-				eeprom_update_block(&freqProgram8fm, (unsigned char *)PROGRAM8_FM_FREQ_ADDRESS, sizeof(freqProgram8fm));
-				eeprom_update_block(&freqProgram8am, (unsigned char *)PROGRAM8_AM_FREQ_ADDRESS, sizeof(freqProgram8am));
-				irLearningMode = IR_LEARNING_PROGRAM9;
-				graPuts("Program 10 =? ");
-				break;
-				case IR_LEARNING_PROGRAM9:
-				learnIrCode(PROGRAM9_ADDRESS, &irmp_data, &irmp_program9);
-				freqProgram9fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram9fm;
-				freqProgram9am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram9am;
-				eeprom_update_block(&freqProgram9fm, (unsigned char *)PROGRAM9_FM_FREQ_ADDRESS, sizeof(freqProgram9fm));
-				eeprom_update_block(&freqProgram9am, (unsigned char *)PROGRAM9_AM_FREQ_ADDRESS, sizeof(freqProgram9am));
-				irLearningMode = IR_LEARNING_PROGRAM10;
-				graPuts("Program 11 =? ");
-				break;
-				case IR_LEARNING_PROGRAM10:
-				learnIrCode(PROGRAM10_ADDRESS, &irmp_data, &irmp_program10);
-				freqProgram10fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram10fm;
-				freqProgram10am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram10am;
-				eeprom_update_block(&freqProgram10fm, (unsigned char *)PROGRAM10_FM_FREQ_ADDRESS, sizeof(freqProgram10fm));
-				eeprom_update_block(&freqProgram10am, (unsigned char *)PROGRAM10_AM_FREQ_ADDRESS, sizeof(freqProgram10am));
-				irLearningMode = IR_LEARNING_PROGRAM11;
-				graPuts("Program 12 =? ");
-				break;
-				case IR_LEARNING_PROGRAM11:
-				learnIrCode(PROGRAM11_ADDRESS, &irmp_data, &irmp_program11);
-				freqProgram11fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram11fm;
-				freqProgram11am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram11am;
-				eeprom_update_block(&freqProgram11fm, (unsigned char *)PROGRAM11_FM_FREQ_ADDRESS, sizeof(freqProgram11fm));
-				eeprom_update_block(&freqProgram11am, (unsigned char *)PROGRAM11_AM_FREQ_ADDRESS, sizeof(freqProgram11am));
-				irLearningMode = IR_LEARNING_PROGRAM12;
-				graPuts("Program 13 =? ");
-				break;
-				case IR_LEARNING_PROGRAM12:
-				learnIrCode(PROGRAM12_ADDRESS, &irmp_data, &irmp_program12);
-				freqProgram12fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram12fm;
-				freqProgram12am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram12am;
-				eeprom_update_block(&freqProgram12fm, (unsigned char *)PROGRAM12_FM_FREQ_ADDRESS, sizeof(freqProgram12fm));
-				eeprom_update_block(&freqProgram12am, (unsigned char *)PROGRAM12_AM_FREQ_ADDRESS, sizeof(freqProgram12am));
-				irLearningMode = IR_LEARNING_PROGRAM13;
-				graPuts("Program 14 =? ");
-				break;
-				case IR_LEARNING_PROGRAM13:
-				learnIrCode(PROGRAM13_ADDRESS, &irmp_data, &irmp_program13);
-				freqProgram13fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram13fm;
-				freqProgram13am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram13am;
-				eeprom_update_block(&freqProgram13fm, (unsigned char *)PROGRAM13_FM_FREQ_ADDRESS, sizeof(freqProgram13fm));
-				eeprom_update_block(&freqProgram13am, (unsigned char *)PROGRAM13_AM_FREQ_ADDRESS, sizeof(freqProgram13am));
-				irLearningMode = IR_LEARNING_PROGRAM14;
-				graPuts("Program 15 =? ");
-				break;
-				case IR_LEARNING_PROGRAM14:
-				learnIrCode(PROGRAM14_ADDRESS, &irmp_data, &irmp_program14);
-				freqProgram14fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram14fm;
-				freqProgram14am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram14am;
-				eeprom_update_block(&freqProgram14fm, (unsigned char *)PROGRAM14_FM_FREQ_ADDRESS, sizeof(freqProgram14fm));
-				eeprom_update_block(&freqProgram14am, (unsigned char *)PROGRAM14_AM_FREQ_ADDRESS, sizeof(freqProgram14am));
-				irLearningMode = IR_LEARNING_PROGRAM15;
-				graPuts("Program 16 =? ");
-				break;
-				case IR_LEARNING_PROGRAM15:
-				learnIrCode(PROGRAM15_ADDRESS, &irmp_data, &irmp_program15);
-				freqProgram15fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram15fm;
-				freqProgram15am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram15am;
-				eeprom_update_block(&freqProgram15fm, (unsigned char *)PROGRAM15_FM_FREQ_ADDRESS, sizeof(freqProgram15fm));
-				eeprom_update_block(&freqProgram15am, (unsigned char *)PROGRAM15_AM_FREQ_ADDRESS, sizeof(freqProgram15am));
-				irLearningMode = IR_LEARNING_PROGRAM16;
-				graPuts("Program 17 =? ");
-				break;
-				case IR_LEARNING_PROGRAM16:
-				learnIrCode(PROGRAM16_ADDRESS, &irmp_data, &irmp_program16);
-				freqProgram16fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram16fm;
-				freqProgram16am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram16am;
-				eeprom_update_block(&freqProgram16fm, (unsigned char *)PROGRAM16_FM_FREQ_ADDRESS, sizeof(freqProgram16fm));
-				eeprom_update_block(&freqProgram16am, (unsigned char *)PROGRAM16_AM_FREQ_ADDRESS, sizeof(freqProgram16am));
-				irLearningMode = IR_LEARNING_PROGRAM17;
-				graPuts("Program 18 =? ");
-				break;
-				case IR_LEARNING_PROGRAM17:
-				learnIrCode(PROGRAM17_ADDRESS, &irmp_data, &irmp_program17);
-				freqProgram17fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram17fm;
-				freqProgram17am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram17am;
-				eeprom_update_block(&freqProgram17fm, (unsigned char *)PROGRAM17_FM_FREQ_ADDRESS, sizeof(freqProgram17fm));
-				eeprom_update_block(&freqProgram17am, (unsigned char *)PROGRAM17_AM_FREQ_ADDRESS, sizeof(freqProgram17am));
-				irLearningMode = IR_LEARNING_PROGRAM18;
-				graPuts("Program 19 =? ");
-				break;
-				case IR_LEARNING_PROGRAM18:
-				learnIrCode(PROGRAM18_ADDRESS, &irmp_data, &irmp_program18);
-				freqProgram18fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram18fm;
-				freqProgram18am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram18am;
-				eeprom_update_block(&freqProgram18fm, (unsigned char *)PROGRAM18_FM_FREQ_ADDRESS, sizeof(freqProgram18fm));
-				eeprom_update_block(&freqProgram18am, (unsigned char *)PROGRAM18_AM_FREQ_ADDRESS, sizeof(freqProgram18am));
-				irLearningMode = IR_LEARNING_PROGRAM19;
-				graPuts("Program 20 =? ");
-				break;
-				case IR_LEARNING_PROGRAM19:
-				learnIrCode(PROGRAM19_ADDRESS, &irmp_data, &irmp_program19);
-				freqProgram19fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram19fm;
-				freqProgram19am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram19am;
-				eeprom_update_block(&freqProgram19fm, (unsigned char *)PROGRAM19_FM_FREQ_ADDRESS, sizeof(freqProgram19fm));
-				eeprom_update_block(&freqProgram19am, (unsigned char *)PROGRAM19_AM_FREQ_ADDRESS, sizeof(freqProgram19am));
-				irLearningMode = IR_LEARNING_R;
-				graPuts("Vol. up   = ? ");
-				break;
-				case IR_LEARNING_R:
-				learnIrCode(R_ADDRESS, &irmp_data, &irmp_r);
-				irLearningMode = IR_LEARNING_F;
-				graPuts("Vol. down = ? ");
-				break;
-				case IR_LEARNING_F:
-				learnIrCode(F_ADDRESS, &irmp_data, &irmp_f);
-				irLearningMode = IR_LEARNING_MUTE;
-				graPuts("Mute      = ? ");
-				break;
-				case IR_LEARNING_MUTE:
-				learnIrCode(MUTE_ADDRESS, &irmp_data, &irmp_mute);
-				irLearningMode = IR_LEARNING_STANDBY;
-				graPuts("On/standby= ? ");
-				break;
-				case IR_LEARNING_STANDBY:
-				learnIrCode(STANDBY_ADDRESS, &irmp_data, &irmp_standby);
-				irLearningMode = IR_LEARNING_BAND;
-				graPuts("Band      = ? ");
-				break;
-				case IR_LEARNING_BAND:
-				learnIrCode(BAND_ADDRESS, &irmp_data, &irmp_band);
-				irLearningMode = IR_LEARNING_PROGRAM;
-				graPuts("Prog. tune= ? ");
-				break;
-				case IR_LEARNING_PROGRAM:
-				learnIrCode(PROGRAM_ADDRESS, &irmp_data, &irmp_program);
-				irLearningMode = IR_LEARNING_MONOSTEREO;
-				graPuts("Mono/ster.= ? ");
-				break;
-				case IR_LEARNING_MONOSTEREO:
-				learnIrCode(MONOSTEREO_ADDRESS, &irmp_data, &irmp_monostereo);
-				irLearningMode = IR_LEARNING_VOLUMEDOWN;
-				graPuts("Tune down = ? ");
-				break;
-				case IR_LEARNING_VOLUMEDOWN:
-				learnIrCode(VOLUMEDOWN_ADDRESS, &irmp_data, &irmp_volumedown);
-				irLearningMode = IR_LEARNING_VOLUMEUP;
-				graPuts("Tune up   = ? ");
-				break;
-				case IR_LEARNING_VOLUMEUP:
-				learnIrCode(VOLUMEUP_ADDRESS, &irmp_data, &irmp_volumeup);
-				irLearningMode = IR_LEARNING_BASSDOWN;
-				graPuts("Bass down = ? ");
-				break;
-				case IR_LEARNING_BASSDOWN:
-				learnIrCode(BASSDOWN_ADDRESS, &irmp_data, &irmp_bassdown);
-				irLearningMode = IR_LEARNING_BASSUP;
-				graPuts("Bass up   = ? ");
-				break;
-				case IR_LEARNING_BASSUP:
-				learnIrCode(BASSUP_ADDRESS, &irmp_data, &irmp_bassup);
-				irLearningMode = IR_LEARNING_TREBLEDOWN;
-				graPuts("Treble dn = ? ");
-				break;
-				case IR_LEARNING_TREBLEDOWN:
-				learnIrCode(TREBLEDOWN_ADDRESS, &irmp_data, &irmp_trebledown);
-				irLearningMode = IR_LEARNING_TREBLEUP;
-				graPuts("Treble up = ? ");
-				break;
-				case IR_LEARNING_TREBLEUP:
-				learnIrCode(TREBLEUP_ADDRESS, &irmp_data, &irmp_trebleup);
-				irLearningMode = IR_LEARNING_DISPLAY;
-				graPuts("Display   = ? ");
-				break;
-				case IR_LEARNING_DISPLAY:
-				learnIrCode(DISPLAY_ADDRESS, &irmp_data, &irmp_display);
-				exitSpecialMode();
-				break;
+				switch (irLearningMode)
+				{
+					case IR_LEARNING_PROGRAM0:
+					learnIrCode(PROGRAM0_ADDRESS, &irmp_data, &irmp_program0);
+					graPuts("Program 2 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM1;
+					break;
+					case IR_LEARNING_PROGRAM1:
+					learnIrCode(PROGRAM1_ADDRESS, &irmp_data, &irmp_program1);
+					graPuts("Program 3 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM2;
+					break;
+					case IR_LEARNING_PROGRAM2:
+					learnIrCode(PROGRAM2_ADDRESS, &irmp_data, &irmp_program2);
+					graPuts("Program 4 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM3;
+					break;
+					case IR_LEARNING_PROGRAM3:
+					learnIrCode(PROGRAM3_ADDRESS, &irmp_data, &irmp_program3);
+					graPuts("Program 5 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM4;
+					break;
+					case IR_LEARNING_PROGRAM4:
+					learnIrCode(PROGRAM4_ADDRESS, &irmp_data, &irmp_program4);
+					graPuts("Program 6 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM5;
+					break;
+					case IR_LEARNING_PROGRAM5:
+					learnIrCode(PROGRAM5_ADDRESS, &irmp_data, &irmp_program5);
+					graPuts("Program 7 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM6;
+					break;
+					case IR_LEARNING_PROGRAM6:
+					learnIrCode(PROGRAM6_ADDRESS, &irmp_data, &irmp_program6);
+					graPuts("Program 8 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM7;
+					break;
+					case IR_LEARNING_PROGRAM7:
+					learnIrCode(PROGRAM7_ADDRESS, &irmp_data, &irmp_program7);
+					graPuts("Program 9 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM8;
+					break;
+					case IR_LEARNING_PROGRAM8:
+					learnIrCode(PROGRAM8_ADDRESS, &irmp_data, &irmp_program8);
+					graPuts("Program 10 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM9;
+					break;
+					case IR_LEARNING_PROGRAM9:
+					learnIrCode(PROGRAM9_ADDRESS, &irmp_data, &irmp_program9);
+					graPuts("Program 11 = ? ");
+					irLearningMode = IR_LEARNING_PROGRAM10;
+					break;
+					case IR_LEARNING_PROGRAM10:
+					learnIrCode(PROGRAM10_ADDRESS, &irmp_data, &irmp_program10);
+					graPuts("Program 12 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM11;
+					break;
+					case IR_LEARNING_PROGRAM11:
+					learnIrCode(PROGRAM11_ADDRESS, &irmp_data, &irmp_program11);
+					graPuts("Program 13 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM12;
+					break;
+					case IR_LEARNING_PROGRAM12:
+					learnIrCode(PROGRAM12_ADDRESS, &irmp_data, &irmp_program12);
+					graPuts("Program 14 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM13;
+					break;
+					case IR_LEARNING_PROGRAM13:
+					learnIrCode(PROGRAM13_ADDRESS, &irmp_data, &irmp_program13);
+					graPuts("Program 15 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM14;
+					break;
+					case IR_LEARNING_PROGRAM14:
+					learnIrCode(PROGRAM14_ADDRESS, &irmp_data, &irmp_program14);
+					graPuts("Program 16 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM15;
+					break;
+					case IR_LEARNING_PROGRAM15:
+					learnIrCode(PROGRAM15_ADDRESS, &irmp_data, &irmp_program15);
+					graPuts("Program 17 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM16;
+					break;
+					case IR_LEARNING_PROGRAM16:
+					learnIrCode(PROGRAM16_ADDRESS, &irmp_data, &irmp_program16);
+					graPuts("Program 18 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM17;
+					break;
+					case IR_LEARNING_PROGRAM17:
+					learnIrCode(PROGRAM17_ADDRESS, &irmp_data, &irmp_program17);
+					graPuts("Program 19 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM18;
+					break;
+					case IR_LEARNING_PROGRAM18:
+					learnIrCode(PROGRAM18_ADDRESS, &irmp_data, &irmp_program18);
+					graPuts("Program 20 = ?");
+					irLearningMode = IR_LEARNING_PROGRAM19;
+					break;
+					case IR_LEARNING_PROGRAM19:
+					learnIrCode(PROGRAM19_ADDRESS, &irmp_data, &irmp_program19);
+					speOn(SPE_ARROW_DOWN);
+					graPuts("Tuning = ?    ");
+					irLearningMode = IR_LEARNING_R;
+					break;
+					case IR_LEARNING_R:
+					learnIrCode(R_ADDRESS, &irmp_data, &irmp_r);
+					speOff(SPE_ARROW_DOWN);
+					speOn(SPE_ARROW_UP);
+					graPuts("Tuning = ?    ");
+					irLearningMode = IR_LEARNING_F;
+					break;
+					case IR_LEARNING_F:
+					learnIrCode(F_ADDRESS, &irmp_data, &irmp_f);
+					speOff(SPE_ARROW_UP);
+					graPuts("Mute = ?      ");
+					irLearningMode = IR_LEARNING_MUTE;
+					break;
+					case IR_LEARNING_MUTE:
+					learnIrCode(MUTE_ADDRESS, &irmp_data, &irmp_mute);
+					graPuts("Standby = ?   ");
+					irLearningMode = IR_LEARNING_STANDBY;
+					break;
+					case IR_LEARNING_STANDBY:
+					learnIrCode(STANDBY_ADDRESS, &irmp_data, &irmp_standby);
+					graPuts("Band/input = ?");
+					irLearningMode = IR_LEARNING_BAND;
+					break;
+					case IR_LEARNING_BAND:
+					learnIrCode(BAND_ADDRESS, &irmp_data, &irmp_band);
+					speOn(SPE_ARROW_DOWN);
+					graPuts("Volume = ?    ");
+					irLearningMode = IR_LEARNING_VOLUMEDOWN;
+					break;
+					case IR_LEARNING_VOLUMEDOWN:
+					learnIrCode(VOLUMEDOWN_ADDRESS, &irmp_data, &irmp_volumedown);
+					speOff(SPE_ARROW_DOWN);
+					speOn(SPE_ARROW_UP);
+					graPuts("Volume = ?    ");
+					irLearningMode = IR_LEARNING_VOLUMEUP;
+					break;
+					case IR_LEARNING_VOLUMEUP:
+					learnIrCode(VOLUMEUP_ADDRESS, &irmp_data, &irmp_volumeup);
+					speOff(SPE_ARROW_UP);
+					speOn(SPE_ARROW_DOWN);
+					graPuts("Bass = ?      ");
+					irLearningMode = IR_LEARNING_BASSDOWN;
+					break;
+					case IR_LEARNING_BASSDOWN:
+					learnIrCode(BASSDOWN_ADDRESS, &irmp_data, &irmp_bassdown);
+					speOff(SPE_ARROW_DOWN);
+					speOn(SPE_ARROW_UP);
+					graPuts("Bass = ?      ");
+					irLearningMode = IR_LEARNING_BASSUP;
+					break;
+					case IR_LEARNING_BASSUP:
+					learnIrCode(BASSUP_ADDRESS, &irmp_data, &irmp_bassup);
+					speOn(SPE_ARROW_DOWN);
+					speOff(SPE_ARROW_UP);
+					graPuts("Treble = ?    ");
+					irLearningMode = IR_LEARNING_TREBLEDOWN;
+					break;
+					case IR_LEARNING_TREBLEDOWN:
+					learnIrCode(TREBLEDOWN_ADDRESS, &irmp_data, &irmp_trebledown);
+					speOn(SPE_ARROW_UP);
+					speOff(SPE_ARROW_DOWN);
+					graPuts("Treble = ?    ");
+					irLearningMode = IR_LEARNING_TREBLEUP;
+					break;
+					case IR_LEARNING_TREBLEUP:
+					learnIrCode(TREBLEUP_ADDRESS, &irmp_data, &irmp_trebleup);
+					speOff(SPE_ARROW_UP);
+					graPuts("Mono/st. = ?  ");
+					irLearningMode = IR_LEARNING_MONOSTEREO;
+					break;
+					case IR_LEARNING_MONOSTEREO:
+					learnIrCode(MONOSTEREO_ADDRESS, &irmp_data, &irmp_monostereo);
+					graPuts("Display = ?   ");
+					irLearningMode = IR_LEARNING_DISPLAY;
+					break;
+					case IR_LEARNING_DISPLAY:
+					learnIrCode(DISPLAY_ADDRESS, &irmp_data, &irmp_display);
+					graPuts("Program = ?   ");
+					irLearningMode = IR_LEARNING_PROGRAM;
+					break;
+					case IR_LEARNING_PROGRAM:
+					learnIrCode(PROGRAM_ADDRESS, &irmp_data, &irmp_program);
+					exitSpecialMode();
+					break;
+				}
+			}
+		}
+		else if (specialMode == SPECIAL_MODE_PROGRAM)
+		{
+			if (!wasRepetition && (getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM) && getMode() != MODE_STANDBY)
+			{
+				bool wasRecognized = false;
+				
+				// user pressed button to save a program into, let's check if it is valid Program button, or the Program button was pressed again to cancel
+				if (memcmp(&irmp_data, &irmp_program0, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM0_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM0_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram0fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM0_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM0_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram0am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program1, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM1_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM1_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram1fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM1_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM1_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram1am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program2, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM2_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM2_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram2fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM2_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM2_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram2am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program3, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM3_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM3_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram3fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM3_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM3_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram3am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program4, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM4_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM4_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram4fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM4_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM4_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram4am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program5, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM5_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM5_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram5fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM5_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM5_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram5am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program6, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM6_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM6_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram6fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM6_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM6_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram6am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program7, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM7_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM7_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram7fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM7_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM7_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram7am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program8, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM8_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM8_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram8fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM8_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM8_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram8am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program9, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM9_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM9_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram9fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM9_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM9_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram9am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program10, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM10_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM10_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram10fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM10_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM10_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram10am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program11, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM11_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM11_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram11fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM11_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM11_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram11am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program12, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM12_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM12_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram12fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM12_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM12_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram12am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program13, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM13_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM13_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram13fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM13_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM13_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram13am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program14, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM14_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM14_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram14fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM14_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM14_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram14am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program15, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM15_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM15_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram15fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM15_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM15_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram15am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program16, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM16_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM16_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram16fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM16_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM16_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram16am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program17, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM17_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM17_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram17fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM17_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM17_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram17am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program18, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM18_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM18_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram18fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM18_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM18_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram18am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program19, sizeof(irmp_data) - 1) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM19_FM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM19_FM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram19fm = freq;
+					}
+					else if (getMode() == MODE_RADIO_AM)
+					{
+						unsigned int freq = si4735.getCurrentFrequency();
+						eeprom_update_byte((unsigned char*)PROGRAM19_AM_FREQ_ADDRESS, freq & 0xFF);
+						eeprom_update_byte((unsigned char*)PROGRAM19_AM_FREQ_ADDRESS + 1, freq >> 8);
+						freqProgram19am = freq;
+					}
+					
+					wasRecognized = true;
+				}
+				else if (memcmp(&irmp_data, &irmp_program, sizeof(irmp_data) - 1) == 0)
+				{
+					wasRecognized = true;
+				}
+				
+				if (wasRecognized == 1)
+				{
+					exitSpecialMode();
+				}
 			}
 		}
 		else
 		{
-			// not in learning mode, act on the received code
-			if (memcmp(&irmp_data, &irmp_standby, sizeof(irmp_data)) == 0)
+			// compare trained code with received code
+			// below we compare sizeof - 1 because we want to exclude 'flags' property (it indicates repetition)
+			if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram0fm >= MIN_FREQ_MHZ && freqProgram0fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram0am >= MIN_FREQ_KHZ && freqProgram0am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program0, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram0fm, freqProgram0am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram1fm >= MIN_FREQ_MHZ && freqProgram1fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram1am >= MIN_FREQ_KHZ && freqProgram1am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program1, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram1fm, freqProgram1am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram2fm >= MIN_FREQ_MHZ && freqProgram2fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram2am >= MIN_FREQ_KHZ && freqProgram2am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program2, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram2fm, freqProgram2am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram3fm >= MIN_FREQ_MHZ && freqProgram3fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram3am >= MIN_FREQ_KHZ && freqProgram3am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program3, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram3fm, freqProgram3am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram4fm >= MIN_FREQ_MHZ && freqProgram4fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram4am >= MIN_FREQ_KHZ && freqProgram4am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program4, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram4fm, freqProgram4am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram5fm >= MIN_FREQ_MHZ && freqProgram5fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram5am >= MIN_FREQ_KHZ && freqProgram5am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program5, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram5fm, freqProgram5am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram6fm >= MIN_FREQ_MHZ && freqProgram6fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram6am >= MIN_FREQ_KHZ && freqProgram6am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program6, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram6fm, freqProgram6am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram7fm >= MIN_FREQ_MHZ && freqProgram7fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram7am >= MIN_FREQ_KHZ && freqProgram7am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program7, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram7fm, freqProgram7am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram8fm >= MIN_FREQ_MHZ && freqProgram8fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram8am >= MIN_FREQ_KHZ && freqProgram8am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program8, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram8fm, freqProgram8am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram9fm >= MIN_FREQ_MHZ && freqProgram9fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram9am >= MIN_FREQ_KHZ && freqProgram9am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program9, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram9fm, freqProgram9am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram10fm >= MIN_FREQ_MHZ && freqProgram10fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram10am >= MIN_FREQ_KHZ && freqProgram10am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program10, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram10fm, freqProgram10am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram11fm >= MIN_FREQ_MHZ && freqProgram11fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram11am >= MIN_FREQ_KHZ && freqProgram11am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program11, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram11fm, freqProgram11am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram12fm >= MIN_FREQ_MHZ && freqProgram12fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram12am >= MIN_FREQ_KHZ && freqProgram12am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program12, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram12fm, freqProgram12am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram13fm >= MIN_FREQ_MHZ && freqProgram13fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram13am >= MIN_FREQ_KHZ && freqProgram13am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program13, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram13fm, freqProgram13am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram14fm >= MIN_FREQ_MHZ && freqProgram14fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram14am >= MIN_FREQ_KHZ && freqProgram14am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program14, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram14fm, freqProgram14am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram15fm >= MIN_FREQ_MHZ && freqProgram15fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram15am >= MIN_FREQ_KHZ && freqProgram15am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program15, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram15fm, freqProgram15am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram16fm >= MIN_FREQ_MHZ && freqProgram16fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram16am >= MIN_FREQ_KHZ && freqProgram16am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program16, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram16fm, freqProgram16am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram17fm >= MIN_FREQ_MHZ && freqProgram17fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram17am >= MIN_FREQ_KHZ && freqProgram17am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program17, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram17fm, freqProgram17am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram18fm >= MIN_FREQ_MHZ && freqProgram18fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram18am >= MIN_FREQ_KHZ && freqProgram18am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program18, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram18fm, freqProgram18am);
+			}
+			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram19fm >= MIN_FREQ_MHZ && freqProgram19fm <= MAX_FREQ_MHZ)
+				|| (getMode() == MODE_RADIO_AM && freqProgram19am >= MIN_FREQ_KHZ && freqProgram19am <= MAX_FREQ_KHZ))
+					&& memcmp(&irmp_data, &irmp_program19, sizeof(irmp_data) - 1) == 0
+					&& !wasRepetition
+					&& specialMode == 0)
+			{
+				switchToSavedFrequency(freqProgram19fm, freqProgram19am);
+			}
+			else if ((getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM)
+				&& memcmp(&irmp_data, &irmp_f, sizeof(irmp_data) - 1) == 0
+				&& specialMode == 0)
+			{
+				frequencyUp();
+			}
+			else if ((getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM)
+				&& memcmp(&irmp_data, &irmp_r, sizeof(irmp_data) - 1) == 0
+				&& specialMode == 0)
+			{
+				frequencyDown();
+			}
+			else if (getMode() != MODE_STANDBY
+				&& memcmp(&irmp_data, &irmp_mute, sizeof(irmp_data) - 1) == 0
+				&& !wasRepetition
+				&& specialMode == 0)
+			{
+				toggleMute();
+			}
+			else if ((getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM)
+				&& memcmp(&irmp_data, &irmp_program, sizeof(irmp_program) - 1) == 0
+				&& !wasRepetition
+				&& specialMode == 0)
+			{
+				waitForVfdReady();
+				graPuts("Program # = ? ");
+				speOff(SPE_ARROW_LEFT);
+				speOff(SPE_ARROW_RIGHT);
+				specialMode = SPECIAL_MODE_PROGRAM;
+			}
+			else if (memcmp(&irmp_data, &irmp_standby, sizeof(irmp_standby) - 1) == 0
+				&& !wasRepetition
+				&& specialMode == 0)
 			{
 				if (getMode() == MODE_STANDBY)
 				{
@@ -2147,164 +2675,53 @@ void loop() {
 					off();
 				}
 			}
-			else if (getMode() != MODE_STANDBY)
+			else if (getMode() != MODE_STANDBY
+				&& memcmp(&irmp_data, &irmp_band, sizeof(irmp_band) - 1) == 0
+				&& !wasRepetition
+				&& specialMode == 0)
 			{
-				if (memcmp(&irmp_data, &irmp_r, sizeof(irmp_data)) == 0)
-				{
-					volumeUp();
-				}
-				else if (memcmp(&irmp_data, &irmp_f, sizeof(irmp_data)) == 0)
-				{
-					volumeDown();
-				}
-				else if (memcmp(&irmp_data, &irmp_mute, sizeof(irmp_data)) == 0)
-				{
-					toggleMute();
-				}
-				else if (memcmp(&irmp_data, &irmp_band, sizeof(irmp_data)) == 0)
-				{
-					switchMode();
-				}
-				else if (memcmp(&irmp_data, &irmp_monostereo, sizeof(irmp_data)) == 0)
-				{
-					toggleForceMono();
-				}
-				else if (memcmp(&irmp_data, &irmp_volumeup, sizeof(irmp_data)) == 0)
-				{
-					frequencyUp();
-				}
-				else if (memcmp(&irmp_data, &irmp_volumedown, sizeof(irmp_data)) == 0)
-				{
-					frequencyDown();
-				}
-				else if (memcmp(&irmp_data, &irmp_bassup, sizeof(irmp_data)) == 0)
-				{
-					bassUp();
-				}
-				else if (memcmp(&irmp_data, &irmp_bassdown, sizeof(irmp_data)) == 0)
-				{
-					bassDown();
-				}
-				else if (memcmp(&irmp_data, &irmp_trebleup, sizeof(irmp_data)) == 0)
-				{
-					trebleUp();
-				}
-				else if (memcmp(&irmp_data, &irmp_trebledown, sizeof(irmp_data)) == 0)
-				{
-					trebleDown();
-				}
-				else if (memcmp(&irmp_data, &irmp_display, sizeof(irmp_data)) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						displayRadioText = !displayRadioText;
-						
-						if (!displayRadioText)
-						{
-							clearRdsInfo();
-							clearGra();
-							showFM();
-						}
-						else
-						{
-							clearGra();
-							clearRadioText();
-						}
-					}
-				}
-				else if (memcmp(&irmp_data, &irmp_program, sizeof(irmp_data)) == 0)
-				{
-					// toggle the VFD driver display on/off
-					waitForVfdReady();
-					Wire.beginTransmission(I2C7_VFDDRIVER);
-					Wire.write(CMD_TOGGLE_DISPLAY);
-					Wire.endTransmission();
-					delay(1);
-				}
-				else
-				{
-					// check if a program button was pressed
-					if (memcmp(&irmp_data, &irmp_program0, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram0fm, freqProgram0am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program1, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram1fm, freqProgram1am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program2, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram2fm, freqProgram2am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program3, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram3fm, freqProgram3am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program4, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram4fm, freqProgram4am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program5, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram5fm, freqProgram5am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program6, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram6fm, freqProgram6am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program7, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram7fm, freqProgram7am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program8, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram8fm, freqProgram8am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program9, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram9fm, freqProgram9am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program10, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram10fm, freqProgram10am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program11, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram11fm, freqProgram11am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program12, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram12fm, freqProgram12am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program13, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram13fm, freqProgram13am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program14, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram14fm, freqProgram14am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program15, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram15fm, freqProgram15am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program16, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram16fm, freqProgram16am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program17, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram17fm, freqProgram17am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program18, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram18fm, freqProgram18am);
-					}
-					else if (memcmp(&irmp_data, &irmp_program19, sizeof(irmp_data)) == 0)
-					{
-						switchToSavedFrequency(freqProgram19fm, freqProgram19am);
-					}
-				}
+				switchMode();
+			}
+			else if (getMode() == MODE_RADIO_FM
+				&& memcmp(&irmp_data, &irmp_monostereo, sizeof(irmp_monostereo) - 1) == 0
+				&& !wasRepetition
+				&& specialMode == 0)
+			{
+				toggleForceMono();
+			}
+			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_volumedown, sizeof(irmp_data) - 1) == 0)
+			{
+				volumeDown();
+			}
+			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_volumeup, sizeof(irmp_data) - 1) == 0)
+			{
+				volumeUp();
+			}
+			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_trebledown, sizeof(irmp_data) - 1) == 0)
+			{
+				trebleDown();
+			}
+			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_trebleup, sizeof(irmp_data) - 1) == 0)
+			{
+				trebleUp();
+			}
+			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_bassdown, sizeof(irmp_data) - 1) == 0)
+			{
+				bassDown();
+			}
+			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_bassup, sizeof(irmp_data) - 1) == 0)
+			{
+				bassUp();
+			}
+			else if (memcmp(&irmp_data, &irmp_display, sizeof(irmp_data) - 1) == 0
+				&& !wasRepetition
+				&& specialMode == 0)
+			{
+				waitForVfdReady();
+				Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+				Wire.write(CMD_TOGGLE_DISPLAY);
+				Wire.endTransmission();
+				delay(1);
 			}
 		}
 	}

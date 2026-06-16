@@ -9,6 +9,7 @@
 #include <avr/wdt.h>
 #include <avr/sleep.h>
 #include <avr/power.h>
+#include <util/atomic.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +29,7 @@ static unsigned int dtDayInMonth = UINT16_MAX;
 static unsigned int dtDayInWeek = UINT16_MAX;
 static unsigned int dtMonth = UINT16_MAX;
 static unsigned int dtYear = UINT16_MAX; // two-place year
-static const char* dayNames[] = { "Pon", "Uto", "Str", "Štv", "Pia", "Sob", "Ned" };
+static const char* dayNames[] = { "Pon", "Uto", "Str", "Å tv", "Pia", "Sob", "Ned" };
 static const char* fmString = "      FM      ";
 static char *radioText; // partial only, dynamic length + nul character
 static char *stationName; // partial only, exactly 8 characters + nul character
@@ -60,6 +61,19 @@ static unsigned int lastFreqKhz = DEFAULT_FREQ_KHZ;
 static unsigned char trebleBass = 0;
 static unsigned int stereoAndTunedUpdateCounter = 0;
 
+// ---------------------------------------------------------------------------
+// EEPROM address map.
+// Addresses are intentionally LEFT UNCHANGED so that already-learned IR codes
+// stored in the device EEPROM keep working after re-flashing.
+// All pointers index single bytes, so they are ALL declared as
+// "const unsigned char*". (The trailing block addresses used to be declared
+// as "const unsigned int*", which was wrong: pointer arithmetic on them would
+// have advanced 2 bytes per element. They only worked because every use cast
+// to (unsigned char*) or passed an explicit size.)
+// NOTE: there is a deliberate 1-byte gap at offset 219 (F_ADDRESS=213 is 6 B,
+// next block MUTE_ADDRESS=220). It is preserved to avoid shifting later
+// records and invalidating stored data.
+// ---------------------------------------------------------------------------
 static const unsigned char* LAST_MODE_ADDRESS = (unsigned char*)0; // 1 B
 static const unsigned char* LAST_FREQ_KHZ_ADDRESS = (unsigned char*)1; // 2 B
 static const unsigned char* LAST_FREQ_MHZ_ADDRESS = (unsigned char*)3; // 2 B
@@ -190,7 +204,7 @@ const unsigned char* PROGRAM19_FM_FREQ_ADDRESS = (unsigned char*)205; // 2 B
 static IRMP_DATA irmp_r;
 const unsigned char* R_ADDRESS = (unsigned char*)207; // 6 B - sizeof(IRMP_DATA)
 static IRMP_DATA irmp_f;
-const unsigned char* F_ADDRESS = (unsigned char*)213; // 6 B - sizeof(IRMP_DATA)
+const unsigned char* F_ADDRESS = (unsigned char*)213; // 6 B - sizeof(IRMP_DATA); note: 1-byte gap at 219 before MUTE_ADDRESS (preserved intentionally)
 static IRMP_DATA irmp_mute;
 const unsigned char* MUTE_ADDRESS = (unsigned char*)220; // 6 B - sizeof(IRMP_DATA)
 static IRMP_DATA irmp_standby;
@@ -205,17 +219,17 @@ const unsigned char* FORCEMONO_ADDRESS = (unsigned char*)250; // 1 B
 static IRMP_DATA irmp_volumedown;
 const unsigned char* VOLUMEDOWN_ADDRESS = (unsigned char*)251; // 6 B - sizeof(IRMP_DATA)
 static IRMP_DATA irmp_volumeup;
-const unsigned int* VOLUMEUP_ADDRESS = (unsigned int*)257; // 6 B - sizeof(IRMP_DATA)
+const unsigned char* VOLUMEUP_ADDRESS = (unsigned char*)257; // 6 B - sizeof(IRMP_DATA)  (was wrongly unsigned int*)
 static IRMP_DATA irmp_bassdown;
-const unsigned int* BASSDOWN_ADDRESS = (unsigned int*)263; // 6 B - sizeof(IRMP_DATA)
+const unsigned char* BASSDOWN_ADDRESS = (unsigned char*)263; // 6 B - sizeof(IRMP_DATA)  (was wrongly unsigned int*)
 static IRMP_DATA irmp_bassup;
-const unsigned int* BASSUP_ADDRESS = (unsigned int*)269; // 6 B - sizeof(IRMP_DATA)
+const unsigned char* BASSUP_ADDRESS = (unsigned char*)269; // 6 B - sizeof(IRMP_DATA)  (was wrongly unsigned int*)
 static IRMP_DATA irmp_trebledown;
-const unsigned int* TREBLEDOWN_ADDRESS = (unsigned int*)275; // 6 B - sizeof(IRMP_DATA)
+const unsigned char* TREBLEDOWN_ADDRESS = (unsigned char*)275; // 6 B - sizeof(IRMP_DATA)  (was wrongly unsigned int*)
 static IRMP_DATA irmp_trebleup;
-const unsigned int* TREBLEUP_ADDRESS = (unsigned int*)281; // 6 B - sizeof(IRMP_DATA)
+const unsigned char* TREBLEUP_ADDRESS = (unsigned char*)281; // 6 B - sizeof(IRMP_DATA)  (was wrongly unsigned int*)
 static IRMP_DATA irmp_display;
-const unsigned int* DISPLAY_ADDRESS = (unsigned int*)287; // 6 B - sizeof(IRMP_DATA)
+const unsigned char* DISPLAY_ADDRESS = (unsigned char*)287; // 6 B - sizeof(IRMP_DATA)  (was wrongly unsigned int*)
 
 static const char speForStandby[] = {
 	SPE_ARROW_DOWN,
@@ -260,8 +274,20 @@ static const char speForStandby[] = {
 
 static unsigned int weekday(unsigned int y, unsigned int m, unsigned int d) {
 	// function must return one-based day index (1 = Monday, 7 = Sunday), but by default 0 = Sunday
-	unsigned int result = (d += m < 3 ? y-- : y - 2 , 23 * m / 9 + d + 4 + y / 4 - y / 100 + y / 400) % 7;
-	
+	// NOTE: rewritten from a single comma-operator expression that modified y
+	// in-place inside the same full-expression it was also read in (fragile).
+	// This is the same Sakamoto's algorithm, written without that side effect.
+	if (m < 3)
+	{
+		y -= 1;
+	}
+	else
+	{
+		y -= 2;
+	}
+
+	unsigned int result = (23 * m / 9 + d + 4 + y / 4 - y / 100 + y / 400) % 7;
+
 	if (result == 0)
 	{
 		result = 7;
@@ -278,11 +304,22 @@ static void learnIrCode(const void* eepromAddress, IRMP_DATA* irmpDataToSet, IRM
 
 static unsigned char getMode()
 {
-	return digitalRead(PB0A) == LOW // display is dimmed
-		? MODE_STANDBY
-		: digitalRead(PC3A) == LOW // BT is off
-			? si4735.isCurrentTuneFM() ? MODE_RADIO_FM : MODE_RADIO_AM
-			: MODE_BT;
+	// display dimmed -> standby; BT pin high -> Bluetooth; otherwise radio.
+	// NOTE: only query the Si4735 for FM/AM when we are actually in a radio
+	// mode (display on AND BT off). Previously isCurrentTuneFM() was called
+	// whenever BT was off even if the set was in standby / powered down,
+	// which could read stale or invalid tuner state.
+	if (digitalRead(PB0A) == LOW) // display is dimmed
+	{
+		return MODE_STANDBY;
+	}
+
+	if (digitalRead(PC3A) != LOW) // BT is on
+	{
+		return MODE_BT;
+	}
+
+	return si4735.isCurrentTuneFM() ? MODE_RADIO_FM : MODE_RADIO_AM;
 }
 
 static void saveSettings()
@@ -355,11 +392,42 @@ static bool compareGraMemory(char const* text)
 	return result;
 }
 
+// Optional, bounded, non-blocking readiness poll. Reads the slave status
+// byte and returns once it is READY or a short timeout elapses, so the
+// master never hangs if the slave is unresponsive. The slave still accepts
+// commands without this (one-way), but polling avoids dropping a command
+// while the slave is mid-render.
+static void waitForVfdReady()
+{
+	for (unsigned char attempts = 0; attempts < 8; attempts++)
+	{
+		uint8_t status = STATUS_READY;
+		if (Wire.requestFrom((int)(I2C7_VFDDRIVER), 1) == 1)
+		{
+			status = Wire.read();
+		}
+		else
+		{
+			// could not read a status byte; do not block the master
+			return;
+		}
+
+		if (status == STATUS_READY)
+		{
+			return;
+		}
+
+		wdt_reset();
+		delayMicroseconds(200);
+	}
+}
+
 static void graPuts(char const* text)
 {
 	if (compareGraMemory(text))
 	{
-		Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+		waitForVfdReady();
+		Wire.beginTransmission(I2C7_VFDDRIVER);
 		Wire.write(CMD_SHOW_GRA_TEXT);
 		for (unsigned char i = 0; i <= 13; i++)
 		{
@@ -373,7 +441,8 @@ static void graPuts(char const* text)
 
 static void numPuts(char const* text)
 {
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_SHOW_NUM_TEXT);
 	for (unsigned char i = 0; i <= 5; i++)
 	{
@@ -388,7 +457,8 @@ static void graPutc(char chr, unsigned char index)
 	if (graDisplayMemory[index] != chr)
 	{
 		graDisplayMemory[index] = chr;
-		Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+		waitForVfdReady();
+		Wire.beginTransmission(I2C7_VFDDRIVER);
 		Wire.write(CMD_SHOW_GRA_CHAR);
 		Wire.write(chr);
 		Wire.write(index);
@@ -399,7 +469,8 @@ static void graPutc(char chr, unsigned char index)
 
 static void numPutc(char chr, unsigned char index)
 {
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_SHOW_NUM_CHAR);
 	Wire.write(chr);
 	Wire.write(index);
@@ -414,7 +485,8 @@ static void clearGra()
 		graDisplayMemory[i] = ' ';
 	}
 	
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_CLEAR_GRA);
 	Wire.endTransmission();
 	delay(1);
@@ -422,7 +494,8 @@ static void clearGra()
 
 static void clearNum()
 {
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_CLEAR_NUM);
 	Wire.endTransmission();
 	delay(1);
@@ -435,7 +508,8 @@ static void clearAll()
 		graDisplayMemory[i] = ' ';
 	}
 
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_CLEAR_ALL);
 	Wire.endTransmission();
 	delay(1);
@@ -450,7 +524,8 @@ static void speOn(char spe)
 		return;
 	}
 	
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_SHOW_SPE);
 	Wire.write(spe);
 	Wire.endTransmission();
@@ -466,7 +541,8 @@ static void speOff(char spe)
 		return;
 	}
 
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_HIDE_SPE);
 	Wire.write(spe);
 	Wire.endTransmission();
@@ -475,7 +551,8 @@ static void speOff(char spe)
 
 static void speToggle(char spe)
 {
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_TOGGLE_SPE);
 	Wire.write(spe);
 	Wire.endTransmission();
@@ -494,7 +571,8 @@ inline static void showBT()
 
 static void volDisplayUpdate()
 {
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_SHOW_VOLUME);
 	Wire.write(MAX_VOLUME - volume);
 	Wire.endTransmission();
@@ -509,13 +587,13 @@ static void volumeUp()
 		//si4735.setVolume(volume); // Si4735 has 63 as maximum volume, but TDA7468 has it as minimum
 		
 		// volume left
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000011);
 		Wire.write(volume);
 		Wire.endTransmission();
 			
 		// volume right
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000100);
 		Wire.write(volume);
 		Wire.endTransmission();
@@ -533,13 +611,13 @@ static void volumeDown()
 		//si4735.setVolume(volume);
 		
 		// volume left
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000011);
 		Wire.write(volume);
 		Wire.endTransmission();
 		
 		// volume right
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000100);
 		Wire.write(volume);
 		Wire.endTransmission();
@@ -563,7 +641,7 @@ static void trebleUp()
 		trebleBass = (trebleBass & 0xF0) | (treble & 0x0F); // update lower nibble only, upper nibble stays as it was
 		
 		// treble/bass
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000101);
 		Wire.write(trebleBass);
 		Wire.endTransmission();
@@ -586,7 +664,7 @@ static void trebleDown()
 		trebleBass = (trebleBass & 0xF0) | (treble & 0x0F); // update lower nibble only, upper nibble stays as it was
 		
 		// treble/bass
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000101);
 		Wire.write(trebleBass);
 		Wire.endTransmission();
@@ -609,7 +687,7 @@ static void bassUp()
 		trebleBass = (trebleBass & 0x0F) | (bass << 4); // update upper nibble only, lower nibble stays as it was
 		
 		// treble/bass
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000101);
 		Wire.write(trebleBass);
 		Wire.endTransmission();
@@ -632,7 +710,7 @@ static void bassDown()
 		trebleBass = (trebleBass & 0x0F) | (bass << 4); // update upper nibble only, lower nibble stays as it was
 		
 		// treble/bass
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000101);
 		Wire.write(trebleBass);
 		Wire.endTransmission();
@@ -669,7 +747,19 @@ static void showFM()
 
 static void clearRadioText()
 {
-	char maxIndex = radioText == NULL ? UINT8_MAX : (strlen(radioText) - 1);
+	// maxIndex is the last valid index of the dynamically allocated radioText,
+	// or UINT8_MAX as a "no buffer" sentinel. Guard strlen against a NULL
+	// pointer AND against an empty string (strlen==0 would underflow to 255).
+	unsigned char maxIndex;
+	if (radioText == NULL || strlen(radioText) == 0)
+	{
+		maxIndex = UINT8_MAX;
+	}
+	else
+	{
+		maxIndex = (unsigned char)(strlen(radioText) - 1);
+	}
+
 	for (unsigned char i = 0; i < RADIOTEXT_CHARS; i++)
 	{
 		completeRadioText[i] = ' ';
@@ -680,10 +770,14 @@ static void clearRadioText()
 		}
 	}
 	
-	radioTextScrollingStartIndex = 0;
-	radioTextScrollingEndIndex = 0;
-	initialScrollDelayCounter = 0;
-	radioTextDelayCounter = 0;
+	// these indices are shared with the Timer2 ISR; update them atomically
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+	{
+		radioTextScrollingStartIndex = 0;
+		radioTextScrollingEndIndex = 0;
+		initialScrollDelayCounter = 0;
+		radioTextDelayCounter = 0;
+	}
 }
 
 static void setMuteOnly(bool on)
@@ -695,7 +789,7 @@ static void setMuteOnly(bool on)
 		//si4735.setAudioMute(true); // mute
 		
 		// output
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000110);
 		Wire.write(OUTPUT_OFF);
 		Wire.endTransmission();
@@ -708,7 +802,7 @@ static void setMuteOnly(bool on)
 		//si4735.setAudioMute(false); // unmute
 		
 		// output
-		Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+		Wire.beginTransmission(I2C7_AUDIOPROC);
 		Wire.write(0b00000110);
 		Wire.write(OUTPUT_ON);
 		Wire.endTransmission();
@@ -775,7 +869,17 @@ static void toggleForceMono()
 
 static void clearRdsInfo()
 {
-	char maxIndex = stationName == NULL ? UINT8_MAX : (strlen(stationName) - 1);
+	// same NULL/empty guard as clearRadioText (strlen==0 would underflow)
+	unsigned char maxIndex;
+	if (stationName == NULL || strlen(stationName) == 0)
+	{
+		maxIndex = UINT8_MAX;
+	}
+	else
+	{
+		maxIndex = (unsigned char)(strlen(stationName) - 1);
+	}
+
 	for (unsigned char i = 0; i < STATION_NAME_CHARS; i++)
 	{
 		completeStationName[i] = ' ';
@@ -820,7 +924,7 @@ static void exitSpecialMode()
 static void setRTCValues(unsigned char bytes[])
 {
 	// 7 bytes expected...
-	Wire.beginTransmission(I2C_ADDR_RTC >> 1);
+	Wire.beginTransmission(I2C7_RTC);
 	Wire.write(0); // start from register 0, other registers are accessed incrementally
 	
 	for (unsigned char i = 0; i <= 6; i++)
@@ -851,7 +955,7 @@ void setup() {
 	OCR1B = 0;
 	TIMSK1 = 0;
 	TIFR1 = 0;
-    OCR1A = (F_CPU / F_INTERRUPTS) - 1; // compare value: 1/15000 of CPU frequency
+    OCR1A = (F_CPU / F_INTERRUPTS) - 1; // compare value: F_CPU / F_INTERRUPTS (F_INTERRUPTS = 15000 in irmpconfig.hpp; at 20 MHz this is 1333.33 -> 1332, see build notes)
     TCCR1B = _BV(WGM12) | _BV(CS10); // switch CTC Mode on, set prescaler to 1
     TIMSK1 = _BV(OCIE1A); // OCIE1A: interrupt by timer compare
 	
@@ -900,37 +1004,37 @@ void setup() {
 	trebleBass = (trebleBass0 != 0xff) ? trebleBass0 : DEFAULT_TREBLEBASS;
 	
 	// input
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000000); 
 	Wire.write(INPUT_IN1_TUNER);
 	Wire.endTransmission();
 		
 	// input gain
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000001);
 	Wire.write(0b00000000);
 	Wire.endTransmission();
 		
 	// surround
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000010);
 	Wire.write(0b01011000); // bits 3-5 must be set like this otherwise the chip is in MUTE mode!
 	Wire.endTransmission();
 	
 	// volume left
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000011);
 	Wire.write(volume);
 	Wire.endTransmission();
 	
 	// volume right
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000100);
 	Wire.write(volume);
 	Wire.endTransmission();
 	
 	// treble/bass
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000101);
 	// Wire.write(0b10000000); // max bass, min treble
 	// Wire.write(0b11111111); // 0 db bass, 0 db treble
@@ -941,7 +1045,7 @@ void setup() {
 	setMuteOnly(true);
 		
 	// bass alc
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000111);
 	Wire.write(0b10000000);
 	Wire.endTransmission();
@@ -1007,7 +1111,7 @@ void setup() {
 	eeprom_read_block(&irmp_program19, (unsigned char *)PROGRAM19_ADDRESS, sizeof(irmp_program19));
 	eeprom_read_block(&freqProgram19am, (unsigned char *)PROGRAM19_AM_FREQ_ADDRESS, sizeof(freqProgram19am));
 	eeprom_read_block(&freqProgram19fm, (unsigned char *)PROGRAM19_FM_FREQ_ADDRESS, sizeof(freqProgram19fm));
-	
+
 	eeprom_read_block(&irmp_r, (unsigned char *)R_ADDRESS, sizeof(irmp_r));
 	eeprom_read_block(&irmp_f, (unsigned char *)F_ADDRESS, sizeof(irmp_f));
 	eeprom_read_block(&irmp_mute, (unsigned char *)MUTE_ADDRESS, sizeof(irmp_mute));
@@ -1016,27 +1120,14 @@ void setup() {
 	eeprom_read_block(&irmp_program, (unsigned char *)PROGRAM_ADDRESS, sizeof(irmp_program));
 	eeprom_read_block(&irmp_monostereo, (unsigned char *)MONOSTEREO_ADDRESS, sizeof(irmp_monostereo));
 	eeprom_read_block(&irmp_volumedown, (unsigned char *)VOLUMEDOWN_ADDRESS, sizeof(irmp_volumedown));
-	eeprom_read_block(&irmp_volumeup, (unsigned int *)VOLUMEUP_ADDRESS, sizeof(irmp_volumeup));
+	eeprom_read_block(&irmp_volumeup, (unsigned char *)VOLUMEUP_ADDRESS, sizeof(irmp_volumeup));
 	eeprom_read_block(&irmp_bassdown, (unsigned char *)BASSDOWN_ADDRESS, sizeof(irmp_bassdown));
-	eeprom_read_block(&irmp_bassup, (unsigned int *)BASSUP_ADDRESS, sizeof(irmp_bassup));
+	eeprom_read_block(&irmp_bassup, (unsigned char *)BASSUP_ADDRESS, sizeof(irmp_bassup));
 	eeprom_read_block(&irmp_trebledown, (unsigned char *)TREBLEDOWN_ADDRESS, sizeof(irmp_trebledown));
-	eeprom_read_block(&irmp_trebleup, (unsigned int *)TREBLEUP_ADDRESS, sizeof(irmp_trebleup));
-	eeprom_read_block(&irmp_display, (unsigned int *)DISPLAY_ADDRESS, sizeof(irmp_display));
-	
-	wdt_reset();
-	
-	// set Saturday 1.1.2000 to RTC
-	unsigned char bytes[] = {
-		0b00000000, // seconds
-		0b00000000, // minutes
-		0b00000000, // hours
-		0b00000110, // Saturday (6)
-		0b00000001, // day of month (1)
-		0b00000001, // month (1)
-		0b00000000 // 2000
-	};
-	
-	setRTCValues(bytes);
+	eeprom_read_block(&irmp_trebleup, (unsigned char *)TREBLEUP_ADDRESS, sizeof(irmp_trebleup));
+	eeprom_read_block(&irmp_display, (unsigned char *)DISPLAY_ADDRESS, sizeof(irmp_display));
+
+	setupFinished = true;
 }
 
 static void frequencyDisplayUpdate()
@@ -1105,13 +1196,13 @@ static void setFM()
 	si4735.setVolume(SI4735_VOLUME);
 
 	// input
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000000);
 	Wire.write(INPUT_IN1_TUNER);
 	Wire.endTransmission();
 	
 	// input gain
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000001);
 	Wire.write(0b00000000);
 	Wire.endTransmission();
@@ -1138,13 +1229,13 @@ static void setAM()
 	si4735.setVolume(SI4735_VOLUME);
 	
 	// input
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000000);
 	Wire.write(INPUT_IN1_TUNER);
 	Wire.endTransmission();
 	
 	// input gain
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000001);
 	Wire.write(0b00000000);
 	Wire.endTransmission();
@@ -1162,13 +1253,13 @@ static void setBT()
 	digitalWrite(PC3A, HIGH); // BT on
 	
 	// input
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000000);
 	Wire.write(INPUT_IN2_BT);
 	Wire.endTransmission();
 	
 	// input gain
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000001);
 	Wire.write(0b00000111);
 	Wire.endTransmission();
@@ -1209,7 +1300,7 @@ static void on()
 	}
 	
 	// input
-	Wire.beginTransmission(I2C_ADDR_AUDIOPROC >> 1);
+	Wire.beginTransmission(I2C7_AUDIOPROC);
 	Wire.write(0b00000000);
 	Wire.write(getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM ? INPUT_IN1_TUNER : INPUT_IN2_BT);
 	Wire.endTransmission();
@@ -1225,7 +1316,8 @@ static void on()
 	speOn(SPE_R);
 	
 	// show underlines
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_SHOW_UNDERLINES);
 	Wire.endTransmission();
 	delay(1);
@@ -1267,7 +1359,8 @@ static void off()
 	isTunedDisplayOn = false;
 	
 	// hide underlines
-	Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
+	waitForVfdReady();
+	Wire.beginTransmission(I2C7_VFDDRIVER);
 	Wire.write(CMD_HIDE_UNDERLINES);
 	Wire.endTransmission();
 	delay(1);
@@ -1407,12 +1500,12 @@ void loop() {
 			
 		// read from RTC if indicated by interrupt from TIMER2
 		// start from register 0
-		Wire.beginTransmission(I2C_ADDR_RTC >> 1);
+		Wire.beginTransmission(I2C7_RTC);
 		Wire.write(0);
 		Wire.endTransmission();
 	
 		unsigned char registers[7];
-		Wire.requestFrom(I2C_ADDR_RTC >> 1, 7, false);
+		Wire.requestFrom(I2C7_RTC, 7, false);
 		Wire.readBytes((unsigned char *)&registers, 7);
 	
 		//char seconds = (registers[0] & 0b00001111) + ((registers[0] & 0b01110000) >> 4) * 10;
@@ -1599,31 +1692,48 @@ void loop() {
 							}
 						}
 						
-						// determine radioTextScrollingEndIndex - last non-space character
+						// snapshot the ISR-shared scrolling indices once, atomically,
+						// then work with locals so the values cannot change mid-use.
+						char startIndex;
+						char endIndex;
+						ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+						{
+							startIndex = radioTextScrollingStartIndex;
+							endIndex = radioTextScrollingEndIndex;
+						}
+
+						// determine endIndex - last non-space character
 						for (int i = RADIOTEXT_CHARS - 1; i >= 0; i--)
 						{
 							if (completeRadioText[i] != ' ')
 							{
-								radioTextScrollingEndIndex = i;
+								endIndex = i;
 								break;
 							}
 						}
 					
-						if (radioTextScrollingEndIndex < GRA_DISPLAY_CHARS)
+						if (endIndex < GRA_DISPLAY_CHARS)
 						{
 							// no scrolling, radiotext is short
-							radioTextScrollingStartIndex = 0;
+							startIndex = 0;
+						}
+
+						// publish possibly-updated indices back atomically
+						ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+						{
+							radioTextScrollingStartIndex = startIndex;
+							radioTextScrollingEndIndex = endIndex;
 						}
 					
 						char graString[GRA_DISPLAY_CHARS]; // not nul-terminated
 						for (unsigned char i = 0; i < GRA_DISPLAY_CHARS; i++)
 						{
-							graString[i] = completeRadioText[i + radioTextScrollingStartIndex];
+							graString[i] = completeRadioText[i + startIndex];
 						}
 					
 						graPuts((const char *)&graString);
 						
-						if (radioTextScrollingStartIndex > 0)
+						if (startIndex > 0)
 						{
 							speOn(SPE_ARROW_LEFT);
 						}
@@ -1634,7 +1744,7 @@ void loop() {
 						
 						delay(1);
 						
-						if ((radioTextScrollingStartIndex + GRA_DISPLAY_CHARS < radioTextScrollingEndIndex + 1))
+						if ((startIndex + GRA_DISPLAY_CHARS < endIndex + 1))
 						{
 							speOn(SPE_ARROW_RIGHT);
 						}
@@ -1680,8 +1790,11 @@ void loop() {
 					if (!displayRadioText)
 					{
 						// find real length of station name - it may be padded with spaces and we want to center it
+						// NOTE: the original loop used "unsigned char i" with "i >= 0", which is
+						// ALWAYS true for an unsigned type -> infinite loop / out-of-bounds read once
+						// i wrapped from 0 to 255. Use a signed index instead.
 						char stationNameMaxIndex = 0;
-						for (unsigned char i = STATION_NAME_CHARS - 1; i >= 0; i--)
+						for (int i = STATION_NAME_CHARS - 1; i >= 0; i--)
 						{
 							if (completeStationName[i] != ' ')
 							{
@@ -1748,796 +1861,269 @@ void loop() {
 	
 	if (irmp_get_data(&irmp_data))
 	{
-		char wasRepetition = irmp_data.flags & IRMP_FLAG_REPETITION;
+		wdt_reset();
 		
-		if (specialMode == SPECIAL_MODE_IR_LEARNING)
+		// a key was received
+		if (irLearningMode != 0)
 		{
-			if (!wasRepetition)
+			// we are in IR learning mode, store the received code
+			switch (irLearningMode)
 			{
-				switch (irLearningMode)
-				{
-					case IR_LEARNING_PROGRAM0:
-					learnIrCode(PROGRAM0_ADDRESS, &irmp_data, &irmp_program0);
-					graPuts("Program 2 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM1;
-					break;
-					case IR_LEARNING_PROGRAM1:
-					learnIrCode(PROGRAM1_ADDRESS, &irmp_data, &irmp_program1);
-					graPuts("Program 3 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM2;
-					break;
-					case IR_LEARNING_PROGRAM2:
-					learnIrCode(PROGRAM2_ADDRESS, &irmp_data, &irmp_program2);
-					graPuts("Program 4 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM3;
-					break;
-					case IR_LEARNING_PROGRAM3:
-					learnIrCode(PROGRAM3_ADDRESS, &irmp_data, &irmp_program3);
-					graPuts("Program 5 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM4;
-					break;
-					case IR_LEARNING_PROGRAM4:
-					learnIrCode(PROGRAM4_ADDRESS, &irmp_data, &irmp_program4);
-					graPuts("Program 6 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM5;
-					break;
-					case IR_LEARNING_PROGRAM5:
-					learnIrCode(PROGRAM5_ADDRESS, &irmp_data, &irmp_program5);
-					graPuts("Program 7 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM6;
-					break;
-					case IR_LEARNING_PROGRAM6:
-					learnIrCode(PROGRAM6_ADDRESS, &irmp_data, &irmp_program6);
-					graPuts("Program 8 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM7;
-					break;
-					case IR_LEARNING_PROGRAM7:
-					learnIrCode(PROGRAM7_ADDRESS, &irmp_data, &irmp_program7);
-					graPuts("Program 9 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM8;
-					break;
-					case IR_LEARNING_PROGRAM8:
-					learnIrCode(PROGRAM8_ADDRESS, &irmp_data, &irmp_program8);
-					graPuts("Program 10 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM9;
-					break;
-					case IR_LEARNING_PROGRAM9:
-					learnIrCode(PROGRAM9_ADDRESS, &irmp_data, &irmp_program9);
-					graPuts("Program 11 = ? ");
-					irLearningMode = IR_LEARNING_PROGRAM10;
-					break;
-					case IR_LEARNING_PROGRAM10:
-					learnIrCode(PROGRAM10_ADDRESS, &irmp_data, &irmp_program10);
-					graPuts("Program 12 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM11;
-					break;
-					case IR_LEARNING_PROGRAM11:
-					learnIrCode(PROGRAM11_ADDRESS, &irmp_data, &irmp_program11);
-					graPuts("Program 13 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM12;
-					break;
-					case IR_LEARNING_PROGRAM12:
-					learnIrCode(PROGRAM12_ADDRESS, &irmp_data, &irmp_program12);
-					graPuts("Program 14 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM13;
-					break;
-					case IR_LEARNING_PROGRAM13:
-					learnIrCode(PROGRAM13_ADDRESS, &irmp_data, &irmp_program13);
-					graPuts("Program 15 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM14;
-					break;
-					case IR_LEARNING_PROGRAM14:
-					learnIrCode(PROGRAM14_ADDRESS, &irmp_data, &irmp_program14);
-					graPuts("Program 16 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM15;
-					break;
-					case IR_LEARNING_PROGRAM15:
-					learnIrCode(PROGRAM15_ADDRESS, &irmp_data, &irmp_program15);
-					graPuts("Program 17 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM16;
-					break;
-					case IR_LEARNING_PROGRAM16:
-					learnIrCode(PROGRAM16_ADDRESS, &irmp_data, &irmp_program16);
-					graPuts("Program 18 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM17;
-					break;
-					case IR_LEARNING_PROGRAM17:
-					learnIrCode(PROGRAM17_ADDRESS, &irmp_data, &irmp_program17);
-					graPuts("Program 19 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM18;
-					break;
-					case IR_LEARNING_PROGRAM18:
-					learnIrCode(PROGRAM18_ADDRESS, &irmp_data, &irmp_program18);
-					graPuts("Program 20 = ?");
-					irLearningMode = IR_LEARNING_PROGRAM19;
-					break;
-					case IR_LEARNING_PROGRAM19:
-					learnIrCode(PROGRAM19_ADDRESS, &irmp_data, &irmp_program19);
-					speOn(SPE_ARROW_DOWN);
-					graPuts("Tuning = ?    ");
-					irLearningMode = IR_LEARNING_R;
-					break;
-					case IR_LEARNING_R:
-					learnIrCode(R_ADDRESS, &irmp_data, &irmp_r);
-					speOff(SPE_ARROW_DOWN);
-					speOn(SPE_ARROW_UP);
-					graPuts("Tuning = ?    ");
-					irLearningMode = IR_LEARNING_F;
-					break;
-					case IR_LEARNING_F:
-					learnIrCode(F_ADDRESS, &irmp_data, &irmp_f);
-					speOff(SPE_ARROW_UP);
-					graPuts("Mute = ?      ");
-					irLearningMode = IR_LEARNING_MUTE;
-					break;
-					case IR_LEARNING_MUTE:
-					learnIrCode(MUTE_ADDRESS, &irmp_data, &irmp_mute);
-					graPuts("Standby = ?   ");
-					irLearningMode = IR_LEARNING_STANDBY;
-					break;
-					case IR_LEARNING_STANDBY:
-					learnIrCode(STANDBY_ADDRESS, &irmp_data, &irmp_standby);
-					graPuts("Band/input = ?");
-					irLearningMode = IR_LEARNING_BAND;
-					break;
-					case IR_LEARNING_BAND:
-					learnIrCode(BAND_ADDRESS, &irmp_data, &irmp_band);
-					speOn(SPE_ARROW_DOWN);
-					graPuts("Volume = ?    ");
-					irLearningMode = IR_LEARNING_VOLUMEDOWN;
-					break;
-					case IR_LEARNING_VOLUMEDOWN:
-					learnIrCode(VOLUMEDOWN_ADDRESS, &irmp_data, &irmp_volumedown);
-					speOff(SPE_ARROW_DOWN);
-					speOn(SPE_ARROW_UP);
-					graPuts("Volume = ?    ");
-					irLearningMode = IR_LEARNING_VOLUMEUP;
-					break;
-					case IR_LEARNING_VOLUMEUP:
-					learnIrCode(VOLUMEUP_ADDRESS, &irmp_data, &irmp_volumeup);
-					speOff(SPE_ARROW_UP);
-					speOn(SPE_ARROW_DOWN);
-					graPuts("Bass = ?      ");
-					irLearningMode = IR_LEARNING_BASSDOWN;
-					break;
-					case IR_LEARNING_BASSDOWN:
-					learnIrCode(BASSDOWN_ADDRESS, &irmp_data, &irmp_bassdown);
-					speOff(SPE_ARROW_DOWN);
-					speOn(SPE_ARROW_UP);
-					graPuts("Bass = ?      ");
-					irLearningMode = IR_LEARNING_BASSUP;
-					break;
-					case IR_LEARNING_BASSUP:
-					learnIrCode(BASSUP_ADDRESS, &irmp_data, &irmp_bassup);
-					speOn(SPE_ARROW_DOWN);
-					speOff(SPE_ARROW_UP);
-					graPuts("Treble = ?    ");
-					irLearningMode = IR_LEARNING_TREBLEDOWN;
-					break;
-					case IR_LEARNING_TREBLEDOWN:
-					learnIrCode(TREBLEDOWN_ADDRESS, &irmp_data, &irmp_trebledown);
-					speOn(SPE_ARROW_UP);
-					speOff(SPE_ARROW_DOWN);
-					graPuts("Treble = ?    ");
-					irLearningMode = IR_LEARNING_TREBLEUP;
-					break;
-					case IR_LEARNING_TREBLEUP:
-					learnIrCode(TREBLEUP_ADDRESS, &irmp_data, &irmp_trebleup);
-					speOff(SPE_ARROW_UP);
-					graPuts("Mono/st. = ?  ");
-					irLearningMode = IR_LEARNING_MONOSTEREO;
-					break;
-					case IR_LEARNING_MONOSTEREO:
-					learnIrCode(MONOSTEREO_ADDRESS, &irmp_data, &irmp_monostereo);
-					graPuts("Display = ?   ");
-					irLearningMode = IR_LEARNING_DISPLAY;
-					break;
-					case IR_LEARNING_DISPLAY:
-					learnIrCode(DISPLAY_ADDRESS, &irmp_data, &irmp_display);
-					graPuts("Program = ?   ");
-					irLearningMode = IR_LEARNING_PROGRAM;
-					break;
-					case IR_LEARNING_PROGRAM:
-					learnIrCode(PROGRAM_ADDRESS, &irmp_data, &irmp_program);
-					exitSpecialMode();
-					break;
-				}
-			}
-		}
-		else if (specialMode == SPECIAL_MODE_PROGRAM)
-		{
-			if (!wasRepetition && (getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM) && getMode() != MODE_STANDBY)
-			{
-				bool wasRecognized = false;
-					
-				// user pressed button to save a program into, let's check if it is valid Program button, or the Program button was pressed again to cancel
-				if (memcmp(&irmp_data, &irmp_program0, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM0_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM0_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram0fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM0_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM0_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram0am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program1, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM1_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM1_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram1fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM1_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM1_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram1am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program2, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM2_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM2_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram2fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM2_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM2_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram2am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program3, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM3_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM3_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram3fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM3_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM3_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram3am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program4, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM4_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM4_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram4fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM4_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM4_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram4am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program5, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM5_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM5_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram5fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM5_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM5_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram5am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program6, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM6_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM6_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram6fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM6_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM6_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram6am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program7, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM7_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM7_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram7fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM7_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM7_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram7am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program8, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM8_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM8_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram8fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM8_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM8_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram8am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program9, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM9_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM9_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram9fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM9_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM9_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram9am = freq;
-					}
-						
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program10, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM10_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM10_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram10fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM10_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM10_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram10am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program11, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM11_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM11_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram11fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM11_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM11_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram11am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program12, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM12_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM12_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram12fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM12_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM12_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram12am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program13, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM13_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM13_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram13fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM13_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM13_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram13am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program14, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM14_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM14_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram14fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM14_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM14_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram14am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program15, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM15_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM15_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram15fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM15_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM15_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram15am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program16, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM16_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM16_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram16fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM16_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM16_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram16am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program17, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM17_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM17_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram17fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM17_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM17_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram17am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program18, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM18_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM18_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram18fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM18_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM18_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram18am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program19, sizeof(irmp_data) - 1) == 0)
-				{
-					if (getMode() == MODE_RADIO_FM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM19_FM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM19_FM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram19fm = freq;
-					}
-					else if (getMode() == MODE_RADIO_AM)
-					{
-						unsigned int freq = si4735.getCurrentFrequency();
-						eeprom_update_byte((unsigned char*)PROGRAM19_AM_FREQ_ADDRESS, freq & 0xFF);
-						eeprom_update_byte((unsigned char*)PROGRAM19_AM_FREQ_ADDRESS + 1, freq >> 8);
-						freqProgram19am = freq;
-					}
-				
-					wasRecognized = true;
-				}
-				else if (memcmp(&irmp_data, &irmp_program, sizeof(irmp_data) - 1) == 0)
-				{
-					wasRecognized = true;
-				}
-				
-				if (wasRecognized == 1)
-				{
-					exitSpecialMode();
-				}
+				case IR_LEARNING_PROGRAM0:
+				learnIrCode(PROGRAM0_ADDRESS, &irmp_data, &irmp_program0);
+				freqProgram0fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram0fm;
+				freqProgram0am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram0am;
+				eeprom_update_block(&freqProgram0fm, (unsigned char *)PROGRAM0_FM_FREQ_ADDRESS, sizeof(freqProgram0fm));
+				eeprom_update_block(&freqProgram0am, (unsigned char *)PROGRAM0_AM_FREQ_ADDRESS, sizeof(freqProgram0am));
+				irLearningMode = IR_LEARNING_PROGRAM1;
+				graPuts("Program 2 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM1:
+				learnIrCode(PROGRAM1_ADDRESS, &irmp_data, &irmp_program1);
+				freqProgram1fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram1fm;
+				freqProgram1am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram1am;
+				eeprom_update_block(&freqProgram1fm, (unsigned char *)PROGRAM1_FM_FREQ_ADDRESS, sizeof(freqProgram1fm));
+				eeprom_update_block(&freqProgram1am, (unsigned char *)PROGRAM1_AM_FREQ_ADDRESS, sizeof(freqProgram1am));
+				irLearningMode = IR_LEARNING_PROGRAM2;
+				graPuts("Program 3 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM2:
+				learnIrCode(PROGRAM2_ADDRESS, &irmp_data, &irmp_program2);
+				freqProgram2fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram2fm;
+				freqProgram2am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram2am;
+				eeprom_update_block(&freqProgram2fm, (unsigned char *)PROGRAM2_FM_FREQ_ADDRESS, sizeof(freqProgram2fm));
+				eeprom_update_block(&freqProgram2am, (unsigned char *)PROGRAM2_AM_FREQ_ADDRESS, sizeof(freqProgram2am));
+				irLearningMode = IR_LEARNING_PROGRAM3;
+				graPuts("Program 4 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM3:
+				learnIrCode(PROGRAM3_ADDRESS, &irmp_data, &irmp_program3);
+				freqProgram3fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram3fm;
+				freqProgram3am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram3am;
+				eeprom_update_block(&freqProgram3fm, (unsigned char *)PROGRAM3_FM_FREQ_ADDRESS, sizeof(freqProgram3fm));
+				eeprom_update_block(&freqProgram3am, (unsigned char *)PROGRAM3_AM_FREQ_ADDRESS, sizeof(freqProgram3am));
+				irLearningMode = IR_LEARNING_PROGRAM4;
+				graPuts("Program 5 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM4:
+				learnIrCode(PROGRAM4_ADDRESS, &irmp_data, &irmp_program4);
+				freqProgram4fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram4fm;
+				freqProgram4am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram4am;
+				eeprom_update_block(&freqProgram4fm, (unsigned char *)PROGRAM4_FM_FREQ_ADDRESS, sizeof(freqProgram4fm));
+				eeprom_update_block(&freqProgram4am, (unsigned char *)PROGRAM4_AM_FREQ_ADDRESS, sizeof(freqProgram4am));
+				irLearningMode = IR_LEARNING_PROGRAM5;
+				graPuts("Program 6 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM5:
+				learnIrCode(PROGRAM5_ADDRESS, &irmp_data, &irmp_program5);
+				freqProgram5fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram5fm;
+				freqProgram5am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram5am;
+				eeprom_update_block(&freqProgram5fm, (unsigned char *)PROGRAM5_FM_FREQ_ADDRESS, sizeof(freqProgram5fm));
+				eeprom_update_block(&freqProgram5am, (unsigned char *)PROGRAM5_AM_FREQ_ADDRESS, sizeof(freqProgram5am));
+				irLearningMode = IR_LEARNING_PROGRAM6;
+				graPuts("Program 7 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM6:
+				learnIrCode(PROGRAM6_ADDRESS, &irmp_data, &irmp_program6);
+				freqProgram6fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram6fm;
+				freqProgram6am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram6am;
+				eeprom_update_block(&freqProgram6fm, (unsigned char *)PROGRAM6_FM_FREQ_ADDRESS, sizeof(freqProgram6fm));
+				eeprom_update_block(&freqProgram6am, (unsigned char *)PROGRAM6_AM_FREQ_ADDRESS, sizeof(freqProgram6am));
+				irLearningMode = IR_LEARNING_PROGRAM7;
+				graPuts("Program 8 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM7:
+				learnIrCode(PROGRAM7_ADDRESS, &irmp_data, &irmp_program7);
+				freqProgram7fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram7fm;
+				freqProgram7am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram7am;
+				eeprom_update_block(&freqProgram7fm, (unsigned char *)PROGRAM7_FM_FREQ_ADDRESS, sizeof(freqProgram7fm));
+				eeprom_update_block(&freqProgram7am, (unsigned char *)PROGRAM7_AM_FREQ_ADDRESS, sizeof(freqProgram7am));
+				irLearningMode = IR_LEARNING_PROGRAM8;
+				graPuts("Program 9 = ? ");
+				break;
+				case IR_LEARNING_PROGRAM8:
+				learnIrCode(PROGRAM8_ADDRESS, &irmp_data, &irmp_program8);
+				freqProgram8fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram8fm;
+				freqProgram8am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram8am;
+				eeprom_update_block(&freqProgram8fm, (unsigned char *)PROGRAM8_FM_FREQ_ADDRESS, sizeof(freqProgram8fm));
+				eeprom_update_block(&freqProgram8am, (unsigned char *)PROGRAM8_AM_FREQ_ADDRESS, sizeof(freqProgram8am));
+				irLearningMode = IR_LEARNING_PROGRAM9;
+				graPuts("Program 10 =? ");
+				break;
+				case IR_LEARNING_PROGRAM9:
+				learnIrCode(PROGRAM9_ADDRESS, &irmp_data, &irmp_program9);
+				freqProgram9fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram9fm;
+				freqProgram9am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram9am;
+				eeprom_update_block(&freqProgram9fm, (unsigned char *)PROGRAM9_FM_FREQ_ADDRESS, sizeof(freqProgram9fm));
+				eeprom_update_block(&freqProgram9am, (unsigned char *)PROGRAM9_AM_FREQ_ADDRESS, sizeof(freqProgram9am));
+				irLearningMode = IR_LEARNING_PROGRAM10;
+				graPuts("Program 11 =? ");
+				break;
+				case IR_LEARNING_PROGRAM10:
+				learnIrCode(PROGRAM10_ADDRESS, &irmp_data, &irmp_program10);
+				freqProgram10fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram10fm;
+				freqProgram10am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram10am;
+				eeprom_update_block(&freqProgram10fm, (unsigned char *)PROGRAM10_FM_FREQ_ADDRESS, sizeof(freqProgram10fm));
+				eeprom_update_block(&freqProgram10am, (unsigned char *)PROGRAM10_AM_FREQ_ADDRESS, sizeof(freqProgram10am));
+				irLearningMode = IR_LEARNING_PROGRAM11;
+				graPuts("Program 12 =? ");
+				break;
+				case IR_LEARNING_PROGRAM11:
+				learnIrCode(PROGRAM11_ADDRESS, &irmp_data, &irmp_program11);
+				freqProgram11fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram11fm;
+				freqProgram11am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram11am;
+				eeprom_update_block(&freqProgram11fm, (unsigned char *)PROGRAM11_FM_FREQ_ADDRESS, sizeof(freqProgram11fm));
+				eeprom_update_block(&freqProgram11am, (unsigned char *)PROGRAM11_AM_FREQ_ADDRESS, sizeof(freqProgram11am));
+				irLearningMode = IR_LEARNING_PROGRAM12;
+				graPuts("Program 13 =? ");
+				break;
+				case IR_LEARNING_PROGRAM12:
+				learnIrCode(PROGRAM12_ADDRESS, &irmp_data, &irmp_program12);
+				freqProgram12fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram12fm;
+				freqProgram12am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram12am;
+				eeprom_update_block(&freqProgram12fm, (unsigned char *)PROGRAM12_FM_FREQ_ADDRESS, sizeof(freqProgram12fm));
+				eeprom_update_block(&freqProgram12am, (unsigned char *)PROGRAM12_AM_FREQ_ADDRESS, sizeof(freqProgram12am));
+				irLearningMode = IR_LEARNING_PROGRAM13;
+				graPuts("Program 14 =? ");
+				break;
+				case IR_LEARNING_PROGRAM13:
+				learnIrCode(PROGRAM13_ADDRESS, &irmp_data, &irmp_program13);
+				freqProgram13fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram13fm;
+				freqProgram13am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram13am;
+				eeprom_update_block(&freqProgram13fm, (unsigned char *)PROGRAM13_FM_FREQ_ADDRESS, sizeof(freqProgram13fm));
+				eeprom_update_block(&freqProgram13am, (unsigned char *)PROGRAM13_AM_FREQ_ADDRESS, sizeof(freqProgram13am));
+				irLearningMode = IR_LEARNING_PROGRAM14;
+				graPuts("Program 15 =? ");
+				break;
+				case IR_LEARNING_PROGRAM14:
+				learnIrCode(PROGRAM14_ADDRESS, &irmp_data, &irmp_program14);
+				freqProgram14fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram14fm;
+				freqProgram14am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram14am;
+				eeprom_update_block(&freqProgram14fm, (unsigned char *)PROGRAM14_FM_FREQ_ADDRESS, sizeof(freqProgram14fm));
+				eeprom_update_block(&freqProgram14am, (unsigned char *)PROGRAM14_AM_FREQ_ADDRESS, sizeof(freqProgram14am));
+				irLearningMode = IR_LEARNING_PROGRAM15;
+				graPuts("Program 16 =? ");
+				break;
+				case IR_LEARNING_PROGRAM15:
+				learnIrCode(PROGRAM15_ADDRESS, &irmp_data, &irmp_program15);
+				freqProgram15fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram15fm;
+				freqProgram15am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram15am;
+				eeprom_update_block(&freqProgram15fm, (unsigned char *)PROGRAM15_FM_FREQ_ADDRESS, sizeof(freqProgram15fm));
+				eeprom_update_block(&freqProgram15am, (unsigned char *)PROGRAM15_AM_FREQ_ADDRESS, sizeof(freqProgram15am));
+				irLearningMode = IR_LEARNING_PROGRAM16;
+				graPuts("Program 17 =? ");
+				break;
+				case IR_LEARNING_PROGRAM16:
+				learnIrCode(PROGRAM16_ADDRESS, &irmp_data, &irmp_program16);
+				freqProgram16fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram16fm;
+				freqProgram16am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram16am;
+				eeprom_update_block(&freqProgram16fm, (unsigned char *)PROGRAM16_FM_FREQ_ADDRESS, sizeof(freqProgram16fm));
+				eeprom_update_block(&freqProgram16am, (unsigned char *)PROGRAM16_AM_FREQ_ADDRESS, sizeof(freqProgram16am));
+				irLearningMode = IR_LEARNING_PROGRAM17;
+				graPuts("Program 18 =? ");
+				break;
+				case IR_LEARNING_PROGRAM17:
+				learnIrCode(PROGRAM17_ADDRESS, &irmp_data, &irmp_program17);
+				freqProgram17fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram17fm;
+				freqProgram17am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram17am;
+				eeprom_update_block(&freqProgram17fm, (unsigned char *)PROGRAM17_FM_FREQ_ADDRESS, sizeof(freqProgram17fm));
+				eeprom_update_block(&freqProgram17am, (unsigned char *)PROGRAM17_AM_FREQ_ADDRESS, sizeof(freqProgram17am));
+				irLearningMode = IR_LEARNING_PROGRAM18;
+				graPuts("Program 19 =? ");
+				break;
+				case IR_LEARNING_PROGRAM18:
+				learnIrCode(PROGRAM18_ADDRESS, &irmp_data, &irmp_program18);
+				freqProgram18fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram18fm;
+				freqProgram18am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram18am;
+				eeprom_update_block(&freqProgram18fm, (unsigned char *)PROGRAM18_FM_FREQ_ADDRESS, sizeof(freqProgram18fm));
+				eeprom_update_block(&freqProgram18am, (unsigned char *)PROGRAM18_AM_FREQ_ADDRESS, sizeof(freqProgram18am));
+				irLearningMode = IR_LEARNING_PROGRAM19;
+				graPuts("Program 20 =? ");
+				break;
+				case IR_LEARNING_PROGRAM19:
+				learnIrCode(PROGRAM19_ADDRESS, &irmp_data, &irmp_program19);
+				freqProgram19fm = getMode() == MODE_RADIO_FM ? si4735.getCurrentFrequency() : freqProgram19fm;
+				freqProgram19am = getMode() == MODE_RADIO_AM ? si4735.getCurrentFrequency() : freqProgram19am;
+				eeprom_update_block(&freqProgram19fm, (unsigned char *)PROGRAM19_FM_FREQ_ADDRESS, sizeof(freqProgram19fm));
+				eeprom_update_block(&freqProgram19am, (unsigned char *)PROGRAM19_AM_FREQ_ADDRESS, sizeof(freqProgram19am));
+				irLearningMode = IR_LEARNING_R;
+				graPuts("Vol. up   = ? ");
+				break;
+				case IR_LEARNING_R:
+				learnIrCode(R_ADDRESS, &irmp_data, &irmp_r);
+				irLearningMode = IR_LEARNING_F;
+				graPuts("Vol. down = ? ");
+				break;
+				case IR_LEARNING_F:
+				learnIrCode(F_ADDRESS, &irmp_data, &irmp_f);
+				irLearningMode = IR_LEARNING_MUTE;
+				graPuts("Mute      = ? ");
+				break;
+				case IR_LEARNING_MUTE:
+				learnIrCode(MUTE_ADDRESS, &irmp_data, &irmp_mute);
+				irLearningMode = IR_LEARNING_STANDBY;
+				graPuts("On/standby= ? ");
+				break;
+				case IR_LEARNING_STANDBY:
+				learnIrCode(STANDBY_ADDRESS, &irmp_data, &irmp_standby);
+				irLearningMode = IR_LEARNING_BAND;
+				graPuts("Band      = ? ");
+				break;
+				case IR_LEARNING_BAND:
+				learnIrCode(BAND_ADDRESS, &irmp_data, &irmp_band);
+				irLearningMode = IR_LEARNING_PROGRAM;
+				graPuts("Prog. tune= ? ");
+				break;
+				case IR_LEARNING_PROGRAM:
+				learnIrCode(PROGRAM_ADDRESS, &irmp_data, &irmp_program);
+				irLearningMode = IR_LEARNING_MONOSTEREO;
+				graPuts("Mono/ster.= ? ");
+				break;
+				case IR_LEARNING_MONOSTEREO:
+				learnIrCode(MONOSTEREO_ADDRESS, &irmp_data, &irmp_monostereo);
+				irLearningMode = IR_LEARNING_VOLUMEDOWN;
+				graPuts("Tune down = ? ");
+				break;
+				case IR_LEARNING_VOLUMEDOWN:
+				learnIrCode(VOLUMEDOWN_ADDRESS, &irmp_data, &irmp_volumedown);
+				irLearningMode = IR_LEARNING_VOLUMEUP;
+				graPuts("Tune up   = ? ");
+				break;
+				case IR_LEARNING_VOLUMEUP:
+				learnIrCode(VOLUMEUP_ADDRESS, &irmp_data, &irmp_volumeup);
+				irLearningMode = IR_LEARNING_BASSDOWN;
+				graPuts("Bass down = ? ");
+				break;
+				case IR_LEARNING_BASSDOWN:
+				learnIrCode(BASSDOWN_ADDRESS, &irmp_data, &irmp_bassdown);
+				irLearningMode = IR_LEARNING_BASSUP;
+				graPuts("Bass up   = ? ");
+				break;
+				case IR_LEARNING_BASSUP:
+				learnIrCode(BASSUP_ADDRESS, &irmp_data, &irmp_bassup);
+				irLearningMode = IR_LEARNING_TREBLEDOWN;
+				graPuts("Treble dn = ? ");
+				break;
+				case IR_LEARNING_TREBLEDOWN:
+				learnIrCode(TREBLEDOWN_ADDRESS, &irmp_data, &irmp_trebledown);
+				irLearningMode = IR_LEARNING_TREBLEUP;
+				graPuts("Treble up = ? ");
+				break;
+				case IR_LEARNING_TREBLEUP:
+				learnIrCode(TREBLEUP_ADDRESS, &irmp_data, &irmp_trebleup);
+				irLearningMode = IR_LEARNING_DISPLAY;
+				graPuts("Display   = ? ");
+				break;
+				case IR_LEARNING_DISPLAY:
+				learnIrCode(DISPLAY_ADDRESS, &irmp_data, &irmp_display);
+				exitSpecialMode();
+				break;
 			}
 		}
 		else
 		{
-			// compare trained code with received code
-			// below we compare sizeof - 1 because we want to exclude 'flags' property (it indicates repetition)
-			if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram0fm >= MIN_FREQ_MHZ && freqProgram0fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram0am >= MIN_FREQ_KHZ && freqProgram0am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program0, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram0fm, freqProgram0am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram1fm >= MIN_FREQ_MHZ && freqProgram1fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram1am >= MIN_FREQ_KHZ && freqProgram1am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program1, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram1fm, freqProgram1am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram2fm >= MIN_FREQ_MHZ && freqProgram2fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram2am >= MIN_FREQ_KHZ && freqProgram2am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program2, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram2fm, freqProgram2am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram3fm >= MIN_FREQ_MHZ && freqProgram3fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram3am >= MIN_FREQ_KHZ && freqProgram3am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program3, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram3fm, freqProgram3am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram4fm >= MIN_FREQ_MHZ && freqProgram4fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram4am >= MIN_FREQ_KHZ && freqProgram4am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program4, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram4fm, freqProgram4am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram5fm >= MIN_FREQ_MHZ && freqProgram5fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram5am >= MIN_FREQ_KHZ && freqProgram5am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program5, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram5fm, freqProgram5am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram6fm >= MIN_FREQ_MHZ && freqProgram6fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram6am >= MIN_FREQ_KHZ && freqProgram6am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program6, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram6fm, freqProgram6am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram7fm >= MIN_FREQ_MHZ && freqProgram7fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram7am >= MIN_FREQ_KHZ && freqProgram7am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program7, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram7fm, freqProgram7am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram8fm >= MIN_FREQ_MHZ && freqProgram8fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram8am >= MIN_FREQ_KHZ && freqProgram8am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program8, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram8fm, freqProgram8am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram9fm >= MIN_FREQ_MHZ && freqProgram9fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram9am >= MIN_FREQ_KHZ && freqProgram9am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program9, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram9fm, freqProgram9am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram10fm >= MIN_FREQ_MHZ && freqProgram10fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram10am >= MIN_FREQ_KHZ && freqProgram10am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program10, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram10fm, freqProgram10am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram11fm >= MIN_FREQ_MHZ && freqProgram11fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram11am >= MIN_FREQ_KHZ && freqProgram11am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program11, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram11fm, freqProgram11am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram12fm >= MIN_FREQ_MHZ && freqProgram12fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram12am >= MIN_FREQ_KHZ && freqProgram12am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program12, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram12fm, freqProgram12am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram13fm >= MIN_FREQ_MHZ && freqProgram13fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram13am >= MIN_FREQ_KHZ && freqProgram13am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program13, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram13fm, freqProgram13am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram14fm >= MIN_FREQ_MHZ && freqProgram14fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram14am >= MIN_FREQ_KHZ && freqProgram14am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program14, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram14fm, freqProgram14am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram15fm >= MIN_FREQ_MHZ && freqProgram15fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram15am >= MIN_FREQ_KHZ && freqProgram15am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program15, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram15fm, freqProgram15am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram16fm >= MIN_FREQ_MHZ && freqProgram16fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram16am >= MIN_FREQ_KHZ && freqProgram16am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program16, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram16fm, freqProgram16am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram17fm >= MIN_FREQ_MHZ && freqProgram17fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram17am >= MIN_FREQ_KHZ && freqProgram17am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program17, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram17fm, freqProgram17am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram18fm >= MIN_FREQ_MHZ && freqProgram18fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram18am >= MIN_FREQ_KHZ && freqProgram18am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program18, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram18fm, freqProgram18am);
-			}
-			else if ((((getMode() == MODE_STANDBY || getMode() == MODE_RADIO_FM) && freqProgram19fm >= MIN_FREQ_MHZ && freqProgram19fm <= MAX_FREQ_MHZ)
-					|| (getMode() == MODE_RADIO_AM && freqProgram19am >= MIN_FREQ_KHZ && freqProgram19am <= MAX_FREQ_KHZ))
-				&& memcmp(&irmp_data, &irmp_program19, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				switchToSavedFrequency(freqProgram19fm, freqProgram19am);
-			}
-			else if ((getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM)
-				&& memcmp(&irmp_data, &irmp_f, sizeof(irmp_data) - 1) == 0
-				&& specialMode == 0)
-			{
-				frequencyUp();
-			}
-			else if ((getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM)
-				&& memcmp(&irmp_data, &irmp_r, sizeof(irmp_data) - 1) == 0
-				&& specialMode == 0)
-			{
-				frequencyDown();
-			}
-			else if (getMode() != MODE_STANDBY
-				&& memcmp(&irmp_data, &irmp_mute, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				toggleMute();
-			}
-			else if ((getMode() == MODE_RADIO_FM || getMode() == MODE_RADIO_AM)
-				&& memcmp(&irmp_data, &irmp_program, sizeof(irmp_program) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				graPuts("Program # = ? ");
-				speOff(SPE_ARROW_LEFT);
-				speOff(SPE_ARROW_RIGHT);
-				specialMode = SPECIAL_MODE_PROGRAM;
-			}
-			else if (memcmp(&irmp_data, &irmp_standby, sizeof(irmp_standby) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
+			// not in learning mode, act on the received code
+			if (memcmp(&irmp_data, &irmp_standby, sizeof(irmp_data)) == 0)
 			{
 				if (getMode() == MODE_STANDBY)
 				{
@@ -2548,147 +2134,240 @@ void loop() {
 					off();
 				}
 			}
-			else if (getMode() != MODE_STANDBY
-				&& memcmp(&irmp_data, &irmp_band, sizeof(irmp_band) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
+			else if (getMode() != MODE_STANDBY)
 			{
-				switchMode();
-			}
-			else if (getMode() == MODE_RADIO_FM
-				&& memcmp(&irmp_data, &irmp_monostereo, sizeof(irmp_monostereo) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				toggleForceMono();
-			}
-			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_volumedown, sizeof(irmp_data) - 1) == 0)
-			{
-				volumeDown();
-			}
-			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_volumeup, sizeof(irmp_data) - 1) == 0)
-			{
-				volumeUp();
-			}
-			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_trebledown, sizeof(irmp_data) - 1) == 0)
-			{
-				trebleDown();
-			}
-			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_trebleup, sizeof(irmp_data) - 1) == 0)
-			{
-				trebleUp();
-			}
-			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_bassdown, sizeof(irmp_data) - 1) == 0)
-			{
-				bassDown();
-			}
-			else if (getMode() != MODE_STANDBY && memcmp(&irmp_data, &irmp_bassup, sizeof(irmp_data) - 1) == 0)
-			{
-				bassUp();
-			}
-			else if (memcmp(&irmp_data, &irmp_display, sizeof(irmp_data) - 1) == 0
-				&& !wasRepetition
-				&& specialMode == 0)
-			{
-				Wire.beginTransmission(I2C_ADDR_VFDDRIVER >> 1);
-				Wire.write(CMD_TOGGLE_DISPLAY);
-				Wire.endTransmission();
-				delay(1);
+				if (memcmp(&irmp_data, &irmp_r, sizeof(irmp_data)) == 0)
+				{
+					volumeUp();
+				}
+				else if (memcmp(&irmp_data, &irmp_f, sizeof(irmp_data)) == 0)
+				{
+					volumeDown();
+				}
+				else if (memcmp(&irmp_data, &irmp_mute, sizeof(irmp_data)) == 0)
+				{
+					toggleMute();
+				}
+				else if (memcmp(&irmp_data, &irmp_band, sizeof(irmp_data)) == 0)
+				{
+					switchMode();
+				}
+				else if (memcmp(&irmp_data, &irmp_monostereo, sizeof(irmp_data)) == 0)
+				{
+					toggleForceMono();
+				}
+				else if (memcmp(&irmp_data, &irmp_volumeup, sizeof(irmp_data)) == 0)
+				{
+					frequencyUp();
+				}
+				else if (memcmp(&irmp_data, &irmp_volumedown, sizeof(irmp_data)) == 0)
+				{
+					frequencyDown();
+				}
+				else if (memcmp(&irmp_data, &irmp_bassup, sizeof(irmp_data)) == 0)
+				{
+					bassUp();
+				}
+				else if (memcmp(&irmp_data, &irmp_bassdown, sizeof(irmp_data)) == 0)
+				{
+					bassDown();
+				}
+				else if (memcmp(&irmp_data, &irmp_trebleup, sizeof(irmp_data)) == 0)
+				{
+					trebleUp();
+				}
+				else if (memcmp(&irmp_data, &irmp_trebledown, sizeof(irmp_data)) == 0)
+				{
+					trebleDown();
+				}
+				else if (memcmp(&irmp_data, &irmp_display, sizeof(irmp_data)) == 0)
+				{
+					if (getMode() == MODE_RADIO_FM)
+					{
+						displayRadioText = !displayRadioText;
+						
+						if (!displayRadioText)
+						{
+							clearRdsInfo();
+							clearGra();
+							showFM();
+						}
+						else
+						{
+							clearGra();
+							clearRadioText();
+						}
+					}
+				}
+				else if (memcmp(&irmp_data, &irmp_program, sizeof(irmp_data)) == 0)
+				{
+					// toggle the VFD driver display on/off
+					waitForVfdReady();
+					Wire.beginTransmission(I2C7_VFDDRIVER);
+					Wire.write(CMD_TOGGLE_DISPLAY);
+					Wire.endTransmission();
+					delay(1);
+				}
+				else
+				{
+					// check if a program button was pressed
+					if (memcmp(&irmp_data, &irmp_program0, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram0fm, freqProgram0am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program1, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram1fm, freqProgram1am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program2, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram2fm, freqProgram2am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program3, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram3fm, freqProgram3am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program4, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram4fm, freqProgram4am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program5, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram5fm, freqProgram5am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program6, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram6fm, freqProgram6am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program7, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram7fm, freqProgram7am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program8, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram8fm, freqProgram8am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program9, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram9fm, freqProgram9am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program10, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram10fm, freqProgram10am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program11, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram11fm, freqProgram11am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program12, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram12fm, freqProgram12am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program13, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram13fm, freqProgram13am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program14, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram14fm, freqProgram14am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program15, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram15fm, freqProgram15am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program16, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram16fm, freqProgram16am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program17, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram17fm, freqProgram17am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program18, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram18fm, freqProgram18am);
+					}
+					else if (memcmp(&irmp_data, &irmp_program19, sizeof(irmp_data)) == 0)
+					{
+						switchToSavedFrequency(freqProgram19fm, freqProgram19am);
+					}
+				}
 			}
 		}
 	}
 }
 
+// TIMER1 compare match: IRMP sampling tick (F_INTERRUPTS = 15000 Hz)
+ISR(TIMER1_COMPA_vect)
+{
+	irmp_ISR();
+}
+
+// TIMER2 overflow: ~13.1 ms tick at 20 MHz / 1024 prescaler.
+// Drives the once-per-second housekeeping (RTC read request, standby spe
+// blinking) and the radiotext scroll stepping. All variables touched here
+// are declared volatile; the main loop snapshots the multi-byte ones under
+// ATOMIC_BLOCK.
 ISR(TIMER2_OVF_vect)
 {
-	unsigned char mode = getMode();
-	if (mode == MODE_RADIO_FM && timer2OverflowCounter % 8 == 0) // do not read RDS too often, spare some MCU cycles
-	{
-		readRDS = true;
-	}
-	
-	// set flag to read from RTC every second, doesn't have to be perfectly second-aligned, because we don't display seconds, only minutes
-	// this is like a second prescaler of TIMER2
-	if (timer2OverflowCounter < 96)
-	{
-		timer2OverflowCounter++;
-	}
-	else
+	// ~76 overflows per second at 20 MHz (20e6 / 1024 / 256 = 76.29)
+	if (timer2OverflowCounter >= 76)
 	{
 		timer2OverflowCounter = 0;
 		
-		if (mode == MODE_STANDBY)
+		readFromRTC = true;
+		readRDS = true;
+		
+		if (getMode() == MODE_STANDBY)
 		{
-			if (setupFinished)
+			// advance the blinking spe segment index (wraps around)
+			if (displayedSpeForStandbyIndex >= (sizeof(speForStandby) - 1))
 			{
-				readFromRTC = true;
-				
-				if (displayedSpeForStandbyIndex == sizeof(speForStandby) - 1)
-				{
-					displayedSpeForStandbyIndex = 0;
-				}
-				else
-				{
-					displayedSpeForStandbyIndex++;
-				}				
+				displayedSpeForStandbyIndex = 0;
+			}
+			else
+			{
+				displayedSpeForStandbyIndex++;
 			}
 		}
 		else
 		{
-			if (!displayRadioText)
+			// radiotext scrolling timing, only relevant when displaying radio text
+			if (displayRadioText)
 			{
-				if (radioTextDelayCounter == 3)
+				if (initialScrollDelayCounter < 3)
 				{
-					radioTextDelayCounter = 0;
-					displayRadioText = true;
+					// keep the start of the radiotext visible for a few seconds
+					// before scrolling begins
+					initialScrollDelayCounter++;
 				}
 				else
 				{
-					radioTextDelayCounter++;
-				}
-			}
-			else
-			{
-				// if there is new radio text that is shorter than the previous one and we were past the length of the new one,
-				// reset position to 0 immediately
-				if (radioTextScrollingStartIndex + GRA_DISPLAY_CHARS > radioTextScrollingEndIndex + 1)
-				{
-					radioTextScrollingStartIndex = 0;
-				}
-				
-				bool continueScrolling = true; // indicates if enough time has passed so that we can scroll or wait a bit
-		
-				// wait a bit if showing radiotext from the start or it is at the end of scrolling
-				if (radioTextScrollingStartIndex == 0 || (radioTextScrollingStartIndex + GRA_DISPLAY_CHARS == radioTextScrollingEndIndex + 1))
-				{
-					if (initialScrollDelayCounter == 3)
-					{
-						initialScrollDelayCounter = 0;
-					}
-					else
-					{
-						initialScrollDelayCounter++;
-						continueScrolling = false;
-					}
-				}
-			
-				if (continueScrolling)
-				{
+					// step the scroll window one character to the right; when the
+					// end is reached, wrap back to the beginning after a short pause
 					if (radioTextScrollingStartIndex + GRA_DISPLAY_CHARS <= radioTextScrollingEndIndex)
 					{
 						radioTextScrollingStartIndex++;
 					}
 					else
 					{
-						radioTextScrollingStartIndex = 0;
+						if (radioTextDelayCounter < 2)
+						{
+							radioTextDelayCounter++;
+						}
+						else
+						{
+							radioTextScrollingStartIndex = 0;
+							initialScrollDelayCounter = 0;
+							radioTextDelayCounter = 0;
+						}
 					}
 				}
 			}
 		}
 	}
-}
-
-ISR(TIMER1_COMPA_vect)
-{
-	(void)irmp_ISR();
+	else
+	{
+		timer2OverflowCounter++;
+	}
 }

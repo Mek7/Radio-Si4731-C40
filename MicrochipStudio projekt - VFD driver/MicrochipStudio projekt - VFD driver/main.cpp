@@ -1,11 +1,10 @@
-// this file MUST be saved in ANSI encoding, not UTF-8 - because of the diacritic chars which should take up only one byte - ·
-
 #include <avr/io.h>
 #include <avr/eeprom.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <avr/wdt.h>
 #include <util/delay.h>
+#include <util/atomic.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,17 +16,17 @@
 
 static unsigned int activeGrid = 0; // 0-17
 static VfdState displayMemory[18];
-static volatile uint8_t i2cdata[I2CDATA_MAXLENGTH] = { UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX }; // buffer for incoming i2c data, a command and two parameters = at most 3 bytes
-static bool showUnderlines = false;
-static unsigned char modeCmdGraTextCurrentIndex = UINT8_MAX; // UINT8_MAX means we are not in CMD_SHOW_GRA_TEXT mode
-static unsigned char modeCmdNumTextCurrentIndex = UINT8_MAX; // UINT8_MAX means we are not in CMD_SHOW_NUM_TEXT mode
-static unsigned char modeCmdGraCharCurrentIndex = UINT8_MAX; // etc.
-static unsigned char modeCmdNumCharCurrentIndex = UINT8_MAX;
-static unsigned char modeCmdShowSpeCurrentIndex = UINT8_MAX;
-static unsigned char modeCmdHideSpeCurrentIndex = UINT8_MAX;
-static unsigned char modeCmdToggleSpeCurrentIndex = UINT8_MAX;
-static unsigned char modeCmdShowVolumeCurrentIndex = UINT8_MAX;
-static char modeCmdFinished = UINT8_MAX;
+static volatile uint8_t i2cdata[I2CDATA_MAXLENGTH] = { UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX, UINT8_MAX };
+static volatile bool showUnderlines = false;
+static volatile unsigned char modeCmdGraTextCurrentIndex = UINT8_MAX; // UINT8_MAX means we are not in CMD_SHOW_GRA_TEXT mode
+static volatile unsigned char modeCmdNumTextCurrentIndex = UINT8_MAX; // UINT8_MAX means we are not in CMD_SHOW_NUM_TEXT mode
+static volatile unsigned char modeCmdGraCharCurrentIndex = UINT8_MAX; // etc.
+static volatile unsigned char modeCmdNumCharCurrentIndex = UINT8_MAX;
+static volatile unsigned char modeCmdShowSpeCurrentIndex = UINT8_MAX;
+static volatile unsigned char modeCmdHideSpeCurrentIndex = UINT8_MAX;
+static volatile unsigned char modeCmdToggleSpeCurrentIndex = UINT8_MAX;
+static volatile unsigned char modeCmdShowVolumeCurrentIndex = UINT8_MAX;
+static volatile char modeCmdFinished = UINT8_MAX;
 static unsigned int displayCounter = 0;
 static volatile unsigned char displayOn = 1; // 0 or 1 or 2 (means "turn off display in the next loop and set this variable to 0")
 
@@ -78,6 +77,12 @@ static void shiftOut(uint8_t val)
 // called in interrupt of I2C receive, keep as fast as possible
 static void I2C_received(uint8_t data)
 {
+	// the slave is collecting payload or about to accept a new command:
+	// report BUSY to the master so it polls before sending the next command.
+	// (cleared back to READY in the main loop once the finished command is
+	// applied and we are idle again.)
+	I2C_setStatus(STATUS_BUSY);
+
 	if (modeCmdGraTextCurrentIndex != UINT8_MAX)
 	{
 		// accepting data for gra display
@@ -187,10 +192,14 @@ static void I2C_received(uint8_t data)
 		else if (data == CMD_SHOW_UNDERLINES)
 		{
 			showUnderlines = true;
+			// single-byte command with no payload and no main-loop step:
+			// we are immediately idle again.
+			I2C_setStatus(STATUS_READY);
 		}
 		else if (data == CMD_HIDE_UNDERLINES)
 		{
 			showUnderlines = false;
+			I2C_setStatus(STATUS_READY);
 		}
 		else if (data == CMD_SHOW_GRA_TEXT)
 		{
@@ -227,13 +236,17 @@ static void I2C_received(uint8_t data)
 		else if (data == CMD_TOGGLE_DISPLAY)
 		{
 			displayOn = displayOn == 1 ? 2 : 1;
+			I2C_setStatus(STATUS_READY);
 		}
 	}
 }
 
 static void I2C_requested()
 {
-	I2C_transmitByte(i2cdata[0]);
+	// The protocol is one-way for data; on a read we report a single status
+	// byte (READY / BUSY) so the master can poll before sending the next
+	// command. The actual byte placed on the bus is set inside I2CSlave from
+	// the value provided via I2C_setStatus(); nothing extra is needed here.
 }
 
 static VfdState getGraDisplayChar(char chr)
@@ -249,77 +262,99 @@ static VfdState getGraDisplayChar(char chr)
 	{
 		const VfdState* vfdStatePointer;
 		
-		switch (chr)
+		switch ((unsigned char)chr)
 		{
-			case 'ö':
-			case 'ä':
+			case 0x9A:  /* ≈° */
+			case 0x8A:  /* ≈† */
 			vfdStatePointer = &GraCaronS;
 			break;
-			case 'æ':
+
+			case 0xBE:  /* ƒæ */
 			vfdStatePointer = &GraCaronLowerL;
 			break;
-			case 'º':
+
+			case 0xBC:  /* ƒΩ */
 			vfdStatePointer = &GraCaronUpperL;
 			break;
-			case 'Ë':
-			case '»':
+
+			case 0xE8:  /* ƒç */
+			case 0xC8:  /* ƒå */
 			vfdStatePointer = &GraCaronC;
 			break;
-			case 'ç':
+
+			case 0x8D:  /* ≈§ */
 			vfdStatePointer = &GraCaronUpperT;
 			break;
-			case 'ù':
+
+			case 0x9D:  /* ≈• */
 			vfdStatePointer = &GraCaronLowerT;
 			break;
-			case 'û':
-			case 'é':
+
+			case 0x9E:  /* ≈æ */
+			case 0x8E:  /* ≈Ω */
 			vfdStatePointer = &GraCaronZ;
 			break;
-			case '˝':
+
+			case 0xFD:  /* √Ω */
 			vfdStatePointer = &GraAcuteLowerY;
 			break;
-			case '›':
+
+			case 0xDD:  /* √ù */
 			vfdStatePointer = &GraAcuteUpperY;
 			break;
-			case '·':
+
+			case 0xE1:  /* √° */
 			vfdStatePointer = &GraAcuteLowerA;
 			break;
-			case '¡':
+
+			case 0xC1:  /* √Å */
 			vfdStatePointer = &GraAcuteUpperA;
 			break;
-			case 'Ì':
+
+			case 0xED:  /* √≠ */
 			vfdStatePointer = &GraAcuteLowerI;
 			break;
-			case 'Õ':
+
+			case 0xCD:  /* √ç */
 			vfdStatePointer = &GraAcuteUpperI;
 			break;
-			case 'È':
+
+			case 0xE9:  /* √© */
 			vfdStatePointer = &GraAcuteLowerE;
 			break;
-			case '…':
+
+			case 0xC9:  /* √â */
 			vfdStatePointer = &GraAcuteUpperE;
 			break;
-			case 'Û':
+
+			case 0xF3:  /* √≥ */
 			vfdStatePointer = &GraAcuteLowerO;
 			break;
-			case '”':
+
+			case 0xD3:  /* √ì */
 			vfdStatePointer = &GraAcuteUpperO;
 			break;
-			case '˙':
+
+			case 0xFA:  /* √∫ */
 			vfdStatePointer = &GraAcuteLowerU;
 			break;
-			case '⁄':
+
+			case 0xDA:  /* √ö */
 			vfdStatePointer = &GraAcuteUpperU;
 			break;
-			case 'ƒ':
+
+			case 0xC4:  /* √Ñ */
 			vfdStatePointer = &GraDiaeresisUpperA;
 			break;
-			case '‰':
+
+			case 0xE4:  /* √§ */
 			vfdStatePointer = &GraDiaeresisLowerA;
 			break;
-			case 'Ú':
+
+			case 0xF2:  /* ≈à */
 			vfdStatePointer = &GraCaronLowerN;
 			break;
+
 			default:
 			vfdStatePointer = &GraSpace;
 			break;
@@ -580,31 +615,36 @@ static void speOn(const VfdState newVfdState)
 	// take AC-AJ from grids 0-2
 	// take A and T-AJ from grid 3
 	// leave the rest as they were
+	//
+	// NOTE: the original code used "x |= (x & ~mask) | (new & mask)", whose
+	// leading |= made the "& ~mask" clear dead - segments could only ever be
+	// turned ON, never replaced. This is a plain masked merge so the selected
+	// bits take the new value and the rest are preserved.
 	if (newVfdState.chip5 & 0b00010000)
 	{
 		// grid 0
-		displayMemory[0].chip4 |= (displayMemory[0].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-		displayMemory[0].chip5 |= (displayMemory[0].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[0].chip4 = (displayMemory[0].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+		displayMemory[0].chip5 = (displayMemory[0].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 	else if (newVfdState.chip5 & 0b00100000)
 	{
 		// grid 1
-		displayMemory[1].chip4 |= (displayMemory[1].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-		displayMemory[1].chip5 |= (displayMemory[1].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[1].chip4 = (displayMemory[1].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+		displayMemory[1].chip5 = (displayMemory[1].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 	else if (newVfdState.chip5 & 0b01000000)
 	{
 		// grid 2
-		displayMemory[2].chip4 |= (displayMemory[2].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-		displayMemory[2].chip5 |= (displayMemory[2].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[2].chip4 = (displayMemory[2].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+		displayMemory[2].chip5 = (displayMemory[2].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 	else if (newVfdState.chip5 & 0b10000000)
 	{
 		// grid 3
-		displayMemory[3].chip1 |= (displayMemory[3].chip1 & ~0b00000001) | (newVfdState.chip1 & 0b00000001);
-		displayMemory[3].chip3 |= (displayMemory[3].chip3 & ~0b11111000) | (newVfdState.chip3 & 0b11111000);
-		displayMemory[3].chip4 |= newVfdState.chip4;
-		displayMemory[3].chip5 |= (displayMemory[3].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[3].chip1 = (displayMemory[3].chip1 & ~0b00000001) | (newVfdState.chip1 & 0b00000001);
+		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b11111000) | (newVfdState.chip3 & 0b11111000);
+		displayMemory[3].chip4 = newVfdState.chip4;
+		displayMemory[3].chip5 = (displayMemory[3].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 }
 
@@ -676,9 +716,11 @@ static void speToggle(const VfdState newVfdState)
 
 static void volDisplay(const char volume)
 {
-	unsigned int volDb = 945 - volume * 15; // -94.5 dB is maximum silence, 0 is maximum loudness
-
-	if (volDb == UINT16_MAX)
+	// A sentinel volume of UINT8_MAX (0xFF) means "do not display volume".
+	// NOTE: the original guard checked volDb == UINT16_MAX, but volDb is
+	// 945 - volume*15 which can never reach UINT16_MAX, so that branch was
+	// dead. Test the sentinel on the input instead.
+	if ((unsigned char)volume == UINT8_MAX)
 	{
 		// do not display anything
 		// set grid 3, segments C-S to 0, leave others as they were
@@ -689,6 +731,8 @@ static void volDisplay(const char volume)
 	}
 	else
 	{
+		unsigned int volDb = 945 - volume * 15; // -94.5 dB is maximum silence, 0 is maximum loudness
+
 		const unsigned int segmentA = volDb / 100;
 		const unsigned int segmentB = (volDb % 100) / 10;
 		const unsigned int segmentC = volDb % 10;
@@ -813,6 +857,7 @@ int main(void)
 	// initialize I2C slave
 	I2C_setCallbacks(I2C_received, I2C_requested);
 	I2C_init(I2C_ADDR);
+	I2C_setStatus(STATUS_READY);
 	
 	PORTC |= _BV(PC3); // MR/, 0 clears whole register
 	
@@ -826,13 +871,22 @@ int main(void)
 	
 	sei(); // enable global interrupts
 	
-	graPuts("-R·dio by Mek-");
+	graPuts("-R√°dio by Mek-");
 
     while (1) 
     {	
 		if (modeCmdFinished != UINT8_MAX)
 		{
-			switch (modeCmdFinished)
+			// snapshot the finished-command id with interrupts briefly off so
+			// it cannot change between the test above and the switch below.
+			char finished;
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				finished = modeCmdFinished;
+				modeCmdFinished = UINT8_MAX;
+			}
+
+			switch (finished)
 			{
 				case CMD_SHOW_GRA_TEXT:
 				graPuts((const char *)i2cdata);
@@ -849,14 +903,15 @@ int main(void)
 				clearNumDisplay();
 				break;
 				case CMD_CLEAR_ALL:
-				VfdState graChar;
-				graChar = getGraDisplayChar(' '); // happens to be all zeroes, turns off everything including Spe segments
-				
-				for (unsigned char i = 0; i <= 17; i++)
 				{
-					displayMemory[i] = graChar;
-				}
+					VfdState graChar;
+					graChar = getGraDisplayChar(' '); // happens to be all zeroes, turns off everything including Spe segments
 				
+					for (unsigned char i = 0; i <= 17; i++)
+					{
+						displayMemory[i] = graChar;
+					}
+				}
 				break;
 				case CMD_SHOW_GRA_CHAR:
 				graPutc(i2cdata[0], i2cdata[1]);
@@ -867,15 +922,15 @@ int main(void)
 				clearI2Cdata();
 				break;
 				case CMD_SHOW_SPE:
-				speOn((const VfdState)getSpeDisplayChar(i2cdata[0]));
+				speOn(getSpeDisplayChar(i2cdata[0]));
 				clearI2Cdata();
 				break;
 				case CMD_HIDE_SPE:
-				speOff((const VfdState)getSpeDisplayChar(i2cdata[0]));
+				speOff(getSpeDisplayChar(i2cdata[0]));
 				clearI2Cdata();
 				break;
 				case CMD_TOGGLE_SPE:
-				speToggle((const VfdState)getSpeDisplayChar(i2cdata[0]));
+				speToggle(getSpeDisplayChar(i2cdata[0]));
 				clearI2Cdata();
 				break;
 				case CMD_SHOW_VOLUME:
@@ -883,8 +938,24 @@ int main(void)
 				clearI2Cdata();
 				break;
 			}
-			
-			modeCmdFinished = UINT8_MAX;
+
+			// command applied; if no new frame has started in the meantime,
+			// report READY again so the master may send the next command.
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				if (modeCmdFinished == UINT8_MAX
+					&& modeCmdGraTextCurrentIndex == UINT8_MAX
+					&& modeCmdNumTextCurrentIndex == UINT8_MAX
+					&& modeCmdGraCharCurrentIndex == UINT8_MAX
+					&& modeCmdNumCharCurrentIndex == UINT8_MAX
+					&& modeCmdShowSpeCurrentIndex == UINT8_MAX
+					&& modeCmdHideSpeCurrentIndex == UINT8_MAX
+					&& modeCmdToggleSpeCurrentIndex == UINT8_MAX
+					&& modeCmdShowVolumeCurrentIndex == UINT8_MAX)
+				{
+					I2C_setStatus(STATUS_READY);
+				}
+			}
 		}
 		
 		if (displayOn == 1)
@@ -1012,4 +1083,3 @@ int main(void)
 		}
    }
 }
-

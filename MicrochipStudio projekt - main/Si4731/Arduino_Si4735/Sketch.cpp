@@ -1127,6 +1127,9 @@ void setup() {
 	eeprom_read_block(&irmp_trebleup, (unsigned char *)TREBLEUP_ADDRESS, sizeof(irmp_trebleup));
 	eeprom_read_block(&irmp_display, (unsigned char *)DISPLAY_ADDRESS, sizeof(irmp_display));
 
+	wdt_reset();
+	delay(1000);
+	wdt_reset();
 	setupFinished = true;
 }
 

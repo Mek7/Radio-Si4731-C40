@@ -3,31 +3,31 @@ MicrochipStudio projekt - VFD driver.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000468  00800100  000013ea  0000147e  2**0
+  0 .data         00000468  00800100  000013e2  00001476  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000013ea  00000000  00000000  00000094  2**1
+  1 .text         000013e2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000089  00800568  00800568  000018e6  2**0
+  2 .bss          00000089  00800568  00800568  000018de  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000018e6  2**0
+  3 .comment      00000030  00000000  00000000  000018de  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00001918  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00001910  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000c8  00000000  00000000  00001954  2**0
+  5 .debug_aranges 000000c8  00000000  00000000  0000194c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002b30  00000000  00000000  00001a1c  2**0
+  6 .debug_info   00002b30  00000000  00000000  00001a14  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000a68  00000000  00000000  0000454c  2**0
+  7 .debug_abbrev 00000a68  00000000  00000000  00004544  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000cd3  00000000  00000000  00004fb4  2**0
+  8 .debug_line   00000cd3  00000000  00000000  00004fac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000210  00000000  00000000  00005c88  2**2
+  9 .debug_frame  00000210  00000000  00000000  00005c80  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000109e  00000000  00000000  00005e98  2**0
+ 10 .debug_str    0000109e  00000000  00000000  00005e90  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000cf6  00000000  00000000  00006f36  2**0
+ 11 .debug_loc    00000cf6  00000000  00000000  00006f2e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000128  00000000  00000000  00007c2c  2**0
+ 12 .debug_ranges 00000128  00000000  00000000  00007c24  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -92,16 +92,16 @@ Disassembly of section .text:
       a4:	3d 07       	cpc	r19, r29
       a6:	59 07       	cpc	r21, r25
       a8:	60 07       	cpc	r22, r16
-      aa:	b2 07       	cpc	r27, r18
-      ac:	0a 08       	sbc	r0, r10
+      aa:	ae 07       	cpc	r26, r30
+      ac:	06 08       	sbc	r0, r6
       ae:	19 07       	cpc	r17, r25
       b0:	1e 07       	cpc	r17, r30
       b2:	23 07       	cpc	r18, r19
-      b4:	d8 08       	sbc	r13, r8
-      b6:	d8 08       	sbc	r13, r8
+      b4:	d4 08       	sbc	r13, r4
+      b6:	d4 08       	sbc	r13, r4
       b8:	fc 06       	cpc	r15, r28
       ba:	12 07       	cpc	r17, r18
-      bc:	56 08       	sbc	r5, r6
+      bc:	52 08       	sbc	r5, r2
 
 000000be <Vol5c>:
       be:	00 00 80 00 00 04 10                                .......
@@ -739,7 +739,7 @@ Disassembly of section .text:
      67a:	15 e0       	ldi	r17, 0x05	; 5
      67c:	a0 e0       	ldi	r26, 0x00	; 0
      67e:	b1 e0       	ldi	r27, 0x01	; 1
-     680:	ea ee       	ldi	r30, 0xEA	; 234
+     680:	e2 ee       	ldi	r30, 0xE2	; 226
      682:	f3 e1       	ldi	r31, 0x13	; 19
      684:	02 c0       	rjmp	.+4      	; 0x68a <__do_copy_data+0x10>
      686:	05 90       	lpm	r0, Z+
@@ -762,7 +762,7 @@ Disassembly of section .text:
      69c:	b2 07       	cpc	r27, r18
      69e:	e1 f7       	brne	.-8      	; 0x698 <.do_clear_bss_loop>
      6a0:	0e 94 b6 06 	call	0xd6c	; 0xd6c <main>
-     6a4:	0c 94 f3 09 	jmp	0x13e6	; 0x13e6 <_exit>
+     6a4:	0c 94 ef 09 	jmp	0x13de	; 0x13de <_exit>
 
 000006a8 <__bad_interrupt>:
      6a8:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -1083,7 +1083,7 @@ static VfdState getNumDisplayChar(char chr, const bool isEven)
      83a:	48 c0       	rjmp	.+144    	; 0x8cc <__DATA_REGION_LENGTH__+0xcc>
      83c:	ec 5c       	subi	r30, 0xCC	; 204
      83e:	ff 4f       	sbci	r31, 0xFF	; 255
-     840:	0c 94 e4 09 	jmp	0x13c8	; 0x13c8 <__tablejump2__>
+     840:	0c 94 e0 09 	jmp	0x13c0	; 0x13c0 <__tablejump2__>
 	{
 		case '0':
 		vfdStatePointer = isEven ? &Num0a : &Num0b;
@@ -1294,7 +1294,7 @@ static VfdState getNumDisplayChar(char chr, const bool isEven)
      92a:	50 e0       	ldi	r21, 0x00	; 0
      92c:	ce 01       	movw	r24, r28
      92e:	08 96       	adiw	r24, 0x08	; 8
-     930:	0e 94 ea 09 	call	0x13d4	; 0x13d4 <memcpy_P>
+     930:	0e 94 e6 09 	call	0x13cc	; 0x13cc <memcpy_P>
 	
 	return result;
      934:	87 e0       	ldi	r24, 0x07	; 7
@@ -1485,7 +1485,7 @@ static VfdState getSpeDisplayChar(char spe)
      a24:	50 e0       	ldi	r21, 0x00	; 0
      a26:	ce 01       	movw	r24, r28
      a28:	08 96       	adiw	r24, 0x08	; 8
-     a2a:	0e 94 ea 09 	call	0x13d4	; 0x13d4 <memcpy_P>
+     a2a:	0e 94 e6 09 	call	0x13cc	; 0x13cc <memcpy_P>
 	
 	return result;
      a2e:	87 e0       	ldi	r24, 0x07	; 7
@@ -2032,7 +2032,7 @@ static VfdState getGraDisplayChar(char chr)
      cd6:	50 e0       	ldi	r21, 0x00	; 0
      cd8:	ce 01       	movw	r24, r28
      cda:	46 96       	adiw	r24, 0x16	; 22
-     cdc:	0e 94 ea 09 	call	0x13d4	; 0x13d4 <memcpy_P>
+     cdc:	0e 94 e6 09 	call	0x13cc	; 0x13cc <memcpy_P>
 	}
 	
 	return result;
@@ -2229,7 +2229,7 @@ int main(void)
      dca:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <_ZL15modeCmdFinished>
      dce:	8f 3f       	cpi	r24, 0xFF	; 255
      dd0:	09 f4       	brne	.+2      	; 0xdd4 <main+0x68>
-     dd2:	1e c2       	rjmp	.+1084   	; 0x1210 <main+0x4a4>
+     dd2:	1a c2       	rjmp	.+1076   	; 0x1208 <main+0x49c>
 		{
 			// snapshot the finished-command id with interrupts briefly off so
 			// it cannot change between the test above and the switch below.
@@ -2263,11 +2263,11 @@ static __inline__ void __iRestore(const  uint8_t *__s)
      de6:	8d 30       	cpi	r24, 0x0D	; 13
      de8:	91 05       	cpc	r25, r1
      dea:	08 f0       	brcs	.+2      	; 0xdee <main+0x82>
-     dec:	e1 c1       	rjmp	.+962    	; 0x11b0 <main+0x444>
+     dec:	dd c1       	rjmp	.+954    	; 0x11a8 <main+0x43c>
      dee:	fc 01       	movw	r30, r24
      df0:	ee 5a       	subi	r30, 0xAE	; 174
      df2:	ff 4f       	sbci	r31, 0xFF	; 255
-     df4:	0c 94 e4 09 	jmp	0x13c8	; 0x13c8 <__tablejump2__>
+     df4:	0c 94 e0 09 	jmp	0x13c0	; 0x13c0 <__tablejump2__>
 			{
 				case CMD_SHOW_GRA_TEXT:
 				// TEMP DIAG: prove this case runs at all
@@ -2298,7 +2298,7 @@ static __inline__ void __iRestore(const  uint8_t *__s)
 				clearI2Cdata();
      e2c:	0e 94 df 03 	call	0x7be	; 0x7be <_ZL12clearI2Cdatav>
 				break;
-     e30:	bf c1       	rjmp	.+894    	; 0x11b0 <main+0x444>
+     e30:	bb c1       	rjmp	.+886    	; 0x11a8 <main+0x43c>
 	}
 }
 
@@ -2308,7 +2308,7 @@ static void clearGraDisplay()
      e32:	88 e2       	ldi	r24, 0x28	; 40
      e34:	91 e0       	ldi	r25, 0x01	; 1
      e36:	0e 94 8a 06 	call	0xd14	; 0xd14 <_ZL7graPutsPKc>
-     e3a:	ba c1       	rjmp	.+884    	; 0x11b0 <main+0x444>
+     e3a:	b6 c1       	rjmp	.+876    	; 0x11a8 <main+0x43c>
 }
 
 static void clearNumDisplay()
@@ -2317,7 +2317,7 @@ static void clearNumDisplay()
      e3c:	80 e3       	ldi	r24, 0x30	; 48
      e3e:	91 e0       	ldi	r25, 0x01	; 1
      e40:	0e 94 e8 04 	call	0x9d0	; 0x9d0 <_ZL7numPutsPKc>
-     e44:	b5 c1       	rjmp	.+874    	; 0x11b0 <main+0x444>
+     e44:	b1 c1       	rjmp	.+866    	; 0x11a8 <main+0x43c>
 				clearNumDisplay();
 				break;
 				case CMD_CLEAR_ALL:
@@ -2358,7 +2358,7 @@ static void clearNumDisplay()
      e72:	8f 3e       	cpi	r24, 0xEF	; 239
      e74:	92 07       	cpc	r25, r18
      e76:	99 f7       	brne	.-26     	; 0xe5e <main+0xf2>
-     e78:	9b c1       	rjmp	.+822    	; 0x11b0 <main+0x444>
+     e78:	97 c1       	rjmp	.+814    	; 0x11a8 <main+0x43c>
 						displayMemory[i] = graChar;
 					}
 				}
@@ -2419,863 +2419,858 @@ static void graPutc(char chr, char index)
      ed0:	68 a7       	std	Y+40, r22	; 0x28
      ed2:	79 a7       	std	Y+41, r23	; 0x29
      ed4:	8a a7       	std	Y+42, r24	; 0x2a
-	//
-	// NOTE: the original code used "x |= (x & ~mask) | (new & mask)", whose
-	// leading |= made the "& ~mask" clear dead - segments could only ever be
-	// turned ON, never replaced. This is a plain masked merge so the selected
-	// bits take the new value and the rest are preserved.
+static void speOn(const VfdState newVfdState)
+{
+	// take AC-AJ from grids 0-2
+	// take A and T-AJ from grid 3
+	// leave the rest as they were
 	if (newVfdState.chip5 & 0b00010000)
      ed6:	44 ff       	sbrs	r20, 4
-     ed8:	0d c0       	rjmp	.+26     	; 0xef4 <main+0x188>
+     ed8:	0b c0       	rjmp	.+22     	; 0xef0 <main+0x184>
 	{
 		// grid 0
-		displayMemory[0].chip4 = (displayMemory[0].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+		displayMemory[0].chip4 |= (displayMemory[0].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
      eda:	80 91 74 05 	lds	r24, 0x0574	; 0x800574 <_ZL13displayMemory+0x3>
-     ede:	8f 70       	andi	r24, 0x0F	; 15
-     ee0:	50 7f       	andi	r21, 0xF0	; 240
-     ee2:	58 2b       	or	r21, r24
-     ee4:	50 93 74 05 	sts	0x0574, r21	; 0x800574 <_ZL13displayMemory+0x3>
-		displayMemory[0].chip5 = (displayMemory[0].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
-     ee8:	80 91 73 05 	lds	r24, 0x0573	; 0x800573 <_ZL13displayMemory+0x2>
-     eec:	80 7f       	andi	r24, 0xF0	; 240
-     eee:	4f 70       	andi	r20, 0x0F	; 15
-     ef0:	48 2b       	or	r20, r24
-     ef2:	51 c0       	rjmp	.+162    	; 0xf96 <main+0x22a>
+     ede:	50 7f       	andi	r21, 0xF0	; 240
+     ee0:	58 2b       	or	r21, r24
+     ee2:	50 93 74 05 	sts	0x0574, r21	; 0x800574 <_ZL13displayMemory+0x3>
+		displayMemory[0].chip5 |= (displayMemory[0].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     ee6:	80 91 73 05 	lds	r24, 0x0573	; 0x800573 <_ZL13displayMemory+0x2>
+     eea:	4f 70       	andi	r20, 0x0F	; 15
+     eec:	48 2b       	or	r20, r24
+     eee:	4f c0       	rjmp	.+158    	; 0xf8e <main+0x222>
 	}
 	else if (newVfdState.chip5 & 0b00100000)
-     ef4:	45 ff       	sbrs	r20, 5
-     ef6:	0d c0       	rjmp	.+26     	; 0xf12 <main+0x1a6>
+     ef0:	45 ff       	sbrs	r20, 5
+     ef2:	0b c0       	rjmp	.+22     	; 0xf0a <main+0x19e>
 	{
 		// grid 1
-		displayMemory[1].chip4 = (displayMemory[1].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-     ef8:	80 91 7b 05 	lds	r24, 0x057B	; 0x80057b <_ZL13displayMemory+0xa>
-     efc:	8f 70       	andi	r24, 0x0F	; 15
-     efe:	50 7f       	andi	r21, 0xF0	; 240
-     f00:	58 2b       	or	r21, r24
-     f02:	50 93 7b 05 	sts	0x057B, r21	; 0x80057b <_ZL13displayMemory+0xa>
-		displayMemory[1].chip5 = (displayMemory[1].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
-     f06:	80 91 7a 05 	lds	r24, 0x057A	; 0x80057a <_ZL13displayMemory+0x9>
-     f0a:	80 7f       	andi	r24, 0xF0	; 240
-     f0c:	4f 70       	andi	r20, 0x0F	; 15
-     f0e:	48 2b       	or	r20, r24
-     f10:	53 c0       	rjmp	.+166    	; 0xfb8 <main+0x24c>
+		displayMemory[1].chip4 |= (displayMemory[1].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+     ef4:	80 91 7b 05 	lds	r24, 0x057B	; 0x80057b <_ZL13displayMemory+0xa>
+     ef8:	50 7f       	andi	r21, 0xF0	; 240
+     efa:	58 2b       	or	r21, r24
+     efc:	50 93 7b 05 	sts	0x057B, r21	; 0x80057b <_ZL13displayMemory+0xa>
+		displayMemory[1].chip5 |= (displayMemory[1].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     f00:	80 91 7a 05 	lds	r24, 0x057A	; 0x80057a <_ZL13displayMemory+0x9>
+     f04:	4f 70       	andi	r20, 0x0F	; 15
+     f06:	48 2b       	or	r20, r24
+     f08:	53 c0       	rjmp	.+166    	; 0xfb0 <main+0x244>
 	}
 	else if (newVfdState.chip5 & 0b01000000)
-     f12:	46 ff       	sbrs	r20, 6
-     f14:	0d c0       	rjmp	.+26     	; 0xf30 <main+0x1c4>
+     f0a:	46 ff       	sbrs	r20, 6
+     f0c:	0b c0       	rjmp	.+22     	; 0xf24 <main+0x1b8>
 	{
 		// grid 2
-		displayMemory[2].chip4 = (displayMemory[2].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-     f16:	80 91 82 05 	lds	r24, 0x0582	; 0x800582 <_ZL13displayMemory+0x11>
-     f1a:	8f 70       	andi	r24, 0x0F	; 15
-     f1c:	50 7f       	andi	r21, 0xF0	; 240
-     f1e:	58 2b       	or	r21, r24
-     f20:	50 93 82 05 	sts	0x0582, r21	; 0x800582 <_ZL13displayMemory+0x11>
-		displayMemory[2].chip5 = (displayMemory[2].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
-     f24:	80 91 81 05 	lds	r24, 0x0581	; 0x800581 <_ZL13displayMemory+0x10>
-     f28:	80 7f       	andi	r24, 0xF0	; 240
-     f2a:	4f 70       	andi	r20, 0x0F	; 15
-     f2c:	48 2b       	or	r20, r24
-     f2e:	a3 c0       	rjmp	.+326    	; 0x1076 <main+0x30a>
+		displayMemory[2].chip4 |= (displayMemory[2].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+     f0e:	80 91 82 05 	lds	r24, 0x0582	; 0x800582 <_ZL13displayMemory+0x11>
+     f12:	50 7f       	andi	r21, 0xF0	; 240
+     f14:	58 2b       	or	r21, r24
+     f16:	50 93 82 05 	sts	0x0582, r21	; 0x800582 <_ZL13displayMemory+0x11>
+		displayMemory[2].chip5 |= (displayMemory[2].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     f1a:	80 91 81 05 	lds	r24, 0x0581	; 0x800581 <_ZL13displayMemory+0x10>
+     f1e:	4f 70       	andi	r20, 0x0F	; 15
+     f20:	48 2b       	or	r20, r24
+     f22:	a5 c0       	rjmp	.+330    	; 0x106e <main+0x302>
 	}
 	else if (newVfdState.chip5 & 0b10000000)
-     f30:	47 ff       	sbrs	r20, 7
-     f32:	7c cf       	rjmp	.-264    	; 0xe2c <main+0xc0>
+     f24:	47 ff       	sbrs	r20, 7
+     f26:	82 cf       	rjmp	.-252    	; 0xe2c <main+0xc0>
 	{
 		// grid 3
-		displayMemory[3].chip1 = (displayMemory[3].chip1 & ~0b00000001) | (newVfdState.chip1 & 0b00000001);
-     f34:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
-     f38:	9e 7f       	andi	r25, 0xFE	; 254
-     f3a:	81 70       	andi	r24, 0x01	; 1
-     f3c:	89 2b       	or	r24, r25
-     f3e:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
-		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b11111000) | (newVfdState.chip3 & 0b11111000);
-     f42:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
-     f46:	87 70       	andi	r24, 0x07	; 7
-     f48:	68 7f       	andi	r22, 0xF8	; 248
-     f4a:	68 2b       	or	r22, r24
-     f4c:	60 93 8a 05 	sts	0x058A, r22	; 0x80058a <_ZL13displayMemory+0x19>
-		displayMemory[3].chip4 = newVfdState.chip4;
-     f50:	50 93 89 05 	sts	0x0589, r21	; 0x800589 <_ZL13displayMemory+0x18>
-		displayMemory[3].chip5 = (displayMemory[3].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
-     f54:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x17>
-     f58:	80 7f       	andi	r24, 0xF0	; 240
-     f5a:	4f 70       	andi	r20, 0x0F	; 15
-     f5c:	48 2b       	or	r20, r24
-     f5e:	40 93 88 05 	sts	0x0588, r20	; 0x800588 <_ZL13displayMemory+0x17>
-     f62:	64 cf       	rjmp	.-312    	; 0xe2c <main+0xc0>
+		displayMemory[3].chip1 |= (displayMemory[3].chip1 & ~0b00000001) | (newVfdState.chip1 & 0b00000001);
+     f28:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
+     f2c:	f9 2f       	mov	r31, r25
+     f2e:	80 fb       	bst	r24, 0
+     f30:	f0 f9       	bld	r31, 0
+     f32:	9f 2b       	or	r25, r31
+     f34:	90 93 8c 05 	sts	0x058C, r25	; 0x80058c <_ZL13displayMemory+0x1b>
+		displayMemory[3].chip3 |= (displayMemory[3].chip3 & ~0b11111000) | (newVfdState.chip3 & 0b11111000);
+     f38:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
+     f3c:	68 7f       	andi	r22, 0xF8	; 248
+     f3e:	68 2b       	or	r22, r24
+     f40:	60 93 8a 05 	sts	0x058A, r22	; 0x80058a <_ZL13displayMemory+0x19>
+		displayMemory[3].chip4 |= newVfdState.chip4;
+     f44:	80 91 89 05 	lds	r24, 0x0589	; 0x800589 <_ZL13displayMemory+0x18>
+     f48:	58 2b       	or	r21, r24
+     f4a:	50 93 89 05 	sts	0x0589, r21	; 0x800589 <_ZL13displayMemory+0x18>
+		displayMemory[3].chip5 |= (displayMemory[3].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+     f4e:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x17>
+     f52:	4f 70       	andi	r20, 0x0F	; 15
+     f54:	48 2b       	or	r20, r24
+     f56:	40 93 88 05 	sts	0x0588, r20	; 0x800588 <_ZL13displayMemory+0x17>
+     f5a:	68 cf       	rjmp	.-304    	; 0xe2c <main+0xc0>
 				case CMD_SHOW_SPE:
 				speOn(getSpeDisplayChar(i2cdata[0]));
 				clearI2Cdata();
 				break;
 				case CMD_HIDE_SPE:
 				speOff(getSpeDisplayChar(i2cdata[0]));
-     f64:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <_ZL7i2cdata>
-     f68:	0e 94 fa 04 	call	0x9f4	; 0x9f4 <_ZL17getSpeDisplayCharc>
-     f6c:	2d 8f       	std	Y+29, r18	; 0x1d
-     f6e:	3e 8f       	std	Y+30, r19	; 0x1e
-     f70:	4f 8f       	std	Y+31, r20	; 0x1f
-     f72:	58 a3       	std	Y+32, r21	; 0x20
-     f74:	69 a3       	std	Y+33, r22	; 0x21
-     f76:	7a a3       	std	Y+34, r23	; 0x22
-     f78:	8b a3       	std	Y+35, r24	; 0x23
+     f5c:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <_ZL7i2cdata>
+     f60:	0e 94 fa 04 	call	0x9f4	; 0x9f4 <_ZL17getSpeDisplayCharc>
+     f64:	2d 8f       	std	Y+29, r18	; 0x1d
+     f66:	3e 8f       	std	Y+30, r19	; 0x1e
+     f68:	4f 8f       	std	Y+31, r20	; 0x1f
+     f6a:	58 a3       	std	Y+32, r21	; 0x20
+     f6c:	69 a3       	std	Y+33, r22	; 0x21
+     f6e:	7a a3       	std	Y+34, r23	; 0x22
+     f70:	8b a3       	std	Y+35, r24	; 0x23
 static void speOff(const VfdState newVfdState)
 {
 	// take AC-AJ from grids 0-2
 	// take A and T-AJ from grid 3
 	// leave the rest as they were
 	if (newVfdState.chip5 & 0b00010000)
-     f7a:	44 ff       	sbrs	r20, 4
-     f7c:	0f c0       	rjmp	.+30     	; 0xf9c <main+0x230>
+     f72:	44 ff       	sbrs	r20, 4
+     f74:	0f c0       	rjmp	.+30     	; 0xf94 <main+0x228>
 	{
 		// grid 0
 		displayMemory[0].chip4 &= ~(newVfdState.chip4 & 0b11110000);
-     f7e:	50 7f       	andi	r21, 0xF0	; 240
-     f80:	50 95       	com	r21
-     f82:	80 91 74 05 	lds	r24, 0x0574	; 0x800574 <_ZL13displayMemory+0x3>
-     f86:	58 23       	and	r21, r24
-     f88:	50 93 74 05 	sts	0x0574, r21	; 0x800574 <_ZL13displayMemory+0x3>
+     f76:	50 7f       	andi	r21, 0xF0	; 240
+     f78:	50 95       	com	r21
+     f7a:	80 91 74 05 	lds	r24, 0x0574	; 0x800574 <_ZL13displayMemory+0x3>
+     f7e:	58 23       	and	r21, r24
+     f80:	50 93 74 05 	sts	0x0574, r21	; 0x800574 <_ZL13displayMemory+0x3>
 		displayMemory[0].chip5 &= ~(newVfdState.chip5 & 0b00001111);
-     f8c:	4f 70       	andi	r20, 0x0F	; 15
-     f8e:	40 95       	com	r20
-     f90:	80 91 73 05 	lds	r24, 0x0573	; 0x800573 <_ZL13displayMemory+0x2>
-     f94:	48 23       	and	r20, r24
-     f96:	40 93 73 05 	sts	0x0573, r20	; 0x800573 <_ZL13displayMemory+0x2>
-     f9a:	48 cf       	rjmp	.-368    	; 0xe2c <main+0xc0>
+     f84:	4f 70       	andi	r20, 0x0F	; 15
+     f86:	40 95       	com	r20
+     f88:	80 91 73 05 	lds	r24, 0x0573	; 0x800573 <_ZL13displayMemory+0x2>
+     f8c:	48 23       	and	r20, r24
+     f8e:	40 93 73 05 	sts	0x0573, r20	; 0x800573 <_ZL13displayMemory+0x2>
+     f92:	4c cf       	rjmp	.-360    	; 0xe2c <main+0xc0>
 	}
 	else if (newVfdState.chip5 & 0b00100000)
-     f9c:	45 ff       	sbrs	r20, 5
-     f9e:	0f c0       	rjmp	.+30     	; 0xfbe <main+0x252>
+     f94:	45 ff       	sbrs	r20, 5
+     f96:	0f c0       	rjmp	.+30     	; 0xfb6 <main+0x24a>
 	{
 		// grid 1
 		displayMemory[1].chip4 &= ~(newVfdState.chip4 & 0b11110000);
-     fa0:	50 7f       	andi	r21, 0xF0	; 240
-     fa2:	50 95       	com	r21
-     fa4:	80 91 7b 05 	lds	r24, 0x057B	; 0x80057b <_ZL13displayMemory+0xa>
-     fa8:	58 23       	and	r21, r24
-     faa:	50 93 7b 05 	sts	0x057B, r21	; 0x80057b <_ZL13displayMemory+0xa>
+     f98:	50 7f       	andi	r21, 0xF0	; 240
+     f9a:	50 95       	com	r21
+     f9c:	80 91 7b 05 	lds	r24, 0x057B	; 0x80057b <_ZL13displayMemory+0xa>
+     fa0:	58 23       	and	r21, r24
+     fa2:	50 93 7b 05 	sts	0x057B, r21	; 0x80057b <_ZL13displayMemory+0xa>
 		displayMemory[1].chip5 &= ~(newVfdState.chip5 & 0b00001111);
-     fae:	4f 70       	andi	r20, 0x0F	; 15
-     fb0:	40 95       	com	r20
-     fb2:	80 91 7a 05 	lds	r24, 0x057A	; 0x80057a <_ZL13displayMemory+0x9>
-     fb6:	48 23       	and	r20, r24
-     fb8:	40 93 7a 05 	sts	0x057A, r20	; 0x80057a <_ZL13displayMemory+0x9>
-     fbc:	37 cf       	rjmp	.-402    	; 0xe2c <main+0xc0>
+     fa6:	4f 70       	andi	r20, 0x0F	; 15
+     fa8:	40 95       	com	r20
+     faa:	80 91 7a 05 	lds	r24, 0x057A	; 0x80057a <_ZL13displayMemory+0x9>
+     fae:	48 23       	and	r20, r24
+     fb0:	40 93 7a 05 	sts	0x057A, r20	; 0x80057a <_ZL13displayMemory+0x9>
+     fb4:	3b cf       	rjmp	.-394    	; 0xe2c <main+0xc0>
 	}
 	else if (newVfdState.chip5 & 0b01000000)
-     fbe:	46 ff       	sbrs	r20, 6
-     fc0:	0d c0       	rjmp	.+26     	; 0xfdc <main+0x270>
+     fb6:	46 ff       	sbrs	r20, 6
+     fb8:	0d c0       	rjmp	.+26     	; 0xfd4 <main+0x268>
 	{
 		// grid 2
 		displayMemory[2].chip4 &= ~(newVfdState.chip4 & 0b11110000);
-     fc2:	50 7f       	andi	r21, 0xF0	; 240
-     fc4:	50 95       	com	r21
-     fc6:	80 91 82 05 	lds	r24, 0x0582	; 0x800582 <_ZL13displayMemory+0x11>
-     fca:	58 23       	and	r21, r24
-     fcc:	50 93 82 05 	sts	0x0582, r21	; 0x800582 <_ZL13displayMemory+0x11>
+     fba:	50 7f       	andi	r21, 0xF0	; 240
+     fbc:	50 95       	com	r21
+     fbe:	80 91 82 05 	lds	r24, 0x0582	; 0x800582 <_ZL13displayMemory+0x11>
+     fc2:	58 23       	and	r21, r24
+     fc4:	50 93 82 05 	sts	0x0582, r21	; 0x800582 <_ZL13displayMemory+0x11>
 		displayMemory[2].chip5 &= ~(newVfdState.chip5 & 0b00001111);
-     fd0:	4f 70       	andi	r20, 0x0F	; 15
-     fd2:	40 95       	com	r20
-     fd4:	80 91 81 05 	lds	r24, 0x0581	; 0x800581 <_ZL13displayMemory+0x10>
-     fd8:	48 23       	and	r20, r24
-     fda:	4d c0       	rjmp	.+154    	; 0x1076 <main+0x30a>
+     fc8:	4f 70       	andi	r20, 0x0F	; 15
+     fca:	40 95       	com	r20
+     fcc:	80 91 81 05 	lds	r24, 0x0581	; 0x800581 <_ZL13displayMemory+0x10>
+     fd0:	48 23       	and	r20, r24
+     fd2:	4d c0       	rjmp	.+154    	; 0x106e <main+0x302>
 	}
 	else if (newVfdState.chip5 & 0b10000000)
-     fdc:	47 ff       	sbrs	r20, 7
-     fde:	26 cf       	rjmp	.-436    	; 0xe2c <main+0xc0>
+     fd4:	47 ff       	sbrs	r20, 7
+     fd6:	2a cf       	rjmp	.-428    	; 0xe2c <main+0xc0>
 	{
 		// grid 3
 		displayMemory[3].chip1 &= ~(newVfdState.chip1 & 0b00000001);
-     fe0:	81 70       	andi	r24, 0x01	; 1
-     fe2:	80 95       	com	r24
-     fe4:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
-     fe8:	89 23       	and	r24, r25
-     fea:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
+     fd8:	81 70       	andi	r24, 0x01	; 1
+     fda:	80 95       	com	r24
+     fdc:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
+     fe0:	89 23       	and	r24, r25
+     fe2:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
 		displayMemory[3].chip3 &= ~(newVfdState.chip3 & 0b11111000);
-     fee:	68 7f       	andi	r22, 0xF8	; 248
-     ff0:	60 95       	com	r22
-     ff2:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
-     ff6:	68 23       	and	r22, r24
-     ff8:	60 93 8a 05 	sts	0x058A, r22	; 0x80058a <_ZL13displayMemory+0x19>
+     fe6:	68 7f       	andi	r22, 0xF8	; 248
+     fe8:	60 95       	com	r22
+     fea:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
+     fee:	68 23       	and	r22, r24
+     ff0:	60 93 8a 05 	sts	0x058A, r22	; 0x80058a <_ZL13displayMemory+0x19>
 		displayMemory[3].chip4 &= ~newVfdState.chip4;
-     ffc:	50 95       	com	r21
-     ffe:	80 91 89 05 	lds	r24, 0x0589	; 0x800589 <_ZL13displayMemory+0x18>
-    1002:	58 23       	and	r21, r24
-    1004:	50 93 89 05 	sts	0x0589, r21	; 0x800589 <_ZL13displayMemory+0x18>
+     ff4:	50 95       	com	r21
+     ff6:	80 91 89 05 	lds	r24, 0x0589	; 0x800589 <_ZL13displayMemory+0x18>
+     ffa:	58 23       	and	r21, r24
+     ffc:	50 93 89 05 	sts	0x0589, r21	; 0x800589 <_ZL13displayMemory+0x18>
 		displayMemory[3].chip5 &= ~(newVfdState.chip5 & 0b00001111);
-    1008:	4f 70       	andi	r20, 0x0F	; 15
-    100a:	40 95       	com	r20
-    100c:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x17>
-    1010:	48 23       	and	r20, r24
-    1012:	a5 cf       	rjmp	.-182    	; 0xf5e <main+0x1f2>
+    1000:	4f 70       	andi	r20, 0x0F	; 15
+    1002:	40 95       	com	r20
+    1004:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x17>
+    1008:	48 23       	and	r20, r24
+    100a:	a5 cf       	rjmp	.-182    	; 0xf56 <main+0x1ea>
 				case CMD_HIDE_SPE:
 				speOff(getSpeDisplayChar(i2cdata[0]));
 				clearI2Cdata();
 				break;
 				case CMD_TOGGLE_SPE:
 				speToggle(getSpeDisplayChar(i2cdata[0]));
-    1014:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <_ZL7i2cdata>
-    1018:	0e 94 fa 04 	call	0x9f4	; 0x9f4 <_ZL17getSpeDisplayCharc>
-    101c:	2e 8b       	std	Y+22, r18	; 0x16
-    101e:	3f 8b       	std	Y+23, r19	; 0x17
-    1020:	48 8f       	std	Y+24, r20	; 0x18
-    1022:	59 8f       	std	Y+25, r21	; 0x19
-    1024:	6a 8f       	std	Y+26, r22	; 0x1a
-    1026:	7b 8f       	std	Y+27, r23	; 0x1b
-    1028:	8c 8f       	std	Y+28, r24	; 0x1c
+    100c:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <_ZL7i2cdata>
+    1010:	0e 94 fa 04 	call	0x9f4	; 0x9f4 <_ZL17getSpeDisplayCharc>
+    1014:	2e 8b       	std	Y+22, r18	; 0x16
+    1016:	3f 8b       	std	Y+23, r19	; 0x17
+    1018:	48 8f       	std	Y+24, r20	; 0x18
+    101a:	59 8f       	std	Y+25, r21	; 0x19
+    101c:	6a 8f       	std	Y+26, r22	; 0x1a
+    101e:	7b 8f       	std	Y+27, r23	; 0x1b
+    1020:	8c 8f       	std	Y+28, r24	; 0x1c
 static void speToggle(const VfdState newVfdState)
 {
 	// take AC-AJ from grids 0-2
 	// take A and T-AJ from grid 3
 	// leave the rest as they were
 	if (newVfdState.chip5 & 0b00010000)
-    102a:	44 ff       	sbrs	r20, 4
-    102c:	0b c0       	rjmp	.+22     	; 0x1044 <main+0x2d8>
+    1022:	44 ff       	sbrs	r20, 4
+    1024:	0b c0       	rjmp	.+22     	; 0x103c <main+0x2d0>
 	{
 		// grid 0
 		displayMemory[0].chip4 ^= newVfdState.chip4 & 0b11110000;
-    102e:	50 7f       	andi	r21, 0xF0	; 240
-    1030:	80 91 74 05 	lds	r24, 0x0574	; 0x800574 <_ZL13displayMemory+0x3>
-    1034:	58 27       	eor	r21, r24
-    1036:	50 93 74 05 	sts	0x0574, r21	; 0x800574 <_ZL13displayMemory+0x3>
+    1026:	50 7f       	andi	r21, 0xF0	; 240
+    1028:	80 91 74 05 	lds	r24, 0x0574	; 0x800574 <_ZL13displayMemory+0x3>
+    102c:	58 27       	eor	r21, r24
+    102e:	50 93 74 05 	sts	0x0574, r21	; 0x800574 <_ZL13displayMemory+0x3>
 		displayMemory[0].chip5 ^= newVfdState.chip5 & 0b00001111;
-    103a:	4f 70       	andi	r20, 0x0F	; 15
-    103c:	80 91 73 05 	lds	r24, 0x0573	; 0x800573 <_ZL13displayMemory+0x2>
-    1040:	48 27       	eor	r20, r24
-    1042:	a9 cf       	rjmp	.-174    	; 0xf96 <main+0x22a>
+    1032:	4f 70       	andi	r20, 0x0F	; 15
+    1034:	80 91 73 05 	lds	r24, 0x0573	; 0x800573 <_ZL13displayMemory+0x2>
+    1038:	48 27       	eor	r20, r24
+    103a:	a9 cf       	rjmp	.-174    	; 0xf8e <main+0x222>
 	}
 	else if (newVfdState.chip5 & 0b00100000)
-    1044:	45 ff       	sbrs	r20, 5
-    1046:	0b c0       	rjmp	.+22     	; 0x105e <main+0x2f2>
+    103c:	45 ff       	sbrs	r20, 5
+    103e:	0b c0       	rjmp	.+22     	; 0x1056 <main+0x2ea>
 	{
 		// grid 1
 		displayMemory[1].chip4 ^= newVfdState.chip4 & 0b11110000;
-    1048:	50 7f       	andi	r21, 0xF0	; 240
-    104a:	80 91 7b 05 	lds	r24, 0x057B	; 0x80057b <_ZL13displayMemory+0xa>
-    104e:	58 27       	eor	r21, r24
-    1050:	50 93 7b 05 	sts	0x057B, r21	; 0x80057b <_ZL13displayMemory+0xa>
+    1040:	50 7f       	andi	r21, 0xF0	; 240
+    1042:	80 91 7b 05 	lds	r24, 0x057B	; 0x80057b <_ZL13displayMemory+0xa>
+    1046:	58 27       	eor	r21, r24
+    1048:	50 93 7b 05 	sts	0x057B, r21	; 0x80057b <_ZL13displayMemory+0xa>
 		displayMemory[1].chip5 ^= newVfdState.chip5 & 0b00001111;
-    1054:	4f 70       	andi	r20, 0x0F	; 15
-    1056:	80 91 7a 05 	lds	r24, 0x057A	; 0x80057a <_ZL13displayMemory+0x9>
-    105a:	48 27       	eor	r20, r24
-    105c:	ad cf       	rjmp	.-166    	; 0xfb8 <main+0x24c>
+    104c:	4f 70       	andi	r20, 0x0F	; 15
+    104e:	80 91 7a 05 	lds	r24, 0x057A	; 0x80057a <_ZL13displayMemory+0x9>
+    1052:	48 27       	eor	r20, r24
+    1054:	ad cf       	rjmp	.-166    	; 0xfb0 <main+0x244>
 	}
 	else if (newVfdState.chip5 & 0b01000000)
-    105e:	46 ff       	sbrs	r20, 6
-    1060:	0d c0       	rjmp	.+26     	; 0x107c <main+0x310>
+    1056:	46 ff       	sbrs	r20, 6
+    1058:	0d c0       	rjmp	.+26     	; 0x1074 <main+0x308>
 	{
 		// grid 2
 		displayMemory[2].chip4 ^= newVfdState.chip4 & 0b11110000;
-    1062:	50 7f       	andi	r21, 0xF0	; 240
-    1064:	80 91 82 05 	lds	r24, 0x0582	; 0x800582 <_ZL13displayMemory+0x11>
-    1068:	58 27       	eor	r21, r24
-    106a:	50 93 82 05 	sts	0x0582, r21	; 0x800582 <_ZL13displayMemory+0x11>
+    105a:	50 7f       	andi	r21, 0xF0	; 240
+    105c:	80 91 82 05 	lds	r24, 0x0582	; 0x800582 <_ZL13displayMemory+0x11>
+    1060:	58 27       	eor	r21, r24
+    1062:	50 93 82 05 	sts	0x0582, r21	; 0x800582 <_ZL13displayMemory+0x11>
 		displayMemory[2].chip5 ^= newVfdState.chip5 & 0b00001111;
-    106e:	4f 70       	andi	r20, 0x0F	; 15
-    1070:	80 91 81 05 	lds	r24, 0x0581	; 0x800581 <_ZL13displayMemory+0x10>
-    1074:	48 27       	eor	r20, r24
-    1076:	40 93 81 05 	sts	0x0581, r20	; 0x800581 <_ZL13displayMemory+0x10>
-    107a:	d8 ce       	rjmp	.-592    	; 0xe2c <main+0xc0>
+    1066:	4f 70       	andi	r20, 0x0F	; 15
+    1068:	80 91 81 05 	lds	r24, 0x0581	; 0x800581 <_ZL13displayMemory+0x10>
+    106c:	48 27       	eor	r20, r24
+    106e:	40 93 81 05 	sts	0x0581, r20	; 0x800581 <_ZL13displayMemory+0x10>
+    1072:	dc ce       	rjmp	.-584    	; 0xe2c <main+0xc0>
 	}
 	else if (newVfdState.chip5 & 0b10000000)
-    107c:	47 ff       	sbrs	r20, 7
-    107e:	d6 ce       	rjmp	.-596    	; 0xe2c <main+0xc0>
+    1074:	47 ff       	sbrs	r20, 7
+    1076:	da ce       	rjmp	.-588    	; 0xe2c <main+0xc0>
 	{
 		// grid 3
 		displayMemory[3].chip1 ^= newVfdState.chip1 & 0b00000001;
-    1080:	81 70       	andi	r24, 0x01	; 1
-    1082:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
-    1086:	89 27       	eor	r24, r25
-    1088:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
+    1078:	81 70       	andi	r24, 0x01	; 1
+    107a:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
+    107e:	89 27       	eor	r24, r25
+    1080:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
 		displayMemory[3].chip3 ^= newVfdState.chip3 & 0b11111000;
-    108c:	68 7f       	andi	r22, 0xF8	; 248
-    108e:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
-    1092:	68 27       	eor	r22, r24
-    1094:	60 93 8a 05 	sts	0x058A, r22	; 0x80058a <_ZL13displayMemory+0x19>
+    1084:	68 7f       	andi	r22, 0xF8	; 248
+    1086:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
+    108a:	68 27       	eor	r22, r24
+    108c:	60 93 8a 05 	sts	0x058A, r22	; 0x80058a <_ZL13displayMemory+0x19>
 		displayMemory[3].chip4 ^= newVfdState.chip4;
-    1098:	80 91 89 05 	lds	r24, 0x0589	; 0x800589 <_ZL13displayMemory+0x18>
-    109c:	58 27       	eor	r21, r24
-    109e:	50 93 89 05 	sts	0x0589, r21	; 0x800589 <_ZL13displayMemory+0x18>
+    1090:	80 91 89 05 	lds	r24, 0x0589	; 0x800589 <_ZL13displayMemory+0x18>
+    1094:	58 27       	eor	r21, r24
+    1096:	50 93 89 05 	sts	0x0589, r21	; 0x800589 <_ZL13displayMemory+0x18>
 		displayMemory[3].chip5 ^= newVfdState.chip5 & 0b00001111;
-    10a2:	4f 70       	andi	r20, 0x0F	; 15
-    10a4:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x17>
-    10a8:	48 27       	eor	r20, r24
-    10aa:	59 cf       	rjmp	.-334    	; 0xf5e <main+0x1f2>
+    109a:	4f 70       	andi	r20, 0x0F	; 15
+    109c:	80 91 88 05 	lds	r24, 0x0588	; 0x800588 <_ZL13displayMemory+0x17>
+    10a0:	48 27       	eor	r20, r24
+    10a2:	59 cf       	rjmp	.-334    	; 0xf56 <main+0x1ea>
 				case CMD_TOGGLE_SPE:
 				speToggle(getSpeDisplayChar(i2cdata[0]));
 				clearI2Cdata();
 				break;
 				case CMD_SHOW_VOLUME:
 				volDisplay(i2cdata[0]);
-    10ac:	20 91 0b 01 	lds	r18, 0x010B	; 0x80010b <_ZL7i2cdata>
+    10a4:	20 91 0b 01 	lds	r18, 0x010B	; 0x80010b <_ZL7i2cdata>
 {
 	// A sentinel volume of UINT8_MAX (0xFF) means "do not display volume".
 	// NOTE: the original guard checked volDb == UINT16_MAX, but volDb is
 	// 945 - volume*15 which can never reach UINT16_MAX, so that branch was
 	// dead. Test the sentinel on the input instead.
 	if ((unsigned char)volume == UINT8_MAX)
-    10b0:	2f 3f       	cpi	r18, 0xFF	; 255
-    10b2:	69 f4       	brne	.+26     	; 0x10ce <main+0x362>
+    10a8:	2f 3f       	cpi	r18, 0xFF	; 255
+    10aa:	69 f4       	brne	.+26     	; 0x10c6 <main+0x35a>
 	{
 		// do not display anything
 		// set grid 3, segments C-S to 0, leave others as they were
 		// also do not display minus sign (segment A)
 		displayMemory[3].chip1 = (displayMemory[3].chip1 & ~0b11111110) | (0b00000000 & 0b11111110);
-    10b4:	80 91 8c 05 	lds	r24, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
-    10b8:	81 70       	andi	r24, 0x01	; 1
-    10ba:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
+    10ac:	80 91 8c 05 	lds	r24, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
+    10b0:	81 70       	andi	r24, 0x01	; 1
+    10b2:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
 		displayMemory[3].chip2 = 0b00000000;
-    10be:	10 92 8b 05 	sts	0x058B, r1	; 0x80058b <_ZL13displayMemory+0x1a>
+    10b6:	10 92 8b 05 	sts	0x058B, r1	; 0x80058b <_ZL13displayMemory+0x1a>
 		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b00000111) | (0b00000000 & 0b00000111);
-    10c2:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
-    10c6:	88 7f       	andi	r24, 0xF8	; 248
-    10c8:	80 93 8a 05 	sts	0x058A, r24	; 0x80058a <_ZL13displayMemory+0x19>
-    10cc:	af ce       	rjmp	.-674    	; 0xe2c <main+0xc0>
+    10ba:	80 91 8a 05 	lds	r24, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
+    10be:	88 7f       	andi	r24, 0xF8	; 248
+    10c0:	80 93 8a 05 	sts	0x058A, r24	; 0x80058a <_ZL13displayMemory+0x19>
+    10c4:	b3 ce       	rjmp	.-666    	; 0xe2c <main+0xc0>
 	}
 	else
 	{
 		unsigned int volDb = 945 - volume * 15; // -94.5 dB is maximum silence, 0 is maximum loudness
-    10ce:	31 ef       	ldi	r19, 0xF1	; 241
-    10d0:	32 03       	mulsu	r19, r18
-    10d2:	50 01       	movw	r10, r0
-    10d4:	11 24       	eor	r1, r1
-    10d6:	8f e4       	ldi	r24, 0x4F	; 79
-    10d8:	a8 1a       	sub	r10, r24
-    10da:	8c ef       	ldi	r24, 0xFC	; 252
-    10dc:	b8 0a       	sbc	r11, r24
+    10c6:	31 ef       	ldi	r19, 0xF1	; 241
+    10c8:	32 03       	mulsu	r19, r18
+    10ca:	50 01       	movw	r10, r0
+    10cc:	11 24       	eor	r1, r1
+    10ce:	8f e4       	ldi	r24, 0x4F	; 79
+    10d0:	a8 1a       	sub	r10, r24
+    10d2:	8c ef       	ldi	r24, 0xFC	; 252
+    10d4:	b8 0a       	sbc	r11, r24
 
 		const unsigned int segmentA = volDb / 100;
-    10de:	c5 01       	movw	r24, r10
-    10e0:	b7 01       	movw	r22, r14
-    10e2:	0e 94 d0 09 	call	0x13a0	; 0x13a0 <__udivmodhi4>
-    10e6:	fb 01       	movw	r30, r22
+    10d6:	c5 01       	movw	r24, r10
+    10d8:	b7 01       	movw	r22, r14
+    10da:	0e 94 cc 09 	call	0x1398	; 0x1398 <__udivmodhi4>
+    10de:	fb 01       	movw	r30, r22
 		const unsigned int segmentB = (volDb % 100) / 10;
-    10e8:	b8 01       	movw	r22, r16
-    10ea:	0e 94 d0 09 	call	0x13a0	; 0x13a0 <__udivmodhi4>
-    10ee:	9b 01       	movw	r18, r22
+    10e0:	b8 01       	movw	r22, r16
+    10e2:	0e 94 cc 09 	call	0x1398	; 0x1398 <__udivmodhi4>
+    10e6:	9b 01       	movw	r18, r22
 		const unsigned int segmentC = volDb % 10;
-    10f0:	c5 01       	movw	r24, r10
-    10f2:	b8 01       	movw	r22, r16
-    10f4:	0e 94 d0 09 	call	0x13a0	; 0x13a0 <__udivmodhi4>
-    10f8:	ea 30       	cpi	r30, 0x0A	; 10
-    10fa:	f1 05       	cpc	r31, r1
-    10fc:	38 f4       	brcc	.+14     	; 0x110c <main+0x3a0>
-    10fe:	ee 0f       	add	r30, r30
-    1100:	ff 1f       	adc	r31, r31
-    1102:	ef 57       	subi	r30, 0x7F	; 127
-    1104:	fe 4f       	sbci	r31, 0xFE	; 254
-    1106:	60 81       	ld	r22, Z
-    1108:	71 81       	ldd	r23, Z+1	; 0x01
-    110a:	02 c0       	rjmp	.+4      	; 0x1110 <main+0x3a4>
-    110c:	60 e0       	ldi	r22, 0x00	; 0
-    110e:	70 e0       	ldi	r23, 0x00	; 0
-    1110:	22 0f       	add	r18, r18
-    1112:	33 1f       	adc	r19, r19
-    1114:	f9 01       	movw	r30, r18
-    1116:	e3 59       	subi	r30, 0x93	; 147
-    1118:	fe 4f       	sbci	r31, 0xFE	; 254
-    111a:	80 80       	ld	r8, Z
-    111c:	91 80       	ldd	r9, Z+1	; 0x01
+    10e8:	c5 01       	movw	r24, r10
+    10ea:	b8 01       	movw	r22, r16
+    10ec:	0e 94 cc 09 	call	0x1398	; 0x1398 <__udivmodhi4>
+    10f0:	ea 30       	cpi	r30, 0x0A	; 10
+    10f2:	f1 05       	cpc	r31, r1
+    10f4:	38 f4       	brcc	.+14     	; 0x1104 <main+0x398>
+    10f6:	ee 0f       	add	r30, r30
+    10f8:	ff 1f       	adc	r31, r31
+    10fa:	ef 57       	subi	r30, 0x7F	; 127
+    10fc:	fe 4f       	sbci	r31, 0xFE	; 254
+    10fe:	60 81       	ld	r22, Z
+    1100:	71 81       	ldd	r23, Z+1	; 0x01
+    1102:	02 c0       	rjmp	.+4      	; 0x1108 <main+0x39c>
+    1104:	60 e0       	ldi	r22, 0x00	; 0
+    1106:	70 e0       	ldi	r23, 0x00	; 0
+    1108:	22 0f       	add	r18, r18
+    110a:	33 1f       	adc	r19, r19
+    110c:	f9 01       	movw	r30, r18
+    110e:	e3 59       	subi	r30, 0x93	; 147
+    1110:	fe 4f       	sbci	r31, 0xFE	; 254
+    1112:	80 80       	ld	r8, Z
+    1114:	91 80       	ldd	r9, Z+1	; 0x01
 			case 9:
 			segmentBPointer = &Vol9b;
 			break;
 		}
 		
 		switch (segmentC)
-    111e:	00 97       	sbiw	r24, 0x00	; 0
-    1120:	51 f0       	breq	.+20     	; 0x1136 <main+0x3ca>
-    1122:	05 97       	sbiw	r24, 0x05	; 5
-    1124:	19 f0       	breq	.+6      	; 0x112c <main+0x3c0>
+    1116:	00 97       	sbiw	r24, 0x00	; 0
+    1118:	51 f0       	breq	.+20     	; 0x112e <main+0x3c2>
+    111a:	05 97       	sbiw	r24, 0x05	; 5
+    111c:	19 f0       	breq	.+6      	; 0x1124 <main+0x3b8>
 		const unsigned int segmentA = volDb / 100;
 		const unsigned int segmentB = (volDb % 100) / 10;
 		const unsigned int segmentC = volDb % 10;
 		const VfdState* segmentAPointer = 0;
 		const VfdState* segmentBPointer = 0;
 		const VfdState* segmentCPointer = 0;
-    1126:	61 2c       	mov	r6, r1
-    1128:	71 2c       	mov	r7, r1
-    112a:	09 c0       	rjmp	.+18     	; 0x113e <main+0x3d2>
+    111e:	61 2c       	mov	r6, r1
+    1120:	71 2c       	mov	r7, r1
+    1122:	09 c0       	rjmp	.+18     	; 0x1136 <main+0x3ca>
 		{
 			case 0:
 			segmentCPointer = &Vol0c;
 			break;
 			case 5:
 			segmentCPointer = &Vol5c;
-    112c:	4e eb       	ldi	r20, 0xBE	; 190
-    112e:	64 2e       	mov	r6, r20
-    1130:	40 e0       	ldi	r20, 0x00	; 0
-    1132:	74 2e       	mov	r7, r20
-    1134:	04 c0       	rjmp	.+8      	; 0x113e <main+0x3d2>
+    1124:	4e eb       	ldi	r20, 0xBE	; 190
+    1126:	64 2e       	mov	r6, r20
+    1128:	40 e0       	ldi	r20, 0x00	; 0
+    112a:	74 2e       	mov	r7, r20
+    112c:	04 c0       	rjmp	.+8      	; 0x1136 <main+0x3ca>
 		}
 		
 		switch (segmentC)
 		{
 			case 0:
 			segmentCPointer = &Vol0c;
-    1136:	35 ec       	ldi	r19, 0xC5	; 197
-    1138:	63 2e       	mov	r6, r19
-    113a:	30 e0       	ldi	r19, 0x00	; 0
-    113c:	73 2e       	mov	r7, r19
+    112e:	35 ec       	ldi	r19, 0xC5	; 197
+    1130:	63 2e       	mov	r6, r19
+    1132:	30 e0       	ldi	r19, 0x00	; 0
+    1134:	73 2e       	mov	r7, r19
 			segmentCPointer = &Vol5c;
 			break;
 		}
 		
 		VfdState segmentAVfdState;
 		memcpy_P(&segmentAVfdState, segmentAPointer, sizeof(VfdState));
-    113e:	47 e0       	ldi	r20, 0x07	; 7
-    1140:	50 e0       	ldi	r21, 0x00	; 0
-    1142:	ce 01       	movw	r24, r28
-    1144:	0f 96       	adiw	r24, 0x0f	; 15
-    1146:	0e 94 ea 09 	call	0x13d4	; 0x13d4 <memcpy_P>
+    1136:	47 e0       	ldi	r20, 0x07	; 7
+    1138:	50 e0       	ldi	r21, 0x00	; 0
+    113a:	ce 01       	movw	r24, r28
+    113c:	0f 96       	adiw	r24, 0x0f	; 15
+    113e:	0e 94 e6 09 	call	0x13cc	; 0x13cc <memcpy_P>
 		VfdState segmentBVfdState;
 		memcpy_P(&segmentBVfdState, segmentBPointer, sizeof(VfdState));
-    114a:	47 e0       	ldi	r20, 0x07	; 7
-    114c:	50 e0       	ldi	r21, 0x00	; 0
-    114e:	b4 01       	movw	r22, r8
-    1150:	ce 01       	movw	r24, r28
-    1152:	08 96       	adiw	r24, 0x08	; 8
-    1154:	0e 94 ea 09 	call	0x13d4	; 0x13d4 <memcpy_P>
+    1142:	47 e0       	ldi	r20, 0x07	; 7
+    1144:	50 e0       	ldi	r21, 0x00	; 0
+    1146:	b4 01       	movw	r22, r8
+    1148:	ce 01       	movw	r24, r28
+    114a:	08 96       	adiw	r24, 0x08	; 8
+    114c:	0e 94 e6 09 	call	0x13cc	; 0x13cc <memcpy_P>
 		VfdState segmentCVfdState;
 		memcpy_P(&segmentCVfdState, segmentCPointer, sizeof(VfdState));
-    1158:	47 e0       	ldi	r20, 0x07	; 7
-    115a:	50 e0       	ldi	r21, 0x00	; 0
-    115c:	b3 01       	movw	r22, r6
-    115e:	ce 01       	movw	r24, r28
-    1160:	01 96       	adiw	r24, 0x01	; 1
-    1162:	0e 94 ea 09 	call	0x13d4	; 0x13d4 <memcpy_P>
+    1150:	47 e0       	ldi	r20, 0x07	; 7
+    1152:	50 e0       	ldi	r21, 0x00	; 0
+    1154:	b3 01       	movw	r22, r6
+    1156:	ce 01       	movw	r24, r28
+    1158:	01 96       	adiw	r24, 0x01	; 1
+    115a:	0e 94 e6 09 	call	0x13cc	; 0x13cc <memcpy_P>
 		
 		// combine all segments into C-S for grid 3
 		// leave others as they were
 		
 		displayMemory[3].chip1 = (displayMemory[3].chip1 & ~0b11111100) | ((segmentAVfdState.chip1 | segmentBVfdState.chip1 | segmentCVfdState.chip1) & 0b11111100);
-    1166:	9d 89       	ldd	r25, Y+21	; 0x15
-    1168:	8e 85       	ldd	r24, Y+14	; 0x0e
-    116a:	89 2b       	or	r24, r25
-    116c:	9f 81       	ldd	r25, Y+7	; 0x07
-    116e:	89 2b       	or	r24, r25
-    1170:	8c 7f       	andi	r24, 0xFC	; 252
-    1172:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
-    1176:	93 70       	andi	r25, 0x03	; 3
-    1178:	89 2b       	or	r24, r25
+    115e:	9d 89       	ldd	r25, Y+21	; 0x15
+    1160:	8e 85       	ldd	r24, Y+14	; 0x0e
+    1162:	89 2b       	or	r24, r25
+    1164:	9f 81       	ldd	r25, Y+7	; 0x07
+    1166:	89 2b       	or	r24, r25
+    1168:	8c 7f       	andi	r24, 0xFC	; 252
+    116a:	90 91 8c 05 	lds	r25, 0x058C	; 0x80058c <_ZL13displayMemory+0x1b>
+    116e:	93 70       	andi	r25, 0x03	; 3
+    1170:	89 2b       	or	r24, r25
 		displayMemory[3].chip2 = segmentAVfdState.chip2 | segmentBVfdState.chip2 | segmentCVfdState.chip2;
-    117a:	2c 89       	ldd	r18, Y+20	; 0x14
-    117c:	9d 85       	ldd	r25, Y+13	; 0x0d
-    117e:	92 2b       	or	r25, r18
-    1180:	2e 81       	ldd	r18, Y+6	; 0x06
-    1182:	92 2b       	or	r25, r18
-    1184:	90 93 8b 05 	sts	0x058B, r25	; 0x80058b <_ZL13displayMemory+0x1a>
+    1172:	2c 89       	ldd	r18, Y+20	; 0x14
+    1174:	9d 85       	ldd	r25, Y+13	; 0x0d
+    1176:	92 2b       	or	r25, r18
+    1178:	2e 81       	ldd	r18, Y+6	; 0x06
+    117a:	92 2b       	or	r25, r18
+    117c:	90 93 8b 05 	sts	0x058B, r25	; 0x80058b <_ZL13displayMemory+0x1a>
 		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b00000111) | ((segmentAVfdState.chip3 | segmentBVfdState.chip3 | segmentCVfdState.chip3) & 0b00000111);
-    1188:	2b 89       	ldd	r18, Y+19	; 0x13
-    118a:	9c 85       	ldd	r25, Y+12	; 0x0c
-    118c:	92 2b       	or	r25, r18
-    118e:	2d 81       	ldd	r18, Y+5	; 0x05
-    1190:	92 2b       	or	r25, r18
-    1192:	97 70       	andi	r25, 0x07	; 7
-    1194:	20 91 8a 05 	lds	r18, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
-    1198:	28 7f       	andi	r18, 0xF8	; 248
-    119a:	92 2b       	or	r25, r18
-    119c:	90 93 8a 05 	sts	0x058A, r25	; 0x80058a <_ZL13displayMemory+0x19>
+    1180:	2b 89       	ldd	r18, Y+19	; 0x13
+    1182:	9c 85       	ldd	r25, Y+12	; 0x0c
+    1184:	92 2b       	or	r25, r18
+    1186:	2d 81       	ldd	r18, Y+5	; 0x05
+    1188:	92 2b       	or	r25, r18
+    118a:	97 70       	andi	r25, 0x07	; 7
+    118c:	20 91 8a 05 	lds	r18, 0x058A	; 0x80058a <_ZL13displayMemory+0x19>
+    1190:	28 7f       	andi	r18, 0xF8	; 248
+    1192:	92 2b       	or	r25, r18
+    1194:	90 93 8a 05 	sts	0x058A, r25	; 0x80058a <_ZL13displayMemory+0x19>
 		
 		if (volDb == 0)
-    11a0:	ab 28       	or	r10, r11
-    11a2:	11 f4       	brne	.+4      	; 0x11a8 <main+0x43c>
+    1198:	ab 28       	or	r10, r11
+    119a:	11 f4       	brne	.+4      	; 0x11a0 <main+0x434>
 		{
 			// do not display minus sign
 			displayMemory[3].chip1 &= ~0b00000010;
-    11a4:	8d 7f       	andi	r24, 0xFD	; 253
-    11a6:	01 c0       	rjmp	.+2      	; 0x11aa <main+0x43e>
+    119c:	8d 7f       	andi	r24, 0xFD	; 253
+    119e:	01 c0       	rjmp	.+2      	; 0x11a2 <main+0x436>
 		}
 		else
 		{
 			// display minus sign
 			displayMemory[3].chip1 |= 0b00000010;
-    11a8:	82 60       	ori	r24, 0x02	; 2
-    11aa:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
-    11ae:	3e ce       	rjmp	.-900    	; 0xe2c <main+0xc0>
+    11a0:	82 60       	ori	r24, 0x02	; 2
+    11a2:	80 93 8c 05 	sts	0x058C, r24	; 0x80058c <_ZL13displayMemory+0x1b>
+    11a6:	42 ce       	rjmp	.-892    	; 0xe2c <main+0xc0>
 				break;
 			}
 
 			// command applied; if no new frame has started in the meantime,
 			// report READY again so the master may send the next command.
 			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-    11b0:	bf b6       	in	r11, 0x3f	; 63
+    11a8:	bf b6       	in	r11, 0x3f	; 63
     return 1;
 }
 
 static __inline__ uint8_t __iCliRetVal(void)
 {
     cli();
-    11b2:	f8 94       	cli
-    11b4:	81 e0       	ldi	r24, 0x01	; 1
-    11b6:	88 23       	and	r24, r24
-    11b8:	51 f1       	breq	.+84     	; 0x120e <main+0x4a2>
+    11aa:	f8 94       	cli
+    11ac:	81 e0       	ldi	r24, 0x01	; 1
+    11ae:	88 23       	and	r24, r24
+    11b0:	51 f1       	breq	.+84     	; 0x1206 <main+0x49a>
 			{
 				if (modeCmdFinished == UINT8_MAX
-    11ba:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <_ZL15modeCmdFinished>
+    11b2:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <_ZL15modeCmdFinished>
 					&& modeCmdGraCharCurrentIndex == UINT8_MAX
 					&& modeCmdNumCharCurrentIndex == UINT8_MAX
 					&& modeCmdShowSpeCurrentIndex == UINT8_MAX
 					&& modeCmdHideSpeCurrentIndex == UINT8_MAX
 					&& modeCmdToggleSpeCurrentIndex == UINT8_MAX
 					&& modeCmdShowVolumeCurrentIndex == UINT8_MAX)
-    11be:	8f 3f       	cpi	r24, 0xFF	; 255
-    11c0:	31 f5       	brne	.+76     	; 0x120e <main+0x4a2>
+    11b6:	8f 3f       	cpi	r24, 0xFF	; 255
+    11b8:	31 f5       	brne	.+76     	; 0x1206 <main+0x49a>
 			// command applied; if no new frame has started in the meantime,
 			// report READY again so the master may send the next command.
 			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 			{
 				if (modeCmdFinished == UINT8_MAX
 					&& modeCmdGraTextCurrentIndex == UINT8_MAX
-    11c2:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL26modeCmdGraTextCurrentIndex>
-    11c6:	8f 3f       	cpi	r24, 0xFF	; 255
-    11c8:	11 f5       	brne	.+68     	; 0x120e <main+0x4a2>
+    11ba:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <_ZL26modeCmdGraTextCurrentIndex>
+    11be:	8f 3f       	cpi	r24, 0xFF	; 255
+    11c0:	11 f5       	brne	.+68     	; 0x1206 <main+0x49a>
 					&& modeCmdNumTextCurrentIndex == UINT8_MAX
-    11ca:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <_ZL26modeCmdNumTextCurrentIndex>
-    11ce:	80 e0       	ldi	r24, 0x00	; 0
-    11d0:	9f 3f       	cpi	r25, 0xFF	; 255
-    11d2:	e9 f4       	brne	.+58     	; 0x120e <main+0x4a2>
+    11c2:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <_ZL26modeCmdNumTextCurrentIndex>
+    11c6:	80 e0       	ldi	r24, 0x00	; 0
+    11c8:	9f 3f       	cpi	r25, 0xFF	; 255
+    11ca:	e9 f4       	brne	.+58     	; 0x1206 <main+0x49a>
 					&& modeCmdGraCharCurrentIndex == UINT8_MAX
-    11d4:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <_ZL26modeCmdGraCharCurrentIndex>
-    11d8:	9f 3f       	cpi	r25, 0xFF	; 255
-    11da:	69 f7       	brne	.-38     	; 0x11b6 <main+0x44a>
+    11cc:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <_ZL26modeCmdGraCharCurrentIndex>
+    11d0:	9f 3f       	cpi	r25, 0xFF	; 255
+    11d2:	69 f7       	brne	.-38     	; 0x11ae <main+0x442>
 					&& modeCmdNumCharCurrentIndex == UINT8_MAX
-    11dc:	90 91 07 01 	lds	r25, 0x0107	; 0x800107 <_ZL26modeCmdNumCharCurrentIndex>
-    11e0:	9f 3f       	cpi	r25, 0xFF	; 255
-    11e2:	49 f7       	brne	.-46     	; 0x11b6 <main+0x44a>
+    11d4:	90 91 07 01 	lds	r25, 0x0107	; 0x800107 <_ZL26modeCmdNumCharCurrentIndex>
+    11d8:	9f 3f       	cpi	r25, 0xFF	; 255
+    11da:	49 f7       	brne	.-46     	; 0x11ae <main+0x442>
 					&& modeCmdShowSpeCurrentIndex == UINT8_MAX
-    11e4:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <_ZL26modeCmdShowSpeCurrentIndex>
-    11e8:	9f 3f       	cpi	r25, 0xFF	; 255
-    11ea:	29 f7       	brne	.-54     	; 0x11b6 <main+0x44a>
+    11dc:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <_ZL26modeCmdShowSpeCurrentIndex>
+    11e0:	9f 3f       	cpi	r25, 0xFF	; 255
+    11e2:	29 f7       	brne	.-54     	; 0x11ae <main+0x442>
 					&& modeCmdHideSpeCurrentIndex == UINT8_MAX
-    11ec:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <_ZL26modeCmdHideSpeCurrentIndex>
-    11f0:	9f 3f       	cpi	r25, 0xFF	; 255
-    11f2:	09 f7       	brne	.-62     	; 0x11b6 <main+0x44a>
+    11e4:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <_ZL26modeCmdHideSpeCurrentIndex>
+    11e8:	9f 3f       	cpi	r25, 0xFF	; 255
+    11ea:	09 f7       	brne	.-62     	; 0x11ae <main+0x442>
 					&& modeCmdToggleSpeCurrentIndex == UINT8_MAX
-    11f4:	90 91 04 01 	lds	r25, 0x0104	; 0x800104 <_ZL28modeCmdToggleSpeCurrentIndex>
-    11f8:	9f 3f       	cpi	r25, 0xFF	; 255
-    11fa:	e9 f6       	brne	.-70     	; 0x11b6 <main+0x44a>
+    11ec:	90 91 04 01 	lds	r25, 0x0104	; 0x800104 <_ZL28modeCmdToggleSpeCurrentIndex>
+    11f0:	9f 3f       	cpi	r25, 0xFF	; 255
+    11f2:	e9 f6       	brne	.-70     	; 0x11ae <main+0x442>
 					&& modeCmdShowVolumeCurrentIndex == UINT8_MAX)
-    11fc:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <_ZL29modeCmdShowVolumeCurrentIndex>
-    1200:	8f 3f       	cpi	r24, 0xFF	; 255
-    1202:	09 f0       	breq	.+2      	; 0x1206 <main+0x49a>
-    1204:	cb c0       	rjmp	.+406    	; 0x139c <main+0x630>
+    11f4:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <_ZL29modeCmdShowVolumeCurrentIndex>
+    11f8:	8f 3f       	cpi	r24, 0xFF	; 255
+    11fa:	09 f0       	breq	.+2      	; 0x11fe <main+0x492>
+    11fc:	cb c0       	rjmp	.+406    	; 0x1394 <main+0x628>
 				{
 					I2C_setStatus(STATUS_READY);
-    1206:	85 ea       	ldi	r24, 0xA5	; 165
-    1208:	0e 94 63 03 	call	0x6c6	; 0x6c6 <_Z13I2C_setStatush>
-    120c:	c7 c0       	rjmp	.+398    	; 0x139c <main+0x630>
+    11fe:	85 ea       	ldi	r24, 0xA5	; 165
+    1200:	0e 94 63 03 	call	0x6c6	; 0x6c6 <_Z13I2C_setStatush>
+    1204:	c7 c0       	rjmp	.+398    	; 0x1394 <main+0x628>
     (void)__s;
 }
 
 static __inline__ void __iRestore(const  uint8_t *__s)
 {
     SREG = *__s;
-    120e:	bf be       	out	0x3f, r11	; 63
+    1206:	bf be       	out	0x3f, r11	; 63
 				}
 			}
 		}
 		
 		if (displayOn == 1)
-    1210:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <_ZL9displayOn>
-    1214:	81 30       	cpi	r24, 0x01	; 1
-    1216:	09 f0       	breq	.+2      	; 0x121a <main+0x4ae>
-    1218:	af c0       	rjmp	.+350    	; 0x1378 <main+0x60c>
+    1208:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <_ZL9displayOn>
+    120c:	81 30       	cpi	r24, 0x01	; 1
+    120e:	09 f0       	breq	.+2      	; 0x1212 <main+0x4a6>
+    1210:	af c0       	rjmp	.+350    	; 0x1370 <main+0x604>
 		{
 			if (displayCounter >= 250)
-    121a:	80 91 6e 05 	lds	r24, 0x056E	; 0x80056e <_ZL14displayCounter>
-    121e:	90 91 6f 05 	lds	r25, 0x056F	; 0x80056f <_ZL14displayCounter+0x1>
-    1222:	8a 3f       	cpi	r24, 0xFA	; 250
-    1224:	91 05       	cpc	r25, r1
-    1226:	08 f4       	brcc	.+2      	; 0x122a <main+0x4be>
-    1228:	a1 c0       	rjmp	.+322    	; 0x136c <main+0x600>
+    1212:	80 91 6e 05 	lds	r24, 0x056E	; 0x80056e <_ZL14displayCounter>
+    1216:	90 91 6f 05 	lds	r25, 0x056F	; 0x80056f <_ZL14displayCounter+0x1>
+    121a:	8a 3f       	cpi	r24, 0xFA	; 250
+    121c:	91 05       	cpc	r25, r1
+    121e:	08 f4       	brcc	.+2      	; 0x1222 <main+0x4b6>
+    1220:	a1 c0       	rjmp	.+322    	; 0x1364 <main+0x5f8>
 			{
 				displayCounter = 0;
-    122a:	10 92 6f 05 	sts	0x056F, r1	; 0x80056f <_ZL14displayCounter+0x1>
-    122e:	10 92 6e 05 	sts	0x056E, r1	; 0x80056e <_ZL14displayCounter>
+    1222:	10 92 6f 05 	sts	0x056F, r1	; 0x80056f <_ZL14displayCounter+0x1>
+    1226:	10 92 6e 05 	sts	0x056E, r1	; 0x80056e <_ZL14displayCounter>
 		
 				if (activeGrid == 17)
-    1232:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
-    1236:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
-    123a:	81 31       	cpi	r24, 0x11	; 17
-    123c:	91 05       	cpc	r25, r1
-    123e:	29 f4       	brne	.+10     	; 0x124a <main+0x4de>
+    122a:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
+    122e:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
+    1232:	81 31       	cpi	r24, 0x11	; 17
+    1234:	91 05       	cpc	r25, r1
+    1236:	29 f4       	brne	.+10     	; 0x1242 <main+0x4d6>
 				{
 					activeGrid = 0;
-    1240:	10 92 f0 05 	sts	0x05F0, r1	; 0x8005f0 <_ZL10activeGrid+0x1>
-    1244:	10 92 ef 05 	sts	0x05EF, r1	; 0x8005ef <_ZL10activeGrid>
-    1248:	05 c0       	rjmp	.+10     	; 0x1254 <main+0x4e8>
+    1238:	10 92 f0 05 	sts	0x05F0, r1	; 0x8005f0 <_ZL10activeGrid+0x1>
+    123c:	10 92 ef 05 	sts	0x05EF, r1	; 0x8005ef <_ZL10activeGrid>
+    1240:	05 c0       	rjmp	.+10     	; 0x124c <main+0x4e0>
 				}
 				else
 				{
 					activeGrid++;
-    124a:	01 96       	adiw	r24, 0x01	; 1
-    124c:	90 93 f0 05 	sts	0x05F0, r25	; 0x8005f0 <_ZL10activeGrid+0x1>
-    1250:	80 93 ef 05 	sts	0x05EF, r24	; 0x8005ef <_ZL10activeGrid>
+    1242:	01 96       	adiw	r24, 0x01	; 1
+    1244:	90 93 f0 05 	sts	0x05F0, r25	; 0x8005f0 <_ZL10activeGrid+0x1>
+    1248:	80 93 ef 05 	sts	0x05EF, r24	; 0x8005ef <_ZL10activeGrid>
 
 				unsigned char chip7 = 0b00000000;
 				unsigned char chip6 = 0b00000000;
 				unsigned char chip5 = 0b00000000;
 
 				switch (activeGrid)
-    1254:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
-    1258:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
-    125c:	82 31       	cpi	r24, 0x12	; 18
-    125e:	91 05       	cpc	r25, r1
-    1260:	80 f4       	brcc	.+32     	; 0x1282 <main+0x516>
+    124c:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
+    1250:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
+    1254:	82 31       	cpi	r24, 0x12	; 18
+    1256:	91 05       	cpc	r25, r1
+    1258:	80 f4       	brcc	.+32     	; 0x127a <main+0x50e>
+    125a:	fc 01       	movw	r30, r24
+    125c:	e5 5a       	subi	r30, 0xA5	; 165
+    125e:	fe 4f       	sbci	r31, 0xFE	; 254
+    1260:	a0 80       	ld	r10, Z
     1262:	fc 01       	movw	r30, r24
-    1264:	e5 5a       	subi	r30, 0xA5	; 165
+    1264:	e7 5b       	subi	r30, 0xB7	; 183
     1266:	fe 4f       	sbci	r31, 0xFE	; 254
-    1268:	a0 80       	ld	r10, Z
+    1268:	90 80       	ld	r9, Z
     126a:	fc 01       	movw	r30, r24
-    126c:	e7 5b       	subi	r30, 0xB7	; 183
+    126c:	e9 5c       	subi	r30, 0xC9	; 201
     126e:	fe 4f       	sbci	r31, 0xFE	; 254
-    1270:	90 80       	ld	r9, Z
-    1272:	fc 01       	movw	r30, r24
-    1274:	e9 5c       	subi	r30, 0xC9	; 201
-    1276:	fe 4f       	sbci	r31, 0xFE	; 254
-    1278:	80 80       	ld	r8, Z
+    1270:	80 80       	ld	r8, Z
 					chip6 = 0b00000001;
 					break;
 				}
 		
 				// add underlines
 				if (activeGrid >= 4)
-    127a:	84 30       	cpi	r24, 0x04	; 4
-    127c:	91 05       	cpc	r25, r1
-    127e:	f0 f0       	brcs	.+60     	; 0x12bc <main+0x550>
-    1280:	03 c0       	rjmp	.+6      	; 0x1288 <main+0x51c>
+    1272:	84 30       	cpi	r24, 0x04	; 4
+    1274:	91 05       	cpc	r25, r1
+    1276:	f0 f0       	brcs	.+60     	; 0x12b4 <main+0x548>
+    1278:	03 c0       	rjmp	.+6      	; 0x1280 <main+0x514>
 
 				unsigned char chip7 = 0b00000000;
 				unsigned char chip6 = 0b00000000;
 				unsigned char chip5 = 0b00000000;
 
 				switch (activeGrid)
-    1282:	81 2c       	mov	r8, r1
-    1284:	91 2c       	mov	r9, r1
-    1286:	a1 2c       	mov	r10, r1
+    127a:	81 2c       	mov	r8, r1
+    127c:	91 2c       	mov	r9, r1
+    127e:	a1 2c       	mov	r10, r1
 				}
 		
 				// add underlines
 				if (activeGrid >= 4)
 				{
 					if (showUnderlines)
-    1288:	20 91 70 05 	lds	r18, 0x0570	; 0x800570 <_ZL14showUnderlines>
-    128c:	22 23       	and	r18, r18
-    128e:	59 f0       	breq	.+22     	; 0x12a6 <main+0x53a>
+    1280:	20 91 70 05 	lds	r18, 0x0570	; 0x800570 <_ZL14showUnderlines>
+    1284:	22 23       	and	r18, r18
+    1286:	59 f0       	breq	.+22     	; 0x129e <main+0x532>
 					{
 						displayMemory[activeGrid].chip5 |= 0b00001000;
-    1290:	27 e0       	ldi	r18, 0x07	; 7
-    1292:	28 9f       	mul	r18, r24
-    1294:	f0 01       	movw	r30, r0
-    1296:	29 9f       	mul	r18, r25
-    1298:	f0 0d       	add	r31, r0
-    129a:	11 24       	eor	r1, r1
-    129c:	ef 58       	subi	r30, 0x8F	; 143
-    129e:	fa 4f       	sbci	r31, 0xFA	; 250
-    12a0:	82 81       	ldd	r24, Z+2	; 0x02
-    12a2:	88 60       	ori	r24, 0x08	; 8
-    12a4:	0a c0       	rjmp	.+20     	; 0x12ba <main+0x54e>
+    1288:	27 e0       	ldi	r18, 0x07	; 7
+    128a:	28 9f       	mul	r18, r24
+    128c:	f0 01       	movw	r30, r0
+    128e:	29 9f       	mul	r18, r25
+    1290:	f0 0d       	add	r31, r0
+    1292:	11 24       	eor	r1, r1
+    1294:	ef 58       	subi	r30, 0x8F	; 143
+    1296:	fa 4f       	sbci	r31, 0xFA	; 250
+    1298:	82 81       	ldd	r24, Z+2	; 0x02
+    129a:	88 60       	ori	r24, 0x08	; 8
+    129c:	0a c0       	rjmp	.+20     	; 0x12b2 <main+0x546>
 					}
 					else
 					{
 						displayMemory[activeGrid].chip5 &= ~0b00001000;
-    12a6:	27 e0       	ldi	r18, 0x07	; 7
-    12a8:	28 9f       	mul	r18, r24
-    12aa:	f0 01       	movw	r30, r0
-    12ac:	29 9f       	mul	r18, r25
-    12ae:	f0 0d       	add	r31, r0
-    12b0:	11 24       	eor	r1, r1
-    12b2:	ef 58       	subi	r30, 0x8F	; 143
-    12b4:	fa 4f       	sbci	r31, 0xFA	; 250
-    12b6:	82 81       	ldd	r24, Z+2	; 0x02
-    12b8:	87 7f       	andi	r24, 0xF7	; 247
-    12ba:	82 83       	std	Z+2, r24	; 0x02
+    129e:	27 e0       	ldi	r18, 0x07	; 7
+    12a0:	28 9f       	mul	r18, r24
+    12a2:	f0 01       	movw	r30, r0
+    12a4:	29 9f       	mul	r18, r25
+    12a6:	f0 0d       	add	r31, r0
+    12a8:	11 24       	eor	r1, r1
+    12aa:	ef 58       	subi	r30, 0x8F	; 143
+    12ac:	fa 4f       	sbci	r31, 0xFA	; 250
+    12ae:	82 81       	ldd	r24, Z+2	; 0x02
+    12b0:	87 7f       	andi	r24, 0xF7	; 247
+    12b2:	82 83       	std	Z+2, r24	; 0x02
 					}
 				}
 		
 				PORTC &= ~_BV(PC2); // LATCH, 1 active
-    12bc:	42 98       	cbi	0x08, 2	; 8
+    12b4:	42 98       	cbi	0x08, 2	; 8
 				shiftOut(~displayMemory[activeGrid].chip1);
-    12be:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
-    12c2:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
-    12c6:	27 e0       	ldi	r18, 0x07	; 7
-    12c8:	b2 2e       	mov	r11, r18
-    12ca:	b8 9e       	mul	r11, r24
-    12cc:	f0 01       	movw	r30, r0
-    12ce:	b9 9e       	mul	r11, r25
-    12d0:	f0 0d       	add	r31, r0
-    12d2:	11 24       	eor	r1, r1
-    12d4:	ef 58       	subi	r30, 0x8F	; 143
-    12d6:	fa 4f       	sbci	r31, 0xFA	; 250
-    12d8:	86 81       	ldd	r24, Z+6	; 0x06
-    12da:	80 95       	com	r24
-    12dc:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
+    12b6:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
+    12ba:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
+    12be:	27 e0       	ldi	r18, 0x07	; 7
+    12c0:	b2 2e       	mov	r11, r18
+    12c2:	b8 9e       	mul	r11, r24
+    12c4:	f0 01       	movw	r30, r0
+    12c6:	b9 9e       	mul	r11, r25
+    12c8:	f0 0d       	add	r31, r0
+    12ca:	11 24       	eor	r1, r1
+    12cc:	ef 58       	subi	r30, 0x8F	; 143
+    12ce:	fa 4f       	sbci	r31, 0xFA	; 250
+    12d0:	86 81       	ldd	r24, Z+6	; 0x06
+    12d2:	80 95       	com	r24
+    12d4:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
 				shiftOut(~displayMemory[activeGrid].chip2);
-    12e0:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
-    12e4:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
-    12e8:	b8 9e       	mul	r11, r24
-    12ea:	f0 01       	movw	r30, r0
-    12ec:	b9 9e       	mul	r11, r25
-    12ee:	f0 0d       	add	r31, r0
-    12f0:	11 24       	eor	r1, r1
-    12f2:	ef 58       	subi	r30, 0x8F	; 143
-    12f4:	fa 4f       	sbci	r31, 0xFA	; 250
-    12f6:	85 81       	ldd	r24, Z+5	; 0x05
-    12f8:	80 95       	com	r24
-    12fa:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
+    12d8:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
+    12dc:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
+    12e0:	b8 9e       	mul	r11, r24
+    12e2:	f0 01       	movw	r30, r0
+    12e4:	b9 9e       	mul	r11, r25
+    12e6:	f0 0d       	add	r31, r0
+    12e8:	11 24       	eor	r1, r1
+    12ea:	ef 58       	subi	r30, 0x8F	; 143
+    12ec:	fa 4f       	sbci	r31, 0xFA	; 250
+    12ee:	85 81       	ldd	r24, Z+5	; 0x05
+    12f0:	80 95       	com	r24
+    12f2:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
 				shiftOut(~displayMemory[activeGrid].chip3);
-    12fe:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
-    1302:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
-    1306:	b8 9e       	mul	r11, r24
-    1308:	f0 01       	movw	r30, r0
-    130a:	b9 9e       	mul	r11, r25
-    130c:	f0 0d       	add	r31, r0
-    130e:	11 24       	eor	r1, r1
-    1310:	ef 58       	subi	r30, 0x8F	; 143
-    1312:	fa 4f       	sbci	r31, 0xFA	; 250
-    1314:	84 81       	ldd	r24, Z+4	; 0x04
-    1316:	80 95       	com	r24
-    1318:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
+    12f6:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
+    12fa:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
+    12fe:	b8 9e       	mul	r11, r24
+    1300:	f0 01       	movw	r30, r0
+    1302:	b9 9e       	mul	r11, r25
+    1304:	f0 0d       	add	r31, r0
+    1306:	11 24       	eor	r1, r1
+    1308:	ef 58       	subi	r30, 0x8F	; 143
+    130a:	fa 4f       	sbci	r31, 0xFA	; 250
+    130c:	84 81       	ldd	r24, Z+4	; 0x04
+    130e:	80 95       	com	r24
+    1310:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
 				shiftOut(~displayMemory[activeGrid].chip4);
-    131c:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
-    1320:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
-    1324:	b8 9e       	mul	r11, r24
-    1326:	f0 01       	movw	r30, r0
-    1328:	b9 9e       	mul	r11, r25
-    132a:	f0 0d       	add	r31, r0
-    132c:	11 24       	eor	r1, r1
-    132e:	ef 58       	subi	r30, 0x8F	; 143
-    1330:	fa 4f       	sbci	r31, 0xFA	; 250
-    1332:	83 81       	ldd	r24, Z+3	; 0x03
-    1334:	80 95       	com	r24
-    1336:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
+    1314:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
+    1318:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
+    131c:	b8 9e       	mul	r11, r24
+    131e:	f0 01       	movw	r30, r0
+    1320:	b9 9e       	mul	r11, r25
+    1322:	f0 0d       	add	r31, r0
+    1324:	11 24       	eor	r1, r1
+    1326:	ef 58       	subi	r30, 0x8F	; 143
+    1328:	fa 4f       	sbci	r31, 0xFA	; 250
+    132a:	83 81       	ldd	r24, Z+3	; 0x03
+    132c:	80 95       	com	r24
+    132e:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
 				shiftOut(~(chip5 | displayMemory[activeGrid].chip5)); // only lowest 4 bits belong to grids, so the rest is always set to 0000 (1111 inverted)
-    133a:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
-    133e:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
-    1342:	b8 9e       	mul	r11, r24
-    1344:	f0 01       	movw	r30, r0
-    1346:	b9 9e       	mul	r11, r25
-    1348:	f0 0d       	add	r31, r0
-    134a:	11 24       	eor	r1, r1
-    134c:	ef 58       	subi	r30, 0x8F	; 143
-    134e:	fa 4f       	sbci	r31, 0xFA	; 250
-    1350:	82 81       	ldd	r24, Z+2	; 0x02
-    1352:	88 29       	or	r24, r8
+    1332:	80 91 ef 05 	lds	r24, 0x05EF	; 0x8005ef <_ZL10activeGrid>
+    1336:	90 91 f0 05 	lds	r25, 0x05F0	; 0x8005f0 <_ZL10activeGrid+0x1>
+    133a:	b8 9e       	mul	r11, r24
+    133c:	f0 01       	movw	r30, r0
+    133e:	b9 9e       	mul	r11, r25
+    1340:	f0 0d       	add	r31, r0
+    1342:	11 24       	eor	r1, r1
+    1344:	ef 58       	subi	r30, 0x8F	; 143
+    1346:	fa 4f       	sbci	r31, 0xFA	; 250
+    1348:	82 81       	ldd	r24, Z+2	; 0x02
+    134a:	88 29       	or	r24, r8
+    134c:	80 95       	com	r24
+    134e:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
+				shiftOut(~chip6);
+    1352:	89 2d       	mov	r24, r9
     1354:	80 95       	com	r24
     1356:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
-				shiftOut(~chip6);
-    135a:	89 2d       	mov	r24, r9
+				shiftOut(~chip7);
+    135a:	8a 2d       	mov	r24, r10
     135c:	80 95       	com	r24
     135e:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
-				shiftOut(~chip7);
-    1362:	8a 2d       	mov	r24, r10
-    1364:	80 95       	com	r24
-    1366:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
-    136a:	16 c0       	rjmp	.+44     	; 0x1398 <main+0x62c>
+    1362:	16 c0       	rjmp	.+44     	; 0x1390 <main+0x624>
 				PORTC |= _BV(PC2); // LATCH, 1 active
 			}
 			else
 			{
 				displayCounter++;
-    136c:	01 96       	adiw	r24, 0x01	; 1
-    136e:	90 93 6f 05 	sts	0x056F, r25	; 0x80056f <_ZL14displayCounter+0x1>
-    1372:	80 93 6e 05 	sts	0x056E, r24	; 0x80056e <_ZL14displayCounter>
-    1376:	29 cd       	rjmp	.-1454   	; 0xdca <main+0x5e>
+    1364:	01 96       	adiw	r24, 0x01	; 1
+    1366:	90 93 6f 05 	sts	0x056F, r25	; 0x80056f <_ZL14displayCounter+0x1>
+    136a:	80 93 6e 05 	sts	0x056E, r24	; 0x80056e <_ZL14displayCounter>
+    136e:	2d cd       	rjmp	.-1446   	; 0xdca <main+0x5e>
 			}
 		}
 		else
 		{
 			if (displayOn == 2)
-    1378:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <_ZL9displayOn>
-    137c:	82 30       	cpi	r24, 0x02	; 2
-    137e:	09 f0       	breq	.+2      	; 0x1382 <main+0x616>
-    1380:	24 cd       	rjmp	.-1464   	; 0xdca <main+0x5e>
+    1370:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <_ZL9displayOn>
+    1374:	82 30       	cpi	r24, 0x02	; 2
+    1376:	09 f0       	breq	.+2      	; 0x137a <main+0x60e>
+    1378:	28 cd       	rjmp	.-1456   	; 0xdca <main+0x5e>
 			{
 				displayOn = 0;
-    1382:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_ZL9displayOn>
+    137a:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_ZL9displayOn>
 				
 				PORTC &= ~_BV(PC2); // LATCH, 1 active
-    1386:	42 98       	cbi	0x08, 2	; 8
-    1388:	87 e0       	ldi	r24, 0x07	; 7
-    138a:	b8 2e       	mov	r11, r24
+    137e:	42 98       	cbi	0x08, 2	; 8
+    1380:	87 e0       	ldi	r24, 0x07	; 7
+    1382:	b8 2e       	mov	r11, r24
 				
 				for (unsigned char k = 1; k <= 7; k++)
 				{
 					shiftOut(UINT8_MAX);
-    138c:	8f ef       	ldi	r24, 0xFF	; 255
-    138e:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
-    1392:	ba 94       	dec	r11
+    1384:	8f ef       	ldi	r24, 0xFF	; 255
+    1386:	0e 94 31 05 	call	0xa62	; 0xa62 <_ZL8shiftOuth>
+    138a:	ba 94       	dec	r11
 			{
 				displayOn = 0;
 				
 				PORTC &= ~_BV(PC2); // LATCH, 1 active
 				
 				for (unsigned char k = 1; k <= 7; k++)
-    1394:	b1 10       	cpse	r11, r1
-    1396:	fa cf       	rjmp	.-12     	; 0x138c <main+0x620>
+    138c:	b1 10       	cpse	r11, r1
+    138e:	fa cf       	rjmp	.-12     	; 0x1384 <main+0x618>
 				{
 					shiftOut(UINT8_MAX);
 				}
 				
 				PORTC |= _BV(PC2); // LATCH, 1 active
-    1398:	42 9a       	sbi	0x08, 2	; 8
-    139a:	17 cd       	rjmp	.-1490   	; 0xdca <main+0x5e>
+    1390:	42 9a       	sbi	0x08, 2	; 8
+    1392:	1b cd       	rjmp	.-1482   	; 0xdca <main+0x5e>
 				break;
 			}
 
 			// command applied; if no new frame has started in the meantime,
 			// report READY again so the master may send the next command.
 			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-    139c:	80 e0       	ldi	r24, 0x00	; 0
-    139e:	0b cf       	rjmp	.-490    	; 0x11b6 <main+0x44a>
+    1394:	80 e0       	ldi	r24, 0x00	; 0
+    1396:	0b cf       	rjmp	.-490    	; 0x11ae <main+0x442>
 
-000013a0 <__udivmodhi4>:
-    13a0:	aa 1b       	sub	r26, r26
-    13a2:	bb 1b       	sub	r27, r27
-    13a4:	51 e1       	ldi	r21, 0x11	; 17
-    13a6:	07 c0       	rjmp	.+14     	; 0x13b6 <__udivmodhi4_ep>
+00001398 <__udivmodhi4>:
+    1398:	aa 1b       	sub	r26, r26
+    139a:	bb 1b       	sub	r27, r27
+    139c:	51 e1       	ldi	r21, 0x11	; 17
+    139e:	07 c0       	rjmp	.+14     	; 0x13ae <__udivmodhi4_ep>
 
-000013a8 <__udivmodhi4_loop>:
-    13a8:	aa 1f       	adc	r26, r26
-    13aa:	bb 1f       	adc	r27, r27
-    13ac:	a6 17       	cp	r26, r22
-    13ae:	b7 07       	cpc	r27, r23
-    13b0:	10 f0       	brcs	.+4      	; 0x13b6 <__udivmodhi4_ep>
-    13b2:	a6 1b       	sub	r26, r22
-    13b4:	b7 0b       	sbc	r27, r23
+000013a0 <__udivmodhi4_loop>:
+    13a0:	aa 1f       	adc	r26, r26
+    13a2:	bb 1f       	adc	r27, r27
+    13a4:	a6 17       	cp	r26, r22
+    13a6:	b7 07       	cpc	r27, r23
+    13a8:	10 f0       	brcs	.+4      	; 0x13ae <__udivmodhi4_ep>
+    13aa:	a6 1b       	sub	r26, r22
+    13ac:	b7 0b       	sbc	r27, r23
 
-000013b6 <__udivmodhi4_ep>:
-    13b6:	88 1f       	adc	r24, r24
-    13b8:	99 1f       	adc	r25, r25
-    13ba:	5a 95       	dec	r21
-    13bc:	a9 f7       	brne	.-22     	; 0x13a8 <__udivmodhi4_loop>
-    13be:	80 95       	com	r24
-    13c0:	90 95       	com	r25
-    13c2:	bc 01       	movw	r22, r24
-    13c4:	cd 01       	movw	r24, r26
-    13c6:	08 95       	ret
+000013ae <__udivmodhi4_ep>:
+    13ae:	88 1f       	adc	r24, r24
+    13b0:	99 1f       	adc	r25, r25
+    13b2:	5a 95       	dec	r21
+    13b4:	a9 f7       	brne	.-22     	; 0x13a0 <__udivmodhi4_loop>
+    13b6:	80 95       	com	r24
+    13b8:	90 95       	com	r25
+    13ba:	bc 01       	movw	r22, r24
+    13bc:	cd 01       	movw	r24, r26
+    13be:	08 95       	ret
 
-000013c8 <__tablejump2__>:
-    13c8:	ee 0f       	add	r30, r30
-    13ca:	ff 1f       	adc	r31, r31
-    13cc:	05 90       	lpm	r0, Z+
-    13ce:	f4 91       	lpm	r31, Z
-    13d0:	e0 2d       	mov	r30, r0
-    13d2:	09 94       	ijmp
+000013c0 <__tablejump2__>:
+    13c0:	ee 0f       	add	r30, r30
+    13c2:	ff 1f       	adc	r31, r31
+    13c4:	05 90       	lpm	r0, Z+
+    13c6:	f4 91       	lpm	r31, Z
+    13c8:	e0 2d       	mov	r30, r0
+    13ca:	09 94       	ijmp
 
-000013d4 <memcpy_P>:
-    13d4:	fb 01       	movw	r30, r22
-    13d6:	dc 01       	movw	r26, r24
-    13d8:	02 c0       	rjmp	.+4      	; 0x13de <memcpy_P+0xa>
-    13da:	05 90       	lpm	r0, Z+
-    13dc:	0d 92       	st	X+, r0
-    13de:	41 50       	subi	r20, 0x01	; 1
-    13e0:	50 40       	sbci	r21, 0x00	; 0
-    13e2:	d8 f7       	brcc	.-10     	; 0x13da <memcpy_P+0x6>
-    13e4:	08 95       	ret
+000013cc <memcpy_P>:
+    13cc:	fb 01       	movw	r30, r22
+    13ce:	dc 01       	movw	r26, r24
+    13d0:	02 c0       	rjmp	.+4      	; 0x13d6 <memcpy_P+0xa>
+    13d2:	05 90       	lpm	r0, Z+
+    13d4:	0d 92       	st	X+, r0
+    13d6:	41 50       	subi	r20, 0x01	; 1
+    13d8:	50 40       	sbci	r21, 0x00	; 0
+    13da:	d8 f7       	brcc	.-10     	; 0x13d2 <memcpy_P+0x6>
+    13dc:	08 95       	ret
 
-000013e6 <_exit>:
-    13e6:	f8 94       	cli
+000013de <_exit>:
+    13de:	f8 94       	cli
 
-000013e8 <__stop_program>:
-    13e8:	ff cf       	rjmp	.-2      	; 0x13e8 <__stop_program>
+000013e0 <__stop_program>:
+    13e0:	ff cf       	rjmp	.-2      	; 0x13e0 <__stop_program>

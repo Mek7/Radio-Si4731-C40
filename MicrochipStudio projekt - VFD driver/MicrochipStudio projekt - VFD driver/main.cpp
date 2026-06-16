@@ -632,36 +632,31 @@ static void speOn(const VfdState newVfdState)
 	// take AC-AJ from grids 0-2
 	// take A and T-AJ from grid 3
 	// leave the rest as they were
-	//
-	// NOTE: the original code used "x |= (x & ~mask) | (new & mask)", whose
-	// leading |= made the "& ~mask" clear dead - segments could only ever be
-	// turned ON, never replaced. This is a plain masked merge so the selected
-	// bits take the new value and the rest are preserved.
 	if (newVfdState.chip5 & 0b00010000)
 	{
 		// grid 0
-		displayMemory[0].chip4 = (displayMemory[0].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-		displayMemory[0].chip5 = (displayMemory[0].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[0].chip4 |= (displayMemory[0].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+		displayMemory[0].chip5 |= (displayMemory[0].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 	else if (newVfdState.chip5 & 0b00100000)
 	{
 		// grid 1
-		displayMemory[1].chip4 = (displayMemory[1].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-		displayMemory[1].chip5 = (displayMemory[1].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[1].chip4 |= (displayMemory[1].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+		displayMemory[1].chip5 |= (displayMemory[1].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 	else if (newVfdState.chip5 & 0b01000000)
 	{
 		// grid 2
-		displayMemory[2].chip4 = (displayMemory[2].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
-		displayMemory[2].chip5 = (displayMemory[2].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[2].chip4 |= (displayMemory[2].chip4 & ~0b11110000) | (newVfdState.chip4 & 0b11110000);
+		displayMemory[2].chip5 |= (displayMemory[2].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 	else if (newVfdState.chip5 & 0b10000000)
 	{
 		// grid 3
-		displayMemory[3].chip1 = (displayMemory[3].chip1 & ~0b00000001) | (newVfdState.chip1 & 0b00000001);
-		displayMemory[3].chip3 = (displayMemory[3].chip3 & ~0b11111000) | (newVfdState.chip3 & 0b11111000);
-		displayMemory[3].chip4 = newVfdState.chip4;
-		displayMemory[3].chip5 = (displayMemory[3].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
+		displayMemory[3].chip1 |= (displayMemory[3].chip1 & ~0b00000001) | (newVfdState.chip1 & 0b00000001);
+		displayMemory[3].chip3 |= (displayMemory[3].chip3 & ~0b11111000) | (newVfdState.chip3 & 0b11111000);
+		displayMemory[3].chip4 |= newVfdState.chip4;
+		displayMemory[3].chip5 |= (displayMemory[3].chip5 & ~0b00001111) | (newVfdState.chip5 & 0b00001111);
 	}
 }
 
